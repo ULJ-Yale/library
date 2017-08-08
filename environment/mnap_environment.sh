@@ -40,12 +40,13 @@
 # * MATLAB (version 2012b or above with Signal Processing, Statistics and Machine Learning and Image Processing Toolbox)
 # * FIX ICA
 # * PALM
-# * Python (version 2.7 or above)
+# * Python (version 2.7 or above with numpy)
 # * AFNI
 # * Gradunwarp
 # * Human Connectome Pipelines (Modified versions for single-band preprocessing)
-# * R Statistical Environment
+# * R Statistical Environment with ggplot
 # * dcm2nii (23-June-2017 release)
+# * pydicom
 # * MNAP niutilities Repo
 # * MNAP matlab Repo
 #
