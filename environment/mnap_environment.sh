@@ -156,7 +156,7 @@ umask 002
 TOOLS=/software/
 export TOOLS
 # --- Set up prompt
-PS1="\[\e[0;36m\][Grace \W]\$\[\e[0m\] "
+PS1="\[\e[0;36m\][MNAP \W]\$\[\e[0m\] "
 PROMPT_COMMAND='echo -ne "\033]0;MNAP: ${PWD}\007"'
 
 
