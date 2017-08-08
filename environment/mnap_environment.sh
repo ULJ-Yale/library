@@ -25,7 +25,7 @@
 #
 # ## Description:
 #
-# * This is a general script developed as a front-end environment and path organization for the HPC infrastructure
+# * This is a general script developed as a front-end environment and path organization for the MNAP infrastructure
 # * This script needs to be sourced in each users .bash_profile like so:
 #
 # TOOLS=/PATH_TO/MNAP/
@@ -131,9 +131,20 @@ geho " and the terms and conditions defined in the file 'LICENSE.txt' which is  
 geho " a part of this source code package.                                         "
 geho " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=--=-=-= "
 geho ""
-geho "                    Setting up HPC environment and paths ... "
 geho ""
-geho "         You are logged in as $MyID on `hostname`"
+geho "                  You are logged in as $MyID on `hostname`"
+geho ""
+geho "                  Setting up MNAP environment and paths ... "
+geho "..........................................................................."
+geho ""
+geho "   		         ███╗   ███╗███╗   ██╗ █████╗ ██████╗                   " 
+geho "   		         ████╗ ████║████╗  ██║██╔══██╗██╔══██╗                  " 
+geho "   		         ██╔████╔██║██╔██╗ ██║███████║██████╔╝                  "
+geho "   		         ██║╚██╔╝██║██║╚██╗██║██╔══██║██╔═══╝                   "
+geho "   		         ██║ ╚═╝ ██║██║ ╚████║██║  ██║██║                       "  
+geho "   		         ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝                       "
+geho "..........................................................................."
+geho ""
 geho ""
 geho " --> Studies folder:           /Studies"
 geho " --> Software folder:          /software"
