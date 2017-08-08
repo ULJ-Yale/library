@@ -157,7 +157,7 @@ TOOLS=/software/
 export TOOLS
 # --- Set up prompt
 PS1="\[\e[0;36m\][Grace \W]\$\[\e[0m\] "
-PROMPT_COMMAND='echo -ne "\033]0;Grace: ${PWD}\007"'
+PROMPT_COMMAND='echo -ne "\033]0;MNAP: ${PWD}\007"'
 
 
 # ------------------------------------------------------------------------------
