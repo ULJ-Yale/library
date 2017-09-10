@@ -147,9 +147,6 @@ geho "   		      ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚
 geho "..........................................................................."
 geho ""
 geho ""
-geho " --> Studies folder:           /Studies"
-geho " --> Software folder:          /software"
-geho ""
 geho "------------------------------------------------------------------------------"
 geho ""
 geho ""
@@ -170,7 +167,6 @@ export TOOLS
 # --- Set up prompt
 PS1="\[\e[0;36m\][MNAP \W]\$\[\e[0m\] "
 PROMPT_COMMAND='echo -ne "\033]0;MNAP: ${PWD}\007"'
-
 
 # ------------------------------------------------------------------------------
 # Set FSL environment libraries for queuing system
@@ -221,11 +217,10 @@ MATLABPATH=$FSLGPUDIR:$MATLABPATH
 export MATLABPATH
 
 # -- FreeSurfer binaries
-# -- the following results in an error missing library libXmu.so.6
 FREESURFER_HOME=$TOOLS/freesurfer-6.0/freesurfer
+PATH=${FREESURFER_HOME}:${PATH}
+export FREESURFER_HOME PATH
 . ${FREESURFER_HOME}/SetUpFreeSurfer.sh > /dev/null 2>&1
-#. /gpfs/apps/hpc/Apps/FREESURFER/5.3.0/freesurfer/FreeSurferEnv.sh &> /dev/null
-#. /gpfs/apps/hpc/Apps/FREESURFER/5.3.0-HCP/FreeSurferEnv.sh  &> /dev/null
 
 # -- Workbench binaries
 WORKBENCHDIR=${TOOLS}/workbench/bin_rh_linux64
@@ -273,10 +268,14 @@ APPATH=$MNAPPATH/general
 PATH=${APPATH}:${PATH}
 export APPATH PATH
 PATH=$MNAPPATH/general/functions:$PATH
-export APFUNCTIONS=${APPATH}/functions # AP Supporting functions
+# AP Supporting functions
+export APFUNCTIONS=${APPATH}/functions 
+# Setup aliases for running the general pipeline
 alias AP='bash AnalysisPipeline.sh'
 alias AnalysisPipeline='bash AnalysisPipeline.sh'
 alias ap='bash AnalysisPipeline.sh'
+alias mnap='bash AnalysisPipeline.sh'
+
 MATLABPATH=$MNAPPATH/general:$MATLABPATH
 export MATLABPATH
 
