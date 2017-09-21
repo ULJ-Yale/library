@@ -262,22 +262,19 @@ else
     MNAPPATH=$TOOLS/MNAP
 fi
 
-APPATH=$MNAPPATH/general
+APPATH=$MNAPPATH/connector
 PATH=${APPATH}:${PATH}
 export APPATH PATH
 PATH=$MNAPPATH/general/functions:$PATH
 # AP Supporting functions
 export APFUNCTIONS=${APPATH}/functions 
-# Setup aliases for running the general pipeline
-alias AP='bash AnalysisPipeline.sh'
-alias AnalysisPipeline='bash AnalysisPipeline.sh'
-alias ap='bash AnalysisPipeline.sh'
-alias mnap='bash AnalysisPipeline.sh'
+# Setup aliases for running the connector pipeline
+alias mnap='bash mnap.sh'
 
-MATLABPATH=$MNAPPATH/general:$MATLABPATH
+MATLABPATH=$MNAPPATH/connector:$MATLABPATH
 export MATLABPATH
 
-HCPATLAS=$MNAPPATH/general/templates/HCP
+HCPATLAS=$MNAPPATH/connector/templates/HCP
 PATH=${HCPATLAS}:${PATH}
 export HCPATLAS PATH
 MATLABPATH=$HCPATLAS:$MATLABPATH
@@ -374,17 +371,17 @@ function_commitmnaplibrary() {
 }
 alias commitmnaplibrary=function_commitmnaplibrary
 
-# MNAP General
-function_commitmnapgeneral() {
+# MNAP Connector Code
+function_commitmnapconnector() {
 	
-	cd ${MNAPPATH}/general
+	cd ${MNAPPATH}/connector
 	git add ./*
 	CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
 	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:mnap/general.git master
+	git push git@bitbucket.org:mnap/connector.git master
 
 }
-alias commitmnapgeneral=function_commitmnapgeneral
+alias commitmnapconnector=function_commitmnapconnector
 
 # MNAP HCPModified
 function_commithcpmodified() {
