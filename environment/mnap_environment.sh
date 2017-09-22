@@ -21,7 +21,7 @@
 #
 # ## License
 #
-# See the [LICENSE](https://bitbucket.org/mnap/library/src/ecaf2b6f9d60f07b89dd9bdd2a413e91baab22e9/LICENSE.md?at=master&fileviewer=file-view-default)
+# See the LICENSE @ https://bitbucket.org/mnap/mnaptools
 #
 # ## Description:
 #
@@ -47,8 +47,7 @@
 # * R Statistical Environment with ggplot
 # * dcm2nii (23-June-2017 release)
 # * pydicom
-# * MNAP niutilities Repo
-# * MNAP matlab Repo
+# * MNAP suite
 #
 #~ND~END~
 

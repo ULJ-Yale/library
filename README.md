@@ -5,7 +5,7 @@ Background
 ==========
 ---
 
-This is a library component of the MNAP package that contains miscellaneous dependencies.
+This is a library component of the MNAP suite that contains miscellaneous dependencies.
 
 The MNAP libraries are maintained by Alan Anticevic, [Anticevic Lab], Yale 
 University of Ljubljana in collaboration with Grega Repovs [Mind and Brain Lab], 
@@ -27,15 +27,15 @@ External dependencies
 * Gradunwarp
 * Human Connectome Pipelines (Modified versions for single-band preprocessing)
 * R Statistical Environment
-* MNAP niutilities Repo
-* MNAP matlab Repo
+* MNAP Suite
+* MNAP
 
 
 Usage and command documentation
 ===============================
 ---
 
-For overall usage of the MNAP pipelines refer to the README in the `general` repository. 
+For overall usage of the MNAP pipelines refer to the README in the `connector` repository. 
 
 
 References
