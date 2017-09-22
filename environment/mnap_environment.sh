@@ -357,8 +357,24 @@ export MATLABPATH
 #export PATH
 
 # ------------------------------------------------------------------------------
-#  MNAP Commit Functions and Aliases for BitBucket
+#  MNAP Functions and Aliases for BitBucket
 # ------------------------------------------------------------------------------
+
+# Update MNAP code
+if [ -d ${MNAPPATH}/.gitmodules ]; then
+# Check if using submodules
+alias mnapupdate='cd $MNAPPATH; git submodule foreach git pull origin master'
+else
+# Check if using individual repos
+function_mnapupdate() {
+cd ${MNAPPATH}/library; git pull origin master
+cd ${MNAPPATH}/connector; git pull origin master
+cd ${MNAPPATH}/matlab; git pull origin master
+cd ${MNAPPATH}/hcpmodified; git pull origin master
+cd ${MNAPPATH}/niutilities; git pull origin master
+}
+alias mnapupdate=function_mnapupdate
+fi
 
 # MNAP Library Code
 function_commitmnaplibrary() {
