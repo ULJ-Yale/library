@@ -28,7 +28,6 @@ External dependencies
 * Human Connectome Pipelines (Modified versions for single-band preprocessing)
 * R Statistical Environment
 * MNAP Suite
-* MNAP
 
 
 Usage and command documentation
