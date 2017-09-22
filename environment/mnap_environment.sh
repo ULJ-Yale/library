@@ -363,7 +363,7 @@ export MATLABPATH
 # Update MNAP code
 if [ -d ${MNAPPATH}/.gitmodules ]; then
 # Check if using submodules
-alias mnapupdate='cd $MNAPPATH; git submodule foreach git pull origin master'
+alias mnapupdate='cd $MNAPPATH; git pull origin master; git submodule foreach git pull origin master'
 else
 # Check if using individual repos
 function_mnapupdate() {
