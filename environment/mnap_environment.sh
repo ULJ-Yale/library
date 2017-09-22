@@ -249,27 +249,31 @@ export DCMNII PATH
 #  MNAP - General Code
 # ------------------------------------------------------------------------------
 
+# this assumes you cloned the master repo with all submodules from here:
+# --> git clone git@bitbucket.org:mnap/mnaptools.git
+
+REPO="mnaptools"
+
 if [ -e ~/.mnapdev ]
 then
-    MNAPPATH=$TOOLS/MNAPdev
+    MNAPPATH=$TOOLS/mnapdev
     echo ""
     reho " --- NOTE: You are in MNAP development mode! ----"
 	echo ""
 	reho " ---> MNAP path is set to: $MNAPPATH"
 	echo ""
 else
-    MNAPPATH=$TOOLS/MNAP
+    MNAPPATH=$TOOLS/$REPO
 fi
 
-APPATH=$MNAPPATH/connector
-PATH=${APPATH}:${PATH}
-export APPATH PATH
-PATH=$MNAPPATH/general/functions:$PATH
-# AP Supporting functions
-export APFUNCTIONS=${APPATH}/functions 
-# Setup aliases for running the connector pipeline
+MNAPCONNPATH=$MNAPPATH/connector
+PATH=${MNAPCONNPATH}:${PATH}
+export MNAPCONNPATH PATH
+PATH=$MNAPPATH/connector/functions:$PATH
+export MNAPFUNCTIONS=${MNAPCONNPATH}/functions # MNAP Connector supporting functions
 alias mnap='bash mnap.sh'
-
+alias ap='bash mnap.sh'
+alias AP='bash mnap.sh'
 MATLABPATH=$MNAPPATH/connector:$MATLABPATH
 export MATLABPATH
 
