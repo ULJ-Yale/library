@@ -277,10 +277,16 @@ alias AP='bash mnap.sh'
 MATLABPATH=$MNAPPATH/connector:$MATLABPATH
 export MATLABPATH
 
-HCPATLAS=$MNAPPATH/connector/templates/HCP
+HCPATLAS=$MNAPPATH/library/data/atlases/HCP
 PATH=${HCPATLAS}:${PATH}
 export HCPATLAS PATH
 MATLABPATH=$HCPATLAS:$MATLABPATH
+export MATLABPATH
+
+TemplateFolder=$MNAPPATH/library/data/
+PATH=${TemplateFolder}:${PATH}
+export TemplateFolder PATH
+MATLABPATH=$TemplateFolder:$MATLABPATH
 export MATLABPATH
 
 # ------------------------------------------------------------------------------
