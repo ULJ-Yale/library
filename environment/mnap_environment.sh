@@ -159,7 +159,7 @@ umask 002
 #  Setup master software folder
 # ------------------------------------------------------------------------------
 
-TOOLS=/software/
+TOOLS=/software
 export TOOLS
 # --- Set up prompt
 PS1="\[\e[0;36m\][MNAP \W]\$\[\e[0m\] "
