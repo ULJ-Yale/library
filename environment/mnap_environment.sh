@@ -252,7 +252,9 @@ export DCMNII PATH
 # this assumes you cloned the master repo with all submodules from here:
 # --> git clone git@bitbucket.org:mnap/mnaptools.git
 
-REPO="mnaptools"
+MNAPREPO="mnaptools"
+PATH=${MNAPREPO}:${PATH}
+export MNAPREPO PATH
 
 if [ -e ~/.mnapdev ]
 then
@@ -263,7 +265,7 @@ then
 	reho " ---> MNAP path is set to: $MNAPPATH"
 	echo ""
 else
-    MNAPPATH=$TOOLS/$REPO
+    MNAPPATH=$TOOLS/$MNAPREPO
 fi
 
 MNAPCONNPATH=$MNAPPATH/connector
