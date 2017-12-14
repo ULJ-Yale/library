@@ -48,11 +48,5 @@ doi: 10.1073/pnas.1405289111. PubMed PMID: 24799682; PubMed Central PMCID:
 PMC4034208.
 
 
-Change Log
-============
----
-
-* 0.1: Initial pre-alpha release with major functionality
-
 [Mind and Brain Lab]: http://mblab.si
 [Anticevic Lab]: http://anticeviclab.yale.edu

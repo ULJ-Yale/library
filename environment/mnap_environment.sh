@@ -253,14 +253,15 @@ else
     MNAPPATH=$TOOLS/$MNAPREPO
 fi
 
+# ------------------------------------------------------------------------------
+#  setup overal MNAP paths
+# ------------------------------------------------------------------------------
+
 MNAPCONNPATH=$MNAPPATH/connector
 PATH=${MNAPCONNPATH}:${PATH}
 export MNAPCONNPATH PATH
 PATH=$MNAPPATH/connector/functions:$PATH
-export MNAPFUNCTIONS=${MNAPCONNPATH}/functions # MNAP Connector supporting functions
-alias mnap='bash mnap.sh'
-alias ap='bash mnap.sh'
-alias AP='bash mnap.sh'
+export MNAPFUNCTIONS=${MNAPCONNPATH}/functions
 MATLABPATH=$MNAPPATH/connector:$MATLABPATH
 export MATLABPATH
 
@@ -275,6 +276,8 @@ PATH=${TemplateFolder}:${PATH}
 export TemplateFolder PATH
 MATLABPATH=$TemplateFolder:$MATLABPATH
 export MATLABPATH
+
+alias mnap='bash $MNAPPATH/connector/mnap.sh'
 
 # ------------------------------------------------------------------------------
 #  setup HCP Pipeline paths
