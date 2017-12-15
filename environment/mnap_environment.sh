@@ -355,17 +355,73 @@ export MATLABPATH
 #  MNAP Functions and Aliases for BitBucket
 # ------------------------------------------------------------------------------
 
-# Update MNAP code
+# Update MNAP code by checking if using submodules or individual repos:
+
 if [ -f ${MNAPPATH}/.gitmodules ]; then
-	# Check if using submodules
+	
+	# Update all submodules
 	function_mnapupdate() {
-	echo ""
-	geho "-- Pulling repositories as submodules in $MNAPPATH..."
-	echo ""
-	cd $MNAPPATH; git submodule foreach git pull origin master
+		echo ""
+		geho "-- Pulling repositories as submodules in $MNAPPATH..."
+		echo ""
+		cd $MNAPPATH; git pull origin master; git submodule foreach git pull origin master
 	}
+	
+	# Commit function for all of MNAP Code
+	function_commitmnaptools() {
+		CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
+		
+		geho "-- Committing changes in submodule ${MNAPPATH}/library..."
+		cd ${MNAPPATH}/library
+		git add ./*
+		git commit . --message="${CommitMessage}"
+		git push git@bitbucket.org:mnap/library.git master
+		echo "---"
+		echo ""
+				
+		geho "-- Committing changes in submodule ${MNAPPATH}/connector..."		
+		cd ${MNAPPATH}/connector
+		git add ./*
+		git commit . --message="${CommitMessage}"
+		git push git@bitbucket.org:mnap/library.git master
+		echo "---"
+		echo ""
+		
+		geho "-- Committing changes in submodule ${MNAPPATH}/hcpmodified..."
+		cd ${MNAPPATH}/hcpmodified
+		git add ./*
+		git commit . --message="${CommitMessage}"
+		git push git@bitbucket.org:mnap/library.git master
+		echo "---"
+		echo ""
+		
+		geho "-- Committing changes in submodule ${MNAPPATH}/niutilities..."
+		cd ${MNAPPATH}/niutilities
+		git add ./*
+		git commit . --message="${CommitMessage}"
+		git push git@bitbucket.org:mnap/library.git master
+		echo "---"
+		echo ""
+		
+		geho "-- Committing changes in submodule ${MNAPPATH}/matlab..."
+		cd ${MNAPPATH}/matlab
+		git add ./*
+		git commit . --message="${CommitMessage}"
+		git push git@bitbucket.org:mnap/library.git master
+		echo "---"
+		echo ""
+
+		geho "-- Committing changes in master module ${MNAPPATH}..."						
+		cd ${MNAPPATH}
+		git add ./*
+		git commit . --message="${CommitMessage}"
+		git push git@bitbucket.org:mnap/mnaptools.git master
+	}
+	alias commitmnapall=function_commitmnaptools
+
 else
-	# Check if using individual repos
+
+	# Update individual repos
 	function_mnapupdate() {
 	echo ""
 	beho "-- Pulling individual repositories in $MNAPPATH..."
@@ -376,87 +432,60 @@ else
 	cd ${MNAPPATH}/hcpmodified; git pull origin master
 	cd ${MNAPPATH}/niutilities; git pull origin master
 	}
+
+	# Commit MNAP Library Code
+	function_commitmnaplibrary() {
+		cd ${MNAPPATH}/library
+		git add ./*
+		CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
+		git commit . --message="${CommitMessage}"
+		git push git@bitbucket.org:mnap/library.git master
+	}
+	alias commitmnaplibrary=function_commitmnaplibrary
+	
+	# Commit MNAP Connector Code
+	function_commitmnapconnector() {
+		cd ${MNAPPATH}/connector
+		git add ./*
+		CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
+		git commit . --message="${CommitMessage}"
+		git push git@bitbucket.org:mnap/connector.git master
+	}
+	alias commitmnapconnector=function_commitmnapconnector
+	
+	# Commit MNAP HCPModified
+	function_commithcpmodified() {
+		cd ${MNAPPATH}/hcpmodified
+		git add ./*
+		CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
+		git commit . --message="${CommitMessage}"
+		git push git@bitbucket.org:mnap/hcpmodified.git master
+	}
+	alias commithcpmodified=function_commithcpmodified
+	
+	# Commit MNAP Niutilities
+	function_commitmnapniutilities() {
+		cd ${MNAPPATH}/niutilities
+		git add ./*
+		CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
+		git commit . --message="${CommitMessage}"
+		git push git@bitbucket.org:mnap/niutilities.git master
+	}
+	alias commitmnapniutilities=function_commitmnapniutilities
+	
+	# Commit MNAP Matlab Code
+	function_commitmnapmatlab() {
+		cd ${MNAPPATH}/matlab
+		git add ./*
+		CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
+		git commit . --message="${CommitMessage}"
+		git push git@bitbucket.org:mnap/matlab.git master
+	}
+	alias commitmnapmatlab=function_commitmnapmatlab
 fi
+
 alias mnapupdate=function_mnapupdate
 
-# MNAP All Code
-function_commitmnapall() {
-	
-	cd ${MNAPPATH}
-	git add ./*
-	CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:mnap/mnaptools.git master
-
-
-}
-alias commitmnapall=function_commitmnapall
-
-# MNAP Library Code
-function_commitmnaplibrary() {
-	
-	cd ${MNAPPATH}/library
-	git add ./*
-	CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	#hg commit . --message="${CommitMessage}"
-	#hg push
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:mnap/library.git master
-
-}
-alias commitmnaplibrary=function_commitmnaplibrary
-
-# MNAP Connector Code
-function_commitmnapconnector() {
-	
-	cd ${MNAPPATH}/connector
-	git add ./*
-	CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:mnap/connector.git master
-
-}
-alias commitmnapconnector=function_commitmnapconnector
-
-# MNAP HCPModified
-function_commithcpmodified() {
-	
-	cd ${MNAPPATH}/hcpmodified
-	git add ./*
-	CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:mnap/hcpmodified.git master
-
-}
-alias commithcpmodified=function_commithcpmodified
-
-# MNAP Niutilities
-function_commitmnapniutilities() {
-	
-	cd ${MNAPPATH}/niutilities
-	git add ./*
-	CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	#hg commit . --message="${CommitMessage}"
-	#hg push
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:mnap/niutilities.git master
-
-}
-alias commitmnapniutilities=function_commitmnapniutilities
-
-# MNAP Matlab Code
-function_commitmnapmatlab() {
-	
-	cd ${MNAPPATH}/matlab
-	git add ./*
-	CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	#hg commit . --message="${CommitMessage}"
-	#hg push
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:mnap/matlab.git master
-
-}
-alias commitmnapmatlab=function_commitmnapmatlab
 
 
 
