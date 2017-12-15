@@ -375,7 +375,7 @@ if [ -f ${MNAPPATH}/.gitmodules ]; then
 		cd ${MNAPPATH}/library
 		git add ./*
 		git commit . --message="${CommitMessage}"
-		git push git@bitbucket.org:mnap/library.git master
+		git push origin master
 		echo "---"
 		echo ""
 				
@@ -383,7 +383,7 @@ if [ -f ${MNAPPATH}/.gitmodules ]; then
 		cd ${MNAPPATH}/connector
 		git add ./*
 		git commit . --message="${CommitMessage}"
-		git push git@bitbucket.org:mnap/connector.git master
+		git push origin master
 		echo "---"
 		echo ""
 		
@@ -391,7 +391,7 @@ if [ -f ${MNAPPATH}/.gitmodules ]; then
 		cd ${MNAPPATH}/hcpmodified
 		git add ./*
 		git commit . --message="${CommitMessage}"
-		git push git@bitbucket.org:mnap/hcpmodified.git master
+		git push origin master
 		echo "---"
 		echo ""
 		
@@ -399,7 +399,7 @@ if [ -f ${MNAPPATH}/.gitmodules ]; then
 		cd ${MNAPPATH}/niutilities
 		git add ./*
 		git commit . --message="${CommitMessage}"
-		git push git@bitbucket.org:mnap/niutilities.git master
+		git push origin master
 		echo "---"
 		echo ""
 		
@@ -407,7 +407,7 @@ if [ -f ${MNAPPATH}/.gitmodules ]; then
 		cd ${MNAPPATH}/matlab
 		git add ./*
 		git commit . --message="${CommitMessage}"
-		git push git@bitbucket.org:mnap/matlab.git master
+		git push origin master
 		echo "---"
 		echo ""
 
@@ -415,7 +415,7 @@ if [ -f ${MNAPPATH}/.gitmodules ]; then
 		cd ${MNAPPATH}
 		git add ./*
 		git commit . --message="${CommitMessage}"
-		git push git@bitbucket.org:mnap/mnaptools.git master
+		git push origin master
 	}
 	alias commitmnapall=function_commitmnaptools
 
