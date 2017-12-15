@@ -356,20 +356,28 @@ export MATLABPATH
 # ------------------------------------------------------------------------------
 
 # Update MNAP code
-if [ -d ${MNAPPATH}/.gitmodules ]; then
-# Check if using submodules
-alias mnapupdate='cd $MNAPPATH; git pull origin master; git submodule foreach git pull origin master'
+if [ -f ${MNAPPATH}/.gitmodules ]; then
+	# Check if using submodules
+	function_mnapupdate() {
+	echo ""
+	geho "-- Pulling repositories as submodules in $MNAPPATH..."
+	echo ""
+	cd $MNAPPATH; git submodule foreach git pull origin master
+	}
 else
-# Check if using individual repos
-function_mnapupdate() {
-cd ${MNAPPATH}/library; git pull origin master
-cd ${MNAPPATH}/connector; git pull origin master
-cd ${MNAPPATH}/matlab; git pull origin master
-cd ${MNAPPATH}/hcpmodified; git pull origin master
-cd ${MNAPPATH}/niutilities; git pull origin master
-}
-alias mnapupdate=function_mnapupdate
+	# Check if using individual repos
+	function_mnapupdate() {
+	echo ""
+	beho "-- Pulling individual repositories in $MNAPPATH..."
+	echo ""
+	cd ${MNAPPATH}/library; git pull origin master
+	cd ${MNAPPATH}/connector; git pull origin master
+	cd ${MNAPPATH}/matlab; git pull origin master
+	cd ${MNAPPATH}/hcpmodified; git pull origin master
+	cd ${MNAPPATH}/niutilities; git pull origin master
+	}
 fi
+alias mnapupdate=function_mnapupdate
 
 # MNAP All Code
 function_commitmnapall() {
