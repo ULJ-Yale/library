@@ -138,13 +138,12 @@ geho ""
 # ------------------------------------------------------------------------------
 
 umask 002
-. ~/.bashrc
 
 # ------------------------------------------------------------------------------
 #  Setup master software folder
 # ------------------------------------------------------------------------------
 
-TOOLS=/software
+TOOLS=$TOOLS
 export TOOLS
 # --- Set up prompt
 PS1="\[\e[0;36m\][MNAP \W]\$\[\e[0m\] "
@@ -371,6 +370,19 @@ cd ${MNAPPATH}/niutilities; git pull origin master
 }
 alias mnapupdate=function_mnapupdate
 fi
+
+# MNAP All Code
+function_commitmnapall() {
+	
+	cd ${MNAPPATH}
+	git add ./*
+	CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
+	git commit . --message="${CommitMessage}"
+	git push git@bitbucket.org:mnap/mnaptools.git master
+
+
+}
+alias commitmnapall=function_commitmnapall
 
 # MNAP Library Code
 function_commitmnaplibrary() {
