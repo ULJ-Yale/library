@@ -1,0 +1,182 @@
+#  Batch parameters file
+#  =====================
+#
+#  This file is used to specify the default parameters used by MNAP commands for
+#  HCP minimal preprocessing pipeline, additional bold preprocessing commands,
+#  and others. The content of this file should be prepended to the batch.txt
+#  that is passed to the commands. It can added manually or automatically when
+#  making use of the compileBatch MNAP command.
+#
+#  This template file should be edited to include the parameters relevant for
+#  your study and provide the appropriate values. For detailed description of
+#  parameters and their valid values, please consult the MNAP documentation
+*  (e.g. Running HCP minimal preprocessing pipelines, Additional BOLD
+#  preprocessing) and online help for the relevant MNAP commands.
+#
+#
+#  File format
+#  -----------
+#
+#  Each parameter is specified in a separate line as a "_key: value" pair, e.g.:
+#
+#  _hcp_brainsize:  170
+#
+#  Empty lines and lines that start with a hash (#) are ignored.
+#
+#
+#  Parameters
+#  ==========
+#
+#  The following is a list of parameters organised by the commands they relate
+#  to. To specify parameters, uncomment the line (it should start with the
+#  underscore before the parameter name) and provide the desired value. In some
+#  cases default values are provided. Do take care to remove any descriptors
+#  after the values to be used.
+#
+#  Basic parameters
+#  ----------------
+#
+#  _basefolder   :         ... The path to the study subjects folder
+#  _logfolder    : None    ... The path to the folder where log files are to be stored (None for default <study>/processing/logs)
+#  _overwrite    : no      ... Whether to overwrite existing results or not (yes / no)
+#  _cores        : 1       ... How many subjects to run in parallel
+#  _nprocess     : 0       ... How many subjects to process. 0 to process all
+#  _datainfo     : False   ... Whether to print information on subjects (true / false)
+#  _printoptions : False   ... Whether to print the full list of options in log (true / false)
+#  _filter       :         ... Filtering settings
+#  _subjid       :         ... Pipe separated list of subjects to process
+#  _run          : run     ... Whether to run (run) or just test (test) the command
+#  _log          : remove  ... Whether to keep (keep) or remove (remove) log files after completion
+#
+#  Preprocessing options
+#  ---------------------
+#
+#  These parameters are used in additional task and functional connectivity bold
+#  preprocesing steps.
+#
+#  _bet                : -f 0.5              ... Options to be passed to BET in brain extraction
+#  _fast               : -t 1 -n 3 --nopve   ... Options to be passed to FAST in brain segmentation
+#  _betboldmask        : -R -m               ... Options to be passed to BET when creating bold brain masks
+#  _TR                 : 2.5                 ... TR of the bold data
+#  _omit               : 5                   ... How many frames to omit at the start of each bold run
+#  _bold_actions       : shrcl               ... What processing steps to include in bold preprocessing
+#  _bold_nuisance      : m,V,WM,WB,1d        ... What regressors to include in nuisance signal removal
+#  _bold_preprocess    : all                 ... Which bolds to process (can be multiple joind with pipe or all)
+#  _boldname           : bold                ... The default name for the bold files
+#  _pignore            : 'hipass:keep|regress:keep|lopass:keep'  ... What to do with frames marked as bad
+#  _event_file         :                     ... The root name of the fidl event file for task regression
+#  _event_string       :                     ... A string specifying how to model the task
+#  _bold_prefix        :                     ... What prefix to add at the start of the generated files
+#  _wbmask             :                     ... Mask specifying what ROI to exclude from WB mask
+#  _sbjroi             :                     ... A mask used to specify subject specific WB
+#  _nroi               :                     ... Additional nuisance regressors ROI and which not to mask by brain mask (e.g. 'nroi.names|eyes,scull')
+#  _shrinknsroi        : true                ... Whether to shrink signal nuisance ROI (V,WM,WB), true or false
+#  _image_source       : 4dfp                ... What is the target source file format / structure (4dfp, hcp)
+#  _image_target       : 4dfp                ... What is the target file format (4dfp, nifti, cifti, dtseries, ptseries)
+#  _image_atlas        : 711                 ... What is the target atlas (711, nifti)
+#
+#  _surface_smooth     : 6.0                 ... Sigma for cifti surface smoothing in mm
+#  _volume_smooth      : 6.0                 ... Sigma for cifti volume smoothing in mm
+#  _voxel_smooth       : 2                   ... Extent of volume smoothing in voxels
+#  _smooth_mask        : false               ... Whether to use masked smoothing and what mask to use
+#  _dilate_mask        : false               ... Whether to use dilation after smoothing and what mask to use
+#  _hipass_filter      : 0.008               ... Highpass filter to use
+#  _lopass_filter      : 0.09                ... Lopass filter to use
+#  _omp_threads        : 0                   ... Number of cores to be used in wb_command (0 - don't change system settings)
+#  _framework_path     :                     ... The path to framework libraries on mac system
+#  _wb_command_path    :                     ... The path to wb_command
+#  _print_command      : no                  ... Whether to print the command run within the preprocessing steps
+#
+#
+#  GLM related parameters
+#  ----------------------
+#  _glm_matrix         : Whether to save GLM regressor matrix in text (text), image (image) or both (both) formats, or not (none)
+#  _glm_residuals      : Whether to save GLM residuals (save) or not (forget)
+#  _glm_name           : Additional name to the residuals and coefficient file to distinguish between different posible models.
+#
+#
+#  Movement thresholding and report options
+#  ----------------------------------------
+#  _mov_dvars          : 3.0            ... The dvars threshold to use for identifying bad frames
+#  _mov_dvarsme        : 1.5            ... The dvarsme threshold to use for identifying bad frames
+#  _mov_fd             : 0.5            ... Frame displacement threshold to use for identifying bad frames
+#  _mov_radius         : 50.0           ... The assumed radius of the brain
+#  _mov_scrub          : yes            ... Whether to output a scrub file when processing motion statistics (not used in the new scrubbing pipeline)
+#  _mov_fidl           : udvarsme       ... Which scrub column to use when creating fidl ignore file (or "none")
+#  _mov_plot           : mov_report     ... Root name of the plot file, "none" to omit plotting
+#  _mov_post           : udvarsme       ... Which column to use for generating post-scrubbing movement report (or "none")
+#  _mov_before         : 0              ... How many frames preceeding bad frames to also exclude
+#  _mov_after          : 0              ... How many frames following bad frames to also exclude
+#  _mov_bad            : udvarsme       ... What scrub column to use to mark bad frames
+#  _mov_mreport        : movement_report.txt             ... The name of the movement report file
+#  _mov_preport        : movement_report_post.txt        ... The name of the post scrub movement report file
+#  _mov_sreport        : movement_scrubbing_report.txt   ... The name of the scrubbing report file
+#  _mov_pdf            : movement_plots                  ... The name of the folder that holds movement stats plots
+#  _mov_pref           :                                 ... The prefix for the movement report files
+#
+#
+#  Scheduler options
+#  -----------------
+#  _scheduler             : local  ... The scheduler to use (local|PBS|LSF|SLURM) and any additional settings
+#  _scheduler_environment : None   ... The path to the script setting up the environment to run the commands in
+#  _scheduler_workdir     : None   ... The path to working directory from which to run jobs on the cluster
+#  _scheduler_sleep       : 1      ... Time in seconds between submission of individual scheduler jobs
+#
+#  HCP minimal preprocessing pipeline options
+#  ------------------------------------------
+#  _hcp_freesurfer_home',    :                ... Path to the FreeSurfer base folder
+#  _hcp_freesurfer_module',  :                ... Whether to load FreeSurfer as a module on the cluster: YES or NONE
+#  _hcp_Pipeline',           :                ... Path to pipeline base folder
+#  _hcp_suffix',             :                ... Subject id suffix if running HCP preprocessing variants
+#  _hcp_brainsize',          : 150            ... Human brain size in mm
+#  _hcp_t2',                 : t2             ... Whether T2 image is present - anything or NONE
+#  _hcp_fmap',               : NONE           ... DEPRECATED!!! Whether hi-res structural fieldmap is present - SiemensFieldMap for Siemens Phase/Magnitude pair, GeneralElectricFieldMap for GE single B0 image, or NONE
+#  _hcp_biascorrect_t1w',    : NONE           ... Whether to run T1w image bias correction in PreFS step: YES or NONE
+#  _hcp_echodiff',           : NONE           ... The delta in TE times for the hi-res fieldmap image
+#  _hcp_sephaseneg',         : NONE           ... Spin echo field map volume with a negative phase encoding direction: LR, RL, NONE
+#  _hcp_sephasepos',         : NONE           ... Spin echo field map volume with a positive phase encoding direction: LR, RL, NONE
+#  _hcp_dwelltime',          : NONE           ... Echo Spacing or Dwelltime of Spin Echo Field Map or 'NONE' if not used
+#  _hcp_seunwarpdir',        : NONE           ... Phase encoding direction of the spin echo field map. (Only applies when using a spin echo field map.)
+#  _hcp_t1samplespacing',    : NONE           ... DICOM field (0019,1018) in s or 'NONE' if not used
+#  _hcp_t2samplespacing',    : NONE           ... DICOM field (0019,1018) in s or 'NONE' if not used
+#  _hcp_unwarpdir',          : NONE           ... Readout direction of the T1w and T2w images (Used with either a regular field map or a spin echo field map) z appears to be best or 'NONE' if not used
+#  _hcp_gdcoeffs',           : NONE           ... Location of Coeffs file or 'NONE' to skip
+#  _hcp_avgrdcmethod',       : NONE           ... Averaging and readout distortion correction methods:
+#                                                 'NONE' = average any repeats with no readout correction
+#                                                 'FIELDMAP' or 'SiemensFieldMap' or 'GeneralElectricFieldMap' = average any repeats and use field map for readout correction
+#                                                 'TOPUP' = average and distortion correct at the same time with topup/applytopup only works for 2 images currently
+#  _hcp_topupconfig',        : NONE           ... Config for topup or 'NONE' if not used
+#  _hcp_bfsigma',            :                ... Bias Field Smoothing Sigma (optional)
+#  _hcp_printcom',           :                ... Print command for the HCP scripts
+#  _hcp_grayordinatesres',   : 2              ... Grayordinate voxel resolution in mm
+#  _hcp_hiresmesh',          : 164            ... Number of vertices in high-resolution mesh
+#  _hcp_lowresmesh',         : 32             ... Number of vertices in low-resolution mesh
+#  _hcp_regname',            : FS             ... What registration is used
+#  _hcp_cifti_tail',         :                ... The tail of the cifti file to use when mapping data from the HCP MNINonLinear/Results folder.
+#  _hcp_bold_sequencetype',  : single         ... The type of the sequence used: multi(band) vs single(band)
+#  _hcp_bold_prefix',        : BOLD_          ... The prefix to use for bold working folders and results
+#  _hcp_bold_echospacing',   : 00035          ... Echo Spacing or Dwelltime of fMRI image
+#  _hcp_bold_correct',       : TOPUP          ... BOLD image deformation correction: TOPUP, FIELDMAP / SiemensFieldMap, GeneralElectricFieldMap or NONE
+#  _hcp_bold_ref',           : NONE           ... Whether BOLD image Reference images should be recorded - NONE or USE
+#  _hcp_bold_echodiff',      : NONE           ... Delta TE for BOLD fieldmap images or NONE if not used
+#  _hcp_expert_file',        :                ... Name of the read-in expert options file for FreeSurfer
+#  _hcp_bold_unwarpdir',     : y              ... The direction of unwarping, can be specified separately for LR/RL : 'LR=x|RL=-x|x'
+#  _hcp_bold_res',           : 2              ... Target image resolution
+#  _hcp_bold_gdcoeffs',      : NONE           ... Gradient distorsion correction coefficients or NONE
+#  _hcp_bold_stcorr',        : TRUE           ... Whether to do slice timing correction TRUE or NONE
+#  _hcp_bold_stcorrdir',     : up             ... The direction of slice acquisition
+#  _hcp_bold_stcorrint',     : odd            ... Whether slices were acquired in an interleaved fashion (odd) or not (empty)
+#  _hcp_bold_movref',        : independent    ... What reference to use for movement correction (independent, first)
+#  _hcp_bold_seimg',         : independent    ... What image to use for spin-echo distorsion correction (independent, first)
+#  _hcp_bold_smoothFWHM',    : 2              ... Whether slices were acquired in an interleaved fashion (odd or even) or not (empty)
+#  _hcp_bold_usemask',       : T1             ... what mask to use for the bold images (T1: default, BOLD: mask based on bet of the scout, NONE: do not use a mask)
+#  _hcp_bold_preregister',   : epi_reg        ... What code to use to preregister BOLDs before FSL BBR epi_reg (default) or flirt
+#  _hcp_bold_refreg',        : linear         ... Whether to use only linear (default) or also nonlinear registration of motion corrected bold to reference
+#  _hcp_bold_movreg',        : FLIRT          ... Whether to use FLIRT (default and best for multiband images) or McFLIRT for motion correction
+#  _hcp_dwi_PEdir',          : 1              ... Use 1 for Left-Right Phase Encoding, 2 for Anterior-Posterior
+#  _hcp_dwi_gdcoeffs',       : NONE           ... DWI specific gradient distorsion coefficients file or NONE
+#  _hcp_dwi_dwelltime',      :                ... Echo spacing in msec.
+
+
+
+
