@@ -234,7 +234,7 @@ export DCMNII PATH
 # ------------------------------------------------------------------------------
 
 # this assumes you cloned the master repo with all submodules from here:
-# --> git clone git@bitbucket.org:mnap/mnaptools.git
+# --> git clone git@bitbucket.org:hidradev/mnaptools.git
 
 MNAPREPO="mnaptools"
 PATH=${MNAPREPO}:${PATH}
@@ -439,7 +439,7 @@ else
 		git add ./*
 		CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
 		git commit . --message="${CommitMessage}"
-		git push git@bitbucket.org:mnap/library.git master
+		git push git@bitbucket.org:hidradev/library.git master
 	}
 	alias commitmnaplibrary=function_commitmnaplibrary
 	
@@ -449,7 +449,7 @@ else
 		git add ./*
 		CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
 		git commit . --message="${CommitMessage}"
-		git push git@bitbucket.org:mnap/connector.git master
+		git push git@bitbucket.org:hidradev/connector.git master
 	}
 	alias commitmnapconnector=function_commitmnapconnector
 	
@@ -459,7 +459,7 @@ else
 		git add ./*
 		CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
 		git commit . --message="${CommitMessage}"
-		git push git@bitbucket.org:mnap/hcpmodified.git master
+		git push git@bitbucket.org:hidradev/hcpmodified.git master
 	}
 	alias commithcpmodified=function_commithcpmodified
 	
@@ -469,7 +469,7 @@ else
 		git add ./*
 		CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
 		git commit . --message="${CommitMessage}"
-		git push git@bitbucket.org:mnap/niutilities.git master
+		git push git@bitbucket.org:hidradev/niutilities.git master
 	}
 	alias commitmnapniutilities=function_commitmnapniutilities
 	
@@ -479,7 +479,7 @@ else
 		git add ./*
 		CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
 		git commit . --message="${CommitMessage}"
-		git push git@bitbucket.org:mnap/matlab.git master
+		git push git@bitbucket.org:hidradev/matlab.git master
 	}
 	alias commitmnapmatlab=function_commitmnapmatlab
 fi

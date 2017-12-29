@@ -4,50 +4,54 @@
 #  This file is used to specify mappings between image sequence names (e.g.
 #  T1w 0.7mm N1) to the image descriptors used for sorting data in a folder
 #  organization expected by the HCP minimal preprocessing pipelines. For more 
-#  background information, please see help for setupHCP and setupHCPFolder 
-#  commands, and documentation on Running HCP minimal preprocessing pipeline. 
+#  background information, please see help for setupHCP commands,
+#  and documentation on Running HCP minimal preprocessing pipeline. 
 #  
 #  This file is used by getHCPReady command. The command processes subject 
-#  information files (typically subject.txt). It searches for presence of 
-#  search text in image description and labels every image named with the search 
-#  text with the stated label text. Each pair of search and label texts is to be 
-#  specified in a separate line, with => as separator.
+#  information files (typically subject.txt) and generates a target file 
+#  (default is subject_hcp).txt). The general format for mapping is: 
+#
+#    <original_sequence_name> => <user_speficied_label>
+#
+#    The code searches for presence of the <original_sequence_name> and creates a new file
+#    which now contains the <user_speficied_label> mapping. Each pair of 
+#    <original_sequence_name> => <user_speficied_label> provided in a separate line.
 # 
+#  Note that images with names that do not match the <user_speficied_label> is left empty.
 # 
+#  BOLD files should be given a compound label after the => separator because this allows 
+#  for flexible labeling of distinct BOLD runs based on their content.
+# 
+#    <original_sequence_name>  => bold:<user_speficied_label>
+# 
+#  Here the 'bold' part denotes that it is a bold file and the <user_speficied_label>
+#  allows for flexibility in naming. getHCPReady will automatically number bold images in 
+#  a sequential order, starting with 1.
+#
+#
 #  Examples
 #  --------
 # 
-#  For example, placing the following line in this file:
+#  Example 1: If you place the following line in this file:
 # 
 #  T1w 0.7mm N1 => T1w
+#
+#  then the code would label all image sequences named "T1w 0.7mm N1" with "T1w".
 # 
-#  Would label all image sequences named "T1w 0.7mm N1" with "T1w". A line:
+#  
+#  Example 2: If you the following line in this file:
 # 
 #  03: T1w 0.7mm N1
 # 
-#  in subject.txt file would be changed to:
+#  then the script would take the info from subject.txt (source) and add this to the 
+#  subject_hcp.txt (target), thereby inserting the new label and perserving the old name.
 #  
 #  03: T1w             :T1w 0.7mm N1
 # 
-#  inserting the new label and perserving the old name.
-#  
-#  Images with names that do not match are given empty labels.
-# 
-#  BOLD files should be given a compound label, e.g.:
-# 
-#  RSBOLD 3mm 48 2.5s  => bold:rest
-#  BOLD 3mm 48 2.5s    => bold:WM
-# 
-#  The first part denotes that it is a bold file, the second, the kind of bold
-#  image that was acquired. getHCPReady will autmatically number bold images in 
-#  a sequential order, starting with 1.
 # 
 # 
-#  Valid HCP labels
-#  ----------------
-# 
-#  This is a list of valid HCP labels:
-# 
+#  List of valid HCP labels
+#  -------------------------
 #  
 #  T1w             ... T1 weighted high resolution structural image
 #  T2w             ... T2 weighted high resolution structural image

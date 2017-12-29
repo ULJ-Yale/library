@@ -1,14 +1,14 @@
 #  Batch parameters file
 #  =====================
 #
-#  This file is used to specify the default parameters used by MNAP commands for
+#  This file is used to specify the default parameters used by various MNAP commands for
 #  HCP minimal preprocessing pipeline, additional bold preprocessing commands,
-#  and others. The content of this file should be prepended to the batch.txt
-#  that is passed to the commands. It can added manually or automatically when
-#  making use of the compileBatch MNAP command.
+#  and other analytic functions. The content of this file should be prepended to the list
+#  that contains all the subjects that is passed to the commands. It can added manually or 
+#  automatically when making use of the compileLists MNAP command.
 #
 #  This template file should be edited to include the parameters relevant for
-#  your study and provide the appropriate values. For detailed description of
+#  a given study/analysis and provide the appropriate values. For detailed description of
 #  parameters and their valid values, please consult the MNAP documentation
 *  (e.g. Running HCP minimal preprocessing pipelines, Additional BOLD
 #  preprocessing) and online help for the relevant MNAP commands.
@@ -17,7 +17,8 @@
 #  File format
 #  -----------
 #
-#  Each parameter is specified in a separate line as a "_key: value" pair, e.g.:
+#  Each parameter is specified in a separate line as a 
+#  "_<parameter_key>: <parameter_value>" pair. For example:
 #
 #  _hcp_brainsize:  170
 #
@@ -27,11 +28,11 @@
 #  Parameters
 #  ==========
 #
-#  The following is a list of parameters organised by the commands they relate
+#  The following is a list of parameters organized by the commands they relate
 #  to. To specify parameters, uncomment the line (it should start with the
 #  underscore before the parameter name) and provide the desired value. In some
-#  cases default values are provided. Do take care to remove any descriptors
-#  after the values to be used.
+#  cases default values are provided. Do take care to remove the descriptors 
+#  (... <description>) after the values for the parameters to be used.
 #
 #  Basic parameters
 #  ----------------
