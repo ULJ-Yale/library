@@ -356,19 +356,32 @@ export MATLABPATH
 # ------------------------------------------------------------------------------
 
 # Update MNAP code by checking if using submodules or individual repos:
-
-if [ -f ${MNAPPATH}/.gitmodules ]; then
 	
 	# Update all submodules
-	function_mnapupdate() {
+	function_mnapupdateall() {
 		echo ""
 		geho "-- Pulling repositories as submodules in $MNAPPATH..."
 		echo ""
 		cd $MNAPPATH; git pull origin master; git submodule foreach git pull origin master
 	}
+	alias mnapupdateall=function_mnapupdateall
+
 	
+	# Commit function for MNAP tools master repo
+	function_commitmnapall() {
+		CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
+		geho "-- Committing changes in MNAP tools master repo ${MNAPPATH}/..."
+		cd ${MNAPPATH}
+		git add ./*
+		git commit . --message="${CommitMessage}"
+		git push origin master
+		echo "---"
+		echo ""
+	}
+	alias mnaptoolsupdate=function_commitmnaptools
+
 	# Commit function for all of MNAP Code
-	function_commitmnaptools() {
+	function_commitmnapall() {
 		CommitMessage="${@} --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
 		
 		geho "-- Committing changes in submodule ${MNAPPATH}/library..."
@@ -417,12 +430,10 @@ if [ -f ${MNAPPATH}/.gitmodules ]; then
 		git commit . --message="${CommitMessage}"
 		git push origin master
 	}
-	alias commitmnapall=function_commitmnaptools
-
-else
+	alias commitmnapall=function_commitmnapall
 
 	# Update individual repos
-	function_mnapupdate() {
+	function_mnapupdate_individual() {
 	echo ""
 	beho "-- Pulling individual repositories in $MNAPPATH..."
 	echo ""
@@ -432,6 +443,7 @@ else
 	cd ${MNAPPATH}/hcpmodified; git pull origin master
 	cd ${MNAPPATH}/niutilities; git pull origin master
 	}
+	alias mnapupdateindiv=function_mnapupdate_individual
 
 	# Commit MNAP Library Code
 	function_commitmnaplibrary() {
@@ -482,9 +494,7 @@ else
 		git push git@bitbucket.org:hidradev/matlab.git master
 	}
 	alias commitmnapmatlab=function_commitmnapmatlab
-fi
 
-alias mnapupdate=function_mnapupdate
 
 
 
