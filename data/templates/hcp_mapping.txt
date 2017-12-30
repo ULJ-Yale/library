@@ -9,15 +9,17 @@
 #  
 #  This file is used by getHCPReady command. The command processes subject 
 #  information files (typically subject.txt) and generates a target file 
-#  (default is subject_hcp).txt). The general format for mapping is: 
+#  (default is subject_hcp).txt). The general format for mapping specification is: 
 #
-#    <original_sequence_name> => <user_speficied_label>
+#  <original_sequence_name> => <user_speficied_label>
 #
-#    The code searches for presence of the <original_sequence_name> and creates a new file
-#    which now contains the <user_speficied_label> mapping. Each pair of 
-#    <original_sequence_name> => <user_speficied_label> provided in a separate line.
+#  with one mapping per line.
+#
+#  Within the source file, the code searches for images with matching <original_sequence_name> 
+#  adds them the specified <user_specfied_label>, and saves the results in the target file.
 # 
-#  Note that images with names that do not match the <user_speficied_label> is left empty.
+#  Note that in the target file, all images with names that did not match any of the 
+#  <original_sequence_name> specified, will have an empty label.
 # 
 #  BOLD files should be given a compound label after the => separator because this allows 
 #  for flexible labeling of distinct BOLD runs based on their content.
@@ -29,25 +31,31 @@
 #  a sequential order, starting with 1.
 #
 #
-#  Examples
-#  --------
+#  Example
+#  -------
 # 
-#  Example 1: If you place the following line in this file:
+#  If you place the following lines in this file:
 # 
 #  T1w 0.7mm N1 => T1w
+#  BOLD 3mm     => bold:rest
 #
-#  then the code would label all image sequences named "T1w 0.7mm N1" with "T1w".
-# 
-#  
-#  Example 2: If you the following line in this file:
+#  then the code would label all image sequences named "T1w 0.7mm N1" with "T1w". And all sequences
+#  named "BOLD 3mm" with bold[N]:rest Specifically, the following line in the source file 
+#  (by default subject.txt):
 # 
 #  03: T1w 0.7mm N1
+#  04: T2w 2mm N1
+#  05: BOLD3mm
+#  06: BOLD3mm
+#
+#  would be changed to the following lines in the target file (subject_hcp.txt):
 # 
-#  then the script would take the info from subject.txt (source) and add this to the 
-#  subject_hcp.txt (target), thereby inserting the new label and perserving the old name.
-#  
 #  03: T1w             :T1w 0.7mm N1
-# 
+#  04:                 :T2w 2mm N1
+#  05: bold1:rest      :BOLD3mm
+#  06: bold2:rest      :BOLD3mm
+#
+#  Note, that the old sequence names are perserved.
 # 
 # 
 #  List of valid HCP labels
