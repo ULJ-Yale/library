@@ -22,9 +22,9 @@
 #  <original_sequence_name> specified, will have an empty label.
 # 
 #  BOLD files should be given a compound label after the => separator because this allows 
-#  for flexible labeling of distinct BOLD runs based on their content.
+#  for flexible labeling of distinct BOLD runs based on their content:
 # 
-#    <original_sequence_name>  => bold:<user_speficied_label>
+#  <original_sequence_name>  => bold:<user_speficied_label>
 # 
 #  Here the 'bold' part denotes that it is a bold file and the <user_speficied_label>
 #  allows for flexibility in naming. getHCPReady will automatically number bold images in 
