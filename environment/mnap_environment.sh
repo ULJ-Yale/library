@@ -378,7 +378,7 @@ export MATLABPATH
 		echo "---"
 		echo ""
 	}
-	alias mnaptoolsupdate=function_commitmnaptools
+	alias commitmnaptools=function_commitmnaptools
 
 	# Commit function for all of MNAP Code
 	function_commitmnapall() {
