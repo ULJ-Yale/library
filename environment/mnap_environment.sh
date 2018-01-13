@@ -106,38 +106,20 @@ HOST=`hostname`
 MyID=`whoami`
 
 # ------------------------------------------------------------------------------
-#  License disclaimer
-# ------------------------------------------------------------------------------
-
-geho ""
-geho "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-geho "................. ███╗   ███╗███╗   ██╗ █████╗ ██████╗ ......................" 
-geho "................. ████╗ ████║████╗  ██║██╔══██╗██╔══██╗ ....................." 
-geho "................. ██╔████╔██║██╔██╗ ██║███████║██████╔╝ ....................."
-geho "................. ██║╚██╔╝██║██║╚██╗██║██╔══██║██╔═══╝ ......................"
-geho "................. ██║ ╚═╝ ██║██║ ╚████║██║  ██║██║ .........................."  
-geho "................. ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝ .........................."
-geho "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-geho ""
-geho "                 You are logged in as $MyID on `hostname`                    "
-geho ""
-geho "                Setting up MNAP environment and paths ...                    "
-geho ""
-geho "                     Software Licence Disclaimer:                            "
-geho "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-geho " Use of this software is subject to the terms and conditions defined by the  "
-geho " Yale University Copyright Policies:                                         "
-geho "    http://ocr.yale.edu/faculty/policies/yale-university-copyright-policy    "
-geho " and the terms and conditions defined in the file 'LICENSE.txt' which is     "
-geho " a part of this source code package.                                         "
-geho "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-geho ""
-
-# ------------------------------------------------------------------------------
 #  Setup privileges and environment disclaimer
 # ------------------------------------------------------------------------------
 
 umask 002
+
+# ------------------------------------------------------------------------------
+#  Check Operating System (needed for some apps like Workbench)
+# ------------------------------------------------------------------------------
+
+if [ "$(uname)" == "Darwin" ]; then
+    OperatingSystem="Darwin"       
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    OperatingSystem="Linux"    
+fi
 
 # ------------------------------------------------------------------------------
 #  Setup master software folder
@@ -161,7 +143,7 @@ PROMPT_COMMAND='echo -ne "\033]0;MNAP: ${PWD}\007"'
 # ------------------------------------------------------------------------------
 
 # -- FSL binaries
-FSLDIR=$TOOLS/fsl-5.0.9/fsl
+FSLDIR=$TOOLS/fsl-5.0.9/
 PATH=${FSLDIR}/bin:${PATH}
 . ${FSLDIR}/etc/fslconf/fsl.sh > /dev/null 2>&1
 export FSLDIR PATH
@@ -203,8 +185,12 @@ PATH=${FREESURFER_HOME}:${PATH}
 export FREESURFER_HOME PATH
 . ${FREESURFER_HOME}/SetUpFreeSurfer.sh > /dev/null 2>&1
 
-# -- Workbench binaries
-WORKBENCHDIR=${TOOLS}/workbench/bin_rh_linux64
+# -- Workbench binaries (set OS)
+if [ "$OperatingSystem" == "Darwin" ]; then
+	WORKBENCHDIR=${TOOLS}/workbench/bin_macosx64
+elif [ "$OperatingSystem" == "Linux" ]; then
+	WORKBENCHDIR=${TOOLS}/workbench/bin_rh_linux64
+fi
 PATH=${WORKBENCHDIR}:${PATH}
 export WORKBENCHDIR PATH
 MATLABPATH=$WORKBENCHDIR:$MATLABPATH
@@ -495,7 +481,36 @@ export MATLABPATH
 	}
 	alias commitmnapmatlab=function_commitmnapmatlab
 
+# ------------------------------------------------------------------------------
+#  License and version disclaimer
+# ------------------------------------------------------------------------------
 
+geho ""
+geho "                 Loaded MNAP Environment Successfully"
+geho ""
+geho " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+geho " ................. ███╗   ███╗███╗   ██╗ █████╗ ██████╗ ......................" 
+geho " ................. ████╗ ████║████╗  ██║██╔══██╗██╔══██╗ ....................." 
+geho " ................. ██╔████╔██║██╔██╗ ██║███████║██████╔╝ ....................."
+geho " ................. ██║╚██╔╝██║██║╚██╗██║██╔══██║██╔═══╝ ......................"
+geho " ................. ██║ ╚═╝ ██║██║ ╚████║██║  ██║██║ .........................."  
+geho " ................. ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝ .........................."
+geho " .................            Version: `more $MNAPPATH/VERSION.md`            ......................"
+geho " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+geho ""
+geho "                 You are logged in as $MyID on `hostname`                    "
+geho ""
+geho "                Setting up MNAP environment and paths ...                    "
+geho ""
+geho "                     Software Licence Disclaimer:                            "
+geho " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+geho "  Use of this software is subject to the terms and conditions defined by the  "
+geho "  Yale University Copyright Policies:                                         "
+geho "     http://ocr.yale.edu/faculty/policies/yale-university-copyright-policy    "
+geho "  and the terms and conditions defined in the file 'LICENSE.md' which is     "
+geho "  a part of this source code package.                                         "
+geho " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+geho ""
 
 
 
