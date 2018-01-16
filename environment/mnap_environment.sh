@@ -1,59 +1,48 @@
 #!/bin/bash
 # set -x
-
+#!/bin/sh 
+#set -x
+#
 #~ND~FORMAT~MARKDOWN~
 #~ND~START~
 #
-# mnap_environment.sh
+# # mnap.sh
 #
 # ## Copyright Notice
 #
-# * Copyright (C) 2015 Anticevic Lab, Yale University
+# Copyright (C) 2015 Anticevic Lab 
+# Copyright (C) 2015 MBLAB 
+#
+# * Yale University
+# * University of Ljubljana
 #
 # ## Author(s)
 #
 # * Alan Anticevic, Department of Psychiatry, Yale University
-# * Grega Repovs, Department of Psychology, University of Ljubljana
+# * Grega Repovs , Department of Psychology,  University of Ljubljana
 #
-# ## Product
+# ## PRODUCT
 #
 # * Global environment script for MNAP Repos
 #
-# ## License
+# ## LICENSE & README
 #
-# See the LICENSE @ https://bitbucket.org/mnap/mnaptools
+# See the [MNAP Repo](https://bitbucket.org/hidradev/mnaptools/) file
 #
-# ## Description:
+# ## DESCRIPTION:
 #
 # * This is a general script developed as a front-end environment and path organization for the MNAP infrastructure
 # * This script needs to be sourced in each users .bash_profile like so:
 #
-# TOOLS=/PATH_TO/MNAP/
-# export TOOLS
-# source $TOOLS/library/environment/mnap_environment.sh
-#
-# ### Installed Software (Prerequisites) - these are sourced in $TOOLS/library/environment/mnap_environment.sh
-#
-# * Connectome Workbench (v1.0 or above)
-# * FSL (version 5.0.6 or above with CUDA libraries)
-# * FreeSurfer (5.3 HCP version or later)
-# * MATLAB (version 2012b or above with Signal Processing, Statistics and Machine Learning and Image Processing Toolbox)
-# * FIX ICA
-# * PALM
-# * Python (version 2.7 or above with numpy)
-# * AFNI
-# * Gradunwarp
-# * Human Connectome Pipelines (Modified versions for single-band preprocessing)
-# * R Statistical Environment with ggplot
-# * dcm2nii (23-June-2017 release)
-# * pydicom
-# * MNAP suite
+#    TOOLS=/PATH_TO/MNAP/
+#    export TOOLS
+#    source $TOOLS/library/environment/mnap_environment.sh
 #
 #~ND~END~
 
-###########################################################################################################################
-###################################################  CODE START ###########################################################
-###########################################################################################################################
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= CODE START =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=
 
 # ------------------------------------------------------------------------------
 #  Setup color outputs
@@ -493,9 +482,10 @@ export MATLABPATH
 # ------------------------------------------------------------------------------
 
 showVersion
+
 geho ""
-geho "                 You are logged in as $MyID on `hostname`                    "
-echo ""
+geho " You are logged in as user: $MyID on machine: `hostname`                    "
+geho ""
 geho "                 Loaded MNAP Environment Successfully"
 geho ""
 geho "                  ███╗   ███╗███╗   ██╗ █████╗ ██████╗                       " 
@@ -504,13 +494,11 @@ geho "                  ██╔████╔██║██╔██╗ █�
 geho "                  ██║╚██╔╝██║██║╚██╗██║██╔══██║██╔═══╝                       "
 geho "                  ██║ ╚═╝ ██║██║ ╚████║██║  ██║██║                           "  
 geho "                  ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝                           "
-echo ""
+geho ""
 geho "                                LICENSE:                                     "
 geho " Use of this software is subject to the terms and conditions defined by the  "
 geho " Yale University Copyright Policies:                                         "
 geho "    http://ocr.yale.edu/faculty/policies/yale-university-copyright-policy    "
 geho " and the terms and conditions defined in the file 'LICENSE.txt' which is     "
 geho " a part of this source code package."
-
-
-
+geho ""
