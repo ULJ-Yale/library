@@ -264,6 +264,13 @@ export MATLABPATH
 
 alias mnap='bash $MNAPPATH/connector/mnap.sh'
 
+# -- Checks for version
+showVersion() {
+	MNAPVer=`cat ${TOOLS}/${MNAPREPO}/VERSION.md`
+	echo ""
+	geho "  Multimodal Neuroimaging Analysis Pipeline (MNAP) Version: v${MNAPVer}"
+}
+
 # ------------------------------------------------------------------------------
 #  setup HCP Pipeline paths
 # ------------------------------------------------------------------------------
@@ -485,32 +492,25 @@ export MATLABPATH
 #  License and version disclaimer
 # ------------------------------------------------------------------------------
 
-geho ""
-geho "                 Loaded MNAP Environment Successfully"
-geho ""
-geho " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-geho " ................. ███╗   ███╗███╗   ██╗ █████╗ ██████╗ ......................" 
-geho " ................. ████╗ ████║████╗  ██║██╔══██╗██╔══██╗ ....................." 
-geho " ................. ██╔████╔██║██╔██╗ ██║███████║██████╔╝ ....................."
-geho " ................. ██║╚██╔╝██║██║╚██╗██║██╔══██║██╔═══╝ ......................"
-geho " ................. ██║ ╚═╝ ██║██║ ╚████║██║  ██║██║ .........................."  
-geho " ................. ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝ .........................."
-geho " .................            Version: `more $MNAPPATH/VERSION.md`            ......................"
-geho " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+showVersion
 geho ""
 geho "                 You are logged in as $MyID on `hostname`                    "
+echo ""
+geho "                 Loaded MNAP Environment Successfully"
 geho ""
-geho "                Setting up MNAP environment and paths ...                    "
-geho ""
-geho "                     Software Licence Disclaimer:                            "
-geho " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-geho "  Use of this software is subject to the terms and conditions defined by the  "
-geho "  Yale University Copyright Policies:                                         "
-geho "     http://ocr.yale.edu/faculty/policies/yale-university-copyright-policy    "
-geho "  and the terms and conditions defined in the file 'LICENSE.md' which is     "
-geho "  a part of this source code package.                                         "
-geho " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-geho ""
+geho "                  ███╗   ███╗███╗   ██╗ █████╗ ██████╗                       " 
+geho "                  ████╗ ████║████╗  ██║██╔══██╗██╔══██╗                      " 
+geho "                  ██╔████╔██║██╔██╗ ██║███████║██████╔╝                      "
+geho "                  ██║╚██╔╝██║██║╚██╗██║██╔══██║██╔═══╝                       "
+geho "                  ██║ ╚═╝ ██║██║ ╚████║██║  ██║██║                           "  
+geho "                  ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝                           "
+echo ""
+geho "                                LICENSE:                                     "
+geho " Use of this software is subject to the terms and conditions defined by the  "
+geho " Yale University Copyright Policies:                                         "
+geho "    http://ocr.yale.edu/faculty/policies/yale-university-copyright-policy    "
+geho " and the terms and conditions defined in the file 'LICENSE.txt' which is     "
+geho " a part of this source code package."
 
 
 
