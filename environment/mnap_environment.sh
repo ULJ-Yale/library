@@ -482,11 +482,8 @@ export MATLABPATH
 # ------------------------------------------------------------------------------
 
 showVersion
-
 geho ""
-geho " You are logged in as user: $MyID on machine: `hostname`                    "
-geho ""
-geho "                 Loaded MNAP Environment Successfully"
+geho "  You are logged in as user: $MyID on machine: `hostname`                    "
 geho ""
 geho "                  ███╗   ███╗███╗   ██╗ █████╗ ██████╗                       " 
 geho "                  ████╗ ████║████╗  ██║██╔══██╗██╔══██╗                      " 
