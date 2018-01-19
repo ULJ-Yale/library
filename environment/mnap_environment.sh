@@ -205,6 +205,18 @@ PATH=${DCMNII}:${PATH}
 export DCMNII PATH
 
 # ------------------------------------------------------------------------------
+#  running matlab vs. octave
+# ------------------------------------------------------------------------------
+
+# use the following command to run .m code in Matlab
+MNAPMCOMMAND='matlab -nojvm -nodisplay -nosplash -r'
+
+# use the following command to run .m code in Matlab
+# MNAPMCOMMAND='octave -q --eval'
+
+export MNAPMCOMMAND
+
+# ------------------------------------------------------------------------------
 #  MNAP - General Code
 # ------------------------------------------------------------------------------
 
