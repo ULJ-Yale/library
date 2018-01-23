@@ -306,7 +306,7 @@ Window 1:
                         <Element Index="1">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/Diffusion/data_split2_brain.nii.gz"
+                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split2_brain.nii.gz"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
@@ -426,7 +426,7 @@ Window 1:
                         <Element Index="2">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/Diffusion/data_split1_brain.nii.gz"
+                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
