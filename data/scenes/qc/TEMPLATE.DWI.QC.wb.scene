@@ -306,7 +306,7 @@ Window 1:
                         <Element Index="1">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split2_brain.nii.gz"
+                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame10_brain.nii.gz"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
@@ -426,7 +426,7 @@ Window 1:
                         <Element Index="2">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz"
+                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
@@ -570,7 +570,7 @@ Window 1:
                                       Version="1">
                                  <Object Type="enumeratedType" Name="dataFileType"><![CDATA[VOLUME]]></Object>
                                  <Object Type="enumeratedType" Name="structure"><![CDATA[INVALID]]></Object>
-                                 <Object Type="pathName" Name="fileName"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split2_brain.nii.gz]]></Object>
+                                 <Object Type="pathName" Name="fileName"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame10_brain.nii.gz]]></Object>
                                  <Object Type="boolean" Name="selected">true</Object>
                               </Object>
                            </Element>
@@ -581,7 +581,7 @@ Window 1:
                                       Version="1">
                                  <Object Type="enumeratedType" Name="dataFileType"><![CDATA[VOLUME]]></Object>
                                  <Object Type="enumeratedType" Name="structure"><![CDATA[INVALID]]></Object>
-                                 <Object Type="pathName" Name="fileName"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
+                                 <Object Type="pathName" Name="fileName"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                  <Object Type="boolean" Name="selected">true</Object>
                               </Object>
                            </Element>
@@ -668,7 +668,7 @@ Window 1:
     <group coordinateSpace="TAB" groupType="SPACE" tabOrWindowIndex="1" uniqueKey="4">
         <percentSizeText coordinateSpace="TAB" backgroundCaretColor="NONE" backgroundCustomRGBA="0.000000;0.000000;0.000000;1.000000" foregroundCaretColor="NONE" foregroundCustomRGBA="1.000000;1.000000;1.000000;1.000000" foregroundLineWidth="3" tabIndex="1" windowIndex="-1" uniqueKey="3" width="25" height="25" rotationAngle="0">
             <coordOne x="10.000000" y="30.000000" z="0.000000" structure="INVALID" numberOfNodes="-1" nodeIndex="-1" nodeOffset="5.000000" nodeOffsetVectorType="CENTROID_THRU_VERTEX"/>
-            <textData textCaretColor="WHITE" textCustomRGBA="1.000000;1.000000;1.000000;1.000000" fontBold="false" fontItalic="false" fontName="VERA" fontPointSize="SIZE14" fontUnderline="false" horizontalAlignment="LEFT" orientation="HORIZONTAL" verticalAlignment="TOP" fontPercentViewportSize="5" connectBrainordinate="ANNOTATION_TEXT_CONNECT_NONE">DWI 2nd Frame Overlay</textData>
+            <textData textCaretColor="WHITE" textCustomRGBA="1.000000;1.000000;1.000000;1.000000" fontBold="false" fontItalic="false" fontName="VERA" fontPointSize="SIZE14" fontUnderline="false" horizontalAlignment="LEFT" orientation="HORIZONTAL" verticalAlignment="TOP" fontPercentViewportSize="5" connectBrainordinate="ANNOTATION_TEXT_CONNECT_NONE">DWI 10th Frame Overlay</textData>
         </percentSizeText>
     </group>
 </AnnotationFile>
@@ -2238,8 +2238,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -2376,8 +2376,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -2670,8 +2670,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split2_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split2_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame10_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame10_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -2808,8 +2808,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -3102,8 +3102,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split2_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split2_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame10_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame10_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -3240,8 +3240,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -3534,8 +3534,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -3672,8 +3672,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -3978,8 +3978,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -4116,8 +4116,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -4254,8 +4254,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -4410,8 +4410,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -4548,8 +4548,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -4686,8 +4686,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -4842,8 +4842,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -4980,8 +4980,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -5118,8 +5118,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -5274,8 +5274,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -5412,8 +5412,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
@@ -5550,8 +5550,8 @@ Window 1:
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_split1_brain.nii.gz]]></Object>
-                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_split1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
                                                 </Object>
