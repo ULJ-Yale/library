@@ -1,13 +1,13 @@
-# README File for MNAP Library Repository
+# README File for MNAP Library Utilities
 
 
 Background
 ==========
 ---
 
-This is a library component of the MNAP suite that contains miscellaneous dependencies.
+This is a `library` component of the MNAP suite that contains miscellaneous dependencies.
 
-The MNAP libraries are maintained by Alan Anticevic, [Anticevic Lab], Yale 
+The MNAP `library` are maintained by Alan Anticevic, [Anticevic Lab], Yale 
 University of Ljubljana in collaboration with Grega Repovs [Mind and Brain Lab], 
 University of Ljubljana.
 
@@ -15,7 +15,7 @@ University of Ljubljana.
 External dependencies
 =====================
 ---
-
+* All MNAP repositories for optimal functionality (git clone git@bitbucket.org:mnap/mnaptools.git)
 * Connectome Workbench (v1.0 or above)
 * FSL (version 5.0.6 or above with CUDA libraries)
 * FreeSurfer (5.3 HCP version or later)
@@ -24,17 +24,16 @@ External dependencies
 * PALM
 * Python (version 2.7 or above)
 * AFNI
-* Gradunwarp
-* Human Connectome Pipelines (Modified versions for single-band preprocessing)
+* Human Connectome Pipelines modified for MNAP (https://bitbucket.org/mnap/hcpmodified)
+* Gradunwarp for HCP workflow (https://github.com/ksubramz/gradunwarp)
 * R Statistical Environment
-* MNAP Suite
 
 
 Usage and command documentation
 ===============================
 ---
 
-For overall usage of the MNAP pipelines refer to the README in the `connector` repository. 
+For overall usage of the MNAP suite refer to the README in the master `mnaptools` repository. 
 
 
 References
