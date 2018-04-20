@@ -1,7 +1,5 @@
 #!/bin/bash
 # set -x
-#!/bin/sh 
-#set -x
 #
 #~ND~FORMAT~MARKDOWN~
 #~ND~START~
@@ -34,7 +32,7 @@
 # * This is a general script developed as a front-end environment and path organization for the MNAP infrastructure
 # * This script needs to be sourced in each users .bash_profile like so:
 #
-#    TOOLS=/PATH_TO/MNAP/
+#    TOOLS=/<absolute_path_to_software_folder>
 #    export TOOLS
 #    source $TOOLS/library/environment/mnap_environment.sh
 #
@@ -111,12 +109,25 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 fi
 
 # ------------------------------------------------------------------------------
-#  Setup master software folder
+#  Check for and setup master software folder
 # ------------------------------------------------------------------------------
 
-TOOLS=$TOOLS
-export TOOLS
-# --- Set up prompt
+if [ -z ${TOOLS} ]; then
+	echo ""
+    reho " -- ERROR: TOOLS environment variable not setup on this system."
+    reho "    Please add to your environment profile (e.g. .bash_profile):"
+    echo ""
+    echo "    TOOLS=/<absolute_path_to_software_folder>/"
+    reho 1
+    echo ""
+else
+	export TOOLS
+fi
+
+# ------------------------------------------------------------------------------
+#  Set up prompt
+# ------------------------------------------------------------------------------
+
 PS1="\[\e[0;36m\][MNAP \W]\$\[\e[0m\] "
 PROMPT_COMMAND='echo -ne "\033]0;MNAP: ${PWD}\007"'
 
