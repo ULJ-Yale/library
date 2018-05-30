@@ -1,4 +1,4 @@
-# Multimodal Neuroimaging Analyses Pipelines (MNAP) Library Repository
+# Multimodal Neuroimaging Analyses Platform (MNAP) Library Repository
 
 ## License
 
