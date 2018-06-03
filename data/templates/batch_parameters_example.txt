@@ -37,7 +37,7 @@
 #  Basic parameters
 #  ----------------
 #
-#  _basefolder               :                ... The path to the study subjects folder
+#  _subjectsfolder           :                ... The path to the study subjects folder
 #  _logfolder                : None           ... The path to the folder where log files are to be stored (None for default <study>/processing/logs)
 #  _overwrite                : no             ... Whether to overwrite existing results or not (yes / no)
 #  _cores                    : 1              ... How many subjects to run in parallel

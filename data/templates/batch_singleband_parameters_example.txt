@@ -61,7 +61,7 @@ _hcp_bold_smoothFWHM    : 2
 
 _image_source       : hcp
 _image_target       : cifti
-_bppt               : all
+_bold_preprocess    : all
 _TR					: 2
 _omit:              0
 _pignore:           hipass=keep|regress=keep|lopass=keep

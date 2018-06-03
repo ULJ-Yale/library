@@ -48,9 +48,9 @@ _hcp_bold_stcorr        : NONE
 _hcp_bold_stcorrdir     : up
 _hcp_bold_stcorrint     : odd
 _hcp_bold_sequencetype  : multi
-_hcp_bold_seimg	  	 : independent
-_hcp_bold_movref  	 : independent
-_hcp_bold_prefix 	:
+_hcp_bold_seimg         : independent
+_hcp_bold_movref        : independent
+_hcp_bold_prefix        :
  
 # ---> fMRI Surface
  
@@ -62,13 +62,13 @@ _hcp_bold_smoothFWHM    : 2
 
 _image_source       : hcp
 _image_target       : cifti
-_bppt               : all
-_TR:                0.8
-_omit:              0
-_pignore:           hipass=keep|regress=keep|lopass=keep
-_log              : keep
-_glm_matrix       : both
-_glm_residuals    : forget
+_bold_preprocess    : all
+_TR                 : 0.8
+_omit               : 0
+_pignore            : hipass=keep|regress=keep|lopass=keep
+_log                : keep
+_glm_matrix         : both
+_glm_residuals      : forget
 
 # --- nuisance signal
 
