@@ -14,6 +14,10 @@
 #  preprocessing) and online help for the relevant MNAP commands.
 #
 #
+#  --> For all supported batch parameter options run: 
+#      mnap -o
+#
+#
 #  File format
 #  -----------
 #
