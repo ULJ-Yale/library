@@ -240,7 +240,7 @@ export MNAPREPO PATH
 
 if [ -e ~/.mnapdev ]
 then
-    MNAPPATH=$TOOLS/mnapdev
+    MNAPPATH=$TOOLS/mnaptools
     echo ""
     reho " --- NOTE: You are in MNAP development mode! ----"
 	echo ""
