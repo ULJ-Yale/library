@@ -479,10 +479,14 @@ function_mnapupdateall() {
 	echo ""
 	geho "-- Pulling repositories as submodules in $MNAPPATH from $MNAPBranch..."
 	echo ""
-	cd $MNAPPATH; git pull origin ${MNAPBranch}; git submodule foreach git pull origin ${MNAPBranch}
+	cd $MNAPPATH; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/niutilities; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/library; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/hcpmodified; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/matlab; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/connector; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
 }
 alias mnapupdateall=function_mnapupdateall
-
 
 # -- Commit function for MNAP Suite main repo
 function_commitmnapmain() {
@@ -610,19 +614,6 @@ function_commithcpmodified() {
 	git push git@bitbucket.org:hidradev/hcpmodified.git ${MNAPBranch}
 }
 alias commithcpmodified=function_commithcpmodified
-
-# -- Commit MNAP HCPExtended --> HCPe-MNAP branch
-function_commithcpextended() {
-	unset MNAPBranch
-	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	cd ${MNAPPATH}/hcpextendedpull
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:hidradev/hcpextendedpull.git ${MNAPBranch}
-}
 
 # -- Commit MNAP Niutilities
 function_commitmnapniutilities() {
