@@ -141,13 +141,10 @@ for fn in "$@" ; do
 done
 }
 
-opts_CheckForHelpRequest() {
-for fn in "$@" ; do
-	if [ "$fn" = "--help" ]; then
-		return 0
-	fi
-done
-}
+if [ "$1" == "--help" ]; then
+	usage
+	exit 0
+fi
 
 # ------------------------------------------------------------------------------
 # -- Setup server login messages
@@ -350,6 +347,7 @@ MATLABPATH=$TemplateFolder:$MATLABPATH
 export MATLABPATH
 
 alias mnap='bash $MNAPPATH/connector/mnap.sh'
+alias mnap_environment='$MNAPPATH/library/environment/mnap_environment.sh --help'
 
 # -- Checks for version
 showVersion() {
@@ -422,6 +420,11 @@ export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries
 # -- MNAP - Imaging Utilities, Matlab, Processing
 # ------------------------------------------------------------------------------
 
+# -- Make sure gmri is executable
+if [[ -z `ls -ltr $MNAPPATH/niutilities/gmri | grep "rwxrwx"` ]]; then
+	chmod 770 $MNAPPATH/niutilities/gmri
+fi
+
 PATH=$MNAPPATH/connector:$PATH
 PATH=$MNAPPATH/niutilities:$PATH
 PATH=$MNAPPATH/matlab:$PATH
@@ -481,31 +484,32 @@ function_mnapupdateall() {
 alias mnapupdateall=function_mnapupdateall
 
 
-# -- Commit function for MNAP tools master repo
-function_commitmnapall() {
+# -- Commit function for MNAP Suite main repo
+function_commitmnapmain() {
 	unset MNAPBranch
 	CommitMessage=`opts_GetOpt "--message" $@`
 	MNAPBranch=`opts_GetOpt "--branch" $@`
 	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
 	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	geho "-- Committing changes in MNAP Suite Main repo ${MNAPPATH} to branch ${MNAPBranch}"
+	echo ""
+	geho "-- Committing changes in MNAP Suite main repo ${MNAPPATH} to branch ${MNAPBranch}"
 	cd ${MNAPPATH}
 	git add ./*
 	git commit . --message="${CommitMessage}"
 	git push origin ${MNAPBranch}
-	echo "---"
+	echo ""
+	geho "--- Committing done."
 	echo ""
 }
-alias commitmnaptools=function_commitmnaptools
+alias commitmnapmain=function_commitmnapmain
 
-# -- Commit function for all of MNAP Code
+# -- Commit function for all of MNAP Suite Code across modules
 function_commitmnapall() {
 	unset MNAPBranch
 	CommitMessage=`opts_GetOpt "--message" $@`
 	MNAPBranch=`opts_GetOpt "--branch" $@`
 	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
 	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	
 	geho "-- Committing changes in submodule ${MNAPPATH}/library..."
 	cd ${MNAPPATH}/library
 	git add ./*
@@ -513,7 +517,6 @@ function_commitmnapall() {
 	git push origin ${MNAPBranch}
 	echo "---"
 	echo ""
-			
 	geho "-- Committing changes in submodule ${MNAPPATH}/connector..."
 	cd ${MNAPPATH}/connector
 	git add ./*
@@ -521,7 +524,6 @@ function_commitmnapall() {
 	git push origin ${MNAPBranch}
 	echo "---"
 	echo ""
-	
 	geho "-- Committing changes in submodule ${MNAPPATH}/hcpmodified..."
 	cd ${MNAPPATH}/hcpmodified
 	git add ./*
@@ -529,7 +531,6 @@ function_commitmnapall() {
 	git push origin ${MNAPBranch}
 	echo "---"
 	echo ""
-
 	geho "-- Committing changes in submodule ${MNAPPATH}/hcpextendedpull..."
 	cd ${MNAPPATH}/hcpextendedpull
 	git add ./*
@@ -537,7 +538,6 @@ function_commitmnapall() {
 	git push origin HCPe-MNAP
 	geho "---"
 	echo ""
-
 	geho "-- Committing changes in submodule ${MNAPPATH}/niutilities..."
 	cd ${MNAPPATH}/niutilities
 	git add ./*
@@ -545,7 +545,6 @@ function_commitmnapall() {
 	git push origin ${MNAPBranch}
 	echo "---"
 	echo ""
-	
 	geho "-- Committing changes in submodule ${MNAPPATH}/matlab..."
 	cd ${MNAPPATH}/matlab
 	git add ./*
@@ -553,8 +552,7 @@ function_commitmnapall() {
 	git push origin ${MNAPBranch}
 	echo "---"
 	echo ""
-
-	geho "-- Committing changes in master module ${MNAPPATH}..."
+	geho "-- Committing changes in main module ${MNAPPATH}..."
 	cd ${MNAPPATH}
 	git add ./*
 	git commit . --message="${CommitMessage}"

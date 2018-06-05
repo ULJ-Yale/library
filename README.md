@@ -5,7 +5,9 @@ Background
 ==========
 ---
 
-This is a `library` component of the MNAP suite that contains miscellaneous dependencies.
+This is a `library` component of the MNAP suite that contains miscellaneous dependencies, 
+environment scripts, relevant data, parameter files, etc. It is required for proper
+MNAP Suite functionality.
 
 The MNAP `library` are maintained by Alan Anticevic, [Anticevic Lab], Yale 
 University of Ljubljana in collaboration with Grega Repovs [Mind and Brain Lab], 
@@ -15,52 +17,20 @@ Installation
 ===============================
 ---
 
-### Step 1. Clone all MNAP repos and initiate submodules.
+### See https://bitbucket.org/hidradev/mnaptools/src/master/README.md
 
-* Clone: `git clone git@bitbucket.org/hidradev/mnaptools.git` 
-* Initiate submodules from inside cloned repo folder: `git submodule init`
-* Pull and update all submodules: `git pull --recurse-submodules && git submodule update --recursive`
-* Update submodules to latest commit on origin: `git submodule foreach git pull origin master`
-
-### Step 2. Install all necessary dependencies for full functionality (see below). 
-
-### Step 3. Configure `niutilities` repository. 
-
-* Add `~/mnaptools/niutilities` folder to `$PATH`
-* Add `~/mnaptools/niutilities` folder to `$PYTHONPATH`
-* Make `~/mnaptools/niutilities/gmri` executable
-* Install latest version of numpy, pydicom, scipy & nibabel
-* (e.g. `pip install numpy pydicom scipy nibabel `)
-
-### Step 4. Configure the environment script by adding the following lines to your .bash_profile.
-
-	TOOLS=~/mnaptools
-	export TOOLS
-	source $TOOLS/library/environment/mnap_environment.sh
-	
 
 External dependencies
 =====================
 ---
-* All MNAP repositories for optimal functionality (git clone git@bitbucket.org:mnap/mnaptools.git)
-* Connectome Workbench (v1.0 or above)
-* FSL (version 5.0.6 or above with CUDA libraries)
-* FreeSurfer (5.3 HCP version or later)
-* MATLAB (version 2012b or above with Signal Processing, Statistics and Machine Learning and Image Processing Toolbox)
-* FIX ICA
-* PALM
-* Python (version 2.7 or above)
-* AFNI
-* Human Connectome Pipelines modified for MNAP (https://bitbucket.org/mnap/hcpmodified)
-* Gradunwarp for HCP workflow (https://github.com/ksubramz/gradunwarp)
-* R Statistical Environment
+### See https://bitbucket.org/hidradev/mnaptools/src/master/README.md
 
 
 Usage and command documentation
 ===============================
 ---
 
-For overall usage of the MNAP suite refer to the README in the master `mnaptools` repository. 
+### See https://bitbucket.org/hidradev/mnaptools/src/master/README.md
 
 
 References
