@@ -71,7 +71,7 @@ usage() {
     echo " The MNAP Suite assumes a set default folder names for dependencies if undefined by user environment."
     echo " These are defined relative to the ${TOOLS} folder which should be set as a global system variable."
     echo ""
-    echo "        FSL                 --> FSLFolder=fsl-5.0.9/fsl"
+    echo "        FSL                 --> FSLFolder=fsl-5.0.9"
     echo "        FIX ICA             --> FIXICAFolder=fix1.06 "
     echo "        FreeSurfer          --> FREESURFERDIR=freesurfer-6.0/freesurfer "
     echo "        FreeSurferScheduler --> FreeSurferSchedulerDIR=FreeSurferScheduler "
