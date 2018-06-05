@@ -243,7 +243,7 @@ fi
 #
 # -------------------------------------------------------------------------------
 
-if [[ -z ${FSLFolder} ]]; then FSLFolder="fsl-5.0.9/fsl"; fi
+if [[ -z ${FSLFolder} ]]; then FSLFolder="fsl-5.0.9"; fi
 if [[ -z ${FIXICAFolder} ]]; then FIXICAFolder="fix1.06"; fi
 if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="freesurfer-6.0/freesurfer"; fi
 if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="FreeSurferScheduler"; fi
