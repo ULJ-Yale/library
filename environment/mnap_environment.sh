@@ -531,13 +531,6 @@ function_commitmnapall() {
 	git push origin ${MNAPBranch}
 	echo "---"
 	echo ""
-	geho "-- Committing changes in submodule ${MNAPPATH}/hcpextendedpull..."
-	cd ${MNAPPATH}/hcpextendedpull
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push origin HCPe-MNAP
-	geho "---"
-	echo ""
 	geho "-- Committing changes in submodule ${MNAPPATH}/niutilities..."
 	cd ${MNAPPATH}/niutilities
 	git add ./*
@@ -572,7 +565,6 @@ function_mnapupdate_individual() {
 	cd ${MNAPPATH}/connector; git pull origin ${MNAPBranch}
 	cd ${MNAPPATH}/matlab; git pull origin ${MNAPBranch}
 	cd ${MNAPPATH}/hcpmodified; git pull origin ${MNAPBranch}
-	cd ${MNAPPATH}/hcpextendedpull; git pull origin HCPe-MNAP
 	cd ${MNAPPATH}/niutilities; git pull origin ${MNAPBranch}
 	}
 alias mnapupdateindiv=function_mnapupdate_individual
@@ -619,7 +611,7 @@ function_commithcpmodified() {
 }
 alias commithcpmodified=function_commithcpmodified
 
-# -- Commit MNAP HCPExtended
+# -- Commit MNAP HCPExtended --> HCPe-MNAP branch
 function_commithcpextended() {
 	unset MNAPBranch
 	CommitMessage=`opts_GetOpt "--message" $@`
@@ -629,7 +621,7 @@ function_commithcpextended() {
 	cd ${MNAPPATH}/hcpextendedpull
 	git add ./*
 	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:hidradev/hcpextendedpull.git HCPe-MNAP
+	git push git@bitbucket.org:hidradev/hcpextendedpull.git ${MNAPBranch}
 }
 
 # -- Commit MNAP Niutilities
