@@ -479,7 +479,12 @@ function_mnapupdateall() {
 	echo ""
 	geho "-- Pulling repositories as submodules in $MNAPPATH from $MNAPBranch..."
 	echo ""
-	cd $MNAPPATH; git pull origin ${MNAPBranch}; git submodule foreach git pull origin ${MNAPBranch}
+	cd $MNAPPATH; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/niutilities; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/library; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/hcpmodified; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/matlab; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/connector; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
 }
 alias mnapupdateall=function_mnapupdateall
 
@@ -561,11 +566,12 @@ function_mnapupdate_individual() {
 	echo ""
 	beho "-- Pulling individual repositories in $MNAPPATH..."
 	echo ""
-	cd ${MNAPPATH}/library; git pull origin ${MNAPBranch}
-	cd ${MNAPPATH}/connector; git pull origin ${MNAPBranch}
-	cd ${MNAPPATH}/matlab; git pull origin ${MNAPBranch}
-	cd ${MNAPPATH}/hcpmodified; git pull origin ${MNAPBranch}
-	cd ${MNAPPATH}/niutilities; git pull origin ${MNAPBranch}
+	cd $MNAPPATH; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/niutilities; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/library; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/hcpmodified; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/matlab; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/connector; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
 	}
 alias mnapupdateindiv=function_mnapupdate_individual
 
