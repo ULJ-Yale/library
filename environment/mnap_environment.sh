@@ -243,7 +243,7 @@ fi
 #
 # -------------------------------------------------------------------------------
 
-if [[ -z ${FSLFolder} ]]; then FSLFolder="fsl-5.0.9"; fi
+if [[ -z ${FSLFolder} ]]; then unset FSLDIR; FSLFolder="fsl-5.0.9"; fi
 if [[ -z ${FIXICAFolder} ]]; then FIXICAFolder="fix1.06"; fi
 if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="freesurfer-6.0/freesurfer"; fi
 if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="FreeSurferScheduler"; fi
@@ -251,14 +251,6 @@ if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="workbench"; fi
 if [[ -z ${PALMDIR} ]]; then PALMDIR="PALM/PALM"; fi
 if [[ -z ${AFNIDIR} ]]; then AFNIDIR="afni_linux_openmp_64"; fi
 if [[ -z ${DCM2NIIDIR} ]]; then DCM2NIIDIR="dcm2niix"; fi
-
-# -- FSL binaries
-FSLDIR=${TOOLS}/${FSLFolder}
-PATH=${FSLDIR}/bin:${PATH}
-. ${FSLDIR}/etc/fslconf/fsl.sh > /dev/null 2>&1
-export FSLDIR PATH
-MATLABPATH=$FSLDIR:$MATLABPATH
-export MATLABPATH
 
 # -- FIX ICA path
 FIXICADIR=${TOOLS}/${FIXICAFolder}
@@ -286,6 +278,14 @@ FREESURFER_HOME=${TOOLS}/${FREESURFERDIR}
 PATH=${FREESURFER_HOME}:${PATH}
 export FREESURFER_HOME PATH
 . ${FREESURFER_HOME}/SetUpFreeSurfer.sh > /dev/null 2>&1
+
+# -- FSL binaries
+FSLDIR=${TOOLS}/${FSLFolder}
+PATH=${FSLDIR}/bin:${PATH}
+. ${FSLDIR}/etc/fslconf/fsl.sh > /dev/null 2>&1
+export FSLDIR PATH
+MATLABPATH=$FSLDIR:$MATLABPATH
+export MATLABPATH
 
 # -- FreeSurfer Scheduler for GPU acceleration
 FREESURFER_SCHEDULER=${TOOLS}/${FreeSurferSchedulerDIR}
@@ -565,11 +565,12 @@ function_mnapupdate_individual() {
 	echo ""
 	beho "-- Pulling individual repositories in $MNAPPATH..."
 	echo ""
-	cd ${MNAPPATH}/library; git pull origin ${MNAPBranch}
-	cd ${MNAPPATH}/connector; git pull origin ${MNAPBranch}
-	cd ${MNAPPATH}/matlab; git pull origin ${MNAPBranch}
-	cd ${MNAPPATH}/hcpmodified; git pull origin ${MNAPBranch}
-	cd ${MNAPPATH}/niutilities; git pull origin ${MNAPBranch}
+	cd $MNAPPATH; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/niutilities; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/library; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/hcpmodified; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/matlab; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+	cd $MNAPPATH/connector; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
 	}
 alias mnapupdateindiv=function_mnapupdate_individual
 
