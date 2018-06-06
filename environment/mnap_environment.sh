@@ -243,7 +243,7 @@ fi
 #
 # -------------------------------------------------------------------------------
 
-if [[ -z ${FSLFolder} ]]; then FSLFolder="fsl-5.0.9"; fi
+if [[ -z ${FSLFolder} ]]; then unset FSLDIR; FSLFolder="fsl-5.0.9"; fi
 if [[ -z ${FIXICAFolder} ]]; then FIXICAFolder="fix1.06"; fi
 if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="freesurfer-6.0/freesurfer"; fi
 if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="FreeSurferScheduler"; fi
@@ -251,14 +251,6 @@ if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="workbench"; fi
 if [[ -z ${PALMDIR} ]]; then PALMDIR="PALM/PALM"; fi
 if [[ -z ${AFNIDIR} ]]; then AFNIDIR="afni_linux_openmp_64"; fi
 if [[ -z ${DCM2NIIDIR} ]]; then DCM2NIIDIR="dcm2niix"; fi
-
-# -- FSL binaries
-FSLDIR=${TOOLS}/${FSLFolder}
-PATH=${FSLDIR}/bin:${PATH}
-. ${FSLDIR}/etc/fslconf/fsl.sh > /dev/null 2>&1
-export FSLDIR PATH
-MATLABPATH=$FSLDIR:$MATLABPATH
-export MATLABPATH
 
 # -- FIX ICA path
 FIXICADIR=${TOOLS}/${FIXICAFolder}
@@ -286,6 +278,14 @@ FREESURFER_HOME=${TOOLS}/${FREESURFERDIR}
 PATH=${FREESURFER_HOME}:${PATH}
 export FREESURFER_HOME PATH
 . ${FREESURFER_HOME}/SetUpFreeSurfer.sh > /dev/null 2>&1
+
+# -- FSL binaries
+FSLDIR=${TOOLS}/${FSLFolder}
+PATH=${FSLDIR}/bin:${PATH}
+. ${FSLDIR}/etc/fslconf/fsl.sh > /dev/null 2>&1
+export FSLDIR PATH
+MATLABPATH=$FSLDIR:$MATLABPATH
+export MATLABPATH
 
 # -- FreeSurfer Scheduler for GPU acceleration
 FREESURFER_SCHEDULER=${TOOLS}/${FreeSurferSchedulerDIR}
@@ -346,6 +346,7 @@ export TemplateFolder PATH
 MATLABPATH=$TemplateFolder:$MATLABPATH
 export MATLABPATH
 
+
 alias mnap='bash $MNAPPATH/connector/mnap.sh'
 alias mnap_environment='$MNAPPATH/library/environment/mnap_environment.sh --help'
 
@@ -378,7 +379,6 @@ else
 fi
 
 export MNAPMCOMMAND
-
 
 # ------------------------------------------------------------------------------
 # -- Setup HCP Pipeline paths
@@ -415,6 +415,7 @@ export HCPPIPEDIR_dMRITracFull=${HCPPIPEDIR}/DiffusionTractographyDense
 export HCPPIPEDIR_dMRILegacy=/gpfs/project/fas/n3/software/hcpmodified/DiffusionPreprocessingLegacy 
 export AutoPtxFolder=${HCPPIPEDIR_dMRITracFull}/autoPtx_HCP_extended
 export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries
+
 
 # ------------------------------------------------------------------------------
 # -- MNAP - Imaging Utilities, Matlab, Processing
@@ -458,6 +459,7 @@ MATLABPATH=$MNAPPATH/matlab/gmri:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/stats:$MATLABPATH
 
 export MATLABPATH
+
 
 # ------------------------------------------------------------------------------
 # -- Path to additional libraries
