@@ -580,12 +580,12 @@ function_gitmnap() {
 		reho "---- TESTING ----"
 		cd ${MNAPBranchPath}
 		echo ""
-		beho "-- Checking active branch for main MNAP repo in $MNAPBranchPath..."
+		mageho "-- Checking active branch for main MNAP repo in $MNAPBranchPath..."
 		echo ""
 		if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath. Check your repo."; echo ""; mnapgit_usage; return 1; else geho "--> $MNAPBranch found in $MNAPBranchPath"; echo ""; fi
 		if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath. Check your repo."; echo ""; mnapgit_usage; return 1; else geho "--> $MNAPBranch is active in $MNAPBranchPath"; echo ""; fi
 		echo ""
-		beho "-- All checks for main MNAP repo passed."
+		mageho "-- All checks for main MNAP repo passed."
 		echo ""
 		# -- Check git command
 		echo ""
@@ -602,7 +602,7 @@ function_gitmnap() {
 		fi
 		echo ""
 		geho "-- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
-		echo ""
+		echo ""; echo "------------"; echo ""
 	fi
 		
 	# -- Check if main repo is selected only
@@ -631,15 +631,15 @@ function_gitmnap() {
 	
 	# -- Continue with specific submodules
 	echo ""
-	beho "-- Checking active branch ${MNAPBranch} for specified submodules ${MNAPSubModules} in ${MNAPBranchPath}..."
+	mageho "-- Checking active branch ${MNAPBranch} for specified submodules in ${MNAPBranchPath}..."
 	echo ""
 	for MNAPSubModule in ${MNAPSubModules}; do
 		cd ${MNAPBranchPath}/${MNAPSubModule}
 		if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; mnapgit_usage; return 1; else geho "--> $MNAPBranch found in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
 		if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; mnapgit_usage; return 1; else geho "--> $MNAPBranch is active in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
 	done
-	echo ""
-	beho "-- All checks passed for specified submodules..."
+	echo ""; echo "------------"; echo ""
+	mageho "-- All checks passed for specified submodules..."
 	echo ""
 	
 	# -- Check git command
@@ -658,7 +658,7 @@ function_gitmnap() {
 		fi
 		echo ""
 		geho "-- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."
-		echo ""
+		echo ""; echo "------------"; echo ""
 	done
 	
 	# -- Report final completion
