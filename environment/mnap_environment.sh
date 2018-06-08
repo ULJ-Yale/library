@@ -55,7 +55,7 @@ usage() {
     echo ""
     echo "-- DESCRIPTION:"
     echo ""
-    echo "This function implements the global environment setup for the MNAP Suite."
+    echo "This script implements the global environment setup for the MNAP Suite."
     echo ""
     echo ""
     echo "    Configure the environment script by adding the following lines to the .bash_profile "
@@ -83,6 +83,7 @@ usage() {
     echo " These defaults can be redefined if the above relative paths are declared as global variables in the .bash_profile profile."
     echo ""
 }
+
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= CODE START =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -142,6 +143,16 @@ done
 }
 
 if [ "$1" == "--help" ]; then
+	usage
+	exit 0
+fi
+
+if [ "$1" == "-help" ]; then
+	usage
+	exit 0
+fi
+
+if [ "$1" == "?help" ]; then
 	usage
 	exit 0
 fi
@@ -232,17 +243,18 @@ fi
 
 # -- Set default folder names for dependencies if undefined by user environment: 
 #
-# FSL
-# FIX ICA
-# FreeSurfer
-# FreeSurferScheduler
-# workbench
-# PALM
-# AFNI
-# dcm2niix
+# FSL                       Environment Variable --> $FSLFolder
+# FIX ICA                   Environment Variable --> $FIXICAFolder
+# FreeSurfer                Environment Variable --> $FREESURFERDIR
+# FreeSurferScheduler       Environment Variable --> $FreeSurferSchedulerDIR
+# workbench                 Environment Variable --> $HCPWBDIR
+# PALM                      Environment Variable --> $PALMDIR
+# AFNI                      Environment Variable --> $AFNIDIR
+# dcm2niix                  Environment Variable --> $DCM2NIIDIR
 #
 # -------------------------------------------------------------------------------
 
+# -- Check if folders for dependencies are set in the global path
 if [[ -z ${FSLFolder} ]]; then unset FSLDIR; FSLFolder="fsl-5.0.9"; fi
 if [[ -z ${FIXICAFolder} ]]; then FIXICAFolder="fix1.06"; fi
 if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="freesurfer-6.0/freesurfer"; fi
@@ -273,13 +285,15 @@ export FSLGPUDIR PATH
 MATLABPATH=$FSLGPUDIR:$MATLABPATH
 export MATLABPATH
 
-# -- FreeSurfer binaries
+# -- FreeSurfer path
 FREESURFER_HOME=${TOOLS}/${FREESURFERDIR}
 PATH=${FREESURFER_HOME}:${PATH}
 export FREESURFER_HOME PATH
 . ${FREESURFER_HOME}/SetUpFreeSurfer.sh > /dev/null 2>&1
 
-# -- FSL binaries
+# -- FSL path
+# -- Note: Always run after FreeSurfer for correct environment specification
+#          because SetUpFreeSurfer.sh can mis-specify the $FSLDIR path 
 FSLDIR=${TOOLS}/${FSLFolder}
 PATH=${FSLDIR}/bin:${PATH}
 . ${FSLDIR}/etc/fslconf/fsl.sh > /dev/null 2>&1
@@ -287,12 +301,12 @@ export FSLDIR PATH
 MATLABPATH=$FSLDIR:$MATLABPATH
 export MATLABPATH
 
-# -- FreeSurfer Scheduler for GPU acceleration
+# -- FreeSurfer Scheduler for GPU acceleration path
 FREESURFER_SCHEDULER=${TOOLS}/${FreeSurferSchedulerDIR}
 PATH=${FREESURFER_SCHEDULER}:${PATH}
 export FREESURFER_SCHEDULER PATH
 
-# -- Workbench binaries (set OS)
+# -- Workbench path (set OS)
 if [ "$OperatingSystem" == "Darwin" ]; then
 	WORKBENCHDIR=${TOOLS}/${HCPWBDIR}/bin_macosx64
 elif [ "$OperatingSystem" == "Linux" ]; then
@@ -303,14 +317,14 @@ export WORKBENCHDIR PATH
 MATLABPATH=$WORKBENCHDIR:$MATLABPATH
 export MATLABPATH
 
-# -- PALM binaries
+# -- PALM path
 PALMPATH=${TOOLS}/${PALMDIR}
 PATH=${PALMPATH}:${PATH}
 export PALMPATH PATH
 MATLABPATH=$PALMPATH:$MATLABPATH
 export MATLABPATH
 
-# -- AFNI binaries
+# -- AFNI path
 AFNIPATH=${TOOLS}/${AFNIDIR}
 PATH=${AFNIPATH}:${PATH}
 export AFNIPATH PATH
@@ -346,6 +360,9 @@ export TemplateFolder PATH
 MATLABPATH=$TemplateFolder:$MATLABPATH
 export MATLABPATH
 
+# -- Define submodules, but omit hcpextendedpull to avoid conflicts
+unset MNAPSubModules
+MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
 
 alias mnap='bash $MNAPPATH/connector/mnap.sh'
 alias mnap_environment='$MNAPPATH/library/environment/mnap_environment.sh --help'
@@ -394,6 +411,7 @@ if [ -e ~/.mnaphcpe ];
 	reho " ---> MNAP path is set to: $HCPPIPEDIR"
 	echo ""
 fi
+
 export HCPPIPEDIR=$MNAPPATH/hcpmodified
 export CARET7DIR=$TOOLS/workbench/bin_rh_linux64
 export GRADUNWARPDIR=$TOOLS/pylib/gradunwarp/core
@@ -416,16 +434,14 @@ export HCPPIPEDIR_dMRILegacy=/gpfs/project/fas/n3/software/hcpmodified/Diffusion
 export AutoPtxFolder=${HCPPIPEDIR_dMRITracFull}/autoPtx_HCP_extended
 export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries
 
-
 # ------------------------------------------------------------------------------
-# -- MNAP - Imaging Utilities, Matlab, Processing
+# -- MNAP - NIUtilities and Matlab Paths
 # ------------------------------------------------------------------------------
 
 # -- Make sure gmri is executable
-if [[ -z `ls -ltr $MNAPPATH/niutilities/gmri | grep "rwxrwx"` ]]; then
-	chmod 770 $MNAPPATH/niutilities/gmri
-fi
+chmod ugo+x $MNAPPATH/niutilities/gmri &> /dev/null
 
+# -- Setup Python paths
 PATH=$MNAPPATH/connector:$PATH
 PATH=$MNAPPATH/niutilities:$PATH
 PATH=$MNAPPATH/matlab:$PATH
@@ -437,6 +453,7 @@ PATH=$TOOLS/pylib:$PATH
 PATH=$TOOLS/pylib/bin:$PATH
 PATH=$TOOLS/MeshNet:$PATH
 
+# -- Export Python paths
 PYTHONPATH=$TOOLS:$PYTHONPATH
 PYTHONPATH=$MNAPPATH:$PYTHONPATH
 PYTHONPATH=$MNAPPATH/connector:$PYTHONPATH
@@ -449,216 +466,208 @@ PYTHONPATH=$TOOLS/pylib/bin:$PYTHONPATH
 PYTHONPATH=$TOOLS/pylib/lib/python2.7/site-packages/:$PYTHONPATH
 PYTHONPATH=$TOOLS/pylib:$PYTHONPATH
 PYTHONPATH=$TOOLS/MeshNet:$PYTHONPATH
-
 export PATH
 export PYTHONPATH
 
+# -- Set and export Matlab paths
 MATLABPATH=$MNAPPATH/matlab/fcMRI:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/general:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/gmri:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/stats:$MATLABPATH
-
 export MATLABPATH
 
-
 # ------------------------------------------------------------------------------
-# -- Path to additional libraries
-# ------------------------------------------------------------------------------
-
-# -- Define additional paths here
-
-# ------------------------------------------------------------------------------
-#  MNAP Functions and Aliases for BitBucket
+# -- Path to additional dependencies
 # ------------------------------------------------------------------------------
 
-# -- Update MNAP code by checking if using submodules or individual repos:
+# -- Define additional paths here as needed
 
-# -- Update all submodules
-function_mnapupdateall() {
-	unset MNAPBranch
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	echo ""
-	geho "-- Pulling repositories as submodules in $MNAPPATH from $MNAPBranch..."
-	echo ""
-	cd $MNAPPATH; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/niutilities; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/library; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/hcpmodified; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/matlab; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/connector; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
+# ------------------------------------------------------------------------------
+#  MNAP Functions and git aliases for BitBucket commit and pull requests
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# -- Commit usage function help
+# ------------------------------------------------------------------------------
+
+mnapgit_usage() {
+    echo ""
+    echo " -- DESCRIPTION for gitmnap function:"
+    echo ""
+    echo "The MNAP Suite provides functionality for users with repo privileges to easily pull or commit & push changes via git."
+    echo "This is done via two aliases that are setup as general environment variables: "
+    echo ""
+    echo "    * gitmnap   --> Alias for the MNAP function that updates the MNAP Suite via git from the remote repo or pushes changes to remote repo."
+    echo ""
+    echo ""
+    echo " --command=<git_command>                                            Specify git command: push or pull."
+    echo " --branch=<branch_to_work_on>                                       Specify the branch name you want to pull or commit."
+    echo " --branchpath=<absolute_path_to_folder_containing_mnap_suite>       This folder has to have the selected branch checked out."
+    echo " --message=<commit_message>                                         Specify commit message if running commitmnap"
+    echo " --submodules=<list_of_submodules>                                  Comma, space or pipe separated list of submodules to work on."
+    echo "                                                                    'all'      --->  Update both the main repo and all submodules"
+    echo "                                                                    'main'     --->  Update only the main repo"
+    geho "MNAP Submodules:"
+    echo ""
+    geho "${MNAPSubModules}"
+    echo ""
+    echo ""
+    echo " -- EXAMPLES:"
+    echo ""
+    echo "gitmnap \ "
+    echo "--command='pull' \ "
+    echo "--branch='master' \ "
+    echo "--branchpath='$TOOLS/$MNAPREPO' \ "
+    echo "--submodules='all' "
+    echo ""
+    echo ""
+    echo "gitmnap \ "
+    echo "--command='push' \ "
+    echo "--branch='master' \ "
+    echo "--branchpath='$TOOLS/$MNAPREPO' \ "
+    echo "--submodules='all' \ "
+    echo "--message='Committing change' "
+    echo ""
 }
-alias mnapupdateall=function_mnapupdateall
 
+# -- Update MNAP Suite and all submodules
+function_gitmnap() {
 
-# -- Commit function for MNAP Suite main repo
-function_commitmnapmain() {
+	unset MNAPSubModules
+	MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+	# -- Inputs
 	unset MNAPBranch
+	unset MNAPGitCommand
+	unset MNAPBranchPath
+	unset CommitMessage
+	MNAPGitCommand=`opts_GetOpt "--command" $@`
+	MNAPBranch=`opts_GetOpt "--branch" $@`
+	MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
 	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
+	MNAPSubModulesList=`opts_GetOpt "--submodules" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of inputs; removing comma or pipes
+	
+	# -- Check for help calls
+	if [[ ${1} == "help" ]] || [[ ${1} == "-help" ]] || [[ ${1} == "--help" ]] || [[ ${1} == "?help" ]]; then
+		mnapgit_usage
+		return 0
+	fi
+	if [[ ${1} == "usage" ]] || [[ ${1} == "-usage" ]] || [[ ${1} == "--usage" ]] || [[ ${1} == "?usage" ]]; then
+		mnapgit_usage
+		return 0
+	fi
+	
+	# -- Start execution
 	echo ""
-	geho "-- Committing changes in MNAP Suite main repo ${MNAPPATH} to branch ${MNAPBranch}"
-	cd ${MNAPPATH}
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push origin ${MNAPBranch}
+	geho "--- Executing MNAP $MNAPGitCommand function ... "
 	echo ""
-	geho "--- Committing done."
+	
+	# -- Performing flag checks
 	echo ""
+	geho "--- Checking inputs ... "
+	echo ""
+	if [[ -z ${MNAPGitCommand} ]]; then reho ""; reho "Error: --command flag not defined. Specify 'pull' or 'push' option."; echo ""; mnapgit_usage; return 1; fi
+	if [[ -z ${MNAPBranch} ]]; then reho ""; reho "Error: --branch flag not defined."; echo ""; mnapgit_usage; return 1; fi
+	if [[ -z ${MNAPBranchPath} ]]; then reho ""; reho "Error: --branchpath flag for specified branch not defined. Specify absolute path of the relevant MNAP repo."; echo ""; mnapgit_usage; return 1; fi
+	if [[ -z ${MNAPSubModulesList} ]]; then reho ""; reho "Error: --submodules flag not not defined. Specify 'main', 'all' or specific submodule to commit."; echo ""; mnapgit_usage; return 1; fi
+	if [[ ${MNAPSubModulesList} == "all" ]]; then reho ""; geho "Note: --submodules flag set to all. Setting update for all submodules."; echo ""; fi
+	if [[ ${MNAPSubModulesList} == "main" ]]; then reho ""; geho "Note: --submodules flag set to main MNAP repo only in $MNAPBranchPath"; echo ""; fi
+	if [[ ${MNAPGitCommand} == "push" ]]; then
+		if [[ -z ${CommitMessage} ]]; then reho ""; reho "Error: --message flag missing. Please specify commit message."; echo ""; mnapgit_usage; return 1; else CommitMessage="$CommitMessage ${MyID}-via-`hostname`"; fi
+	fi
+	
+	# -- Perform checks that MNAP contains requested branch and that it is actively checked out
+	if [[ ${MNAPSubModulesList} == "main" ]] || [[ ${MNAPSubModulesList} == "all" ]]; then
+		reho "---- TESTING ----"
+		cd ${MNAPBranchPath}
+		echo ""
+		beho "-- Checking active branch for main MNAP repo in $MNAPBranchPath..."
+		echo ""
+		if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath. Check your repo."; echo ""; mnapgit_usage; return 1; else geho "--> $MNAPBranch found in $MNAPBranchPath"; echo ""; fi
+		if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath. Check your repo."; echo ""; mnapgit_usage; return 1; else geho "--> $MNAPBranch is active in $MNAPBranchPath"; echo ""; fi
+		echo ""
+		beho "-- All checks for main MNAP repo passed."
+		echo ""
+		# -- Check git command
+		echo ""
+		geho "-- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
+		echo
+		if [[ ${MNAPGitCommand} == "pull" ]]; then
+			cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
+		fi
+		if [[ ${MNAPGitCommand} == "push" ]]; then
+			cd ${MNAPBranchPath}
+			git add ./*
+			git commit . --message="${CommitMessage}"
+			git push origin ${MNAPBranch}
+		fi
+		echo ""
+		geho "-- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
+		echo ""
+	fi
+		
+	# -- Check if main repo is selected only
+	if [ ${MNAPSubModulesList} == "main" ]; then
+		MNAPSubModules=""
+		echo ""
+		beho "-- Note: --submodules flag set to main MNAP repo only. Omitting individual submodules."
+		echo ""
+		return 0
+	fi
+	
+	# -- Check if all submodules are requested or only specific ones
+	if [ ${MNAPSubModulesList} == "all" ]; then
+		echo ""
+		beho "-- Note: --submodules flag set to all MNAP repos."
+		echo ""
+	fi
+	# -- Check specific modules only
+	if [ ${MNAPSubModulesList} != "main" ] && [ ${MNAPSubModulesList} != "all" ]; then
+		MNAPSubModules=$MNAPSubModulesList
+		echo ""
+		beho "-- Note: --submodules flag set to selected MNAP repos."
+		beho "$MNAPSubModules"
+		echo ""
+	fi
+	
+	# -- Continue with specific submodules
+	echo ""
+	beho "-- Checking active branch ${MNAPBranch} for specified submodules ${MNAPSubModules} in ${MNAPBranchPath}..."
+	echo ""
+	for MNAPSubModule in ${MNAPSubModules}; do
+		cd ${MNAPBranchPath}/${MNAPSubModule}
+		if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; mnapgit_usage; return 1; else geho "--> $MNAPBranch found in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
+		if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; mnapgit_usage; return 1; else geho "--> $MNAPBranch is active in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
+	done
+	echo ""
+	beho "-- All checks passed for specified submodules..."
+	echo ""
+	
+	# -- Check git command
+	for MNAPSubModule in ${MNAPSubModules}; do
+		echo ""
+		geho "-- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."
+		echo
+		if [[ ${MNAPGitCommand} == "pull" ]]; then
+			cd ${MNAPBranchPath}/${MNAPSubModule}; git pull origin ${MNAPBranch}
+		fi
+		if [[ ${MNAPGitCommand} == "push" ]]; then
+			cd ${MNAPBranchPath}/${MNAPSubModule}
+			git add ./*
+			git commit . --message="${CommitMessage}"
+			git push origin ${MNAPBranch}
+		fi
+		echo ""
+		geho "-- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."
+		echo ""
+	done
+	
+	# -- Report final completion
+	echo ""
+	geho "-- Completed MNAP git ${MNAPGitCommand}."
+	echo ""
+	
 }
-alias commitmnapmain=function_commitmnapmain
-
-# -- Commit function for all of MNAP Suite Code across modules
-function_commitmnapall() {
-	unset MNAPBranch
-	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	geho "-- Committing changes in submodule ${MNAPPATH}/library..."
-	cd ${MNAPPATH}/library
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push origin ${MNAPBranch}
-	echo "---"
-	echo ""
-	geho "-- Committing changes in submodule ${MNAPPATH}/connector..."
-	cd ${MNAPPATH}/connector
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push origin ${MNAPBranch}
-	echo "---"
-	echo ""
-	geho "-- Committing changes in submodule ${MNAPPATH}/hcpmodified..."
-	cd ${MNAPPATH}/hcpmodified
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push origin ${MNAPBranch}
-	echo "---"
-	echo ""
-	geho "-- Committing changes in submodule ${MNAPPATH}/niutilities..."
-	cd ${MNAPPATH}/niutilities
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push origin ${MNAPBranch}
-	echo "---"
-	echo ""
-	geho "-- Committing changes in submodule ${MNAPPATH}/matlab..."
-	cd ${MNAPPATH}/matlab
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push origin ${MNAPBranch}
-	echo "---"
-	echo ""
-	geho "-- Committing changes in main module ${MNAPPATH}..."
-	cd ${MNAPPATH}
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push origin ${MNAPBranch}
-}
-alias commitmnapall=function_commitmnapall
-
-# -- Update individual repos
-function_mnapupdate_individual() {
-	unset MNAPBranch
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	echo ""
-	beho "-- Pulling individual repositories in $MNAPPATH..."
-	echo ""
-	cd $MNAPPATH; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/niutilities; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/library; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/hcpmodified; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/matlab; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/connector; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	}
-alias mnapupdateindiv=function_mnapupdate_individual
-
-# -- Commit MNAP Library Code
-function_commitmnaplibrary() {
-	unset MNAPBranch
-	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	cd ${MNAPPATH}/library
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:hidradev/library.git ${MNAPBranch}
-}
-alias commitmnaplibrary=function_commitmnaplibrary
-
-# -- Commit MNAP Connector Code
-function_commitmnapconnector() {
-	unset MNAPBranch
-	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	cd ${MNAPPATH}/connector
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:hidradev/connector.git ${MNAPBranch}
-}
-alias commitmnapconnector=function_commitmnapconnector
-
-# -- Commit MNAP HCPModified
-function_commithcpmodified() {
-	unset MNAPBranch
-	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; return 1; fi
-	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	cd ${MNAPPATH}/hcpmodified
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:hidradev/hcpmodified.git ${MNAPBranch}
-}
-alias commithcpmodified=function_commithcpmodified
-
-# -- Commit MNAP HCPExtended --> HCPe-MNAP branch
-function_commithcpextended() {
-	unset MNAPBranch
-	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	cd ${MNAPPATH}/hcpextendedpull
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:hidradev/hcpextendedpull.git ${MNAPBranch}
-}
-
-# -- Commit MNAP Niutilities
-function_commitmnapniutilities() {
-	unset MNAPBranch
-	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	cd ${MNAPPATH}/niutilities
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:hidradev/niutilities.git ${MNAPBranch}
-}
-alias commitmnapniutilities=function_commitmnapniutilities
-
-# -- Commit MNAP Matlab Code
-function_commitmnapmatlab() {
-	unset MNAPBranch
-	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	cd ${MNAPPATH}/matlab
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:hidradev/matlab.git ${MNAPBranch}
-}
-alias commitmnapmatlab=function_commitmnapmatlab
+alias gitmnap=function_gitmnap
 
 # ------------------------------------------------------------------------------
 # -- License and version disclaimer
