@@ -653,14 +653,11 @@ function_gitmnap() {
 		fi
 		echo ""
 		geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."
-		echo ""; geho "===================================="; echo ""
 	done
 	
 	# -- Report final completion
+	geho "=============== Completed MNAP $MNAPGitCommand function ============== "
 	echo ""
-	geho "-- Completed MNAP git ${MNAPGitCommand}."
-	echo ""
-	
 }
 alias gitmnap=function_gitmnap
 
