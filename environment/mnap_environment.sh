@@ -486,11 +486,9 @@ export MATLABPATH
 #  MNAP Functions and git aliases for BitBucket commit and pull requests
 # ------------------------------------------------------------------------------
 
-# ------------------------------------------------------------------------------
-# -- Commit usage function help
-# ------------------------------------------------------------------------------
+# -- gitmnap_usage function help
 
-mnapgit_usage() {
+gitmnap_usage() {
     echo ""
     echo " -- DESCRIPTION for gitmnap function:"
     echo ""
@@ -530,11 +528,14 @@ mnapgit_usage() {
     echo ""
 }
 
-# -- Update MNAP Suite and all submodules
+# -- function_gitmnap start 
+
 function_gitmnap() {
 
+	# -- Reset submodules variable
 	unset MNAPSubModules
 	MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+	
 	# -- Inputs
 	unset MNAPBranch
 	unset MNAPGitCommand
@@ -547,12 +548,12 @@ function_gitmnap() {
 	MNAPSubModulesList=`opts_GetOpt "--submodules" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of inputs; removing comma or pipes
 	
 	# -- Check for help calls
-	if [[ ${1} == "help" ]] || [[ ${1} == "-help" ]] || [[ ${1} == "--help" ]] || [[ ${1} == "?help" ]]; then
-		mnapgit_usage
+	if [[ ${1} == "help" ]] || [[ ${1} == "-help" ]] || [[ ${1} == "--help" ]] || [[ ${1} == "?help" ]] || [[ -z ${1} ]]; then
+		gitmnap_usage
 		return 0
 	fi
-	if [[ ${1} == "usage" ]] || [[ ${1} == "-usage" ]] || [[ ${1} == "--usage" ]] || [[ ${1} == "?usage" ]]; then
-		mnapgit_usage
+	if [[ ${1} == "usage" ]] || [[ ${1} == "-usage" ]] || [[ ${1} == "--usage" ]] || [[ ${1} == "?usage" ]] || [[ -z ${1} ]]; then
+		gitmnap_usage
 		return 0
 	fi
 	
@@ -562,14 +563,14 @@ function_gitmnap() {
 	# -- Performing flag checks
 	echo ""
 	geho "--- Checking inputs ... "
-	if [[ -z ${MNAPGitCommand} ]]; then reho ""; reho "   Error: --command flag not defined. Specify 'pull' or 'push' option."; echo ""; mnapgit_usage; return 1; fi
-	if [[ -z ${MNAPBranch} ]]; then reho ""; reho "   Error: --branch flag not defined."; echo ""; mnapgit_usage; return 1; fi
-	if [[ -z ${MNAPBranchPath} ]]; then reho ""; reho "   Error: --branchpath flag for specified branch not defined. Specify absolute path of the relevant MNAP repo."; echo ""; mnapgit_usage; return 1; fi
-	if [[ -z ${MNAPSubModulesList} ]]; then reho ""; reho "   Error: --submodules flag not not defined. Specify 'main', 'all' or specific submodule to commit."; echo ""; mnapgit_usage; return 1; fi
+	if [[ -z ${MNAPGitCommand} ]]; then reho ""; reho "   Error: --command flag not defined. Specify 'pull' or 'push' option."; echo ""; gitmnap_usage; return 1; fi
+	if [[ -z ${MNAPBranch} ]]; then reho ""; reho "   Error: --branch flag not defined."; echo ""; gitmnap_usage; return 1; fi
+	if [[ -z ${MNAPBranchPath} ]]; then reho ""; reho "   Error: --branchpath flag for specified branch not defined. Specify absolute path of the relevant MNAP repo."; echo ""; gitmnap_usage; return 1; fi
+	if [[ -z ${MNAPSubModulesList} ]]; then reho ""; reho "   Error: --submodules flag not not defined. Specify 'main', 'all' or specific submodule to commit."; echo ""; gitmnap_usage; return 1; fi
 	if [[ ${MNAPSubModulesList} == "all" ]]; then reho ""; geho "   Note: --submodules flag set to all. Setting update for all submodules."; echo ""; fi
 	if [[ ${MNAPSubModulesList} == "main" ]]; then reho ""; geho "   Note: --submodules flag set to main MNAP repo only in $MNAPBranchPath"; echo ""; fi
 	if [[ ${MNAPGitCommand} == "push" ]]; then
-		if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; mnapgit_usage; return 1; else CommitMessage="$CommitMessage ${MyID}-via-`hostname`"; fi
+		if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitmnap_usage; return 1; else CommitMessage="$CommitMessage ${MyID}-via-`hostname`"; fi
 	fi
 	
 	# -- Perform checks that MNAP contains requested branch and that it is actively checked out
@@ -578,8 +579,8 @@ function_gitmnap() {
 		echo ""
 		mageho "  * Checking active branch for main MNAP repo in $MNAPBranchPath..."
 		echo ""
-		if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath. Check your repo."; echo ""; mnapgit_usage; return 1; else geho "   --> $MNAPBranch found in $MNAPBranchPath"; echo ""; fi
-		if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath. Check your repo."; echo ""; mnapgit_usage; return 1; else geho "   --> $MNAPBranch is active in $MNAPBranchPath"; echo ""; fi
+		if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch found in $MNAPBranchPath"; echo ""; fi
+		if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch is active in $MNAPBranchPath"; echo ""; fi
 		mageho "  * All checks for main MNAP repo passed."
 		echo ""
 		# -- Check git command
@@ -629,8 +630,8 @@ function_gitmnap() {
 	echo ""
 	for MNAPSubModule in ${MNAPSubModules}; do
 		cd ${MNAPBranchPath}/${MNAPSubModule}
-		if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; mnapgit_usage; return 1; else geho "--> $MNAPBranch found in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
-		if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; mnapgit_usage; return 1; else geho "--> $MNAPBranch is active in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
+		if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "--> $MNAPBranch found in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
+		if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "--> $MNAPBranch is active in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
 	done
 	mageho "  * All checks passed for specified submodules... "
 	echo ""
@@ -658,6 +659,9 @@ function_gitmnap() {
 	geho "=============== Completed MNAP $MNAPGitCommand function ============== "
 	echo ""
 }
+# -- function_gitmnap end 
+
+# -- define function_gitmnap alias
 alias gitmnap=function_gitmnap
 
 # ------------------------------------------------------------------------------
