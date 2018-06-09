@@ -593,19 +593,55 @@ function_gitmnap() {
 		echo ""
 		geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
 		echo
+		cd ${MNAPBranchPath}
+		UPSTREAM=${1:-'@{u}'}
+		LOCAL=$(git rev-parse @)
+		REMOTE=$(git rev-parse "$UPSTREAM")
+		BASE=$(git merge-base @ "$UPSTREAM")
+		# -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
+		if [ $LOCAL = $REMOTE ]; then
+			echo ""
+			mageho "  Note: ---> LOCAL: $LOCAL equals REMOTE: $REMOTE. Nothing to do for ${MNAPBranchPath}."
+			echo ""
+			return 0
+		elif [ $LOCAL = $BASE ]; then
+			echo ""
+			echo "  Note: ---> LOCAL: $LOCAL equals BASE: $BASE for branch ${MNAPBranch} in ${MNAPBranchPath}. You need to pull."
+			echo ""
+		elif [ $REMOTE = $BASE ]; then
+			echo ""
+			echo "  Note: ---> REMOTE: $REMOTE equals BASE: $BASE for branch ${MNAPBranch} in ${MNAPBranchPath}. You need to push."
+			echo ""
+		else
+			echo ""
+			reho "  ERROR: ---> LOCAL, BASE and REMOTE tips have diverged on branch ${MNAPBranch} in ${MNAPBranchPath}."
+			reho "              ------------------------------------------------"
+			reho "                 LOCAL: $LOCAL"
+			reho "                 BASE: $BASE"
+			reho "                 REMOTE: $REMOTE"
+			reho "              ------------------------------------------------"
+			reho "              Check 'git status' and re-run after cleaning things up."
+			echo ""
+		fi
+		# -- Check git command request
 		if [[ ${MNAPGitCommand} == "pull" ]]; then
-			cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
+			if [ $REMOTE = $BASE ]; then
+				echo ""
+				reho " -- Your REMOTE and BASE branches mismatch. You need to push your changes first. Run 'git status' and inspect changes."
+				echo ""
+				return 1
+			else
+				cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
+			fi
 		fi
 		if [[ ${MNAPGitCommand} == "push" ]]; then
 			cd ${MNAPBranchPath}
-			GitStatus=`git status | grep "Your branch is up-to-date"`
-			if [[ -z ${GitStatus} ]]; then
-				reho "Error."
+			if [ $LOCAL = $BASE ]; then
+				echo ""
+				reho " --- Your REMOTE and BASE branches mismatch. You need to pull your changes first. Run 'git status' and inspect changes."
+				echo ""
 				return 1
 			else
-				echo ""
-				geho "   git status -- $GitStatus"
-				echo ""
 				git add ./*
 				git commit . --message="${CommitMessage}"
 				git push origin ${MNAPBranch}
@@ -628,7 +664,8 @@ function_gitmnap() {
 		MNAPSubModules=${MNAPSubModulesList}
 		echo ""
 		geho "   Note: --submodules flag set to selected MNAP repos."
-		geho "$MNAPSubModules"
+		echo ""
+		reho "$MNAPSubModules"
 		echo ""
 		fi
 	fi
@@ -661,7 +698,7 @@ function_gitmnap() {
 				return 1
 			else
 				echo ""
-				geho "   git status -- $GitStatus"
+				mageho "  * git status check passed -- $GitStatus"
 				echo ""
 				git add ./*
 				git commit . --message="${CommitMessage}"
