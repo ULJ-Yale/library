@@ -597,14 +597,16 @@ function_gitmnap() {
 		if [[ ${MNAPGitCommand} == "push" ]]; then
 			cd ${MNAPBranchPath}
 			GitStatus=`git status | grep "Your branch is up-to-date"`
-			if [[ ! -z "$GitStatus" ]]; then
-				echo "git status -- $GitStatus"
+			if [[ -z "$GitStatus" ]]; then
+				reho "Error."
+				return 1
+			else
+				echo ""
+				geho "   git status -- $GitStatus"
+				echo ""
 				git add ./*
 				git commit . --message="${CommitMessage}"
 				git push origin ${MNAPBranch}
-			else
-				echo "Error."
-				return 1
 			fi
 		fi
 		echo ""
