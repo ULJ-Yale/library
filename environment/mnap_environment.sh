@@ -545,10 +545,7 @@ function_gitmnap() {
 	MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
 	CommitMessage=`opts_GetOpt "--message" $@`
 	MNAPSubModulesList=`opts_GetOpt "--submodules" $@ | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'`
-	MNAPSubModules=$MNAPSubModulesList
-	echo ""
-	reho "$MNAPSubModules"
-	echo ""
+	MNAPSubModules="$MNAPSubModulesList"
 	
 	# -- Check for help calls
 	if [[ ${1} == "help" ]] || [[ ${1} == "-help" ]] || [[ ${1} == "--help" ]] || [[ ${1} == "?help" ]] || [[ -z ${1} ]]; then
@@ -566,6 +563,9 @@ function_gitmnap() {
 	# -- Performing flag checks
 	echo ""
 	geho "--- Checking inputs ... "
+	echo ""
+	reho "$MNAPSubModules"
+	echo ""
 	if [[ -z ${MNAPGitCommand} ]]; then reho ""; reho "   Error: --command flag not defined. Specify 'pull' or 'push' option."; echo ""; gitmnap_usage; return 1; fi
 	if [[ -z ${MNAPBranch} ]]; then reho ""; reho "   Error: --branch flag not defined."; echo ""; gitmnap_usage; return 1; fi
 	if [[ -z ${MNAPBranchPath} ]]; then reho ""; reho "   Error: --branchpath flag for specified branch not defined. Specify absolute path of the relevant MNAP repo."; echo ""; gitmnap_usage; return 1; fi
