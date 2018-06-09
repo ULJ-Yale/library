@@ -544,8 +544,8 @@ function_gitmnap() {
 	MNAPBranch=`opts_GetOpt "--branch" $@`
 	MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
 	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPSubModulesList=`opts_GetOpt "--submodules" $@ | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'`
-	MNAPSubModules="$MNAPSubModulesList"
+	MNAPSubModulesList=`opts_GetOpt "--submodules" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of input cases; removing comma or pipes
+	echo "$MNAPSubModulesList"
 	
 	# -- Check for help calls
 	if [[ ${1} == "help" ]] || [[ ${1} == "-help" ]] || [[ ${1} == "--help" ]] || [[ ${1} == "?help" ]] || [[ -z ${1} ]]; then
@@ -575,6 +575,7 @@ function_gitmnap() {
 	if [[ ${MNAPGitCommand} == "push" ]]; then
 		if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitmnap_usage; return 1; else CommitMessage="$CommitMessage ${MyID}-via-`hostname`"; fi
 	fi
+
 	
 	# -- Perform checks that MNAP contains requested branch and that it is actively checked out
 	cd ${MNAPBranchPath}
