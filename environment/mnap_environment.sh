@@ -545,7 +545,6 @@ function_gitmnap() {
 	MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
 	CommitMessage=`opts_GetOpt "--message" $@`
 	MNAPSubModulesList=`opts_GetOpt "--submodules" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of input cases; removing comma or pipes
-	echo "$MNAPSubModulesList"
 	
 	# -- Check for help calls
 	if [[ ${1} == "help" ]] || [[ ${1} == "-help" ]] || [[ ${1} == "--help" ]] || [[ ${1} == "?help" ]] || [[ -z ${1} ]]; then
@@ -559,12 +558,11 @@ function_gitmnap() {
 	
 	# -- Start execution
 	echo ""
-	reho "=============== Executing MNAP $MNAPGitCommand function ============== "
+	geho "=============== Executing MNAP $MNAPGitCommand function ============== "
 	# -- Performing flag checks
 	echo ""
 	geho "--- Checking inputs ... "
 	echo ""
-	reho "$MNAPSubModules"
 	echo ""
 	if [[ -z ${MNAPGitCommand} ]]; then reho ""; reho "   Error: --command flag not defined. Specify 'pull' or 'push' option."; echo ""; gitmnap_usage; return 1; fi
 	if [[ -z ${MNAPBranch} ]]; then reho ""; reho "   Error: --branch flag not defined."; echo ""; gitmnap_usage; return 1; fi
@@ -576,7 +574,6 @@ function_gitmnap() {
 		if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitmnap_usage; return 1; else CommitMessage="$CommitMessage ${MyID}-via-`hostname`"; fi
 	fi
 
-	
 	# -- Perform checks that MNAP contains requested branch and that it is actively checked out
 	cd ${MNAPBranchPath}
 	echo ""
@@ -588,7 +585,7 @@ function_gitmnap() {
 	echo ""
 	
 	# -- Not perform further checks
-	if [[ ${MNAPSubModulesList} == "main" ]]; then
+	if [ ${MNAPSubModulesList} == "main" ]; then
 		echo ""
 		geho "   Note: --submodules flag set to main MNAP repo only. Omitting individual submodules."
 		echo ""
