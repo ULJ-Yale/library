@@ -535,13 +535,13 @@ function_gitmnap() {
 	# -- Reset submodules variable
 	unset MNAPSubModules
 	MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-	
 	# -- Inputs
 	unset MNAPBranch
 	unset MNAPGitCommand
 	unset MNAPBranchPath
 	unset CommitMessage
 	unset GitStatus
+	unset MNAPSubModulesList
 	MNAPGitCommand=`opts_GetOpt "--command" $@`
 	MNAPBranch=`opts_GetOpt "--branch" $@`
 	MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
@@ -622,7 +622,7 @@ function_gitmnap() {
 	fi
 	# -- Check specific modules only
 	if [ ${MNAPSubModulesList} != "main" ] && [ ${MNAPSubModulesList} != "all" ]; then
-		MNAPSubModules=$MNAPSubModulesList
+		MNAPSubModules=${MNAPSubModulesList}
 		echo ""
 		geho "   Note: --submodules flag set to selected MNAP repos."
 		geho "$MNAPSubModules"
