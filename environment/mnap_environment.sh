@@ -621,12 +621,14 @@ function_gitmnap() {
 		echo ""
 	fi
 	# -- Check specific modules only
-	if [ ${MNAPSubModulesList} != "main" ] && [ ${MNAPSubModulesList} != "all" ]; then
+	if [[ ${MNAPSubModulesList} != "main" ]]; then 
+		if [[ ${MNAPSubModulesList} != "all" ]]; then
 		MNAPSubModules=${MNAPSubModulesList}
 		echo ""
 		geho "   Note: --submodules flag set to selected MNAP repos."
 		geho "$MNAPSubModules"
 		echo ""
+		fi
 	fi
 	
 	# -- Continue with specific submodules
@@ -651,9 +653,18 @@ function_gitmnap() {
 		fi
 		if [[ ${MNAPGitCommand} == "push" ]]; then
 			cd ${MNAPBranchPath}/${MNAPSubModule}
-			git add ./*
-			git commit . --message="${CommitMessage}"
-			git push origin ${MNAPBranch}
+			GitStatus=`git status | grep "Your branch is up-to-date"`
+			if [[ -z ${GitStatus} ]]; then
+				reho "Error."
+				return 1
+			else
+				echo ""
+				geho "   git status -- $GitStatus"
+				echo ""
+				git add ./*
+				git commit . --message="${CommitMessage}"
+				git push origin ${MNAPBranch}
+			fi
 		fi
 		echo ""
 		geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."; echo ""; echo ""
@@ -667,9 +678,18 @@ function_gitmnap() {
 	fi
 	if [[ ${MNAPGitCommand} == "push" ]]; then
 		cd ${MNAPBranchPath}
-		git add ./*
-		git commit . --message="${CommitMessage}"
-		git push origin ${MNAPBranch}
+		GitStatus=`git status | grep "Your branch is up-to-date"`
+		if [[ -z ${GitStatus} ]]; then
+			reho "Error."
+			return 1
+		else
+			echo ""
+			geho "   git status -- $GitStatus"
+			echo ""
+			git add ./*
+			git commit . --message="${CommitMessage}"
+			git push origin ${MNAPBranch}
+		fi
 	fi
 	echo ""
 	geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."; echo ""
