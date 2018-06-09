@@ -533,6 +533,7 @@ gitmnap_usage() {
 function_gitmnap() {
 
 	# -- Inputs
+	unset MNAPSubModules
 	unset MNAPBranch
 	unset MNAPGitCommand
 	unset MNAPBranchPath
@@ -543,7 +544,7 @@ function_gitmnap() {
 	MNAPBranch=`opts_GetOpt "--branch" $@`
 	MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
 	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPSubModulesList=`opts_GetOpt "--submodules" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of inputs; removing comma or pipes
+	MNAPSubModulesList=`opts_GetOpt "--submodules" $@ | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'`
 	MNAPSubModules=$MNAPSubModulesList
 	echo ""
 	reho "$MNAPSubModules"
