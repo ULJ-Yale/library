@@ -559,7 +559,7 @@ function_gitmnap() {
 	
 	# -- Start execution
 	echo ""
-	geho "=============== Executing MNAP $MNAPGitCommand function ============== "
+	reho "=============== Executing MNAP $MNAPGitCommand function ============== "
 	# -- Performing flag checks
 	echo ""
 	geho "--- Checking inputs ... "
