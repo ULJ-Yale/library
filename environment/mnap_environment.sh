@@ -541,6 +541,7 @@ function_gitmnap() {
 	unset MNAPGitCommand
 	unset MNAPBranchPath
 	unset CommitMessage
+	unset GitStatus
 	MNAPGitCommand=`opts_GetOpt "--command" $@`
 	MNAPBranch=`opts_GetOpt "--branch" $@`
 	MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
@@ -595,9 +596,16 @@ function_gitmnap() {
 		fi
 		if [[ ${MNAPGitCommand} == "push" ]]; then
 			cd ${MNAPBranchPath}
-			git add ./*
-			git commit . --message="${CommitMessage}"
-			git push origin ${MNAPBranch}
+			GitStatus=`git status | grep "Your branch is up-to-date"`
+			if [[ ! -z "$GitStatus" ]]; then
+				echo "git status -- $GitStatus"
+				git add ./*
+				git commit . --message="${CommitMessage}"
+				git push origin ${MNAPBranch}
+			else
+				echo "Error."
+				return 1
+			fi
 		fi
 		echo ""
 		geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."; echo ""
