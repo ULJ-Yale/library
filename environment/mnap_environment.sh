@@ -532,9 +532,6 @@ gitmnap_usage() {
 
 function_gitmnap() {
 
-	# -- Reset submodules variable
-	unset MNAPSubModules
-	MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
 	# -- Inputs
 	unset MNAPBranch
 	unset MNAPGitCommand
@@ -547,6 +544,10 @@ function_gitmnap() {
 	MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
 	CommitMessage=`opts_GetOpt "--message" $@`
 	MNAPSubModulesList=`opts_GetOpt "--submodules" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of inputs; removing comma or pipes
+	MNAPSubModules=$MNAPSubModulesList
+	echo ""
+	reho "$MNAPSubModules"
+	echo ""
 	
 	# -- Check for help calls
 	if [[ ${1} == "help" ]] || [[ ${1} == "-help" ]] || [[ ${1} == "--help" ]] || [[ ${1} == "?help" ]] || [[ -z ${1} ]]; then
@@ -583,6 +584,8 @@ function_gitmnap() {
 	if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch is active in $MNAPBranchPath"; echo ""; fi
 	mageho "  * All checks for main MNAP repo passed."
 	echo ""
+	
+	# -- Not perform further checks
 	if [[ ${MNAPSubModulesList} == "main" ]]; then
 		echo ""
 		geho "   Note: --submodules flag set to main MNAP repo only. Omitting individual submodules."
@@ -698,6 +701,10 @@ function_gitmnap() {
 	echo ""
 	geho "=============== Completed MNAP $MNAPGitCommand function ============== "
 	echo ""
+
+	# -- Reset submodules variable
+	unset MNAPSubModules
+	MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
 }
 # -- function_gitmnap end 
 
