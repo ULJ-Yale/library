@@ -585,7 +585,7 @@ function_gitmnap() {
 	echo ""
 	
 	# -- Not perform further checks
-	if [ ${MNAPSubModulesList} == "main" ]; then
+	if [ "${MNAPSubModulesList}" == "main" ]; then
 		echo ""
 		geho "   Note: --submodules flag set to main MNAP repo only. Omitting individual submodules."
 		echo ""
