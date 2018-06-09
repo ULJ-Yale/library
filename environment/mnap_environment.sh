@@ -542,7 +542,7 @@ function_gitmnapstatus() {
      git remote update > /dev/null 2>&1
      MNAPDirBranchTest=`pwd`
      echo ""
-     geho " --- Running git status checks in $MNAPDirBranchTest"
+     geho "--- Running git status checks in $MNAPDirBranchTest"
      # -- Set git variables
      unset UPSTREAM; unset LOCAL; unset REMOTE; unset BASE
      UPSTREAM=${1:-'@{u}'}
@@ -550,16 +550,15 @@ function_gitmnapstatus() {
      REMOTE=$(git rev-parse "$UPSTREAM")
      BASE=$(git merge-base @ "$UPSTREAM")
     # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
-     if [ $LOCAL = $REMOTE ]; then
+     if [[ $LOCAL == $REMOTE ]]; then
      	echo ""
      	mageho "Note: LOCAL: $LOCAL equals REMOTE: $REMOTE in $MNAPDirBranchTest."
      	echo ""
-     	return 0
-     elif [ $LOCAL = $BASE ]; then
+     elif [[ $LOCAL == $BASE ]]; then
      	echo ""
      	echo "Note: LOCAL: $LOCAL equals BASE: $BASE in ${MNAPDirBranchTest}. You need to pull."
      	echo ""
-     elif [ $REMOTE = $BASE ]; then
+     elif [[ $REMOTE == $BASE ]]; then
      	echo ""
      	echo "Note: REMOTE: $REMOTE equals BASE: $BASE in ${MNAPDirBranchTest}. You need to push."
      	echo ""
@@ -579,8 +578,8 @@ function_gitmnapstatus() {
 }
 alias gitmnapstatus=function_gitmnapstatus
 
-# -- function_gitmnap start 
-
+# -- function_gitmnap start
+	
 function_gitmnap() {
 
 	# -- Inputs
@@ -613,7 +612,6 @@ function_gitmnap() {
 	echo ""
 	geho "--- Checking inputs ... "
 	echo ""
-	echo ""
 	if [[ -z ${MNAPGitCommand} ]]; then reho ""; reho "   Error: --command flag not defined. Specify 'pull' or 'push' option."; echo ""; gitmnap_usage; return 1; fi
 	if [[ -z ${MNAPBranch} ]]; then reho ""; reho "   Error: --branch flag not defined."; echo ""; gitmnap_usage; return 1; fi
 	if [[ -z ${MNAPBranchPath} ]]; then reho ""; reho "   Error: --branchpath flag for specified branch not defined. Specify absolute path of the relevant MNAP repo."; echo ""; gitmnap_usage; return 1; fi
@@ -645,50 +643,16 @@ function_gitmnap() {
 		echo
 		cd ${MNAPBranchPath}
 		# -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
-		UPSTREAM=${1:-'@{u}'}
-		LOCAL=$(git rev-parse @)
-		REMOTE=$(git rev-parse "$UPSTREAM")
-		BASE=$(git merge-base @ "$UPSTREAM")
-		if [ $LOCAL = $REMOTE ]; then
-			echo ""
-			mageho "Note: ---> LOCAL: $LOCAL equals REMOTE: $REMOTE. Nothing to do for ${MNAPBranchPath}."
-			echo ""
-			return 0
-		elif [ $LOCAL = $BASE ]; then
-			echo ""
-			echo "Note: ---> LOCAL: $LOCAL equals BASE: $BASE for branch ${MNAPBranch} in ${MNAPBranchPath}. You need to pull."
-			echo ""
-		elif [ $REMOTE = $BASE ]; then
-			echo ""
-			echo "Note: ---> REMOTE: $REMOTE equals BASE: $BASE for branch ${MNAPBranch} in ${MNAPBranchPath}. You need to push."
-			echo ""
-		else
-			echo ""
-			reho "  ERROR: ---> LOCAL, BASE and REMOTE tips have diverged on branch ${MNAPBranch} in ${MNAPBranchPath}."
-			reho "              ------------------------------------------------"
-			reho "                 LOCAL: $LOCAL"
-			reho "                 BASE: $BASE"
-			reho "                 REMOTE: $REMOTE"
-			reho "              ------------------------------------------------"
-			reho "              Check 'git status' and re-run after cleaning things up."
-			echo ""
-		fi
+		function_gitmnapstatus > /dev/null 2>&1
 		# -- Check git command request
 		if [[ ${MNAPGitCommand} == "pull" ]]; then
-			if [ $REMOTE = $BASE ]; then
-				echo ""
-				reho " -- Your REMOTE and BASE branches mismatch. You need to push your changes first. Run 'git status' and inspect changes."
-				echo ""
-				return 1
-			else
-				cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
-			fi
+			cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
 		fi
 		if [[ ${MNAPGitCommand} == "push" ]]; then
 			cd ${MNAPBranchPath}
-			if [ $LOCAL = $BASE ]; then
+			if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
 				echo ""
-				reho " --- Your REMOTE and BASE branches mismatch. You need to pull your changes first. Run 'git status' and inspect changes."
+				reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
 				echo ""
 				return 1
 			else
@@ -717,8 +681,6 @@ function_gitmnap() {
 		MNAPSubModules=${MNAPSubModulesList}
 		echo ""
 		geho "Note: --submodules flag set to selected MNAP repos."
-		reho "$MNAPSubModules"
-		echo ""
 		fi
 	fi
 	
@@ -740,49 +702,15 @@ function_gitmnap() {
 		echo
 		cd ${MNAPBranchPath}/${MNAPSubModule}
 		# -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
-		UPSTREAM=${1:-'@{u}'}
-		LOCAL=$(git rev-parse @)
-		REMOTE=$(git rev-parse "$UPSTREAM")
-		BASE=$(git merge-base @ "$UPSTREAM")
-		if [ $LOCAL = $REMOTE ]; then
-			echo ""
-			mageho "Note: ---> LOCAL: $LOCAL equals REMOTE: $REMOTE. Nothing to do for ${MNAPBranchPath}."
-			echo ""
-			return 0
-		elif [ $LOCAL = $BASE ]; then
-			echo ""
-			echo "Note: ---> LOCAL: $LOCAL equals BASE: $BASE for branch ${MNAPBranch} in ${MNAPBranchPath}. You need to pull."
-			echo ""
-		elif [ $REMOTE = $BASE ]; then
-			echo ""
-			echo "Note: ---> REMOTE: $REMOTE equals BASE: $BASE for branch ${MNAPBranch} in ${MNAPBranchPath}. You need to push."
-			echo ""
-		else
-			echo ""
-			reho "  ERROR: ---> LOCAL, BASE and REMOTE tips have diverged on branch ${MNAPBranch} in ${MNAPBranchPath}."
-			reho "              ------------------------------------------------"
-			reho "                 LOCAL: $LOCAL"
-			reho "                 BASE: $BASE"
-			reho "                 REMOTE: $REMOTE"
-			reho "              ------------------------------------------------"
-			reho "              Check 'git status' and re-run after cleaning things up."
-			echo ""
-		fi
+		function_gitmnapstatus > /dev/null 2>&1
 		# -- Check git command requests
 		if [[ ${MNAPGitCommand} == "pull" ]]; then
-			if [ $REMOTE = $BASE ]; then
-				echo ""
-				reho " -- Your REMOTE and BASE branches mismatch. You need to push your changes first. Run 'git status' and inspect changes."
-				echo ""
-				return 1
-			else
-				cd ${MNAPBranchPath}/${MNAPSubModule}; git pull origin ${MNAPBranch}
-			fi
+			cd ${MNAPBranchPath}/${MNAPSubModule}; git pull origin ${MNAPBranch}
 		fi
 		if [[ ${MNAPGitCommand} == "push" ]]; then
-			if [ $LOCAL = $BASE ]; then
+			if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
 				echo ""
-				reho " --- Your REMOTE and BASE branches mismatch. You need to pull your changes first. Run 'git status' and inspect changes."
+				reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
 				echo ""
 				return 1
 			else
@@ -795,32 +723,23 @@ function_gitmnap() {
 		echo ""
 		geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."; echo ""; echo ""
 	done
+	unset MNAPSubModule
 	
 	# -- Finish up with the main submodule after individual modules are committed
 	echo ""
 	geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
 	echo
 	cd ${MNAPBranchPath}
-	UPSTREAM=${1:-'@{u}'}
-	LOCAL=$(git rev-parse @)
-	REMOTE=$(git rev-parse "$UPSTREAM")
-	BASE=$(git merge-base @ "$UPSTREAM")
+	function_gitmnapstatus
 	# -- Check git command request
 	if [[ ${MNAPGitCommand} == "pull" ]]; then
-		if [ $REMOTE = $BASE ]; then
-			echo ""
-			reho " -- Your REMOTE and BASE branches mismatch. You need to push your changes first. Run 'git status' and inspect changes."
-			echo ""
-			return 1
-		else
-			cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
-		fi
+		cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
 	fi
 	if [[ ${MNAPGitCommand} == "push" ]]; then
 		cd ${MNAPBranchPath}
-		if [ $LOCAL = $BASE ]; then
+			if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
 			echo ""
-			reho " --- Your REMOTE and BASE branches mismatch. You need to pull your changes first. Run 'git status' and inspect changes."
+				reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
 			echo ""
 			return 1
 		else
@@ -841,6 +760,13 @@ function_gitmnap() {
 	# -- Reset submodules variable
 	unset MNAPSubModules
 	MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+	unset MNAPBranch
+	unset MNAPGitCommand
+	unset MNAPBranchPath
+	unset CommitMessage
+	unset GitStatus
+	unset MNAPSubModulesList
+	unset MNAPSubModule
 }
 
 # -- define function_gitmnap alias
