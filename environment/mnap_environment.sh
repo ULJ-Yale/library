@@ -597,7 +597,7 @@ function_gitmnap() {
 		if [[ ${MNAPGitCommand} == "push" ]]; then
 			cd ${MNAPBranchPath}
 			GitStatus=`git status | grep "Your branch is up-to-date"`
-			if [[ -z "$GitStatus" ]]; then
+			if [[ -z ${GitStatus} ]]; then
 				reho "Error."
 				return 1
 			else
