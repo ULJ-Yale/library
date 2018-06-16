@@ -227,6 +227,7 @@ fi
 PATH=${MNAPREPO}:${PATH}
 export MNAPREPO PATH
 MNAPPATH=${TOOLS}/${MNAPREPO}
+export MNAPPATH
 
 if [ -e ~/mnapinit.sh ]
 then
