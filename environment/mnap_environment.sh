@@ -42,7 +42,7 @@
 #    source $TOOLS/library/environment/mnap_environment.sh
 #
 # ## PREREQUISITE PRIOR PROCESSING
-# 
+#
 # N/A
 #
 #~ND~END~
@@ -241,7 +241,7 @@ fi
 # -- Load dependent software - FSL, FreeSurfer, Workbench, AFNI, PALM
 # ------------------------------------------------------------------------------
 
-# -- Set default folder names for dependencies if undefined by user environment: 
+# -- Set default folder names for dependencies if undefined by user environment:
 #
 # FSL                       Environment Variable --> $FSLFolder
 # FIX ICA                   Environment Variable --> $FIXICAFolder
@@ -293,7 +293,7 @@ export FREESURFER_HOME PATH
 
 # -- FSL path
 # -- Note: Always run after FreeSurfer for correct environment specification
-#          because SetUpFreeSurfer.sh can mis-specify the $FSLDIR path 
+#          because SetUpFreeSurfer.sh can mis-specify the $FSLDIR path
 FSLDIR=${TOOLS}/${FSLFolder}
 PATH=${FSLDIR}/bin:${PATH}
 . ${FSLDIR}/etc/fslconf/fsl.sh > /dev/null 2>&1
@@ -380,17 +380,14 @@ showVersion() {
 
 if [ -e ~/.mnapuseoctave ]
 then
+    reho " --- NOTE: Setting up Octave! ----"
     MNAPMCOMMAND='octave -q --eval'
-    module load Libs/netlib
-    module load Apps/Octave/4.2.1
-    echo ""
-    reho " --- NOTE: You are set to use Octave instead of Matlab! ----"
-    echo ""
     if [ ! -e ~/.octaverc ]
     then
         cp ${MNAPPATH}/library/.octaverc ~/.octaverc
     fi
 else
+    reho " --- NOTE: Setting up Matlab! ----"
     # -- Use the following command to run .m code in Matlab
     MNAPMCOMMAND='matlab -nojvm -nodisplay -nosplash -r'
 fi
@@ -430,7 +427,7 @@ export HCPPIPEDIR_Global=${HCPPIPEDIR}/global/scripts
 export HCPPIPEDIR_tfMRIAnalysis=${HCPPIPEDIR}/TaskfMRIAnalysis/scripts
 export MSMBin=${HCPPIPEDIR}/MSMBinaries
 export HCPPIPEDIR_dMRITracFull=${HCPPIPEDIR}/DiffusionTractographyDense
-export HCPPIPEDIR_dMRILegacy=/gpfs/project/fas/n3/software/hcpmodified/DiffusionPreprocessingLegacy 
+export HCPPIPEDIR_dMRILegacy=/gpfs/project/fas/n3/software/hcpmodified/DiffusionPreprocessingLegacy
 export AutoPtxFolder=${HCPPIPEDIR_dMRITracFull}/autoPtx_HCP_extended
 export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries
 
@@ -601,7 +598,7 @@ function_gitmnapstatus() {
 alias gitmnapstatus=function_gitmnapstatus
 
 # -- function_gitmnap start
-	
+
 function_gitmnap() {
 	unset MNAPSubModules
 	MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
@@ -617,7 +614,7 @@ function_gitmnap() {
 	MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
 	CommitMessage=`opts_GetOpt "--message" $@`
 	MNAPSubModulesList=`opts_GetOpt "--submodules" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of input cases; removing comma or pipes
-	
+
 	# -- Check for help calls
 	if [[ ${1} == "help" ]] || [[ ${1} == "-help" ]] || [[ ${1} == "--help" ]] || [[ ${1} == "?help" ]] || [[ -z ${1} ]]; then
 		gitmnap_usage
@@ -627,7 +624,7 @@ function_gitmnap() {
 		gitmnap_usage
 		return 0
 	fi
-	
+
 	# -- Start execution
 	echo ""
 	geho "=============== Executing MNAP $MNAPGitCommand function ============== "
@@ -654,7 +651,7 @@ function_gitmnap() {
 	if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch is active in $MNAPBranchPath"; echo ""; fi
 	mageho "  * All checks for main MNAP repo passed."
 	echo ""
-	
+
 	# -- Not perform further checks
 	if [ "${MNAPSubModulesList}" == "main" ]; then
 		echo ""
@@ -689,7 +686,7 @@ function_gitmnap() {
 		geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."; echo ""
 		return 1
 	fi
-	
+
 	# -- Check if all submodules are requested or only specific ones
 	if [ ${MNAPSubModulesList} == "all" ]; then
 		echo ""
@@ -700,14 +697,14 @@ function_gitmnap() {
 		MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
 	fi
 	# -- Check specific modules only
-	if [[ ${MNAPSubModulesList} != "main" ]]; then 
+	if [[ ${MNAPSubModulesList} != "main" ]]; then
 		if [[ ${MNAPSubModulesList} != "all" ]]; then
 		MNAPSubModules=${MNAPSubModulesList}
 		echo ""
 		geho "Note: --submodules flag set to selected MNAP repos."
 		fi
 	fi
-	
+
 	# -- Continue with specific submodules
 	echo ""
 	mageho "  * Checking active branch ${MNAPBranch} for specified submodules in ${MNAPBranchPath}... "
@@ -749,7 +746,7 @@ function_gitmnap() {
 		geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."; echo ""; echo ""
 	done
 	unset MNAPSubModule
-	
+
 	# -- Finish up with the main submodule after individual modules are committed
 	echo ""
 	geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
@@ -776,7 +773,7 @@ function_gitmnap() {
 	function_gitmnapbranch
 	echo ""
 	geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."; echo ""
-	
+
 	# -- Report final completion
 	echo ""
 	geho "=============== Completed MNAP $MNAPGitCommand function ============== "
@@ -805,11 +802,11 @@ showVersion
 geho ""
 geho "  You are logged in as user: $MyID on machine: `hostname`                    "
 geho ""
-geho "                  ███╗   ███╗███╗   ██╗ █████╗ ██████╗                       " 
-geho "                  ████╗ ████║████╗  ██║██╔══██╗██╔══██╗                      " 
+geho "                  ███╗   ███╗███╗   ██╗ █████╗ ██████╗                       "
+geho "                  ████╗ ████║████╗  ██║██╔══██╗██╔══██╗                      "
 geho "                  ██╔████╔██║██╔██╗ ██║███████║██████╔╝                      "
 geho "                  ██║╚██╔╝██║██║╚██╗██║██╔══██║██╔═══╝                       "
-geho "                  ██║ ╚═╝ ██║██║ ╚████║██║  ██║██║                           "  
+geho "                  ██║ ╚═╝ ██║██║ ╚████║██║  ██║██║                           "
 geho "                  ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝                           "
 geho ""
 geho "                      COPYRIGHT & LICENSE NOTICE:                            "
