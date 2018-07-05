@@ -215,19 +215,23 @@ PROMPT_COMMAND='echo -ne "\033]0;MNAP: ${PWD}\007"'
 # -- MNAP - General Code
 # ------------------------------------------------------------------------------
 
+
+if [ -z ${MNAPREPO} ]
+then
+    MNAPREPO="mnaptools"
+fi
+
 # ---- changed to work with new clone/branches setup
 
 if [ -e ~/mnapinit.sh ]
 then
     source ~/mnapinit.sh
-else
-    MNAPREPO="mnaptools"
 fi
 
-PATH=${MNAPREPO}:${PATH}
-export MNAPREPO PATH
+# PATH=${MNAPREPO}:${PATH}
+# export MNAPREPO PATH
 MNAPPATH=${TOOLS}/${MNAPREPO}
-export MNAPPATH
+export MNAPPATH MNAPREPO
 
 if [ -e ~/mnapinit.sh ]
 then
