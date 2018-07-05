@@ -379,27 +379,6 @@ showVersion() {
 	geho " Loading Multimodal Neuroimaging Analysis Platform (MNAP) Suite Version: v${MNAPVer}"
 }
 
-# ------------------------------------------------------------------------------
-# -- Running matlab vs. octave
-# ------------------------------------------------------------------------------
-
-if [ -e ~/.mnapuseoctave ]
-then
-	echo ""
-    reho " --- NOTE: Setting up Octave! ----"
-    MNAPMCOMMAND='octave -q --eval'
-    if [ ! -e ~/.octaverc ]
-    then
-        cp ${MNAPPATH}/library/.octaverc ~/.octaverc
-    fi
-else
-	echo ""
-    reho " --- NOTE: Setting up Matlab! ----"
-    # -- Use the following command to run .m code in Matlab
-    MNAPMCOMMAND='matlab -nojvm -nodisplay -nosplash -r'
-fi
-
-export MNAPMCOMMAND
 
 # ------------------------------------------------------------------------------
 # -- Setup HCP Pipeline paths
@@ -479,6 +458,28 @@ MATLABPATH=$MNAPPATH/matlab/general:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/gmri:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/stats:$MATLABPATH
 export MATLABPATH
+
+# ------------------------------------------------------------------------------
+# -- Running matlab vs. octave
+# ------------------------------------------------------------------------------
+
+if [ -e ~/.mnapuseoctave ]
+then
+    echo ""
+    reho " --- NOTE: Setting up Octave! ----"
+    MNAPMCOMMAND='octave -q --eval'
+    if [ ! -e ~/.octaverc ]
+    then
+        cp ${MNAPPATH}/library/.octaverc ~/.octaverc
+    fi
+else
+    echo ""
+    reho " --- NOTE: Setting up Matlab! ----"
+    # -- Use the following command to run .m code in Matlab
+    MNAPMCOMMAND='matlab -nojvm -nodisplay -nosplash -r'
+fi
+
+export MNAPMCOMMAND
 
 # ------------------------------------------------------------------------------
 # -- Path to additional dependencies
