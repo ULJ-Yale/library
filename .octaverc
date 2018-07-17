@@ -1,6 +1,11 @@
 warning('off');
-PATHS = getenv("MATLABPATH")
+PATHS = getenv("MATLABPATH");
 addpath(PATHS);
+LOCALLIST = getenv("OCTAVELOCAL");
+if isempty(LOCALLIST)
+  LOCALLIST='~/.octave_packages');
+end
+pkg('local_list', LOCALLIST);
 pkg load image
 pkg load control
 pkg load signal
