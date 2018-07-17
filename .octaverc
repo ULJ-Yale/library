@@ -3,7 +3,7 @@ PATHS = getenv("MATLABPATH");
 addpath(PATHS);
 LOCALLIST = getenv("OCTAVELOCAL");
 if isempty(LOCALLIST)
-  LOCALLIST='~/.octave_packages');
+  LOCALLIST='~/.octave_packages';
 end
 pkg('local_list', LOCALLIST);
 pkg load image
