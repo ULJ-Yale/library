@@ -429,8 +429,8 @@ PATH=$MNAPPATH/connector:$PATH
 PATH=$MNAPPATH/niutilities:$PATH
 PATH=$MNAPPATH/matlab:$PATH
 PATH=$TOOLS/bin:$PATH
-PATH=$TOOLS/pylib/gradunwarp-master:$PATH
-PATH=$TOOLS/pylib/gradunwarp-master/core:$PATH
+PATH=$TOOLS/pylib/gradunwarp:$PATH
+PATH=$TOOLS/pylib/gradunwarp/core:$PATH
 PATH=$TOOLS/pylib/xmlutils.py:$PATH
 PATH=$TOOLS/pylib:$PATH
 PATH=$TOOLS/pylib/bin:$PATH
@@ -442,8 +442,9 @@ PYTHONPATH=$MNAPPATH:$PYTHONPATH
 PYTHONPATH=$MNAPPATH/connector:$PYTHONPATH
 PYTHONPATH=$MNAPPATH/niutilities:$PYTHONPATH
 PYTHONPATH=$MNAPPATH/matlab:$PYTHONPATH
-PYTHONPATH=$TOOLS/pylib/gradunwarp-master:$PYTHONPATH
-PYTHONPATH=$TOOLS/pylib/gradunwarp-master/core:$PYTHONPATH
+PYTHONPATH=$TOOLS/pylib/pydicom:$PYTHONPATH
+PYTHONPATH=$TOOLS/pylib/gradunwarp:$PYTHONPATH
+PYTHONPATH=$TOOLS/pylib/gradunwarp/core:$PYTHONPATH
 PYTHONPATH=$TOOLS/pylib/xmlutils.py:$PYTHONPATH
 PYTHONPATH=$TOOLS/pylib/bin:$PYTHONPATH
 PYTHONPATH=$TOOLS/pylib/lib/python2.7/site-packages/:$PYTHONPATH
@@ -551,7 +552,7 @@ function_gitmnapbranch() {
      # -- Set git variables
      unset UPSTREAM; unset LOCAL; unset REMOTE; unset BASE
      UPSTREAM=${1:-'@{u}'}
-     LOCAL=$(git rev-parse @)
+     LOCAL=$(git rev-parse origin)
      REMOTE=$(git rev-parse "$UPSTREAM")
      BASE=$(git merge-base @ "$UPSTREAM")
     # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
@@ -589,7 +590,7 @@ function_gitmnapstatus() {
 	echo ""
 	unset MNAPBranchPath; unset MNAPSubModules; unset MNAPSubModule
 	# -- Run it for the main module
-	function_gitmnapbranch
+	#function_gitmnapbranch
 	git status -uno
 	# -- Then iterate over submodules
 	MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
