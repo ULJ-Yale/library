@@ -562,15 +562,15 @@ echo ""
 # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
 if [[ $LOCAL == $REMOTE ]]; then
 	echo ""
-	mageho "  * Note: LOCAL: $LOCAL equals REMOTE: $REMOTE in $MNAPDirBranchTest."
+	mageho "  * STATUS OK: LOCAL: $LOCAL equals REMOTE: $REMOTE in $MNAPDirBranchTest."
 	echo ""
 elif [[ $LOCAL == $BASE ]]; then
 	echo ""
-	echo "  * Note: LOCAL: $LOCAL equals BASE: $BASE in ${MNAPDirBranchTest}. You need to pull."
+	echo "  * ACTION NEEDED: LOCAL: $LOCAL equals BASE: $BASE in ${MNAPDirBranchTest}. You need to pull."
 	echo ""
 elif [[ $REMOTE == $BASE ]]; then
 	echo ""
-	echo "  * Note: REMOTE: $REMOTE equals BASE: $BASE in ${MNAPDirBranchTest}. You need to push."
+	echo "  * ACTION NEEDED: REMOTE: $REMOTE equals BASE: $BASE in ${MNAPDirBranchTest}. You need to push."
 	echo ""
 else
 	echo ""
