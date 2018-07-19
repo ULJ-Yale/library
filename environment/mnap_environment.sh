@@ -589,182 +589,93 @@ fi
 alias gitmnapbranch=function_gitmnapbranch
 
 function_gitmnapstatus() {
-	echo ""
-	geho "================ Running MNAP Suite Repository Status Check ================"
-	echo ""
-	unset MNAPBranchPath; unset MNAPSubModules; unset MNAPSubModule
-	# -- Run it for the main module
-	#function_gitmnapbranch
+echo ""
+geho "================ Running MNAP Suite Repository Status Check ================"
+echo ""
+unset MNAPBranchPath; unset MNAPSubModules; unset MNAPSubModule
+# -- Run it for the main module
+#function_gitmnapbranch
+git status -uno
+# -- Then iterate over submodules
+MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+MNAPBranchPath="$MNAPPATH"
+for MNAPSubModule in $MNAPSubModules; do
+	cd ${MNAPBranchPath}/${MNAPSubModule}
+	function_gitmnapbranch
 	git status -uno
-	# -- Then iterate over submodules
-	MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-	MNAPBranchPath="$MNAPPATH"
-	for MNAPSubModule in $MNAPSubModules; do
-		cd ${MNAPBranchPath}/${MNAPSubModule}
-		function_gitmnapbranch
-		git status -uno
-	done
-	echo ""
-	geho "================ Completed MNAP Suite Repository Status Check ================"
-	echo ""
+done
+echo ""
+geho "================ Completed MNAP Suite Repository Status Check ================"
+echo ""
 }
 alias gitmnapstatus=function_gitmnapstatus
 
 # -- function_gitmnap start
 
 function_gitmnap() {
-	unset MNAPSubModules
-	MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-	# -- Inputs
-	unset MNAPBranch
-	unset MNAPGitCommand
-	unset MNAPBranchPath
-	unset CommitMessage
-	unset GitStatus
-	unset MNAPSubModulesList
-	MNAPGitCommand=`opts_GetOpt "--command" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
-	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPSubModulesList=`opts_GetOpt "--submodules" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of input cases; removing comma or pipes
+unset MNAPSubModules
+MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+# -- Inputs
+unset MNAPBranch
+unset MNAPGitCommand
+unset MNAPBranchPath
+unset CommitMessage
+unset GitStatus
+unset MNAPSubModulesList
+MNAPGitCommand=`opts_GetOpt "--command" $@`
+MNAPBranch=`opts_GetOpt "--branch" $@`
+MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
+CommitMessage=`opts_GetOpt "--message" $@`
+MNAPSubModulesList=`opts_GetOpt "--submodules" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of input cases; removing comma or pipes
 
-	# -- Check for help calls
-	if [[ ${1} == "help" ]] || [[ ${1} == "-help" ]] || [[ ${1} == "--help" ]] || [[ ${1} == "?help" ]] || [[ -z ${1} ]]; then
-		gitmnap_usage
-		return 0
-	fi
-	if [[ ${1} == "usage" ]] || [[ ${1} == "-usage" ]] || [[ ${1} == "--usage" ]] || [[ ${1} == "?usage" ]] || [[ -z ${1} ]]; then
-		gitmnap_usage
-		return 0
-	fi
+# -- Check for help calls
+if [[ ${1} == "help" ]] || [[ ${1} == "-help" ]] || [[ ${1} == "--help" ]] || [[ ${1} == "?help" ]] || [[ -z ${1} ]]; then
+	gitmnap_usage
+	return 0
+fi
+if [[ ${1} == "usage" ]] || [[ ${1} == "-usage" ]] || [[ ${1} == "--usage" ]] || [[ ${1} == "?usage" ]] || [[ -z ${1} ]]; then
+	gitmnap_usage
+	return 0
+fi
 
-	# -- Start execution
-	echo ""
-	geho "=============== Executing MNAP $MNAPGitCommand function ============== "
-	# -- Performing flag checks
-	echo ""
-	geho "--- Checking inputs ... "
-	echo ""
-	if [[ -z ${MNAPGitCommand} ]]; then reho ""; reho "   Error: --command flag not defined. Specify 'pull' or 'push' option."; echo ""; gitmnap_usage; return 1; fi
-	if [[ -z ${MNAPBranch} ]]; then reho ""; reho "   Error: --branch flag not defined."; echo ""; gitmnap_usage; return 1; fi
-	if [[ -z ${MNAPBranchPath} ]]; then reho ""; reho "   Error: --branchpath flag for specified branch not defined. Specify absolute path of the relevant MNAP repo."; echo ""; gitmnap_usage; return 1; fi
-	if [[ -z ${MNAPSubModulesList} ]]; then reho ""; reho "   Error: --submodules flag not not defined. Specify 'main', 'all' or specific submodule to commit."; echo ""; gitmnap_usage; return 1; fi
-	if [[ ${MNAPSubModulesList} == "all" ]]; then reho ""; geho "   Note: --submodules flag set to all. Setting update for all submodules."; echo ""; fi
-	if [[ ${MNAPSubModulesList} == "main" ]]; then reho ""; geho "   Note: --submodules flag set to main MNAP repo only in $MNAPBranchPath"; echo ""; fi
-	if [[ ${MNAPGitCommand} == "push" ]]; then
-		if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitmnap_usage; return 1; else CommitMessage="$CommitMessage ${MyID}-via-`hostname`"; fi
-	fi
+# -- Start execution
+echo ""
+geho "=============== Executing MNAP $MNAPGitCommand function ============== "
+# -- Performing flag checks
+echo ""
+geho "--- Checking inputs ... "
+echo ""
+if [[ -z ${MNAPGitCommand} ]]; then reho ""; reho "   Error: --command flag not defined. Specify 'pull' or 'push' option."; echo ""; gitmnap_usage; return 1; fi
+if [[ -z ${MNAPBranch} ]]; then reho ""; reho "   Error: --branch flag not defined."; echo ""; gitmnap_usage; return 1; fi
+if [[ -z ${MNAPBranchPath} ]]; then reho ""; reho "   Error: --branchpath flag for specified branch not defined. Specify absolute path of the relevant MNAP repo."; echo ""; gitmnap_usage; return 1; fi
+if [[ -z ${MNAPSubModulesList} ]]; then reho ""; reho "   Error: --submodules flag not not defined. Specify 'main', 'all' or specific submodule to commit."; echo ""; gitmnap_usage; return 1; fi
+if [[ ${MNAPSubModulesList} == "all" ]]; then reho ""; geho "   Note: --submodules flag set to all. Setting update for all submodules."; echo ""; fi
+if [[ ${MNAPSubModulesList} == "main" ]]; then reho ""; geho "   Note: --submodules flag set to main MNAP repo only in $MNAPBranchPath"; echo ""; fi
+if [[ ${MNAPGitCommand} == "push" ]]; then
+	if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitmnap_usage; return 1; else CommitMessage="$CommitMessage ${MyID}-via-`hostname`"; fi
+fi
 
-	# -- Perform checks that MNAP contains requested branch and that it is actively checked out
-	cd ${MNAPBranchPath}
-	echo ""
-	mageho "  * Checking active branch for main MNAP repo in $MNAPBranchPath..."
-	echo ""
-	if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch found in $MNAPBranchPath"; echo ""; fi
-	if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch is active in $MNAPBranchPath"; echo ""; fi
-	mageho "  * All checks for main MNAP repo passed."
-	echo ""
+# -- Perform checks that MNAP contains requested branch and that it is actively checked out
+cd ${MNAPBranchPath}
+echo ""
+mageho "  * Checking active branch for main MNAP repo in $MNAPBranchPath..."
+echo ""
+if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch found in $MNAPBranchPath"; echo ""; fi
+if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch is active in $MNAPBranchPath"; echo ""; fi
+mageho "  * All checks for main MNAP repo passed."
+echo ""
 
-	# -- Not perform further checks
-	if [ "${MNAPSubModulesList}" == "main" ]; then
-		echo ""
-		geho "   Note: --submodules flag set to main MNAP repo only. Omitting individual submodules."
-		echo ""
-		# -- Check git command
-		echo ""
-		geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
-		echo
-		cd ${MNAPBranchPath}
-		# -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
-		function_gitmnapbranch > /dev/null 2>&1
-		# -- Check git command request
-		if [[ ${MNAPGitCommand} == "pull" ]]; then
-			cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
-		fi
-		if [[ ${MNAPGitCommand} == "push" ]]; then
-			cd ${MNAPBranchPath}
-			if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
-				echo ""
-				reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
-				echo ""
-				return 1
-			else
-				git add ./*
-				git commit . --message="${CommitMessage}"
-				git push origin ${MNAPBranch}
-			fi
-		fi
-		function_gitmnapbranch
-		echo ""
-		geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."; echo ""
-		return 1
-	fi
-
-	# -- Check if all submodules are requested or only specific ones
-	if [ ${MNAPSubModulesList} == "all" ]; then
-		echo ""
-		geho "Note: --submodules flag set to all MNAP repos."
-		echo ""
-		# -- Reset submodules variable to all
-		unset MNAPSubModules
-		MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-	fi
-	# -- Check specific modules only
-	if [[ ${MNAPSubModulesList} != "main" ]]; then
-		if [[ ${MNAPSubModulesList} != "all" ]]; then
-		MNAPSubModules=${MNAPSubModulesList}
-		echo ""
-		geho "Note: --submodules flag set to selected MNAP repos."
-		fi
-	fi
-
-	# -- Continue with specific submodules
+# -- Not perform further checks
+if [ "${MNAPSubModulesList}" == "main" ]; then
 	echo ""
-	mageho "  * Checking active branch ${MNAPBranch} for specified submodules in ${MNAPBranchPath}... "
+	geho "   Note: --submodules flag set to main MNAP repo only. Omitting individual submodules."
 	echo ""
-	for MNAPSubModule in ${MNAPSubModules}; do
-		cd ${MNAPBranchPath}/${MNAPSubModule}
-		if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "--> $MNAPBranch found in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
-		if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "--> $MNAPBranch is active in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
-	done
-	mageho "  * All checks passed for specified submodules... "
-	echo ""
-	# -- First run over specific modules
-	for MNAPSubModule in ${MNAPSubModules}; do
-		echo ""
-		geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."
-		echo
-		cd ${MNAPBranchPath}/${MNAPSubModule}
-		# -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
-		function_gitmnapbranch > /dev/null 2>&1
-		# -- Check git command requests
-		if [[ ${MNAPGitCommand} == "pull" ]]; then
-			cd ${MNAPBranchPath}/${MNAPSubModule}; git pull origin ${MNAPBranch}
-		fi
-		if [[ ${MNAPGitCommand} == "push" ]]; then
-			if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
-				echo ""
-				reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
-				echo ""
-				return 1
-			else
-				cd ${MNAPBranchPath}/${MNAPSubModule}
-				git add ./*
-				git commit . --message="${CommitMessage}"
-				git push origin ${MNAPBranch}
-			fi
-		fi
-		function_gitmnapbranch
-		echo ""
-		geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."; echo ""; echo ""
-	done
-	unset MNAPSubModule
-
-	# -- Finish up with the main submodule after individual modules are committed
+	# -- Check git command
 	echo ""
 	geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
 	echo
 	cd ${MNAPBranchPath}
+	# -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
 	function_gitmnapbranch > /dev/null 2>&1
 	# -- Check git command request
 	if [[ ${MNAPGitCommand} == "pull" ]]; then
@@ -772,9 +683,9 @@ function_gitmnap() {
 	fi
 	if [[ ${MNAPGitCommand} == "push" ]]; then
 		cd ${MNAPBranchPath}
-			if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
+		if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
 			echo ""
-				reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
+			reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
 			echo ""
 			return 1
 		else
@@ -786,22 +697,111 @@ function_gitmnap() {
 	function_gitmnapbranch
 	echo ""
 	geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."; echo ""
+	return 1
+fi
 
-	# -- Report final completion
+# -- Check if all submodules are requested or only specific ones
+if [ ${MNAPSubModulesList} == "all" ]; then
 	echo ""
-	geho "=============== Completed MNAP $MNAPGitCommand function ============== "
+	geho "Note: --submodules flag set to all MNAP repos."
 	echo ""
-
-	# -- Reset submodules variable
+	# -- Reset submodules variable to all
 	unset MNAPSubModules
 	MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-	unset MNAPBranch
-	unset MNAPGitCommand
-	unset MNAPBranchPath
-	unset CommitMessage
-	unset GitStatus
-	unset MNAPSubModulesList
-	unset MNAPSubModule
+fi
+# -- Check specific modules only
+if [ ${MNAPSubModulesList} != "main" ]; then
+	if [ ${MNAPSubModulesList} != "all" ]; then
+		MNAPSubModules=${MNAPSubModulesList}
+		echo ""
+		geho "Note: --submodules flag set to selected MNAP repos."
+	fi
+fi
+
+# -- Continue with specific submodules
+echo ""
+mageho "  * Checking active branch ${MNAPBranch} for specified submodules in ${MNAPBranchPath}... "
+echo ""
+for MNAPSubModule in ${MNAPSubModules}; do
+	cd ${MNAPBranchPath}/${MNAPSubModule}
+	if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "--> $MNAPBranch found in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
+	if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "--> $MNAPBranch is active in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
+done
+mageho "  * All checks passed for specified submodules... "
+echo ""
+# -- First run over specific modules
+for MNAPSubModule in ${MNAPSubModules}; do
+	echo ""
+	geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."
+	echo
+	cd ${MNAPBranchPath}/${MNAPSubModule}
+	# -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
+	function_gitmnapbranch > /dev/null 2>&1
+	# -- Check git command requests
+	if [[ ${MNAPGitCommand} == "pull" ]]; then
+		cd ${MNAPBranchPath}/${MNAPSubModule}; git pull origin ${MNAPBranch}
+	fi
+	if [[ ${MNAPGitCommand} == "push" ]]; then
+		if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
+			echo ""
+			reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
+			echo ""
+			return 1
+		else
+			cd ${MNAPBranchPath}/${MNAPSubModule}
+			git add ./*
+			git commit . --message="${CommitMessage}"
+			git push origin ${MNAPBranch}
+		fi
+	fi
+	function_gitmnapbranch
+	echo ""
+	geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."; echo ""; echo ""
+done
+unset MNAPSubModule
+
+# -- Finish up with the main submodule after individual modules are committed
+echo ""
+geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
+echo
+cd ${MNAPBranchPath}
+function_gitmnapbranch > /dev/null 2>&1
+# -- Check git command request
+if [[ ${MNAPGitCommand} == "pull" ]]; then
+	cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
+fi
+if [[ ${MNAPGitCommand} == "push" ]]; then
+	cd ${MNAPBranchPath}
+		if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
+		echo ""
+			reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
+		echo ""
+		return 1
+	else
+		git add ./*
+		git commit . --message="${CommitMessage}"
+		git push origin ${MNAPBranch}
+	fi
+fi
+function_gitmnapbranch
+echo ""
+geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."; echo ""
+
+# -- Report final completion
+echo ""
+geho "=============== Completed MNAP $MNAPGitCommand function ============== "
+echo ""
+
+# -- Reset submodules variable
+unset MNAPSubModules
+MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+unset MNAPBranch
+unset MNAPGitCommand
+unset MNAPBranchPath
+unset CommitMessage
+unset GitStatus
+unset MNAPSubModulesList
+unset MNAPSubModule
 }
 
 # -- define function_gitmnap alias
