@@ -710,12 +710,10 @@ if [ ${MNAPSubModulesList} == "all" ]; then
 	MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
 fi
 # -- Check specific modules only
-if [[ -z `echo ${MNAPSubModulesList} | grep 'main'` ]]; then
-	if [[ -z `echo ${MNAPSubModulesList} | grep 'all'` ]]; then
-		MNAPSubModules=${MNAPSubModulesList}
-		echo ""
-		geho "Note: --submodules flag set to selected MNAP repos."
-	fi
+if [[ -z `echo ${MNAPSubModulesList} | grep 'main'` ]] && [[ -z `echo ${MNAPSubModulesList} | grep 'all'` ]]; then
+	MNAPSubModules=${MNAPSubModulesList}
+	echo ""
+	geho "Note: --submodules flag set to selected MNAP repos."
 fi
 
 # -- Continue with specific submodules
