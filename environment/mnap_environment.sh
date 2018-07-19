@@ -535,52 +535,56 @@ gitmnap_usage() {
 }
 
 function_gitmnapbranch() {
-     # -- Check path
-     if [[ -z ${MNAPBranchPath} ]]; then
-     	cd $TOOLS/$MNAPREPO
-     else
-     	cd ${MNAPBranchPath}
-     fi
-     if [[ ! -z ${MNAPSubModule} ]]; then
-		cd ${MNAPBranchPath}/${MNAPSubModule}
-     fi
-     # -- Update remote
-     git remote update > /dev/null 2>&1
-     MNAPDirBranchTest=`pwd`
-     echo ""
-     geho "--- Running git status checks in $MNAPDirBranchTest"
-     # -- Set git variables
-     unset UPSTREAM; unset LOCAL; unset REMOTE; unset BASE
-     UPSTREAM=${1:-'@{u}'}
-     LOCAL=$(git rev-parse origin)
-     REMOTE=$(git rev-parse "$UPSTREAM")
-     BASE=$(git merge-base @ "$UPSTREAM")
-    # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
-     if [[ $LOCAL == $REMOTE ]]; then
-     	echo ""
-     	mageho "  * Note: LOCAL: $LOCAL equals REMOTE: $REMOTE in $MNAPDirBranchTest."
-     	echo ""
-     elif [[ $LOCAL == $BASE ]]; then
-     	echo ""
-     	echo "  * Note: LOCAL: $LOCAL equals BASE: $BASE in ${MNAPDirBranchTest}. You need to pull."
-     	echo ""
-     elif [[ $REMOTE == $BASE ]]; then
-     	echo ""
-     	echo "  * Note: REMOTE: $REMOTE equals BASE: $BASE in ${MNAPDirBranchTest}. You need to push."
-     	echo ""
-     else
-     	echo ""
-     	reho "  ERROR: LOCAL, BASE and REMOTE tips have diverged in ${MNAPDirBranchTest}."
-     	echo ""
-     	reho "              ------------------------------------------------"
-     	reho "                 LOCAL: $LOCAL"
-     	reho "                 BASE: $BASE"
-     	reho "                 REMOTE: $REMOTE"
-     	reho "              ------------------------------------------------"
-     	echo ""
-     	reho "              Check 'git status -uno' to inspect and re-run after cleaning things up."
-     	echo ""
-     fi
+# -- Check path
+if [[ -z ${MNAPBranchPath} ]]; then
+	cd $TOOLS/$MNAPREPO
+else
+	cd ${MNAPBranchPath}
+fi
+if [[ ! -z ${MNAPSubModule} ]]; then
+	cd ${MNAPBranchPath}/${MNAPSubModule}
+fi
+# -- Update remote
+git remote update > /dev/null 2>&1
+MNAPDirBranchTest=`pwd`
+echo ""
+geho "--- Running git status checks in $MNAPDirBranchTest"
+# -- Set git variables
+unset UPSTREAM; unset LOCAL; unset REMOTE; unset BASE
+UPSTREAM=${1:-'@{u}'}
+LOCAL=$(git rev-parse origin)
+REMOTE=$(git rev-parse "$UPSTREAM")
+BASE=$(git merge-base @ "$UPSTREAM")
+echo ""
+echo "==> Local commit:   $LOCAL"
+echo "==> Remote commit:  $REMOTE"
+echo ""
+# -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
+if [[ $LOCAL == $REMOTE ]]; then
+	echo ""
+	mageho "  * Note: LOCAL: $LOCAL equals REMOTE: $REMOTE in $MNAPDirBranchTest."
+	echo ""
+elif [[ $LOCAL == $BASE ]]; then
+	echo ""
+	echo "  * Note: LOCAL: $LOCAL equals BASE: $BASE in ${MNAPDirBranchTest}. You need to pull."
+	echo ""
+elif [[ $REMOTE == $BASE ]]; then
+	echo ""
+	echo "  * Note: REMOTE: $REMOTE equals BASE: $BASE in ${MNAPDirBranchTest}. You need to push."
+	echo ""
+else
+	echo ""
+	reho "  ERROR: LOCAL, BASE and REMOTE tips have diverged in ${MNAPDirBranchTest}."
+	echo ""
+	reho "              ------------------------------------------------"
+	reho "                 LOCAL: $LOCAL"
+	reho "                 BASE: $BASE"
+	reho "                 REMOTE: $REMOTE"
+	reho "              ------------------------------------------------"
+	echo ""
+	reho "              Check 'git status -uno' to inspect and re-run after cleaning things up."
+	echo ""
+fi
 }
 alias gitmnapbranch=function_gitmnapbranch
 
