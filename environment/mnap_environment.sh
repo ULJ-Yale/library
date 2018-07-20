@@ -686,9 +686,6 @@ fi
 
 # -- Check if all submodules are requested or only specific ones
 if [ ${MNAPSubModulesList} == "all" ]; then
-	echo ""
-	geho "Note: --submodules flag set to all MNAP repos."
-	echo ""
 	# -- Reset submodules variable to all
 	unset MNAPSubModulesList
 	MNAPSubModulesList=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
