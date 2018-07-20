@@ -105,27 +105,21 @@ WHITE_F="\033[37m"; WHITE_B="\033[47m"
 reho() {
     echo -e "$RED_F$1 \033[0m"
 }
-
 geho() {
     echo -e "$GREEN_F$1 \033[0m"
 }
-
 yeho() {
     echo -e "$YELLOW_F$1 \033[0m"
 }
-
 beho() {
     echo -e "$BLUE_F$1 \033[0m"
 }
-
 mageho() {
     echo -e "$MAGENTA_F$1 \033[0m"
 }
-
 cyaneho() {
     echo -e "$CYAN_F$1 \033[0m"
 }
-
 weho() {
     echo -e "$WHITE_F$1 \033[0m"
 }
@@ -160,7 +154,6 @@ fi
 # ------------------------------------------------------------------------------
 # -- Setup server login messages
 # ------------------------------------------------------------------------------
-
 
 HOST=`hostname`
 MyID=`whoami`
@@ -216,16 +209,14 @@ PROMPT_COMMAND='echo -ne "\033]0;MNAP: ${PWD}\007"'
 # ------------------------------------------------------------------------------
 
 
-if [ -z ${MNAPREPO} ]
-then
-    MNAPREPO="mnaptools"
+if [ -z ${MNAPREPO} ]; then
+	MNAPREPO="mnaptools"
 fi
 
 # ---- changed to work with new clone/branches setup
 
-if [ -e ~/mnapinit.sh ]
-then
-    source ~/mnapinit.sh
+if [ -e ~/mnapinit.sh ]; then
+	source ~/mnapinit.sh
 fi
 
 # PATH=${MNAPREPO}:${PATH}
@@ -233,13 +224,12 @@ fi
 MNAPPATH=${TOOLS}/${MNAPREPO}
 export MNAPPATH MNAPREPO
 
-if [ -e ~/mnapinit.sh ]
-then
-    echo ""
-    reho " --- NOTE: MNAP is set by your ~/mnapinit.sh file! ----"
-    echo ""
-    reho " ---> MNAP path is set to: ${MNAPPATH} "
-    echo ""
+if [ -e ~/mnapinit.sh ]; then
+	echo ""
+	reho " --- NOTE: MNAP is set by your ~/mnapinit.sh file! ----"
+	echo ""
+	reho " ---> MNAP path is set to: ${MNAPPATH} "
+	echo ""
 fi
 
 # ------------------------------------------------------------------------------
@@ -556,33 +546,26 @@ LOCAL=$(git rev-parse origin)
 REMOTE=$(git rev-parse "$UPSTREAM")
 BASE=$(git merge-base @ "$UPSTREAM")
 echo ""
-echo "==> Local commit:   $LOCAL"
-echo "==> Remote commit:  $REMOTE"
-echo ""
+echo "   ==> Local commit:   $LOCAL"
+echo "   ==> Remote commit:  $REMOTE"
 # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
 if [[ $LOCAL == $REMOTE ]]; then
-	echo ""
-	mageho "  * STATUS OK: LOCAL: $LOCAL equals REMOTE: $REMOTE in $MNAPDirBranchTest."
-	echo ""
+	cyaneho "   ==> STATUS OK: LOCAL equals REMOTE in $MNAPDirBranchTest."; echo ""
 elif [[ $LOCAL == $BASE ]]; then
-	echo ""
-	echo "  * ACTION NEEDED: LOCAL: $LOCAL equals BASE: $BASE in ${MNAPDirBranchTest}. You need to pull."
-	echo ""
+	reho "   ==> ACTION NEEDED: LOCAL equals BASE in ${MNAPDirBranchTest}. You need to pull."; echo ""
 elif [[ $REMOTE == $BASE ]]; then
-	echo ""
-	echo "  * ACTION NEEDED: REMOTE: $REMOTE equals BASE: $BASE in ${MNAPDirBranchTest}. You need to push."
-	echo ""
+	reho "   ==> ACTION NEEDED: REMOTE equals BASE in ${MNAPDirBranchTest}. You need to push."; echo ""
 else
 	echo ""
-	reho "  ERROR: LOCAL, BASE and REMOTE tips have diverged in ${MNAPDirBranchTest}."
+	reho "   ===> ERROR: LOCAL, BASE and REMOTE tips have diverged in ${MNAPDirBranchTest}."
 	echo ""
-	reho "              ------------------------------------------------"
-	reho "                 LOCAL: $LOCAL"
-	reho "                 BASE: $BASE"
-	reho "                 REMOTE: $REMOTE"
-	reho "              ------------------------------------------------"
+	reho "   ------------------------------------------------"
+	reho "      LOCAL: ${LOCAL}"
+	reho "      BASE: ${BASE}"
+	reho "      REMOTE: ${REMOTE}"
+	reho "   ------------------------------------------------"
 	echo ""
-	reho "              Check 'git status -uno' to inspect and re-run after cleaning things up."
+	reho "   ===> Check 'git status -uno' to inspect and re-run after cleaning things up."
 	echo ""
 fi
 }
@@ -594,12 +577,13 @@ geho "================ Running MNAP Suite Repository Status Check ==============
 echo ""
 unset MNAPBranchPath; unset MNAPSubModules; unset MNAPSubModule
 # -- Run it for the main module
-#function_gitmnapbranch
-git status -uno
+cd ${TOOLS}/${MNAPREPO}
+echo ""; geho "--- Checking status in MNAP Suite location: ${TOOLS}/${MNAPREPO} "; echo ""
+git status -uno; function_gitmnapbranch
 # -- Then iterate over submodules
-MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-MNAPBranchPath="$MNAPPATH"
-for MNAPSubModule in $MNAPSubModules; do
+MNAPSubModules=`cd ${TOOLS}/${MNAPREPO}; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+MNAPBranchPath="${MNAPPATH}"
+for MNAPSubModule in ${MNAPSubModules}; do
 	cd ${MNAPBranchPath}/${MNAPSubModule}
 	function_gitmnapbranch
 	git status -uno
@@ -706,14 +690,19 @@ if [ ${MNAPSubModulesList} == "all" ]; then
 	geho "Note: --submodules flag set to all MNAP repos."
 	echo ""
 	# -- Reset submodules variable to all
-	unset MNAPSubModules
-	MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-fi
-# -- Check specific modules only
-if [[ -z `echo ${MNAPSubModulesList} | grep 'main'` ]] && [[ -z `echo ${MNAPSubModulesList} | grep 'all'` ]]; then
+	unset MNAPSubModulesList
+	MNAPSubModulesList=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+	MNAPSubModules=${MNAPSubModulesList}
+elif [ ${MNAPSubModulesList} == "main" ]; then
+	echo ""
+	geho "Note: --submodules flag set to the main MNAP repo."
+	echo ""
+	MNAPSubModules="main"
+elif [[ ${MNAPSubModulesList} != "main*" ]] && [[ ${MNAPSubModulesList} != "all*" ]]; then
 	MNAPSubModules=${MNAPSubModulesList}
 	echo ""
-	geho "Note: --submodules flag set to selected MNAP repos."
+	geho "Note: --submodules flag set to selected MNAP repos: $MNAPSubModules"
+	echo ""
 fi
 
 # -- Continue with specific submodules
