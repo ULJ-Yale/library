@@ -167,11 +167,11 @@ umask 002
 # ------------------------------------------------------------------------------
 # -- Check Operating System (needed for some apps like Workbench)
 # ------------------------------------------------------------------------------
-
-if [[ `gcc --version | grep 'Red Hat'` != "" ]]; then OSInfo="RedHat"; OperatingSystem=`uname -a; gcc --version | grep 'Red Hat'`;
-elif [[ `gcc --version | grep 'ubuntu'` != "" ]]; then OSInfo="Ubuntu"; OperatingSystem=`uname -a; gcc --version | grep 'ubuntu'`;
-elif [[ `gcc --version | grep 'debian'` != "" ]]; then OSInfo="Debian"; OperatingSystem=`uname -a; gcc --version | grep 'debian'`;
-elif [[ `gcc --version | grep 'darwin'` != "" ]]; then OSInfo="Darwin"; OperatingSystem=`uname -v`; 
+OperatingSystem=`uname -sv`
+if [[ `gcc --version | grep 'Red Hat'` != "" ]]; then OSInfo="RedHat";
+elif [[ `gcc --version | grep 'ubuntu'` != "" ]]; then OSInfo="Ubuntu";
+elif [[ `gcc --version | grep 'debian'` != "" ]]; then OSInfo="Debian";
+elif [[ `gcc --version | grep 'darwin'` != "" ]]; then OSInfo="Darwin";
 fi
 
 # ------------------------------------------------------------------------------
