@@ -11,4 +11,9 @@ pkg load control
 pkg load signal
 pkg load nan
 pkg load statistics
+pkg load general
+pkg load io
+pkg load miscellaneous
+pkg load optim
+pkg load struct
 warning('on');

@@ -168,10 +168,11 @@ umask 002
 # -- Check Operating System (needed for some apps like Workbench)
 # ------------------------------------------------------------------------------
 OperatingSystem=`uname -sv`
-if [[ `gcc --version | grep 'Red Hat'` != "" ]]; then OSInfo="RedHat";
-elif [[ `gcc --version | grep 'ubuntu'` != "" ]]; then OSInfo="Ubuntu";
-elif [[ `gcc --version | grep 'debian'` != "" ]]; then OSInfo="Debian";
-elif [[ `gcc --version | grep 'darwin'` != "" ]]; then OSInfo="Darwin";
+if [[ `gcc --version | grep 'darwin'` != "" ]]; then OSInfo="Darwin"; else
+	if [[ `cat /etc/*-release | grep 'Red Hat'` != "" ]] || [[ `cat /etc/*-release | grep 'rhel'` != "" ]]; then OSInfo="RedHat";
+		elif [[ `cat /etc/*-release| grep 'ubuntu'` != "" ]]; then OSInfo="Ubuntu";
+			elif [[ `cat /etc/*-release | grep 'debian'` != "" ]]; then OSInfo="Debian";
+	fi
 fi
 
 # ------------------------------------------------------------------------------
@@ -379,7 +380,7 @@ showVersion
 geho ""
 geho " Logged in as User: $MyID                                                    "
 geho " Node info: `hostname`                                                       "
-geho " OS: $OperatingSystem                                                        "
+geho " OS: $OSInfo $OperatingSystem                                                "
 geho ""
 geho "                  ███╗   ███╗███╗   ██╗ █████╗ ██████╗                       "
 geho "                  ████╗ ████║████╗  ██║██╔══██╗██╔══██╗                      "
