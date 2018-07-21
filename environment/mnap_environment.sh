@@ -168,9 +168,9 @@ umask 002
 # -- Check Operating System (needed for some apps like Workbench)
 # ------------------------------------------------------------------------------
 
-if [[ `gcc --version | grep 'Red Hat'` != "" ]]; then OSInfo="RedHat"; OperatingSystem=`hostnamectl | grep 'Operating System'`;
-elif [[ `gcc --version | grep 'ubuntu'` != "" ]]; then OSInfo="Ubuntu"; OperatingSystem=`hostnamectl | grep 'Operating System'`;
-elif [[ `gcc --version | grep 'debian'` != "" ]]; then OSInfo="Debian"; OperatingSystem=`hostnamectl | grep 'Operating System'`;
+if [[ `gcc --version | grep 'Red Hat'` != "" ]]; then OSInfo="RedHat"; OperatingSystem=`uname -a; gcc --version | grep 'Red Hat'`;
+elif [[ `gcc --version | grep 'ubuntu'` != "" ]]; then OSInfo="Ubuntu"; OperatingSystem=`uname -a; gcc --version | grep 'ubuntu'`;
+elif [[ `gcc --version | grep 'debian'` != "" ]]; then OSInfo="Debian"; OperatingSystem=`uname -a; gcc --version | grep 'debian'`;
 elif [[ `gcc --version | grep 'darwin'` != "" ]]; then OSInfo="Darwin"; OperatingSystem=`uname -v`; 
 fi
 
@@ -379,7 +379,7 @@ showVersion
 geho ""
 geho " Logged in as User: $MyID                                                    "
 geho " Node info: `hostname`                                                       "
-geho " $OperatingSystem                                                            "
+geho " OS: $OperatingSystem                                                        "
 geho ""
 geho "                  ███╗   ███╗███╗   ██╗ █████╗ ██████╗                       "
 geho "                  ████╗ ████║████╗  ██║██╔══██╗██╔══██╗                      "
