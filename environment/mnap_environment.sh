@@ -168,10 +168,10 @@ umask 002
 # -- Check Operating System (needed for some apps like Workbench)
 # ------------------------------------------------------------------------------
 
-if [ "$(uname)" == "Darwin" ]; then
-	OperatingSystem="Darwin"
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-	OperatingSystem="Linux"
+if [[ `gcc --version | grep 'Red Hat'` != "" ]]; then OSInfo="RedHat"; OperatingSystem=`hostnamectl | grep 'Operating System'`;
+elif [[ `gcc --version | grep 'ubuntu'` != "" ]]; then OSInfo="Ubuntu"; OperatingSystem=`hostnamectl | grep 'Operating System'`;
+elif [[ `gcc --version | grep 'debian'` != "" ]]; then OSInfo="Debian"; OperatingSystem=`hostnamectl | grep 'Operating System'`;
+elif [[ `gcc --version | grep 'darwin'` != "" ]]; then OSInfo="Darwin"; OperatingSystem=`uname -v`; 
 fi
 
 # ------------------------------------------------------------------------------
@@ -302,9 +302,11 @@ PATH=${FREESURFER_SCHEDULER}:${PATH}
 export FREESURFER_SCHEDULER PATH
 
 # -- Workbench path (set OS)
-if [ "$OperatingSystem" == "Darwin" ]; then
+if [ "$OSInfo" == "Darwin" ]; then
 	WORKBENCHDIR=${TOOLS}/${HCPWBDIR}/bin_macosx64
-elif [ "$OperatingSystem" == "Linux" ]; then
+elif [ "$OSInfo" == "Ubuntu" ] || [ "$OSInfo" == "Debian" ]; then
+	WORKBENCHDIR=${TOOLS}/workbench/bin_linux64
+elif [ "$OSInfo" == "RedHat" ]; then
 	WORKBENCHDIR=${TOOLS}/workbench/bin_rh_linux64
 fi
 PATH=${WORKBENCHDIR}:${PATH}
@@ -369,6 +371,32 @@ showVersion() {
 	geho " Loading Multimodal Neuroimaging Analysis Platform (MNAP) Suite Version: v${MNAPVer}"
 }
 
+# ------------------------------------------------------------------------------
+# -- License and version disclaimer
+# ------------------------------------------------------------------------------
+
+showVersion
+geho ""
+geho " Logged in as User: $MyID                                                    "
+geho " Node info: `hostname`                                                       "
+geho " $OperatingSystem                                                            "
+geho ""
+geho "                  ███╗   ███╗███╗   ██╗ █████╗ ██████╗                       "
+geho "                  ████╗ ████║████╗  ██║██╔══██╗██╔══██╗                      "
+geho "                  ██╔████╔██║██╔██╗ ██║███████║██████╔╝                      "
+geho "                  ██║╚██╔╝██║██║╚██╗██║██╔══██║██╔═══╝                       "
+geho "                  ██║ ╚═╝ ██║██║ ╚████║██║  ██║██║                           "
+geho "                  ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝                           "
+geho ""
+geho "                      COPYRIGHT & LICENSE NOTICE:                            "
+geho ""
+geho " Use of this software is subject to the terms and conditions defined by the  "
+geho " Yale University Copyright Policies:                                         "
+geho "    http://ocr.yale.edu/faculty/policies/yale-university-copyright-policy    "
+geho " and the terms and conditions defined in the file 'LICENSE.md' which is      "
+geho " a part of the MNAP Suite source code package:"
+geho "    https://bitbucket.org/hidradev/mnaptools/src/master/LICENSE.md"
+geho ""
 
 # ------------------------------------------------------------------------------
 # -- Setup HCP Pipeline paths
@@ -379,12 +407,10 @@ if [ -e ~/.mnaphcpe ];
 	then
 	export HCPPIPEDIR=${MNAPPATH}/hcpextendedpull
 	echo ""
-	reho " --- NOTE: You are in MNAP HCP development mode! ----"
-	echo ""
-	reho " ---> MNAP path is set to: $HCPPIPEDIR"
+	reho " ===> NOTE: You are in MNAP HCP development mode!"
+	reho " ---> MNAP HCP path is set to: $HCPPIPEDIR"
 	echo ""
 fi
-
 export HCPPIPEDIR=$MNAPPATH/hcpmodified
 export CARET7DIR=$TOOLS/workbench/bin_rh_linux64
 export GRADUNWARPDIR=$TOOLS/pylib/gradunwarp/core
@@ -457,7 +483,7 @@ export MATLABPATH
 if [ -e ~/.mnapuseoctave ]
 then
     echo ""
-    reho " --- NOTE: Setting up Octave! ----"
+    reho " ---> NOTE: Setting up Octave "; echo ""
     MNAPMCOMMAND='octave -q --eval'
     if [ ! -e ~/.octaverc ]
     then
@@ -465,11 +491,10 @@ then
     fi
 else
     echo ""
-    reho " --- NOTE: Setting up Matlab! ----"
+    reho " ---> NOTE: Setting up Matlab "; echo ""
     # -- Use the following command to run .m code in Matlab
     MNAPMCOMMAND='matlab -nojvm -nodisplay -nosplash -r'
 fi
-
 export MNAPMCOMMAND
 
 # ------------------------------------------------------------------------------
@@ -790,28 +815,3 @@ unset MNAPSubModule
 
 # -- define function_gitmnap alias
 alias gitmnap=function_gitmnap
-
-# ------------------------------------------------------------------------------
-# -- License and version disclaimer
-# ------------------------------------------------------------------------------
-
-showVersion
-geho ""
-geho "  You are logged in as user: $MyID on machine: `hostname`                    "
-geho ""
-geho "                  ███╗   ███╗███╗   ██╗ █████╗ ██████╗                       "
-geho "                  ████╗ ████║████╗  ██║██╔══██╗██╔══██╗                      "
-geho "                  ██╔████╔██║██╔██╗ ██║███████║██████╔╝                      "
-geho "                  ██║╚██╔╝██║██║╚██╗██║██╔══██║██╔═══╝                       "
-geho "                  ██║ ╚═╝ ██║██║ ╚████║██║  ██║██║                           "
-geho "                  ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝                           "
-geho ""
-geho "                      COPYRIGHT & LICENSE NOTICE:                            "
-geho ""
-geho " Use of this software is subject to the terms and conditions defined by the  "
-geho " Yale University Copyright Policies:                                         "
-geho "    http://ocr.yale.edu/faculty/policies/yale-university-copyright-policy    "
-geho " and the terms and conditions defined in the file 'LICENSE.md' which is      "
-geho " a part of the MNAP Suite source code package:"
-geho "    https://bitbucket.org/hidradev/mnaptools/src/master/LICENSE.md"
-geho ""
