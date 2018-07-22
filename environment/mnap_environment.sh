@@ -413,7 +413,7 @@ if [ -e ~/.mnaphcpe ];
 	echo ""
 fi
 export HCPPIPEDIR=$MNAPPATH/hcpmodified
-export CARET7DIR=$TOOLS/workbench/bin_rh_linux64
+export CARET7DIR=$WORKBENCHDIR
 export GRADUNWARPDIR=$TOOLS/pylib/gradunwarp/core
 export HCPPIPEDIR_Templates=${HCPPIPEDIR}/global/templates
 export HCPPIPEDIR_Bin=${HCPPIPEDIR}/global/binaries
