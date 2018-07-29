@@ -652,7 +652,7 @@ unset MNAPSubModulesList
 MNAPGitCommand=`opts_GetOpt "--command" $@`
 MNAPBranch=`opts_GetOpt "--branch" $@`
 MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
-CommitMessage=`opts_GetOpt "--message" $@`
+CommitMessage=`opts_GetOpt "--message" "${@}"`
 MNAPSubModulesList=`opts_GetOpt "--submodules" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of input cases; removing comma or pipes
 
 # -- Check for help calls
