@@ -234,31 +234,44 @@ if [ -e ~/mnapinit.sh ]; then
 fi
 
 # ------------------------------------------------------------------------------
-# -- Load dependent software - FSL, FreeSurfer, Workbench, AFNI, PALM
+# -- Load dependent software
 # ------------------------------------------------------------------------------
+# 
+#  $TOOLS                           # -- the base folder for the installation
+#  ├── afni                         # Env. Variable = $AFNIDIR            # -- AFNI: Analysis of Functional NeuroImages (https://github.com/afni/afni)
+#  ├── dcm2niix                     # Env. Variable = $DCM2NIIDIR         # -- dcm2niix (https://github.com/rordenlab/dcm2niix)
+#  ├── fix                          # Env. Variable = $FIXICAFolder       # -- FIX ICA (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FIX/UserGuide)
+#  ├── freesurfer-5.3-HCP           # Env. Variable = $FSDIR53HCP         # -- FreeSurfer (v5.3-HCP version for HCP-compatible data; http://ftp.nmr.mgh.harvard.edu/pub/dist/freesurfer/5.3.0-HCP/)
+#  ├── freesurfer-<LATEST_VERSION>  # Env. Variable = $FSDIRLATEST        # -- FreeSurfer (v6.0 or later stable for all other data; https://surfer.nmr.mgh.harvard.edu/fswiki/DownloadAndInstall)
+#  ├── fsl-<VERSION>                # Env. Variable = $FSLFolder          # -- FSL (v5.0.9 or above with GPU-enabled DWI tools; https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
+#  ├── mnaptools                    # Env. Variable = $MNAPREPO           # -- All MNAP Suite repositories (https://bitbucket.org/hidradev/mnaptools)
+#  ├── octave                       # Env. Variable = $OCTAVEDIR          # -- Octave v.4.2.1 or higher. If Octave is installed system-wide then a symlink is created here
+#  ├── octavepkg                    # Env. Variable = $OCTAVEPKGDIR       # -- If Octave packages need manual deployment then the installed packages go here
+#  ├── PALM/palm-<VERSION>          # Env. Variable = $PALMDIR            # -- PALM: Permutation Analysis of Linear Models (https://github.com/andersonwinkler/PALM)
+#  ├── pylib                        # Env. Variable = $PYLIBDIR           # -- All python libraries and tools
+#  │   ├── gradunwarp               # Env. Variable = $GRADUNWARPDIR      # -- HCP version of gradunwarp (https://github.com/Washington-University/gradunwarp)
+#  │   ├── nibabel                  # Env. Variable = $NIBABELDIR         # -- NiBabel (http://nipy.org/nibabel/)
+#  │   └── pydicom                  # Env. Variable = $PYDICOMDIR         # -- pydicom (v1.1.0 or later; https://pydicom.github.io) 
+#  └── workbench                    # Env. Variable = $HCPWBDIR           # -- Connectome Workbench (v1.0 or above; https://www.humanconnectome.org/software/connectome-workbench)
+#
+#  FreeSurferScheduler       Environment Variable --> $FreeSurferSchedulerDIR
 
+# ------------------------------------------------------------------------------
 # -- Set default folder names for dependencies if undefined by user environment:
-#
-# FSL                       Environment Variable --> $FSLFolder
-# FIX ICA                   Environment Variable --> $FIXICAFolder
-# FreeSurfer                Environment Variable --> $FREESURFERDIR
-# FreeSurferScheduler       Environment Variable --> $FreeSurferSchedulerDIR
-# workbench                 Environment Variable --> $HCPWBDIR
-# PALM                      Environment Variable --> $PALMDIR
-# AFNI                      Environment Variable --> $AFNIDIR
-# dcm2niix                  Environment Variable --> $DCM2NIIDIR
-#
-# -------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 # -- Check if folders for dependencies are set in the global path
 if [[ -z ${FSLFolder} ]]; then unset FSLDIR; FSLFolder="fsl-5.0.9"; fi
 if [[ -z ${FIXICAFolder} ]]; then FIXICAFolder="fix1.06"; fi
-if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="freesurfer-6.0/freesurfer"; fi
+if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="freesurfer-5.3-HCP"; fi
 if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="FreeSurferScheduler"; fi
 if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="workbench"; fi
-if [[ -z ${PALMDIR} ]]; then PALMDIR="PALM/PALM"; fi
+if [[ -z ${PALMDIR} ]]; then PALMDIR="PALM/palm-alpha111"; fi
 if [[ -z ${AFNIDIR} ]]; then AFNIDIR="afni_linux_openmp_64"; fi
 if [[ -z ${DCM2NIIDIR} ]]; then DCM2NIIDIR="dcm2niix"; fi
+if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="octave"; fi
+if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="octavepkg"; fi
+if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="pylib"; fi
 
 # -- FIX ICA path
 FIXICADIR=${TOOLS}/${FIXICAFolder}
@@ -414,7 +427,7 @@ if [ -e ~/.mnaphcpe ];
 fi
 export HCPPIPEDIR=$MNAPPATH/hcpmodified
 export CARET7DIR=$WORKBENCHDIR
-export GRADUNWARPDIR=$TOOLS/pylib/gradunwarp/core
+export GRADUNWARPDIR=$TOOLS/$PYLIBDIR/gradunwarp/core
 export HCPPIPEDIR_Templates=${HCPPIPEDIR}/global/templates
 export HCPPIPEDIR_Bin=${HCPPIPEDIR}/global/binaries
 export HCPPIPEDIR_Config=${HCPPIPEDIR}/global/config
@@ -446,11 +459,11 @@ PATH=$MNAPPATH/connector:$PATH
 PATH=$MNAPPATH/niutilities:$PATH
 PATH=$MNAPPATH/matlab:$PATH
 PATH=$TOOLS/bin:$PATH
-PATH=$TOOLS/pylib/gradunwarp:$PATH
-PATH=$TOOLS/pylib/gradunwarp/core:$PATH
-PATH=$TOOLS/pylib/xmlutils.py:$PATH
-PATH=$TOOLS/pylib:$PATH
-PATH=$TOOLS/pylib/bin:$PATH
+PATH=$TOOLS/$PYLIBDIR/gradunwarp:$PATH
+PATH=$TOOLS/$PYLIBDIR/gradunwarp/core:$PATH
+PATH=$TOOLS/$PYLIBDIR/xmlutils.py:$PATH
+PATH=$TOOLS/$PYLIBDIR:$PATH
+PATH=$TOOLS/$PYLIBDIR/bin:$PATH
 PATH=$TOOLS/MeshNet:$PATH
 
 # -- Export Python paths
@@ -458,14 +471,14 @@ PYTHONPATH=$TOOLS:$PYTHONPATH
 PYTHONPATH=$MNAPPATH:$PYTHONPATH
 PYTHONPATH=$MNAPPATH/connector:$PYTHONPATH
 PYTHONPATH=$MNAPPATH/niutilities:$PYTHONPATH
-PYTHONPATH=$MNAPPATH/matlab:$PYTHONPATH
-PYTHONPATH=$TOOLS/pylib/pydicom:$PYTHONPATH
-PYTHONPATH=$TOOLS/pylib/gradunwarp:$PYTHONPATH
-PYTHONPATH=$TOOLS/pylib/gradunwarp/core:$PYTHONPATH
-PYTHONPATH=$TOOLS/pylib/xmlutils.py:$PYTHONPATH
-PYTHONPATH=$TOOLS/pylib/bin:$PYTHONPATH
-PYTHONPATH=$TOOLS/pylib/lib/python2.7/site-packages/:$PYTHONPATH
-PYTHONPATH=$TOOLS/pylib:$PYTHONPATH
+PYTHONPATH=$MNAPPA$TH/matlab:$PYTHONPATH
+PYTHONPATH=$TOOLS/$PYLIBDIR/pydicom:$PYTHONPATH
+PYTHONPATH=$TOOLS/$PYLIBDIR/gradunwarp:$PYTHONPATH
+PYTHONPATH=$TOOLS/$PYLIBDIR/gradunwarp/core:$PYTHONPATH
+PYTHONPATH=$TOOLS/$PYLIBDIR/xmlutils.py:$PYTHONPATH
+PYTHONPATH=$TOOLS/$PYLIBDIR/bin:$PYTHONPATH
+PYTHONPATH=$TOOLS/$PYLIBDIR/lib/python2.7/site-packages/:$PYTHONPATH
+PYTHONPATH=$TOOLS/$PYLIBDIR:$PYTHONPATH
 PYTHONPATH=$TOOLS/MeshNet:$PYTHONPATH
 export PATH
 export PYTHONPATH
@@ -480,6 +493,10 @@ export MATLABPATH
 # ------------------------------------------------------------------------------
 # -- Running matlab vs. octave
 # ------------------------------------------------------------------------------
+
+ln -s `which octave` $TOOLS/$OCTAVEDIR/octave
+export OCTAVEPKGDIR
+export OCTAVEDIR
 
 if [ -e ~/.mnapuseoctave ]
 then
@@ -662,7 +679,7 @@ if [[ -z ${MNAPSubModulesList} ]]; then reho ""; reho "   Error: --submodules fl
 if [[ ${MNAPSubModulesList} == "all" ]]; then reho ""; geho "   Note: --submodules flag set to all. Setting update for all submodules."; echo ""; fi
 if [[ ${MNAPSubModulesList} == "main" ]]; then reho ""; geho "   Note: --submodules flag set to main MNAP repo only in $MNAPBranchPath"; echo ""; fi
 if [[ ${MNAPGitCommand} == "push" ]]; then
-	if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitmnap_usage; return 1; else CommitMessage="$CommitMessage ${MyID}-via-`hostname`"; fi
+	if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitmnap_usage; return 1; else CommitMessage="${CommitMessage}"; fi
 fi
 
 # -- Perform checks that MNAP contains requested branch and that it is actively checked out
