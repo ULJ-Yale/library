@@ -614,6 +614,7 @@ fi
 }
 alias gitmnapbranch=function_gitmnapbranch
 
+
 function_gitmnapstatus() {
 echo ""
 geho "================ Running MNAP Suite Repository Status Check ================"
