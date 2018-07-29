@@ -494,7 +494,7 @@ export MATLABPATH
 # -- Running matlab vs. octave
 # ------------------------------------------------------------------------------
 
-ln -s `which octave` $TOOLS/$OCTAVEDIR/octave
+ln -s `which octave` $TOOLS/$OCTAVEDIR/octave > /dev/null 2>&1
 export OCTAVEPKGDIR
 export OCTAVEDIR
 
