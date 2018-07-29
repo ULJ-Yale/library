@@ -245,7 +245,7 @@ fi
 #  ├── freesurfer-<LATEST_VERSION>  # Env. Variable = $FSDIRLATEST        # -- FreeSurfer (v6.0 or later stable for all other data; https://surfer.nmr.mgh.harvard.edu/fswiki/DownloadAndInstall)
 #  ├── fsl-<VERSION>                # Env. Variable = $FSLFolder          # -- FSL (v5.0.9 or above with GPU-enabled DWI tools; https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
 #  ├── mnaptools                    # Env. Variable = $MNAPREPO           # -- All MNAP Suite repositories (https://bitbucket.org/hidradev/mnaptools)
-#  ├── octave                       # Env. Variable = $OCTAVEDIR          # -- Octave v.4.2.1 or higher. If Octave is installed system-wide then a symlink is created here
+#  ├── Octave/<version>             # Env. Variable = $OCTAVEDIR          # -- Octave v.4.2.1 or higher. If Octave is installed system-wide then a symlink is created here
 #  ├── octavepkg                    # Env. Variable = $OCTAVEPKGDIR       # -- If Octave packages need manual deployment then the installed packages go here
 #  ├── PALM/palm-<VERSION>          # Env. Variable = $PALMDIR            # -- PALM: Permutation Analysis of Linear Models (https://github.com/andersonwinkler/PALM)
 #  ├── pylib                        # Env. Variable = $PYLIBDIR           # -- All python libraries and tools
@@ -269,7 +269,7 @@ if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="workbench"; fi
 if [[ -z ${PALMDIR} ]]; then PALMDIR="PALM/palm-alpha111"; fi
 if [[ -z ${AFNIDIR} ]]; then AFNIDIR="afni_linux_openmp_64"; fi
 if [[ -z ${DCM2NIIDIR} ]]; then DCM2NIIDIR="dcm2niix"; fi
-if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="octave"; fi
+if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="Octave/4.2.1"; fi
 if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="octavepkg"; fi
 if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="pylib"; fi
 
@@ -346,6 +346,11 @@ export MATLABPATH
 DCMNII=${TOOLS}/${DCM2NIIDIR}/build/bin
 PATH=${DCMNII}:${PATH}
 export DCMNII PATH
+
+# -- Octave path
+OCTAVEPATH=${TOOLS}/${OCTAVEDIR}/bin
+PATH=${OCTAVEPATH}:${PATH}
+export OCTAVEPATH PATH
 
 # ------------------------------------------------------------------------------
 # -- Setup overal MNAP paths

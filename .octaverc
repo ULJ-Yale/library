@@ -5,7 +5,7 @@ LOCALLIST = getenv("OCTAVEPKGDIR");
 if isempty(LOCALLIST)
   LOCALLIST='~/.octave_packages';
 else
-  LOCALLIST=[getenv("TOOLS") '/' LOCALLIST];
+  LOCALLIST=[getenv("TOOLS") '/' LOCALLIST '/octave_packages'];
 end
 pkg('local_list', LOCALLIST);
 pkg load image
