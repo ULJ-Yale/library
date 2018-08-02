@@ -549,6 +549,7 @@ gitmnap_usage() {
     echo ""
     echo ""
     echo " --command=<git_command>                                            Specify git command: push or pull."
+    echo " --add=<files_to_add>                                               Specify files to add. Default []. If 'all' is specified then will run git add on entire repo."
     echo " --branch=<branch_to_work_on>                                       Specify the branch name you want to pull or commit."
     echo " --branchpath=<absolute_path_to_folder_containing_mnap_suite>       This folder has to have the selected branch checked out."
     echo " --message=<commit_message>                                         Specify commit message if running commitmnap"
@@ -564,6 +565,7 @@ gitmnap_usage() {
     echo ""
     echo "gitmnap \ "
     echo "--command='pull' \ "
+    echo "--add='files_to_add' \ "
     echo "--branch='master' \ "
     echo "--branchpath='$TOOLS/$MNAPREPO' \ "
     echo "--submodules='all' "
@@ -656,12 +658,14 @@ unset MNAPSubModules
 MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
 # -- Inputs
 unset MNAPBranch
+unset MNAPAddFiles
 unset MNAPGitCommand
 unset MNAPBranchPath
 unset CommitMessage
 unset GitStatus
 unset MNAPSubModulesList
 MNAPGitCommand=`opts_GetOpt "--command" $@`
+MNAPAddFiles=`opts_GetOpt "--add" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of input cases; removing comma or pipes
 MNAPBranch=`opts_GetOpt "--branch" $@`
 MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
 CommitMessage=`opts_GetOpt "--message" "${@}"`
@@ -692,6 +696,7 @@ if [[ ${MNAPSubModulesList} == "all" ]]; then reho ""; geho "   Note: --submodul
 if [[ ${MNAPSubModulesList} == "main" ]]; then reho ""; geho "   Note: --submodules flag set to main MNAP repo only in $MNAPBranchPath"; echo ""; fi
 if [[ ${MNAPGitCommand} == "push" ]]; then
 	if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitmnap_usage; return 1; else CommitMessage="${CommitMessage}"; fi
+	if [[ -z ${MNAPAddFiles} ]]; then reho ""; reho "   Error: --add flag not defined. Run 'gitmnapstatus' and specify which files to add."; echo ""; gitmnap_usage; return 1; fi
 fi
 
 # -- Perform checks that MNAP contains requested branch and that it is actively checked out
@@ -728,7 +733,11 @@ if [ "${MNAPSubModulesList}" == "main" ]; then
 			echo ""
 			return 1
 		else
-			git add ./*
+			if [[ ${MNAPAddFiles} == "all" ]]; then
+				git add ./*
+			else
+				git add ./${MNAPAddFiles}
+			fi
 			git commit . --message="${CommitMessage}"
 			git push origin ${MNAPBranch}
 		fi
@@ -745,16 +754,38 @@ if [ ${MNAPSubModulesList} == "all" ]; then
 	unset MNAPSubModulesList
 	MNAPSubModulesList=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
 	MNAPSubModules=${MNAPSubModulesList}
+	if [[ ${MNAPAddFiles} != "all" ]]; then
+		reho "ERROR: Cannot specify all submodules and select files. Specify specific files for a given submodule or specify -add='all' "
+		return 1
+		gitmnap_usage
+	else
+		GitAddCommand="git add ./*"
+	fi
 elif [ ${MNAPSubModulesList} == "main" ]; then
 	echo ""
 	geho "Note: --submodules flag set to the main MNAP repo."
 	echo ""
 	MNAPSubModules="main"
+	if [[ ${MNAPAddFiles} == "all" ]]; then
+		GitAddCommand="git add ./*"
+	else
+		GitAddCommand="git add ./${MNAPAddFiles}"
+	fi
 elif [[ ${MNAPSubModulesList} != "main*" ]] && [[ ${MNAPSubModulesList} != "all*" ]]; then
 	MNAPSubModules=${MNAPSubModulesList}
 	echo ""
 	geho "Note: --submodules flag set to selected MNAP repos: $MNAPSubModules"
 	echo ""
+	if [[ ${MNAPAddFiles} != "all" ]]; then
+		if [[ `echo ${MNAPSubModules} | wc -w` != 1 ]]; then 
+			reho "Note: More than one submodule requested"
+			reho "ERROR: Cannot specify several submodules and select specific files. Specify specific files for a given submodule or specify -add='all' "
+			return 1
+		fi 
+		GitAddCommand="git add ./${MNAPAddFiles}"
+	else
+		GitAddCommand="git add ./*"
+	fi
 fi
 
 # -- Continue with specific submodules
@@ -788,7 +819,7 @@ for MNAPSubModule in ${MNAPSubModules}; do
 			return 1
 		else
 			cd ${MNAPBranchPath}/${MNAPSubModule}
-			git add ./*
+			eval ${GitAddCommand}
 			git commit . --message="${CommitMessage}"
 			git push origin ${MNAPBranch}
 		fi
