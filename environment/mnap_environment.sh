@@ -549,7 +549,9 @@ gitmnap_usage() {
     echo ""
     echo ""
     echo " --command=<git_command>                                            Specify git command: push or pull."
-    echo " --add=<files_to_add>                                               Specify files to add. Default []. If 'all' is specified then will run git add on entire repo."
+    echo " --add=<absolute_path_for_file_to_add_and_commit>                   Specify file to add with absolute path when 'push' is selected. Default []. "
+    echo "                                                                    Note: If 'all' is specified then will run git add on entire repo."
+    echo "                                                                    e.g. $TOOLS/$MNAPREPO/connector/mnap.sh "
     echo " --branch=<branch_to_work_on>                                       Specify the branch name you want to pull or commit."
     echo " --branchpath=<absolute_path_to_folder_containing_mnap_suite>       This folder has to have the selected branch checked out."
     echo " --message=<commit_message>                                         Specify commit message if running commitmnap"
@@ -736,7 +738,7 @@ if [ "${MNAPSubModulesList}" == "main" ]; then
 			if [[ ${MNAPAddFiles} == "all" ]]; then
 				git add ./*
 			else
-				git add ./${MNAPAddFiles}
+				git add ${MNAPAddFiles}
 			fi
 			git commit . --message="${CommitMessage}"
 			git push origin ${MNAPBranch}
@@ -769,7 +771,7 @@ elif [ ${MNAPSubModulesList} == "main" ]; then
 	if [[ ${MNAPAddFiles} == "all" ]]; then
 		GitAddCommand="git add ./*"
 	else
-		GitAddCommand="git add ./${MNAPAddFiles}"
+		GitAddCommand="git add ${MNAPAddFiles}"
 	fi
 elif [[ ${MNAPSubModulesList} != "main*" ]] && [[ ${MNAPSubModulesList} != "all*" ]]; then
 	MNAPSubModules=${MNAPSubModulesList}
@@ -782,7 +784,7 @@ elif [[ ${MNAPSubModulesList} != "main*" ]] && [[ ${MNAPSubModulesList} != "all*
 			reho "ERROR: Cannot specify several submodules and select specific files. Specify specific files for a given submodule or specify -add='all' "
 			return 1
 		fi 
-		GitAddCommand="git add ./${MNAPAddFiles}"
+		GitAddCommand="git add ${MNAPAddFiles}"
 	else
 		GitAddCommand="git add ./*"
 	fi
