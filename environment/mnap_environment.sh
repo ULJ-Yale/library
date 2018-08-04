@@ -809,7 +809,7 @@ if [ ${MNAPSubModulesList} == "all" ]; then
     unset MNAPSubModulesList
     MNAPSubModulesList=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
     MNAPSubModules=${MNAPSubModulesList}
-    if [[ ${MNAPAddFiles} != "all" ]]; then
+    if [[ ${MNAPAddFiles} != "all" ]] && [[ ${MNAPGitCommand} == "push" ]]; then
         reho "ERROR: Cannot specify all submodules and select files. Specify specific files for a given submodule or specify -add='all' "
         return 1
         gitmnap_usage
@@ -821,7 +821,7 @@ elif [ ${MNAPSubModulesList} == "main" ]; then
     geho "Note: --submodules flag set to the main MNAP repo."
     echo ""
     MNAPSubModules="main"
-    if [[ ${MNAPAddFiles} == "all" ]]; then
+    if [[ ${MNAPAddFiles} == "all" ]] && [[ ${MNAPGitCommand} == "push" ]]; then
         GitAddCommand="git add ./*"
     else
         GitAddCommand="git add ${MNAPAddFiles}"
@@ -831,7 +831,7 @@ elif [[ ${MNAPSubModulesList} != "main*" ]] && [[ ${MNAPSubModulesList} != "all*
     echo ""
     geho "Note: --submodules flag set to selected MNAP repos: $MNAPSubModules"
     echo ""
-    if [[ ${MNAPAddFiles} != "all" ]]; then
+    if [[ ${MNAPAddFiles} != "all" ]] && [[ ${MNAPGitCommand} == "push" ]]; then
         if [[ `echo ${MNAPSubModules} | wc -w` != 1 ]]; then 
             reho "Note: More than one submodule requested"
             reho "ERROR: Cannot specify several submodules and select specific files. Specify specific files for a given submodule or specify -add='all' "
