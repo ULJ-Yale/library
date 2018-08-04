@@ -129,26 +129,16 @@ opts_GetOpt() {
 sopt="$1"
 shift 1
 for fn in "$@" ; do
-	if [ `echo ${fn} | grep -- "^${sopt}=" | wc -w` -gt 0 ]; then
-		echo "${fn}" | sed "s/^${sopt}=//"
-		return 0
-	fi
+    if [ `echo ${fn} | grep -- "^${sopt}=" | wc -w` -gt 0 ]; then
+        echo "${fn}" | sed "s/^${sopt}=//"
+        return 0
+    fi
 done
 }
 
-if [ "$1" == "--help" ]; then
-	usage
-	exit 0
-fi
-
-if [ "$1" == "-help" ]; then
-	usage
-	exit 0
-fi
-
-if [ "$1" == "?help" ]; then
-	usage
-	exit 0
+if [ "$1" == "--help" ] || [ "$1" == "-help" ] || [ "$1" == "help" ] || [ "$1" == "?help" ] || [ "$1" == "--usage" ] || [ "$1" == "-usage" ] || [ "$1" == "usage" ] || [ "$1" == "?usage" ]; then
+    usage
+    exit 0
 fi
 
 # ------------------------------------------------------------------------------
@@ -169,10 +159,10 @@ umask 002
 # ------------------------------------------------------------------------------
 OperatingSystem=`uname -sv`
 if [[ `gcc --version | grep 'darwin'` != "" ]]; then OSInfo="Darwin"; else
-	if [[ `cat /etc/*-release | grep 'Red Hat'` != "" ]] || [[ `cat /etc/*-release | grep 'rhel'` != "" ]]; then OSInfo="RedHat";
-		elif [[ `cat /etc/*-release| grep 'ubuntu'` != "" ]]; then OSInfo="Ubuntu";
-			elif [[ `cat /etc/*-release | grep 'debian'` != "" ]]; then OSInfo="Debian";
-	fi
+    if [[ `cat /etc/*-release | grep 'Red Hat'` != "" ]] || [[ `cat /etc/*-release | grep 'rhel'` != "" ]]; then OSInfo="RedHat";
+        elif [[ `cat /etc/*-release| grep 'ubuntu'` != "" ]]; then OSInfo="Ubuntu";
+            elif [[ `cat /etc/*-release | grep 'debian'` != "" ]]; then OSInfo="Debian";
+    fi
 fi
 
 # ------------------------------------------------------------------------------
@@ -180,15 +170,15 @@ fi
 # ------------------------------------------------------------------------------
 
 if [ -z ${TOOLS} ]; then
-	echo ""
-	reho " -- ERROR: TOOLS environment variable not setup on this system."
-	reho "    Please add to your environment profile (e.g. .bash_profile):"
-	echo ""
-	echo "    TOOLS=/<absolute_path_to_software_folder>/"
-	reho 1
-	echo ""
+    echo ""
+    reho " -- ERROR: TOOLS environment variable not setup on this system."
+    reho "    Please add to your environment profile (e.g. .bash_profile):"
+    echo ""
+    echo "    TOOLS=/<absolute_path_to_software_folder>/"
+    reho 1
+    echo ""
 else
-	export TOOLS
+    export TOOLS
 fi
 
 # ------------------------------------------------------------------------------
@@ -199,25 +189,17 @@ PS1="\[\e[0;36m\][MNAP \W]\$\[\e[0m\] "
 PROMPT_COMMAND='echo -ne "\033]0;MNAP: ${PWD}\007"'
 
 # ------------------------------------------------------------------------------
-# Set FSL environment libraries for queuing system
-# ------------------------------------------------------------------------------
-
-# export SGE_ROOT=1
-# export FSLGECUDAQ=<name_of_queue>
-
-# ------------------------------------------------------------------------------
 # -- MNAP - General Code
 # ------------------------------------------------------------------------------
 
-
 if [ -z ${MNAPREPO} ]; then
-	MNAPREPO="mnaptools"
+    MNAPREPO="mnaptools"
 fi
 
 # ---- changed to work with new clone/branches setup
 
 if [ -e ~/mnapinit.sh ]; then
-	source ~/mnapinit.sh
+    source ~/mnapinit.sh
 fi
 
 # PATH=${MNAPREPO}:${PATH}
@@ -226,11 +208,11 @@ MNAPPATH=${TOOLS}/${MNAPREPO}
 export MNAPPATH MNAPREPO
 
 if [ -e ~/mnapinit.sh ]; then
-	echo ""
-	reho " --- NOTE: MNAP is set by your ~/mnapinit.sh file! ----"
-	echo ""
-	reho " ---> MNAP path is set to: ${MNAPPATH} "
-	echo ""
+    echo ""
+    reho " --- NOTE: MNAP is set by your ~/mnapinit.sh file! ----"
+    echo ""
+    reho " ---> MNAP path is set to: ${MNAPPATH} "
+    echo ""
 fi
 
 # ------------------------------------------------------------------------------
@@ -272,6 +254,135 @@ if [[ -z ${DCM2NIIDIR} ]]; then DCM2NIIDIR="dcm2niix"; fi
 if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="Octave/4.2.1"; fi
 if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="octavepkg"; fi
 if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="pylib"; fi
+
+
+# -- Checks for version
+showVersion() {
+    MNAPVer=`cat ${TOOLS}/${MNAPREPO}/VERSION.md`
+    echo ""
+    geho " Loading Multimodal Neuroimaging Analysis Platform (MNAP) Suite Version: v${MNAPVer}"
+}
+
+# ------------------------------------------------------------------------------
+# -- License and version disclaimer
+# ------------------------------------------------------------------------------
+
+showVersion
+geho ""
+geho " Logged in as User: $MyID                                                    "
+geho " Node info: `hostname`                                                       "
+geho " OS: $OSInfo $OperatingSystem                                                "
+geho ""
+geho "                  ███╗   ███╗███╗   ██╗ █████╗ ██████╗                       "
+geho "                  ████╗ ████║████╗  ██║██╔══██╗██╔══██╗                      "
+geho "                  ██╔████╔██║██╔██╗ ██║███████║██████╔╝                      "
+geho "                  ██║╚██╔╝██║██║╚██╗██║██╔══██║██╔═══╝                       "
+geho "                  ██║ ╚═╝ ██║██║ ╚████║██║  ██║██║                           "
+geho "                  ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝                           "
+geho ""
+geho "                      COPYRIGHT & LICENSE NOTICE:                            "
+geho ""
+geho " Use of this software is subject to the terms and conditions defined by the  "
+geho " Yale University Copyright Policies:                                         "
+geho "    http://ocr.yale.edu/faculty/policies/yale-university-copyright-policy    "
+geho " and the terms and conditions defined in the file 'LICENSE.md' which is      "
+geho " a part of the MNAP Suite source code package:"
+geho "    https://bitbucket.org/hidradev/mnaptools/src/master/LICENSE.md"
+geho ""
+
+# ------------------------------------------------------------------------------
+#  Check for Lmod and Load software modules
+# ------------------------------------------------------------------------------
+
+# -- Check if Lmod is installed and if Matlab is available https://lmod.readthedocs.io/en/latest/index.html
+#    Lmod is a Lua based module system that easily handles the MODULEPATH Hierarchical problem.
+if [[ `module -t --redirect help | grep 'Lua'` = *"Lua"* ]]; then LMODPRESENT="yes"; else LMODPRESENT="no"; fi > /dev/null 2>&1
+
+if [[ ${LMODPRESENT} == "yes" ]]; then
+    module load StdEnv &> /dev/null
+    # -- Check for presence of system install via Lmod
+    if [[ `module -t --redirect avail /Matlab` = *"matlab"* ]] || [[ `module -t --redirect avail /Matlab` = *"Matlab"* ]]; then LMODMATLAB="yes"; else LMODMATLAB="no"; fi > /dev/null 2>&1
+    if [[ `module -t --redirect avail /Matlab` = *"octave"* ]] || [[ `module -t --redirect avail /Octave` = *"Octave"* ]]; then LMODOCTAVE="yes"; else LMODOCTAVE="no"; fi > /dev/null 2>&1
+    # --- Matlab vs Octave
+    if [ -f ~/.mnapuseoctave ] && [[ ${LMODOCTAVE} == "yes" ]]; then
+        module load Libs/netlib &> /dev/null
+        module load Apps/Octave/4.2.1 &> /dev/null
+        echo ""; cyaneho " ---> Selected to use Octave instead of Matlab! "
+        OctaveTest"pass"
+    fi
+    if [ -f ~/.mnapuseoctave ] && [[ ${LMODOCTAVE} == "no" ]]; then
+        echo ""; reho " ===> ERROR: .mnapuseoctave set but no Octave module is present on the system."; echo ""
+        OctaveTest"fail"
+    fi
+    if [ ! -f ~/.mnapuseoctave ] && [[ ${LMODMATLAB} == "yes" ]]; then
+        module load Apps/Matlab/R2018a &> /dev/null
+        echo ""; cyaneho " ---> Selected to use Matlab!"
+        MatlabTest="pass"
+    fi
+    if [ ! -f ~/.mnapuseoctave ] && [[ ${LMODMATLAB} == "no" ]]; then
+        echo ""; reho " ===> ERROR: Matlab selected and Lmod found but Matlab module missing. Alert your SysAdmin"; echo ""
+        MatlabTest="fail"
+    fi
+    # -- Load additional needed modules
+    module load Libs/netlib &> /dev/null
+    module load Libs/QT/5.6.2 &> /dev/null
+    module load Apps/R &> /dev/null 
+    module load Rpkgs/RCURL/1.95 &> /dev/null
+    module load Langs/Python/2.7.14 &> /dev/null
+    module load Tools/GIT/2.6.2 &> /dev/null
+    module load Tools/Mercurial/3.6 &> /dev/null
+    module load GPU/Cuda/6.5 &> /dev/null
+    module load Apps/R/3.2.2-generic &> /dev/null
+    module load Rpkgs/GGPLOT2/2.0.0 &> /dev/null
+    module load Libs/SCIPY/0.13.3 &> /dev/null
+    module load Libs/PYDICOM/0.9.9 &> /dev/null
+    module load Libs/NIBABEL/2.0.1 &> /dev/null
+    module load Libs/MATPLOTLIB/1.4.3 &> /dev/null
+    module load Libs/AWS/1.11.66 &> /dev/null
+    module load Libs/NetCDF/4.3.3.1-parallel-intel2013 &> /dev/null
+    module load Libs/NUMPY/1.13.1 &> /dev/null
+    module load Langs/Lua/5.3.3 &> /dev/null
+fi
+
+# ------------------------------------------------------------------------------
+# -- Running matlab vs. octave
+# ------------------------------------------------------------------------------
+
+if [ -f ~/.mnapuseoctave ]; then
+    if [[ ${OctaveTest} == "fail" ]]; then 
+        reho " ===> ERROR: Cannot setup Octave because module test failed."
+    else
+         ln -s `which octave` $TOOLS/$OCTAVEDIR/octave > /dev/null 2>&1
+         export OCTAVEPKGDIR
+         export OCTAVEDIR
+         cyaneho " ---> Setting up Octave "; echo ""
+         MNAPMCOMMAND='octave -q --eval'
+         if [ ! -e ~/.octaverc ]; then
+             cp ${MNAPPATH}/library/.octaverc ~/.octaverc
+         fi
+    fi
+fi
+if [ ! -f ~/.mnapuseoctave ]; then 
+    if [[ ${MatlabTest} == "fail" ]]; then
+         reho " ===> ERROR: Cannot setup Matlab because module test failed."
+    else
+         cyaneho " ---> Setting up Matlab "; echo ""
+         MNAPMCOMMAND='matlab -nodisplay -nosplash -r'
+    fi
+fi
+# -- Use the following command to run .m code in Matlab
+export MNAPMCOMMAND
+
+# ------------------------------------------------------------------------------
+#  path to additional libraries
+# ------------------------------------------------------------------------------
+
+LD_LIBRARY_PATH=$TOOLS/lib:$TOOLS/lib/lib:$LD_LIBRARY_PATH
+PKG_CONFIG_PATH=$TOOLS/lib/lib/pkgconfig:$PKG_CONFIG_PATH
+export LD_LIBRARY_PATH
+export PKG_CONFIG_PATH
+PATH=$TOOLS/bin:$TOOLS/lib/bin:$TOOLS/lib/lib/:$PATH
+export PATH
 
 # -- FIX ICA path
 FIXICADIR=${TOOLS}/${FIXICAFolder}
@@ -317,11 +428,11 @@ export FREESURFER_SCHEDULER PATH
 
 # -- Workbench path (set OS)
 if [ "$OSInfo" == "Darwin" ]; then
-	WORKBENCHDIR=${TOOLS}/${HCPWBDIR}/bin_macosx64
+    WORKBENCHDIR=${TOOLS}/${HCPWBDIR}/bin_macosx64
 elif [ "$OSInfo" == "Ubuntu" ] || [ "$OSInfo" == "Debian" ]; then
-	WORKBENCHDIR=${TOOLS}/workbench/bin_linux64
+    WORKBENCHDIR=${TOOLS}/workbench/bin_linux64
 elif [ "$OSInfo" == "RedHat" ]; then
-	WORKBENCHDIR=${TOOLS}/workbench/bin_rh_linux64
+    WORKBENCHDIR=${TOOLS}/workbench/bin_rh_linux64
 fi
 PATH=${WORKBENCHDIR}:${PATH}
 export WORKBENCHDIR PATH
@@ -383,39 +494,6 @@ MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's
 alias mnap='bash $MNAPPATH/connector/mnap.sh'
 alias mnap_environment='$MNAPPATH/library/environment/mnap_environment.sh --help'
 
-# -- Checks for version
-showVersion() {
-	MNAPVer=`cat ${TOOLS}/${MNAPREPO}/VERSION.md`
-	echo ""
-	geho " Loading Multimodal Neuroimaging Analysis Platform (MNAP) Suite Version: v${MNAPVer}"
-}
-
-# ------------------------------------------------------------------------------
-# -- License and version disclaimer
-# ------------------------------------------------------------------------------
-
-showVersion
-geho ""
-geho " Logged in as User: $MyID                                                    "
-geho " Node info: `hostname`                                                       "
-geho " OS: $OSInfo $OperatingSystem                                                "
-geho ""
-geho "                  ███╗   ███╗███╗   ██╗ █████╗ ██████╗                       "
-geho "                  ████╗ ████║████╗  ██║██╔══██╗██╔══██╗                      "
-geho "                  ██╔████╔██║██╔██╗ ██║███████║██████╔╝                      "
-geho "                  ██║╚██╔╝██║██║╚██╗██║██╔══██║██╔═══╝                       "
-geho "                  ██║ ╚═╝ ██║██║ ╚████║██║  ██║██║                           "
-geho "                  ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝                           "
-geho ""
-geho "                      COPYRIGHT & LICENSE NOTICE:                            "
-geho ""
-geho " Use of this software is subject to the terms and conditions defined by the  "
-geho " Yale University Copyright Policies:                                         "
-geho "    http://ocr.yale.edu/faculty/policies/yale-university-copyright-policy    "
-geho " and the terms and conditions defined in the file 'LICENSE.md' which is      "
-geho " a part of the MNAP Suite source code package:"
-geho "    https://bitbucket.org/hidradev/mnaptools/src/master/LICENSE.md"
-geho ""
 
 # ------------------------------------------------------------------------------
 # -- Setup HCP Pipeline paths
@@ -423,12 +501,12 @@ geho ""
 
 export HCPPIPEDIR=${MNAPPATH}/hcpmodified
 if [ -e ~/.mnaphcpe ];
-	then
-	export HCPPIPEDIR=${MNAPPATH}/hcpextendedpull
-	echo ""
-	reho " ===> NOTE: You are in MNAP HCP development mode!"
-	reho " ---> MNAP HCP path is set to: $HCPPIPEDIR"
-	echo ""
+    then
+    export HCPPIPEDIR=${MNAPPATH}/hcpextendedpull
+    echo ""
+    reho " ===> NOTE: You are in MNAP HCP development mode!"
+    reho " ---> MNAP HCP path is set to: $HCPPIPEDIR"
+    echo ""
 fi
 export HCPPIPEDIR=$MNAPPATH/hcpmodified
 export CARET7DIR=$WORKBENCHDIR
@@ -502,31 +580,6 @@ MATLABPATH=$MNAPPATH/matlab/stats:$MATLABPATH
 export MATLABPATH
 
 # ------------------------------------------------------------------------------
-# -- Running matlab vs. octave
-# ------------------------------------------------------------------------------
-
-ln -s `which octave` $TOOLS/$OCTAVEDIR/octave > /dev/null 2>&1
-export OCTAVEPKGDIR
-export OCTAVEDIR
-
-if [ -e ~/.mnapuseoctave ]
-then
-    echo ""
-    reho " ---> NOTE: Setting up Octave "; echo ""
-    MNAPMCOMMAND='octave -q --eval'
-    if [ ! -e ~/.octaverc ]
-    then
-        cp ${MNAPPATH}/library/.octaverc ~/.octaverc
-    fi
-else
-    echo ""
-    reho " ---> NOTE: Setting up Matlab "; echo ""
-    # -- Use the following command to run .m code in Matlab
-    MNAPMCOMMAND='matlab -nojvm -nodisplay -nosplash -r'
-fi
-export MNAPMCOMMAND
-
-# ------------------------------------------------------------------------------
 # -- Path to additional dependencies
 # ------------------------------------------------------------------------------
 
@@ -585,12 +638,12 @@ gitmnap_usage() {
 function_gitmnapbranch() {
 # -- Check path
 if [[ -z ${MNAPBranchPath} ]]; then
-	cd $TOOLS/$MNAPREPO
+    cd $TOOLS/$MNAPREPO
 else
-	cd ${MNAPBranchPath}
+    cd ${MNAPBranchPath}
 fi
 if [[ ! -z ${MNAPSubModule} ]]; then
-	cd ${MNAPBranchPath}/${MNAPSubModule}
+    cd ${MNAPBranchPath}/${MNAPSubModule}
 fi
 # -- Update remote
 git remote update > /dev/null 2>&1
@@ -608,23 +661,23 @@ echo "   ==> Local commit:   $LOCAL"
 echo "   ==> Remote commit:  $REMOTE"
 # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
 if [[ $LOCAL == $REMOTE ]]; then
-	cyaneho "   ==> STATUS OK: LOCAL equals REMOTE in $MNAPDirBranchTest."; echo ""
+    cyaneho "   ==> STATUS OK: LOCAL equals REMOTE in $MNAPDirBranchTest."; echo ""
 elif [[ $LOCAL == $BASE ]]; then
-	reho "   ==> ACTION NEEDED: LOCAL equals BASE in ${MNAPDirBranchTest}. You need to pull."; echo ""
+    reho "   ==> ACTION NEEDED: LOCAL equals BASE in ${MNAPDirBranchTest}. You need to pull."; echo ""
 elif [[ $REMOTE == $BASE ]]; then
-	reho "   ==> ACTION NEEDED: REMOTE equals BASE in ${MNAPDirBranchTest}. You need to push."; echo ""
+    reho "   ==> ACTION NEEDED: REMOTE equals BASE in ${MNAPDirBranchTest}. You need to push."; echo ""
 else
-	echo ""
-	reho "   ===> ERROR: LOCAL, BASE and REMOTE tips have diverged in ${MNAPDirBranchTest}."
-	echo ""
-	reho "   ------------------------------------------------"
-	reho "      LOCAL: ${LOCAL}"
-	reho "      BASE: ${BASE}"
-	reho "      REMOTE: ${REMOTE}"
-	reho "   ------------------------------------------------"
-	echo ""
-	reho "   ===> Check 'git status -uno' to inspect and re-run after cleaning things up."
-	echo ""
+    echo ""
+    reho "   ===> ERROR: LOCAL, BASE and REMOTE tips have diverged in ${MNAPDirBranchTest}."
+    echo ""
+    reho "   ------------------------------------------------"
+    reho "      LOCAL: ${LOCAL}"
+    reho "      BASE: ${BASE}"
+    reho "      REMOTE: ${REMOTE}"
+    reho "   ------------------------------------------------"
+    echo ""
+    reho "   ===> Check 'git status -uno' to inspect and re-run after cleaning things up."
+    echo ""
 fi
 }
 alias gitmnapbranch=function_gitmnapbranch
@@ -643,9 +696,9 @@ git status -uno; function_gitmnapbranch
 MNAPSubModules=`cd ${TOOLS}/${MNAPREPO}; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
 MNAPBranchPath="${MNAPPATH}"
 for MNAPSubModule in ${MNAPSubModules}; do
-	cd ${MNAPBranchPath}/${MNAPSubModule}
-	function_gitmnapbranch
-	git status -uno
+    cd ${MNAPBranchPath}/${MNAPSubModule}
+    function_gitmnapbranch
+    git status -uno
 done
 echo ""
 geho "================ Completed MNAP Suite Repository Status Check ================"
@@ -675,12 +728,12 @@ MNAPSubModulesList=`opts_GetOpt "--submodules" "$@" | sed 's/,/ /g;s/|/ /g'`; MN
 
 # -- Check for help calls
 if [[ ${1} == "help" ]] || [[ ${1} == "-help" ]] || [[ ${1} == "--help" ]] || [[ ${1} == "?help" ]] || [[ -z ${1} ]]; then
-	gitmnap_usage
-	return 0
+    gitmnap_usage
+    return 0
 fi
 if [[ ${1} == "usage" ]] || [[ ${1} == "-usage" ]] || [[ ${1} == "--usage" ]] || [[ ${1} == "?usage" ]] || [[ -z ${1} ]]; then
-	gitmnap_usage
-	return 0
+    gitmnap_usage
+    return 0
 fi
 
 # -- Start execution
@@ -697,8 +750,8 @@ if [[ -z ${MNAPSubModulesList} ]]; then reho ""; reho "   Error: --submodules fl
 if [[ ${MNAPSubModulesList} == "all" ]]; then reho ""; geho "   Note: --submodules flag set to all. Setting update for all submodules."; echo ""; fi
 if [[ ${MNAPSubModulesList} == "main" ]]; then reho ""; geho "   Note: --submodules flag set to main MNAP repo only in $MNAPBranchPath"; echo ""; fi
 if [[ ${MNAPGitCommand} == "push" ]]; then
-	if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitmnap_usage; return 1; else CommitMessage="${CommitMessage}"; fi
-	if [[ -z ${MNAPAddFiles} ]]; then reho ""; reho "   Error: --add flag not defined. Run 'gitmnapstatus' and specify which files to add."; echo ""; gitmnap_usage; return 1; fi
+    if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitmnap_usage; return 1; else CommitMessage="${CommitMessage}"; fi
+    if [[ -z ${MNAPAddFiles} ]]; then reho ""; reho "   Error: --add flag not defined. Run 'gitmnapstatus' and specify which files to add."; echo ""; gitmnap_usage; return 1; fi
 fi
 
 # -- Perform checks that MNAP contains requested branch and that it is actively checked out
@@ -713,81 +766,81 @@ echo ""
 
 # -- Not perform further checks
 if [ "${MNAPSubModulesList}" == "main" ]; then
-	echo ""
-	geho "   Note: --submodules flag set to main MNAP repo only. Omitting individual submodules."
-	echo ""
-	# -- Check git command
-	echo ""
-	geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
-	echo
-	cd ${MNAPBranchPath}
-	# -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
-	function_gitmnapbranch > /dev/null 2>&1
-	# -- Check git command request
-	if [[ ${MNAPGitCommand} == "pull" ]]; then
-		cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
-	fi
-	if [[ ${MNAPGitCommand} == "push" ]]; then
-		cd ${MNAPBranchPath}
-		if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
-			echo ""
-			reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
-			echo ""
-			return 1
-		else
-			if [[ ${MNAPAddFiles} == "all" ]]; then
-				git add ./*
-			else
-				git add ${MNAPAddFiles}
-			fi
-			git commit . --message="${CommitMessage}"
-			git push origin ${MNAPBranch}
-		fi
-	fi
-	function_gitmnapbranch
-	echo ""
-	geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."; echo ""
-	return 1
+    echo ""
+    geho "   Note: --submodules flag set to main MNAP repo only. Omitting individual submodules."
+    echo ""
+    # -- Check git command
+    echo ""
+    geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
+    echo
+    cd ${MNAPBranchPath}
+    # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
+    function_gitmnapbranch > /dev/null 2>&1
+    # -- Check git command request
+    if [[ ${MNAPGitCommand} == "pull" ]]; then
+        cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
+    fi
+    if [[ ${MNAPGitCommand} == "push" ]]; then
+        cd ${MNAPBranchPath}
+        if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
+            echo ""
+            reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
+            echo ""
+            return 1
+        else
+            if [[ ${MNAPAddFiles} == "all" ]]; then
+                git add ./*
+            else
+                git add ${MNAPAddFiles}
+            fi
+            git commit . --message="${CommitMessage}"
+            git push origin ${MNAPBranch}
+        fi
+    fi
+    function_gitmnapbranch
+    echo ""
+    geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."; echo ""
+    return 1
 fi
 
 # -- Check if all submodules are requested or only specific ones
 if [ ${MNAPSubModulesList} == "all" ]; then
-	# -- Reset submodules variable to all
-	unset MNAPSubModulesList
-	MNAPSubModulesList=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-	MNAPSubModules=${MNAPSubModulesList}
-	if [[ ${MNAPAddFiles} != "all" ]]; then
-		reho "ERROR: Cannot specify all submodules and select files. Specify specific files for a given submodule or specify -add='all' "
-		return 1
-		gitmnap_usage
-	else
-		GitAddCommand="git add ./*"
-	fi
+    # -- Reset submodules variable to all
+    unset MNAPSubModulesList
+    MNAPSubModulesList=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+    MNAPSubModules=${MNAPSubModulesList}
+    if [[ ${MNAPAddFiles} != "all" ]]; then
+        reho "ERROR: Cannot specify all submodules and select files. Specify specific files for a given submodule or specify -add='all' "
+        return 1
+        gitmnap_usage
+    else
+        GitAddCommand="git add ./*"
+    fi
 elif [ ${MNAPSubModulesList} == "main" ]; then
-	echo ""
-	geho "Note: --submodules flag set to the main MNAP repo."
-	echo ""
-	MNAPSubModules="main"
-	if [[ ${MNAPAddFiles} == "all" ]]; then
-		GitAddCommand="git add ./*"
-	else
-		GitAddCommand="git add ${MNAPAddFiles}"
-	fi
+    echo ""
+    geho "Note: --submodules flag set to the main MNAP repo."
+    echo ""
+    MNAPSubModules="main"
+    if [[ ${MNAPAddFiles} == "all" ]]; then
+        GitAddCommand="git add ./*"
+    else
+        GitAddCommand="git add ${MNAPAddFiles}"
+    fi
 elif [[ ${MNAPSubModulesList} != "main*" ]] && [[ ${MNAPSubModulesList} != "all*" ]]; then
-	MNAPSubModules=${MNAPSubModulesList}
-	echo ""
-	geho "Note: --submodules flag set to selected MNAP repos: $MNAPSubModules"
-	echo ""
-	if [[ ${MNAPAddFiles} != "all" ]]; then
-		if [[ `echo ${MNAPSubModules} | wc -w` != 1 ]]; then 
-			reho "Note: More than one submodule requested"
-			reho "ERROR: Cannot specify several submodules and select specific files. Specify specific files for a given submodule or specify -add='all' "
-			return 1
-		fi 
-		GitAddCommand="git add ${MNAPAddFiles}"
-	else
-		GitAddCommand="git add ./*"
-	fi
+    MNAPSubModules=${MNAPSubModulesList}
+    echo ""
+    geho "Note: --submodules flag set to selected MNAP repos: $MNAPSubModules"
+    echo ""
+    if [[ ${MNAPAddFiles} != "all" ]]; then
+        if [[ `echo ${MNAPSubModules} | wc -w` != 1 ]]; then 
+            reho "Note: More than one submodule requested"
+            reho "ERROR: Cannot specify several submodules and select specific files. Specify specific files for a given submodule or specify -add='all' "
+            return 1
+        fi 
+        GitAddCommand="git add ${MNAPAddFiles}"
+    else
+        GitAddCommand="git add ./*"
+    fi
 fi
 
 # -- Continue with specific submodules
@@ -795,40 +848,40 @@ echo ""
 mageho "  * Checking active branch ${MNAPBranch} for specified submodules in ${MNAPBranchPath}... "
 echo ""
 for MNAPSubModule in ${MNAPSubModules}; do
-	cd ${MNAPBranchPath}/${MNAPSubModule}
-	if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch found in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
-	if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch is active in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
+    cd ${MNAPBranchPath}/${MNAPSubModule}
+    if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch found in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
+    if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch is active in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
 done
 mageho "  * All checks passed for specified submodules... "
 echo ""
 # -- First run over specific modules
 for MNAPSubModule in ${MNAPSubModules}; do
-	echo ""
-	geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."
-	echo
-	cd ${MNAPBranchPath}/${MNAPSubModule}
-	# -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
-	function_gitmnapbranch > /dev/null 2>&1
-	# -- Check git command requests
-	if [[ ${MNAPGitCommand} == "pull" ]]; then
-		cd ${MNAPBranchPath}/${MNAPSubModule}; git pull origin ${MNAPBranch}
-	fi
-	if [[ ${MNAPGitCommand} == "push" ]]; then
-		if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
-			echo ""
-			reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
-			echo ""
-			return 1
-		else
-			cd ${MNAPBranchPath}/${MNAPSubModule}
-			eval ${GitAddCommand}
-			git commit . --message="${CommitMessage}"
-			git push origin ${MNAPBranch}
-		fi
-	fi
-	function_gitmnapbranch
-	echo ""
-	geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."; echo ""; echo ""
+    echo ""
+    geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."
+    echo
+    cd ${MNAPBranchPath}/${MNAPSubModule}
+    # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
+    function_gitmnapbranch > /dev/null 2>&1
+    # -- Check git command requests
+    if [[ ${MNAPGitCommand} == "pull" ]]; then
+        cd ${MNAPBranchPath}/${MNAPSubModule}; git pull origin ${MNAPBranch}
+    fi
+    if [[ ${MNAPGitCommand} == "push" ]]; then
+        if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
+            echo ""
+            reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
+            echo ""
+            return 1
+        else
+            cd ${MNAPBranchPath}/${MNAPSubModule}
+            eval ${GitAddCommand}
+            git commit . --message="${CommitMessage}"
+            git push origin ${MNAPBranch}
+        fi
+    fi
+    function_gitmnapbranch
+    echo ""
+    geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."; echo ""; echo ""
 done
 unset MNAPSubModule
 
@@ -840,20 +893,20 @@ cd ${MNAPBranchPath}
 function_gitmnapbranch > /dev/null 2>&1
 # -- Check git command request
 if [[ ${MNAPGitCommand} == "pull" ]]; then
-	cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
+    cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
 fi
 if [[ ${MNAPGitCommand} == "push" ]]; then
-	cd ${MNAPBranchPath}
-		if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
-		echo ""
-			reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
-		echo ""
-		return 1
-	else
-		git add ./*
-		git commit . --message="${CommitMessage}"
-		git push origin ${MNAPBranch}
-	fi
+    cd ${MNAPBranchPath}
+        if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
+        echo ""
+            reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
+        echo ""
+        return 1
+    else
+        git add ./*
+        git commit . --message="${CommitMessage}"
+        git push origin ${MNAPBranch}
+    fi
 fi
 function_gitmnapbranch
 echo ""
