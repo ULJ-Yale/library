@@ -255,7 +255,6 @@ if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="Octave/4.2.1"; fi
 if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="octavepkg"; fi
 if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="pylib"; fi
 
-
 # -- Checks for version
 showVersion() {
     MNAPVer=`cat ${TOOLS}/${MNAPREPO}/VERSION.md`
@@ -297,8 +296,9 @@ geho ""
 # -- Check if Lmod is installed and if Matlab is available https://lmod.readthedocs.io/en/latest/index.html
 #    Lmod is a Lua based module system that easily handles the MODULEPATH Hierarchical problem.
 if [[ `module -t --redirect help | grep 'Lua'` = *"Lua"* ]]; then LMODPRESENT="yes"; else LMODPRESENT="no"; fi > /dev/null 2>&1
-
+c
 if [[ ${LMODPRESENT} == "yes" ]]; then
+    module purge
     module load StdEnv &> /dev/null
     # -- Check for presence of system install via Lmod
     if [[ `module -t --redirect avail /Matlab` = *"matlab"* ]] || [[ `module -t --redirect avail /Matlab` = *"Matlab"* ]]; then LMODMATLAB="yes"; else LMODMATLAB="no"; fi > /dev/null 2>&1
@@ -308,11 +308,11 @@ if [[ ${LMODPRESENT} == "yes" ]]; then
         module load Libs/netlib &> /dev/null
         module load Apps/Octave/4.2.1 &> /dev/null
         echo ""; cyaneho " ---> Selected to use Octave instead of Matlab! "
-        OctaveTest"pass"
+        OctaveTest="pass"
     fi
     if [ -f ~/.mnapuseoctave ] && [[ ${LMODOCTAVE} == "no" ]]; then
         echo ""; reho " ===> ERROR: .mnapuseoctave set but no Octave module is present on the system."; echo ""
-        OctaveTest"fail"
+        OctaveTest="fail"
     fi
     if [ ! -f ~/.mnapuseoctave ] && [[ ${LMODMATLAB} == "yes" ]]; then
         module load Apps/Matlab/R2018a &> /dev/null
@@ -323,14 +323,6 @@ if [[ ${LMODPRESENT} == "yes" ]]; then
         echo ""; reho " ===> ERROR: Matlab selected and Lmod found but Matlab module missing. Alert your SysAdmin"; echo ""
         MatlabTest="fail"
     fi
-    # -- Load additional needed modules
-    LoadModules="Libs/netlib Libs/QT/5.6.2 Apps/R Rpkgs/RCURL/1.95 Langs/Python/2.7.14 Tools/GIT/2.6.2 Tools/Mercurial/3.6 GPU/Cuda/7.5 Apps/R/3.2.2-generic Rpkgs/GGPLOT2/2.0.0 Libs/SCIPY/0.13.3 Libs/PYDICOM/0.9.9 Libs/NIBABEL/2.0.1 Libs/MATPLOTLIB/1.4.3 Libs/AWS/1.11.66 Libs/NetCDF/4.3.3.1-parallel-intel2013 Libs/NUMPY/1.13.1 Langs/Lua/5.3.3"
-    echo ""; cyaneho " ---> LMOD present. Loading Modules..."
-    for LoadModule in ${LoadModules}; do
-        module load ${LoadModule} &> /dev/null
-    done
-    echo ""; cyaneho " ---> Loaded Modules:  ${LoadModules}"; echo ""
-    module load StdEnv &> /dev/null
 fi
 
 # ------------------------------------------------------------------------------
@@ -372,8 +364,8 @@ LD_LIBRARY_PATH=$TOOLS/lib:$TOOLS/lib/lib:$LD_LIBRARY_PATH
 LD_LIBRARY_PATH=/usr/lib64/hdf5:$LD_LIBRARY_PATH
 LD_LIBRARY_PATH=$TOOLS/olib:$LD_LIBRARY_PATH
 # For Cuda
-LD_LIBRARY_PATH=/usr/local/cuda-9.2/lib64:$LD_LIBRARY_PATH
-LD_LIBRARY_PATH=/usr/local/cuda-9.2/lib:$LD_LIBRARY_PATH
+LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LD_LIBRARY_PATH
+LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib:$LD_LIBRARY_PATH
 PKG_CONFIG_PATH=$TOOLS/lib/lib/pkgconfig:$PKG_CONFIG_PATH
 export LD_LIBRARY_PATH
 export PKG_CONFIG_PATH
@@ -527,32 +519,13 @@ export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries; PATH=${FSLGPUBi
 export EDDYCUDADIR=${FSLGPUBinary}/eddy_cuda; PATH=${EDDYCUDADIR}:${PATH}; export PATH; eddy_cuda="eddy_cuda_wQC"; export eddy_cuda
 
 # ------------------------------------------------------------------------------
-# -- Setup CUDA
-# ------------------------------------------------------------------------------
-
-# -- set binary location depending on CUDA
-if [[ ! -z `nvcc --version | grep 'Cuda'` ]]; then
-    if [[ `nvcc --version | grep "release"` == *"6.0"* ]]; then NVCCVer="6.0"; BedpostXGPUDir="bedpostx_gpu_cuda_6.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_6.0"; fi
-    if [[ `nvcc --version | grep "release"` == *"6.5"* ]]; then NVCCVer="6.5"; BedpostXGPUDir="bedpostx_gpu_cuda_6.5" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_6.5"; fi
-    if [[ `nvcc --version | grep "release"` == *"7.0"* ]]; then NVCCVer="7.0"; BedpostXGPUDir="bedpostx_gpu_cuda_7.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.0"; fi
-    if [[ `nvcc --version | grep "release"` == *"7.5"* ]]; then NVCCVer="7.5"; BedpostXGPUDir="bedpostx_gpu_cuda_7.5" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.5"; fi
-    if [[ `nvcc --version | grep "release"` == *"8.0"* ]]; then NVCCVer="8.0"; BedpostXGPUDir="bedpostx_gpu_cuda_8.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_8.0"; fi
-    export BedpostXGPUDir; export ProbTrackXDIR; export bindir; PATH=${bindir}:${PATH}; PATH=${ProbTrackXDIR}:${PATH}; export PATH
-    ln -fs ${bindir}/lib/* ${FSLDIR}/lib/ &> /dev/null
-    export LD_LIBRARY_PATH
-    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
-    export PATH
-    module load GPU/Cuda/${NVCCVer} &> /dev/null
-fi
-
-# ------------------------------------------------------------------------------
 # -- MNAP - NIUtilities and Matlab Paths
 # ------------------------------------------------------------------------------
 
 # -- Make sure gmri is executable
 chmod ugo+x $MNAPPATH/niutilities/gmri &> /dev/null
 
-# -- Setup Python paths
+# -- Setup additional paths
 PATH=$MNAPPATH/connector:$PATH
 PATH=$MNAPPATH/niutilities:$PATH
 PATH=$MNAPPATH/matlab:$PATH
@@ -564,10 +537,8 @@ PATH=$TOOLS/$PYLIBDIR:$PATH
 PATH=$TOOLS/$PYLIBDIR/bin:$PATH
 PATH=$TOOLS/MeshNet:$PATH
 PATH=/usr/local/bin:$PATH
-PATH=/bin:$PATH
+PATH=$PATH:/bin
 PATH=$TOOLS/olib:$PATH
-# For Cuda
-PATH=/usr/local/cuda-9.2/bin:$PATH
 
 # -- Export Python paths
 PYTHONPATH=$TOOLS:$PYTHONPATH
@@ -950,3 +921,41 @@ unset MNAPSubModule
 
 # -- define function_gitmnap alias
 alias gitmnap=function_gitmnap
+
+# -- Load additional needed modules
+if [[ ${LMODPRESENT} == "yes" ]]; then
+    LoadModules="Libs/netlib Libs/QT/5.6.2 Apps/R Rpkgs/RCURL/1.95 Langs/Python/2.7.14 Tools/GIT/2.6.2 Tools/Mercurial/3.6 GPU/Cuda/7.5 Apps/R/3.2.2-generic Rpkgs/GGPLOT2/2.0.0 Libs/SCIPY/0.13.3 Libs/PYDICOM/0.9.9 Libs/NIBABEL/2.0.1 Libs/MATPLOTLIB/1.4.3 Libs/AWS/1.11.66 Libs/NetCDF/4.3.3.1-parallel-intel2013 Libs/NUMPY/1.13.1 Langs/Lua/5.3.3"
+    echo ""; cyaneho " ---> LMOD present. Loading Modules..."
+    for LoadModule in ${LoadModules}; do
+        module load ${LoadModule} &> /dev/null
+    done
+    echo ""; cyaneho " ---> Loaded Modules:  ${LoadModules}"; echo ""
+fi
+
+# ------------------------------------------------------------------------------
+# -- Setup CUDA
+# ------------------------------------------------------------------------------
+
+# -- set binary location depending on CUDA 
+if [[ ${LMODPRESENT} != "yes" ]]; then
+    PATH=/usr/local/cuda-7.5/bin:$PATH
+    LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64
+    export LD_LIBRARY_PATH
+    export PATH
+fi
+
+if [[ ! -z `nvcc --version | grep 'Cuda'` ]]; then
+    if [[ `nvcc --version | grep "release"` == *"6.0"* ]]; then NVCCVer="6.0"; BedpostXGPUDir="bedpostx_gpu_cuda_6.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_6.0"; fi
+    if [[ `nvcc --version | grep "release"` == *"6.5"* ]]; then NVCCVer="6.5"; BedpostXGPUDir="bedpostx_gpu_cuda_6.5" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_6.5"; fi
+    if [[ `nvcc --version | grep "release"` == *"7.0"* ]]; then NVCCVer="7.0"; BedpostXGPUDir="bedpostx_gpu_cuda_7.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.0"; fi
+    if [[ `nvcc --version | grep "release"` == *"7.5"* ]]; then NVCCVer="7.5"; BedpostXGPUDir="bedpostx_gpu_cuda_7.5" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.5"; fi
+    if [[ `nvcc --version | grep "release"` == *"8.0"* ]]; then NVCCVer="8.0"; BedpostXGPUDir="bedpostx_gpu_cuda_8.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_8.0"; fi
+    export BedpostXGPUDir
+    export ProbTrackXDIR
+    export bindir
+    PATH=${bindir}:${PATH}
+    PATH=${ProbTrackXDIR}:${PATH}
+    ln -fs ${bindir}/lib/* ${FSLDIR}/lib/ &> /dev/null
+    export PATH
+    module load GPU/Cuda/${NVCCVer} &> /dev/null
+fi
