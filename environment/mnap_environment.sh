@@ -939,7 +939,7 @@ if [[ ${LMODPRESENT} != "yes" ]]; then
     export PATH
 fi
 
-if [[ ! -z `nvcc --version | grep 'Cuda' 2>/dev/null` ]]; then
+if [[ ! -z `command -v nvcc` ]]; then
     if [[ `nvcc --version | grep "release"` == *"6.0"* ]]; then NVCCVer="6.0"; BedpostXGPUDir="bedpostx_gpu_cuda_6.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_6.0"; fi
     if [[ `nvcc --version | grep "release"` == *"6.5"* ]]; then NVCCVer="6.5"; BedpostXGPUDir="bedpostx_gpu_cuda_6.5" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_6.5"; fi
     if [[ `nvcc --version | grep "release"` == *"7.0"* ]]; then NVCCVer="7.0"; BedpostXGPUDir="bedpostx_gpu_cuda_7.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.0"; fi
