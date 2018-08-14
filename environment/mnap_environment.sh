@@ -499,30 +499,28 @@ if [ -e ~/.mnaphcpe ];
     reho " ---> MNAP HCP path is set to: $HCPPIPEDIR"
     echo ""
 fi
-export HCPPIPEDIR=$MNAPPATH/hcpmodified
-export CARET7DIR=$WORKBENCHDIR
-export GRADUNWARPDIR=${TOOLS}/$PYLIBDIR/gradunwarp/core
-export HCPPIPEDIR_Templates=${HCPPIPEDIR}/global/templates
-export HCPPIPEDIR_Bin=${HCPPIPEDIR}/global/binaries
-export HCPPIPEDIR_Config=${HCPPIPEDIR}/global/config
-export HCPPIPEDIR_PreFS=${HCPPIPEDIR}/PreFreeSurfer/scripts
-export HCPPIPEDIR_FS=${HCPPIPEDIR}/FreeSurfer/scripts
-export HCPPIPEDIR_PostFS=${HCPPIPEDIR}/PostFreeSurfer/scripts
-export HCPPIPEDIR_fMRISurf=${HCPPIPEDIR}/fMRISurface/scripts
-export HCPPIPEDIR_fMRIVol=${HCPPIPEDIR}/fMRIVolume/scripts
-export HCPPIPEDIR_tfMRI=${HCPPIPEDIR}/tfMRI/scripts
-export HCPPIPEDIR_dMRI=${HCPPIPEDIR}/DiffusionPreprocessing/scripts
-export HCPPIPEDIR_dMRITract=${HCPPIPEDIR}/DiffusionTractography/scripts
-export HCPPIPEDIR_Global=${HCPPIPEDIR}/global/scripts
-export HCPPIPEDIR_tfMRIAnalysis=${HCPPIPEDIR}/TaskfMRIAnalysis/scripts
-export MSMBin=${HCPPIPEDIR}/MSMBinaries
-export HCPPIPEDIR_dMRITracFull=${HCPPIPEDIR}/DiffusionTractographyDense
-export HCPPIPEDIR_dMRILegacy=${TOOLS}/${MNAPREPO}/connector/functions
-export AutoPtxFolder=${HCPPIPEDIR_dMRITracFull}/autoPtx_HCP_extended
-export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries
-export EDDYCUDADIR=${FSLGPUBinary}/eddy_cuda
-eddy_cuda="eddy_cuda_wQC"
-export eddy_cuda
+export HCPPIPEDIR=$MNAPPATH/hcpmodified; PATH=${HCPPIPEDIR}:${PATH}; export PATH
+export CARET7DIR=$WORKBENCHDIR; PATH=${CARET7DIR}:${PATH}; export PATH
+export GRADUNWARPDIR=${TOOLS}/$PYLIBDIR/gradunwarp/core; PATH=${GRADUNWARPDIR}:${PATH}; export PATH
+export HCPPIPEDIR_Templates=${HCPPIPEDIR}/global/templates; PATH=${HCPPIPEDIR_Templates}:${PATH}; export PATH
+export HCPPIPEDIR_Bin=${HCPPIPEDIR}/global/binaries; PATH=${HCPPIPEDIR_Bin}:${PATH}; export PATH
+export HCPPIPEDIR_Config=${HCPPIPEDIR}/global/config; PATH=${HCPPIPEDIR_Config}:${PATH}; export PATH
+export HCPPIPEDIR_PreFS=${HCPPIPEDIR}/PreFreeSurfer/scripts; PATH=${HCPPIPEDIR_PreFS}:${PATH}; export PATH
+export HCPPIPEDIR_FS=${HCPPIPEDIR}/FreeSurfer/scripts; PATH=${HCPPIPEDIR_FS}:${PATH}; export PATH
+export HCPPIPEDIR_PostFS=${HCPPIPEDIR}/PostFreeSurfer/scripts; PATH=${HCPPIPEDIR_PostFS}:${PATH}; export PATH
+export HCPPIPEDIR_fMRISurf=${HCPPIPEDIR}/fMRISurface/scripts; PATH=${HCPPIPEDIR_fMRISurf}:${PATH}; export PATH
+export HCPPIPEDIR_fMRIVol=${HCPPIPEDIR}/fMRIVolume/scripts; PATH=${HCPPIPEDIR_fMRIVol}:${PATH}; export PATH
+export HCPPIPEDIR_tfMRI=${HCPPIPEDIR}/tfMRI/scripts; PATH=${HCPPIPEDIR_tfMRI}:${PATH}; export PATH
+export HCPPIPEDIR_dMRI=${HCPPIPEDIR}/DiffusionPreprocessing/scripts; PATH=${HCPPIPEDIR_dMRI}:${PATH}; export PATH
+export HCPPIPEDIR_dMRITract=${HCPPIPEDIR}/DiffusionTractography/scripts; PATH=${HCPPIPEDIR_dMRITract}:${PATH}; export PATH
+export HCPPIPEDIR_Global=${HCPPIPEDIR}/global/scripts; PATH=${HCPPIPEDIR_Global}:${PATH}; export PATH
+export HCPPIPEDIR_tfMRIAnalysis=${HCPPIPEDIR}/TaskfMRIAnalysis/scripts; PATH=${HCPPIPEDIR_tfMRIAnalysis}:${PATH}; export PATH
+export MSMBin=${HCPPIPEDIR}/MSMBinaries; PATH=${MSMBin}:${PATH}; export PATH
+export HCPPIPEDIR_dMRITracFull=${HCPPIPEDIR}/DiffusionTractographyDense; PATH=${HCPPIPEDIR_dMRITracFull}:${PATH}; export PATH
+export HCPPIPEDIR_dMRILegacy=${TOOLS}/${MNAPREPO}/connector/functions; PATH=${HCPPIPEDIR_dMRILegacy}:${PATH}; export PATH
+export AutoPtxFolder=${HCPPIPEDIR_dMRITracFull}/autoPtx_HCP_extended; PATH=${AutoPtxFolder}:${PATH}; export PATH
+export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries; PATH=${FSLGPUBinary}:${PATH}; export PATH
+export EDDYCUDADIR=${FSLGPUBinary}/eddy_cuda; PATH=${EDDYCUDADIR}:${PATH}; export PATH; eddy_cuda="eddy_cuda_wQC"; export eddy_cuda
 
 # ------------------------------------------------------------------------------
 # -- Setup CUDA
@@ -530,12 +528,12 @@ export eddy_cuda
 
 # -- set binary location depending on CUDA
 if [[ ! -z `nvcc --version | grep 'Cuda'` ]]; then
-    if [[ `nvcc --version | grep "release"` == *"6.0"* ]]; then NVCCVer="6.0"; BedpostXGPUDir="bedpostx_gpu_cuda_6.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; fi
-    if [[ `nvcc --version | grep "release"` == *"6.5"* ]]; then NVCCVer="6.5"; BedpostXGPUDir="bedpostx_gpu_cuda_6.5" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; fi
-    if [[ `nvcc --version | grep "release"` == *"7.0"* ]]; then NVCCVer="7.0"; BedpostXGPUDir="bedpostx_gpu_cuda_7.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; fi
-    if [[ `nvcc --version | grep "release"` == *"7.5"* ]]; then NVCCVer="7.5"; BedpostXGPUDir="bedpostx_gpu_cuda_7.5" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; fi
-    if [[ `nvcc --version | grep "release"` == *"8.0"* ]]; then NVCCVer="8.0"; BedpostXGPUDir="bedpostx_gpu_cuda_8.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; fi
-    export BedpostXGPUDir
+    if [[ `nvcc --version | grep "release"` == *"6.0"* ]]; then NVCCVer="6.0"; BedpostXGPUDir="bedpostx_gpu_cuda_6.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_6.0"; fi
+    if [[ `nvcc --version | grep "release"` == *"6.5"* ]]; then NVCCVer="6.5"; BedpostXGPUDir="bedpostx_gpu_cuda_6.5" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_6.5"; fi
+    if [[ `nvcc --version | grep "release"` == *"7.0"* ]]; then NVCCVer="7.0"; BedpostXGPUDir="bedpostx_gpu_cuda_7.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.0"; fi
+    if [[ `nvcc --version | grep "release"` == *"7.5"* ]]; then NVCCVer="7.5"; BedpostXGPUDir="bedpostx_gpu_cuda_7.5" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.5"; fi
+    if [[ `nvcc --version | grep "release"` == *"8.0"* ]]; then NVCCVer="8.0"; BedpostXGPUDir="bedpostx_gpu_cuda_8.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_8.0"; fi
+    export BedpostXGPUDir; export ProbTrackXDIR; export bindir; PATH=${bindir}:${PATH}; PATH=${ProbTrackXDIR}:${PATH}; export PATH
     ln -fs ${bindir}/lib/* ${FSLDIR}/lib/ &> /dev/null
     export LD_LIBRARY_PATH
     export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
