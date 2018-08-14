@@ -368,7 +368,7 @@ export MNAPMCOMMAND
 # ------------------------------------------------------------------------------
 
 LD_LIBRARY_PATH=$TOOLS/lib:$TOOLS/lib/lib:$LD_LIBRARY_PATH
-LD_LIBRARY_PATH=hdf5:$LD_LIBRARY_PATH
+LD_LIBRARY_PATH=/usr/lib64/hdf5:$LD_LIBRARY_PATH
 LD_LIBRARY_PATH=$TOOLS/olib:$LD_LIBRARY_PATH
 PKG_CONFIG_PATH=$TOOLS/lib/lib/pkgconfig:$PKG_CONFIG_PATH
 export LD_LIBRARY_PATH
