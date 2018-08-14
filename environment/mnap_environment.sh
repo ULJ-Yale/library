@@ -368,8 +368,12 @@ export MNAPMCOMMAND
 # ------------------------------------------------------------------------------
 
 LD_LIBRARY_PATH=$TOOLS/lib:$TOOLS/lib/lib:$LD_LIBRARY_PATH
+# For Octave
 LD_LIBRARY_PATH=/usr/lib64/hdf5:$LD_LIBRARY_PATH
 LD_LIBRARY_PATH=$TOOLS/olib:$LD_LIBRARY_PATH
+# For Cuda
+LD_LIBRARY_PATH=/usr/local/cuda-9.2/lib64:$LD_LIBRARY_PATH
+LD_LIBRARY_PATH=/usr/local/cuda-9.2/lib:$LD_LIBRARY_PATH
 PKG_CONFIG_PATH=$TOOLS/lib/lib/pkgconfig:$PKG_CONFIG_PATH
 export LD_LIBRARY_PATH
 export PKG_CONFIG_PATH
@@ -562,6 +566,8 @@ PATH=$TOOLS/MeshNet:$PATH
 PATH=/usr/local/bin:$PATH
 PATH=/bin:$PATH
 PATH=$TOOLS/olib:$PATH
+# For Cuda
+PATH=/usr/local/cuda-9.2/bin:$PATH
 
 # -- Export Python paths
 PYTHONPATH=$TOOLS:$PYTHONPATH
