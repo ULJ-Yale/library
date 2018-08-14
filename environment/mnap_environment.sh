@@ -324,24 +324,13 @@ if [[ ${LMODPRESENT} == "yes" ]]; then
         MatlabTest="fail"
     fi
     # -- Load additional needed modules
-    module load Libs/netlib &> /dev/null
-    module load Libs/QT/5.6.2 &> /dev/null
-    module load Apps/R &> /dev/null 
-    module load Rpkgs/RCURL/1.95 &> /dev/null
-    module load Langs/Python/2.7.14 &> /dev/null
-    module load Tools/GIT/2.6.2 &> /dev/null
-    module load Tools/Mercurial/3.6 &> /dev/null
-    module load GPU/Cuda/6.5 &> /dev/null
-    module load Apps/R/3.2.2-generic &> /dev/null
-    module load Rpkgs/GGPLOT2/2.0.0 &> /dev/null
-    module load Libs/SCIPY/0.13.3 &> /dev/null
-    module load Libs/PYDICOM/0.9.9 &> /dev/null
-    module load Libs/NIBABEL/2.0.1 &> /dev/null
-    module load Libs/MATPLOTLIB/1.4.3 &> /dev/null
-    module load Libs/AWS/1.11.66 &> /dev/null
-    module load Libs/NetCDF/4.3.3.1-parallel-intel2013 &> /dev/null
-    module load Libs/NUMPY/1.13.1 &> /dev/null
-    module load Langs/Lua/5.3.3 &> /dev/null
+    LoadModules="Libs/netlib Libs/QT/5.6.2 Apps/R Rpkgs/RCURL/1.95 Langs/Python/2.7.14 Tools/GIT/2.6.2 Tools/Mercurial/3.6 GPU/Cuda/7.5 Apps/R/3.2.2-generic Rpkgs/GGPLOT2/2.0.0 Libs/SCIPY/0.13.3 Libs/PYDICOM/0.9.9 Libs/NIBABEL/2.0.1 Libs/MATPLOTLIB/1.4.3 Libs/AWS/1.11.66 Libs/NetCDF/4.3.3.1-parallel-intel2013 Libs/NUMPY/1.13.1 Langs/Lua/5.3.3"
+    echo ""; cyaneho " ---> LMOD present. Loading Modules..."
+    for LoadModule in ${LoadModules}; do
+        module load ${LoadModule} &> /dev/null
+    done
+    echo ""; cyaneho " ---> Loaded Modules:  ${LoadModules}"; echo ""
+    module load StdEnv &> /dev/null
 fi
 
 # ------------------------------------------------------------------------------
@@ -360,6 +349,7 @@ if [ -f ~/.mnapuseoctave ]; then
          if [ ! -e ~/.octaverc ]; then
              cp ${MNAPPATH}/library/.octaverc ~/.octaverc
          fi
+         export LD_LIBRARY_PATH=/usr/lib64/hdf5/:LD_LIBRARY_PATH > /dev/null 2>&1
     fi
 fi
 if [ ! -f ~/.mnapuseoctave ]; then 
@@ -496,7 +486,6 @@ MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's
 alias mnap='bash $MNAPPATH/connector/mnap.sh'
 alias mnap_environment='$MNAPPATH/library/environment/mnap_environment.sh --help'
 
-
 # ------------------------------------------------------------------------------
 # -- Setup HCP Pipeline paths
 # ------------------------------------------------------------------------------
@@ -512,7 +501,7 @@ if [ -e ~/.mnaphcpe ];
 fi
 export HCPPIPEDIR=$MNAPPATH/hcpmodified
 export CARET7DIR=$WORKBENCHDIR
-export GRADUNWARPDIR=$TOOLS/$PYLIBDIR/gradunwarp/core
+export GRADUNWARPDIR=${TOOLS}/$PYLIBDIR/gradunwarp/core
 export HCPPIPEDIR_Templates=${HCPPIPEDIR}/global/templates
 export HCPPIPEDIR_Bin=${HCPPIPEDIR}/global/binaries
 export HCPPIPEDIR_Config=${HCPPIPEDIR}/global/config
@@ -528,9 +517,31 @@ export HCPPIPEDIR_Global=${HCPPIPEDIR}/global/scripts
 export HCPPIPEDIR_tfMRIAnalysis=${HCPPIPEDIR}/TaskfMRIAnalysis/scripts
 export MSMBin=${HCPPIPEDIR}/MSMBinaries
 export HCPPIPEDIR_dMRITracFull=${HCPPIPEDIR}/DiffusionTractographyDense
-export HCPPIPEDIR_dMRILegacy=/gpfs/project/fas/n3/software/hcpmodified/DiffusionPreprocessingLegacy
+export HCPPIPEDIR_dMRILegacy=${TOOLS}/${MNAPREPO}/connector/functions
 export AutoPtxFolder=${HCPPIPEDIR_dMRITracFull}/autoPtx_HCP_extended
 export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries
+export EDDYCUDADIR=${FSLGPUBinary}/eddy_cuda
+eddy_cuda="eddy_cuda_wQC"
+export eddy_cuda
+
+# ------------------------------------------------------------------------------
+# -- Setup CUDA
+# ------------------------------------------------------------------------------
+
+# -- set binary location depending on CUDA
+if [[ ! -z `nvcc --version | grep 'Cuda'` ]]; then
+    if [[ `nvcc --version | grep "release"` == *"6.0"* ]]; then NVCCVer="6.0"; BedpostXGPUDir="bedpostx_gpu_cuda_6.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; fi
+    if [[ `nvcc --version | grep "release"` == *"6.5"* ]]; then NVCCVer="6.5"; BedpostXGPUDir="bedpostx_gpu_cuda_6.5" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; fi
+    if [[ `nvcc --version | grep "release"` == *"7.0"* ]]; then NVCCVer="7.0"; BedpostXGPUDir="bedpostx_gpu_cuda_7.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; fi
+    if [[ `nvcc --version | grep "release"` == *"7.5"* ]]; then NVCCVer="7.5"; BedpostXGPUDir="bedpostx_gpu_cuda_7.5" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; fi
+    if [[ `nvcc --version | grep "release"` == *"8.0"* ]]; then NVCCVer="8.0"; BedpostXGPUDir="bedpostx_gpu_cuda_8.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; fi
+    export BedpostXGPUDir
+    ln -fs ${bindir}/lib/* ${FSLDIR}/lib/ &> /dev/null
+    export LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
+    export PATH
+    module load GPU/Cuda/${NVCCVer} &> /dev/null
+fi
 
 # ------------------------------------------------------------------------------
 # -- MNAP - NIUtilities and Matlab Paths
