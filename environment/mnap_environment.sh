@@ -296,7 +296,6 @@ geho ""
 # -- Check if Lmod is installed and if Matlab is available https://lmod.readthedocs.io/en/latest/index.html
 #    Lmod is a Lua based module system that easily handles the MODULEPATH Hierarchical problem.
 if [[ `module -t --redirect help | grep 'Lua'` = *"Lua"* ]]; then LMODPRESENT="yes"; else LMODPRESENT="no"; fi > /dev/null 2>&1
-c
 if [[ ${LMODPRESENT} == "yes" ]]; then
     module purge
     module load StdEnv &> /dev/null
@@ -364,8 +363,8 @@ LD_LIBRARY_PATH=$TOOLS/lib:$TOOLS/lib/lib:$LD_LIBRARY_PATH
 LD_LIBRARY_PATH=/usr/lib64/hdf5:$LD_LIBRARY_PATH
 LD_LIBRARY_PATH=$TOOLS/olib:$LD_LIBRARY_PATH
 # For Cuda
-LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LD_LIBRARY_PATH
-LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib:$LD_LIBRARY_PATH
+LD_LIBRARY_PATH=/usr/local/cuda-9.2/lib64:$LD_LIBRARY_PATH
+LD_LIBRARY_PATH=/usr/local/cuda-9.2/lib:$LD_LIBRARY_PATH
 PKG_CONFIG_PATH=$TOOLS/lib/lib/pkgconfig:$PKG_CONFIG_PATH
 export LD_LIBRARY_PATH
 export PKG_CONFIG_PATH
