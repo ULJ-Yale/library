@@ -605,7 +605,6 @@ gitmnap_usage() {
     echo ""
     echo "gitmnap \ "
     echo "--command='pull' \ "
-    echo "--add='files_to_add' \ "
     echo "--branch='master' \ "
     echo "--branchpath='$TOOLS/$MNAPREPO' \ "
     echo "--submodules='all' "
@@ -616,6 +615,7 @@ gitmnap_usage() {
     echo "--branch='master' \ "
     echo "--branchpath='$TOOLS/$MNAPREPO' \ "
     echo "--submodules='all' \ "
+    echo "--add='files_to_add' \ "
     echo "--message='Committing change' "
     echo ""
 }
@@ -685,6 +685,7 @@ for MNAPSubModule in ${MNAPSubModules}; do
     function_gitmnapbranch
     git status -uno
 done
+cd ${TOOLS}/${MNAPREPO}
 echo ""
 geho "================ Completed MNAP Suite Repository Status Check ================"
 echo ""
