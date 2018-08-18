@@ -1,0 +1,291 @@
+{
+  "name": "mnap-turnkey-initial-hcp1-5-QC-BOLDfc-uploadstudy-cleanup",
+  "label": "MNAP TURNKEY INITIAL, HCP1-5, QC, BOLD FC & DATA CLEANUP WITH FULL STUDY UPLOAD",
+  "description": "Runs MNAP Turnkey initial, HCP1-5 & QC, BOLD fc w/ full study upload v0.12.1.BTRX",
+  "version": "1.10",
+  "schema-version": "1.0",
+  "info-url": "https://bitbucket.org/hidradev/mnaptools",
+  "image": "hub.blackthornprod.radiologics.com/mnap_suite:latest",
+  "type": "docker",
+  "index": null,
+  "working-directory": "/output",
+  "command-line": "/opt/mnaptools/library/etc/cs-wrapper.sh #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #OVERWRITEPROJECTXNAT_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #XNAT_PROJECT# #SUBJECTID#",
+  "override-entrypoint": null,
+  "mounts": [
+    {
+      "name": "in",
+      "writable": false,
+      "path": "/input"
+    },
+    {
+      "name": "out",
+      "writable": true,
+      "path": "/output"
+    }
+  ],
+  "environment-variables": {},
+  "ports": {},
+  "inputs": [
+    {
+      "name": "batch_parameters_filename",
+      "description": "Name of the batch parameters file. This file is expected to be present at the MNAP_PROC resource at the project level",
+      "type": "string",
+      "matcher": null,
+      "default-value": "final_batch_parameters.txt",
+      "required": true,
+      "replacement-key": "#BATCH_PARAMETERS_FILENAME_ARG#",
+      "command-line-flag": "--batchfile",
+      "command-line-separator": "=",
+      "true-value": null,
+      "false-value": null
+    },
+    {
+      "name": "scan_mapping_filename",
+      "description": "Name of the scan mapping file. This file is expected to be present at the MNAP_PROC resource at the project level",
+      "type": "string",
+      "matcher": null,
+      "default-value": "final_mapping.txt",
+      "required": true,
+      "replacement-key": "#SCAN_MAPPING_FILENAME_ARG#",
+      "command-line-flag": "--mappingfile",
+      "command-line-separator": "=",
+      "true-value": null,
+      "false-value": null
+    },
+    {
+      "name": "session_id",
+      "description": "Session Accession ID",
+      "type": "string",
+      "matcher": null,
+      "default-value": null,
+      "required": true,
+      "replacement-key": "#ID#",
+      "command-line-flag": "--xnataccsessionid",
+      "command-line-separator": "=",
+      "true-value": null,
+      "false-value": null
+    },
+    {
+      "name": "session_label",
+      "description": "Session Label",
+      "type": "string",
+      "matcher": null,
+      "default-value": null,
+      "required": true,
+      "replacement-key": "#LABEL#",
+      "command-line-flag": "--xnatsessionlabels",
+      "command-line-separator": "=",
+      "true-value": null,
+      "false-value": null
+    },
+    {
+      "name": "session_project",
+      "description": "Project ID of the session",
+      "type": "string",
+      "matcher": null,
+      "default-value": null,
+      "required": true,
+      "replacement-key": "#XNAT_PROJECT#",
+      "command-line-flag": "--xnatprojectid",
+      "command-line-separator": "=",
+      "true-value": null,
+      "false-value": null
+    },
+    {
+      "name": "session_subject",
+      "description": "Subject ID of the Session",
+      "type": "string",
+      "matcher": null,
+      "default-value": null,
+      "required": true,
+      "replacement-key": "#SUBJECTID#",
+      "command-line-flag": "--xnatsubjectid",
+      "command-line-separator": "=",
+      "true-value": null,
+      "false-value": null
+    },
+    {
+      "name": "overwritestep",
+      "description": "Flag to decide if a specific step is to be overwritten by mnap scripts",
+      "type": "string",
+      "matcher": null,
+      "default-value": "yes",
+      "required": true,
+      "replacement-key": "#OVERWRITESTEP_ARG#",
+      "command-line-flag": "--overwritestep",
+      "command-line-separator": "=",
+      "true-value": null,
+      "false-value": null
+    },
+    {
+      "name": "cleanup",
+      "description": "Flag to decide if the data is to be cleaned up after all turnkey steps",
+      "type": "string",
+      "matcher": null,
+      "default-value": "yes",
+      "required": true,
+      "replacement-key": "#CLEANUP_ARG#",
+      "command-line-flag": "--cleanup",
+      "command-line-separator": "=",
+      "true-value": null,
+      "false-value": null
+    },
+    {
+      "name": "turnkeysteps",
+      "description": "Steps to execute",
+      "type": "string",
+      "matcher": null,
+      "default-value": "createStudy,mapRawData,organizeDicom,getHCPReady,mapHCPFiles,hcp1,hcp2,hcp3,QCPreprocT1w,QCPreprocT2w,QCPreprocMyelin,hcp4,hcp5,QCPreprocBOLD,mapHCPData,createBOLDBrainMasks,computeBOLDStats,createStatsReport,extractNuisanceSignal,preprocessBold,BOLDParcellation,computeBOLDfcSeed,computeBOLDfcGBC",
+      "required": true,
+      "replacement-key": "#TURNKEYSTEPS_ARG#",
+      "command-line-flag": "--turnkeysteps",
+      "command-line-separator": "=",
+      "true-value": null,
+      "false-value": null
+    },
+    {
+      "name": "overwriteprojectxnat",
+      "description": "Flag to decide if the entire XNAT project is to be deleted before start",
+      "type": "string",
+      "matcher": null,
+      "default-value": "yes",
+      "required": true,
+      "replacement-key": "#OVERWRITEPROJECTXNAT_ARG#",
+      "command-line-flag": "--overwriteprojectxnat",
+      "command-line-separator": "=",
+      "true-value": null,
+      "false-value": null
+    }
+  ],
+  "outputs": [
+    {
+      "name": "mnap_study",
+      "description": null,
+      "required": false,
+      "mount": "out",
+      "path": "#XNAT_PROJECT#",
+      "glob": null
+    },
+    {
+      "name": "QC",
+      "description": null,
+      "required": false,
+      "mount": "out",
+      "path": "#XNAT_PROJECT#/subjects/QC",
+      "glob": null
+    }
+  ],
+  "xnat": [
+    {
+      "name": "mnap-initial:hcp5+QC:BOLDfc",
+      "label": null,
+      "description": "Execute MNAP Turnkey initial, hcp1-5 with QC, BOLD fc with full study upload and data cleanup",
+      "contexts": [
+        "xnat:imageSessionData"
+      ],
+      "external-inputs": [
+        {
+          "name": "session",
+          "description": "Input session",
+          "type": "Session",
+          "matcher": null,
+          "default-value": null,
+          "required": true,
+          "replacement-key": null,
+          "provides-value-for-command-input": null,
+          "provides-files-for-command-mount": "in",
+          "via-setup-command": null,
+          "user-settable": null,
+          "load-children": true
+        }
+      ],
+      "derived-inputs": [
+        {
+          "name": "id",
+          "description": "Session Accession ID. Used as MNAP id variable.",
+          "type": "string",
+          "matcher": null,
+          "default-value": null,
+          "required": true,
+          "replacement-key": null,
+          "provides-value-for-command-input": "session_id",
+          "provides-files-for-command-mount": null,
+          "user-settable": null,
+          "load-children": true,
+          "derived-from-wrapper-input": "session",
+          "derived-from-xnat-object-property": "id",
+          "via-setup-command": null
+        },
+        {
+          "name": "label",
+          "description": "Session label. Used as MNAP subject identifier.",
+          "type": "string",
+          "matcher": null,
+          "default-value": null,
+          "required": true,
+          "replacement-key": null,
+          "provides-value-for-command-input": "session_label",
+          "provides-files-for-command-mount": null,
+          "user-settable": null,
+          "load-children": true,
+          "derived-from-wrapper-input": "session",
+          "derived-from-xnat-object-property": "label",
+          "via-setup-command": null
+        },
+        {
+          "name": "xnat_project",
+          "description": "Project in which session is stored",
+          "type": "string",
+          "matcher": null,
+          "default-value": null,
+          "required": true,
+          "replacement-key": null,
+          "provides-value-for-command-input": "session_project",
+          "provides-files-for-command-mount": null,
+          "user-settable": null,
+          "load-children": true,
+          "derived-from-wrapper-input": "session",
+          "derived-from-xnat-object-property": "project-id",
+          "via-setup-command": null
+        },
+        {
+          "name": "subjectid",
+          "description": "Subject Accession ID",
+          "type": "string",
+          "matcher": null,
+          "default-value": null,
+          "required": true,
+          "replacement-key": null,
+          "provides-value-for-command-input": "session_subject",
+          "provides-files-for-command-mount": null,
+          "user-settable": null,
+          "load-children": true,
+          "derived-from-wrapper-input": "session",
+          "derived-from-xnat-object-property": "subject-id",
+          "via-setup-command": null
+        }
+      ],
+      "output-handlers": [
+        {
+          "name": "output-resource-study",
+          "accepts-command-output": "mnap_study",
+          "via-wrapup-command": null,
+          "as-a-child-of": "session",
+          "type": "Resource",
+          "label": "mnap_study"
+        },
+        {
+          "name": "output-resource-qc",
+          "accepts-command-output": "QC",
+          "via-wrapup-command": null,
+          "as-a-child-of": "session",
+          "type": "Resource",
+          "label": "QC"
+        }
+      ]
+    }
+  ],
+  "reserve-memory": 15000,
+  "limit-memory": null,
+  "limit-cpu": null
+}
