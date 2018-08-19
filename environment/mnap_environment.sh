@@ -238,14 +238,11 @@ fi
 #
 #  FreeSurferScheduler       Environment Variable --> $FreeSurferSchedulerDIR
 
-<<<<<<< HEAD
-=======
 # ------------------------------------------------------------------------------
 # -- Set default folder names for dependencies if undefined by user environment:
 # ------------------------------------------------------------------------------
 
 # -- Check if folders for dependencies are set in the global path
->>>>>>> 280e0cf8c440f47b97b4c5616be916b67e0a6f1c
 if [[ -z ${FSLFolder} ]]; then unset FSLDIR; FSLFolder="fsl-5.0.9"; fi
 if [[ -z ${FIXICAFolder} ]]; then FIXICAFolder="fix1.06"; fi
 if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="freesurfer-5.3-HCP"; fi
@@ -258,8 +255,6 @@ if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="Octave/4.2.1"; fi
 if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="octavepkg"; fi
 if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="pylib"; fi
 
-<<<<<<< HEAD
-=======
 # -- Checks for version
 showVersion() {
     MNAPVer=`cat ${TOOLS}/${MNAPREPO}/VERSION.md`
@@ -372,7 +367,6 @@ export PKG_CONFIG_PATH
 PATH=$TOOLS/bin:$TOOLS/lib/bin:$TOOLS/lib/lib/:$PATH
 export PATH
 
->>>>>>> 280e0cf8c440f47b97b4c5616be916b67e0a6f1c
 # -- FIX ICA path
 FIXICADIR=${TOOLS}/${FIXICAFolder}
 PATH=${FIXICADIR}:${PATH}
@@ -400,13 +394,9 @@ PATH=${FREESURFER_HOME}:${PATH}
 export FREESURFER_HOME PATH
 . ${FREESURFER_HOME}/SetUpFreeSurfer.sh > /dev/null 2>&1
 
-<<<<<<< HEAD
-# -- FSL binaries
-=======
 # -- FSL path
 # -- Note: Always run after FreeSurfer for correct environment specification
 #          because SetUpFreeSurfer.sh can mis-specify the $FSLDIR path
->>>>>>> 280e0cf8c440f47b97b4c5616be916b67e0a6f1c
 FSLDIR=${TOOLS}/${FSLFolder}
 PATH=${FSLDIR}/bin:${PATH}
 . ${FSLDIR}/etc/fslconf/fsl.sh > /dev/null 2>&1
@@ -414,11 +404,7 @@ export FSLDIR PATH
 MATLABPATH=$FSLDIR:$MATLABPATH
 export MATLABPATH
 
-<<<<<<< HEAD
-# -- FreeSurfer Scheduler for GPU acceleration
-=======
 # -- FreeSurfer Scheduler for GPU acceleration path
->>>>>>> 280e0cf8c440f47b97b4c5616be916b67e0a6f1c
 FREESURFER_SCHEDULER=${TOOLS}/${FreeSurferSchedulerDIR}
 PATH=${FREESURFER_SCHEDULER}:${PATH}
 export FREESURFER_SCHEDULER PATH
@@ -590,136 +576,6 @@ export MATLABPATH
 
 # -- gitmnap_usage function help
 
-<<<<<<< HEAD
-# -- Update all submodules
-function_mnapupdateall() {
-	unset MNAPBranch
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	echo ""
-	geho "-- Pulling repositories as submodules in $MNAPPATH from $MNAPBranch..."
-	echo ""
-	cd $MNAPPATH; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/niutilities; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/library; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/hcpmodified; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/matlab; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/connector; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-}
-alias mnapupdateall=function_mnapupdateall
-
-# -- Commit function for MNAP Suite main repo
-function_commitmnapmain() {
-	unset MNAPBranch
-	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	echo ""
-	geho "-- Committing changes in MNAP Suite main repo ${MNAPPATH} to branch ${MNAPBranch}"
-	cd ${MNAPPATH}
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push origin ${MNAPBranch}
-	echo ""
-	geho "--- Committing done."
-	echo ""
-}
-alias commitmnapmain=function_commitmnapmain
-
-# -- Commit function for all of MNAP Suite Code across modules
-function_commitmnapall() {
-	unset MNAPBranch
-	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	geho "-- Committing changes in submodule ${MNAPPATH}/library..."
-	cd ${MNAPPATH}/library
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push origin ${MNAPBranch}
-	echo "---"
-	echo ""
-	geho "-- Committing changes in submodule ${MNAPPATH}/connector..."
-	cd ${MNAPPATH}/connector
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push origin ${MNAPBranch}
-	echo "---"
-	echo ""
-	geho "-- Committing changes in submodule ${MNAPPATH}/hcpmodified..."
-	cd ${MNAPPATH}/hcpmodified
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push origin ${MNAPBranch}
-	echo "---"
-	echo ""
-	geho "-- Committing changes in submodule ${MNAPPATH}/niutilities..."
-	cd ${MNAPPATH}/niutilities
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push origin ${MNAPBranch}
-	echo "---"
-	echo ""
-	geho "-- Committing changes in submodule ${MNAPPATH}/matlab..."
-	cd ${MNAPPATH}/matlab
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push origin ${MNAPBranch}
-	echo "---"
-	echo ""
-	geho "-- Committing changes in main module ${MNAPPATH}..."
-	cd ${MNAPPATH}
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push origin ${MNAPBranch}
-}
-alias commitmnapall=function_commitmnapall
-
-# -- Update individual repos
-function_mnapupdate_individual() {
-	unset MNAPBranch
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	echo ""
-	beho "-- Pulling individual repositories in $MNAPPATH..."
-	echo ""
-	cd $MNAPPATH; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/niutilities; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/library; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/hcpmodified; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/matlab; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	cd $MNAPPATH/connector; git checkout ${MNAPBranch}; git pull origin ${MNAPBranch}
-	}
-alias mnapupdateindiv=function_mnapupdate_individual
-
-# -- Commit MNAP Library Code
-function_commitmnaplibrary() {
-	unset MNAPBranch
-	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	cd ${MNAPPATH}/library
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:hidradev/library.git ${MNAPBranch}
-}
-alias commitmnaplibrary=function_commitmnaplibrary
-
-# -- Commit MNAP Connector Code
-function_commitmnapconnector() {
-	unset MNAPBranch
-	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	cd ${MNAPPATH}/connector
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:hidradev/connector.git ${MNAPBranch}
-=======
 gitmnap_usage() {
     echo ""
     echo " -- DESCRIPTION for gitmnap function:"
@@ -762,7 +618,6 @@ gitmnap_usage() {
     echo "--add='files_to_add' \ "
     echo "--message='Committing change' "
     echo ""
->>>>>>> 280e0cf8c440f47b97b4c5616be916b67e0a6f1c
 }
 
 function_gitmnapbranch() {
@@ -810,35 +665,6 @@ else
     echo ""
 fi
 }
-<<<<<<< HEAD
-alias commithcpmodified=function_commithcpmodified
-
-# -- Commit MNAP Niutilities
-function_commitmnapniutilities() {
-	unset MNAPBranch
-	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	cd ${MNAPPATH}/niutilities
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:hidradev/niutilities.git ${MNAPBranch}
-}
-alias commitmnapniutilities=function_commitmnapniutilities
-
-# -- Commit MNAP Matlab Code
-function_commitmnapmatlab() {
-	unset MNAPBranch
-	CommitMessage=`opts_GetOpt "--message" $@`
-	MNAPBranch=`opts_GetOpt "--branch" $@`
-	if [[ -z $MNAPBranch ]]; then reho ""; reho "--branch flag not defined."; echo ""; return 1; fi
-	CommitMessage="$CommitMessage --Update-${MyID}-via-`hostname`-`date +%Y-%m-%d-%H-%M-%S`"
-	cd ${MNAPPATH}/matlab
-	git add ./*
-	git commit . --message="${CommitMessage}"
-	git push git@bitbucket.org:hidradev/matlab.git ${MNAPBranch}
-=======
 alias gitmnapbranch=function_gitmnapbranch
 
 
@@ -1087,7 +913,6 @@ unset CommitMessage
 unset GitStatus
 unset MNAPSubModulesList
 unset MNAPSubModule
->>>>>>> 280e0cf8c440f47b97b4c5616be916b67e0a6f1c
 }
 
 # -- define function_gitmnap alias
