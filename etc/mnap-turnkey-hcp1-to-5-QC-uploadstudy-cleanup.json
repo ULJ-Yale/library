@@ -177,7 +177,7 @@
   ],
   "xnat": [
     {
-      "name": "mnap-hcp1:5+QC",
+      "name": "mnap-hcp1-to-5-QC",
       "label": null,
       "description": "Execute MNAP Turnkey hcp1-5 and QC with full study upload and data cleanup, depends on competed initial steps",
       "contexts": [
