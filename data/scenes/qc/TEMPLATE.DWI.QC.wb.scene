@@ -664,7 +664,6 @@ Window 1:
             <coordOne x="10.000000" y="10.000000" z="0.000000" structure="INVALID" numberOfNodes="-1" nodeIndex="-1" nodeOffset="5.000000" nodeOffsetVectorType="CENTROID_THRU_VERTEX"/>
             <textData textCaretColor="WHITE" textCustomRGBA="1.000000;1.000000;1.000000;1.000000" fontBold="false" fontItalic="false" fontName="VERA" fontPointSize="SIZE14" fontUnderline="false" horizontalAlignment="LEFT" orientation="HORIZONTAL" verticalAlignment="TOP" fontPercentViewportSize="5" connectBrainordinate="ANNOTATION_TEXT_CONNECT_NONE">DWI 1st frame on T1w</textData>
         </percentSizeText>
-
          <percentSizeText coordinateSpace="TAB" backgroundCaretColor="NONE" backgroundCustomRGBA="0.000000;0.000000;0.000000;1.000000" foregroundCaretColor="NONE" foregroundCustomRGBA="1.000000;1.000000;1.000000;1.000000" foregroundLineWidth="3" tabIndex="0" windowIndex="-1" uniqueKey="2" width="25" height="25" rotationAngle="0">
             <coordOne x="10" y="25" z="0.000000" structure="INVALID" numberOfNodes="-1" nodeIndex="-1" nodeOffset="5.000000" nodeOffsetVectorType="CENTROID_THRU_VERTEX"/>
             <textData textCaretColor="WHITE" textCustomRGBA="1.000000;1.000000;1.000000;1.000000" fontBold="false" fontItalic="false" fontName="VERA" fontPointSize="SIZE14" fontUnderline="false" horizontalAlignment="LEFT" orientation="HORIZONTAL" verticalAlignment="TOP" fontPercentViewportSize="5" connectBrainordinate="ANNOTATION_TEXT_CONNECT_NONE">Subject ID:
@@ -679,10 +678,13 @@ DUMMYTIMESTAMP</textData>
                 
     </group>
     <group coordinateSpace="TAB" groupType="SPACE" tabOrWindowIndex="1" uniqueKey="4">
-        <percentSizeText coordinateSpace="TAB" backgroundCaretColor="NONE" backgroundCustomRGBA="0.000000;0.000000;0.000000;1.000000" foregroundCaretColor="NONE" foregroundCustomRGBA="1.000000;1.000000;1.000000;1.000000" foregroundLineWidth="3" tabIndex="1" windowIndex="-1" uniqueKey="3" width="25" height="25" rotationAngle="0">
+        <percentSizeText coordinateSpace="TAB" backgroundCaretColor="NONE" backgroundCustomRGBA="0.000000;0.000000;0.000000;1.000000" foregroundCaretColor="NONE" foregroundCustomRGBA="1.000000;1.000000;1.000000;1.000000" foregroundLineWidth="3" tabIndex="1" windowIndex="-1" uniqueKey="4" width="25" height="25" rotationAngle="0">
             <coordOne x="10.000000" y="10.000000" z="0.000000" structure="INVALID" numberOfNodes="-1" nodeIndex="-1" nodeOffset="5.000000" nodeOffsetVectorType="CENTROID_THRU_VERTEX"/>
             <textData textCaretColor="WHITE" textCustomRGBA="1.000000;1.000000;1.000000;1.000000" fontBold="false" fontItalic="false" fontName="VERA" fontPointSize="SIZE14" fontUnderline="false" horizontalAlignment="LEFT" orientation="HORIZONTAL" verticalAlignment="TOP" fontPercentViewportSize="5" connectBrainordinate="ANNOTATION_TEXT_CONNECT_NONE">DWI 10th frame on T1w</textData>
         </percentSizeText>
+        <percentSizeText coordinateSpace="TAB" backgroundCaretColor="NONE" backgroundCustomRGBA="0.000000;0.000000;0.000000;1.000000" foregroundCaretColor="NONE" foregroundCustomRGBA="1.000000;1.000000;1.000000;1.000000" foregroundLineWidth="3" tabIndex="1" windowIndex="-1" uniqueKey="5" width="25" height="25" rotationAngle="0">
+            <coordOne x="10.000000" y="20.000000" z="0.000000" structure="INVALID" numberOfNodes="-1" nodeIndex="-1" nodeOffset="5.000000" nodeOffsetVectorType="CENTROID_THRU_VERTEX"/>
+            <textData textCaretColor="WHITE" textCustomRGBA="1.000000;1.000000;1.000000;1.000000" fontBold="false" fontItalic="false" fontName="VERA" fontPointSize="SIZE14" fontUnderline="false" horizontalAlignment="LEFT" orientation="HORIZONTAL" verticalAlignment="TOP" fontPercentViewportSize="5" connectBrainordinate="ANNOTATION_TEXT_CONNECT_NONE">DUMMYPNGNAME</textData>
     </group>
 </AnnotationFile>
 ]]></Object>

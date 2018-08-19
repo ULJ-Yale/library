@@ -1,14 +1,21 @@
-addpath('/gpfs/project/fas/n3/software/mnaptools/matlab/fcMRI');
-addpath('/gpfs/project/fas/n3/software/mnaptools/matlab/general');
-addpath('/gpfs/project/fas/n3/software/mnaptools/matlab/gmri');
-addpath('/gpfs/project/fas/n3/software/mnaptools/matlab/gmri/@gmrimage');
-addpath('/gpfs/project/fas/n3/software/mnaptools/matlab/simul');
-addpath('/gpfs/project/fas/n3/software/mnaptools/matlab/stats');
-savepath
-## Begin savepath auto-created section, do not edit
-  addpath ('/gpfs/project/fas/n3/software/mnaptools/matlab/stats:/gpfs/project/fas/n3/software/mnaptools/matlab/simul:/gpfs/project/fas/n3/software/mnaptools/matlab/gmri/@gmrimage:/gpfs/project/fas/n3/software/mnaptools/matlab/gmri:/gpfs/project/fas/n3/software/mnaptools/matlab/general:/gpfs/project/fas/n3/software/mnaptools/matlab/fcMRI', '-begin');
-## End savepath auto-created section
+warning('off');
+PATHS = getenv("MATLABPATH");
+addpath(PATHS);
+LOCALLIST = getenv("OCTAVEPKGDIR");
+if isempty(LOCALLIST)
+  LOCALLIST='~/.octave_packages';
+else
+  LOCALLIST=[getenv("TOOLS") '/' LOCALLIST '/octave_packages'];
+end
+pkg('local_list', LOCALLIST);
 pkg load image
 pkg load control
 pkg load signal
 pkg load nan
+pkg load statistics
+pkg load general
+pkg load io
+pkg load miscellaneous
+pkg load optim
+pkg load struct
+warning('on');

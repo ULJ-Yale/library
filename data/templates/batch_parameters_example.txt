@@ -16,7 +16,15 @@
 #
 #  --> For all supported batch parameter options run: 
 #      mnap -o
-#
+# 
+# Please note that if a parameter is specified in the batch file MNAP will set it to the value specified. 
+# This is also the case for parameters that are left '' empty (e.g. `_event_file         :`). 
+# This case the `_event_file` parameter is actually being set to an empty string and is being read as such by MNAP. 
+# The situation where this would be a misspecification would be, for instance: `_nprocess           :`. 
+# In this case the `_nprocess` parameter checks how many concurrent jobs to run. If it set to an empty string then 
+# the MNAP engine cannot set the process number. This behavior is important so that the MNAP engine can interpret 
+# all specified parameters based on actual values provided (empty or some value) as opposed to making an assumptions 
+# that the parameter is absent when in fact it is present with an empty string.
 #
 #  File format
 #  -----------
