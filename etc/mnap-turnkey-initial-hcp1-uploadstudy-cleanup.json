@@ -169,7 +169,7 @@
   ],
   "xnat": [
     {
-      "name": "mnap-initial-hcp1",
+      "name": "mnap-init-hcp1",
       "label": null,
       "description": "Execute MNAP Turnkey initial and hcp1 with full study upload and data cleanup",
       "contexts": [

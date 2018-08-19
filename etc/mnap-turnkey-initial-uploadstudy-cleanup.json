@@ -169,7 +169,7 @@
   ],
   "xnat": [
     {
-      "name": "mnap-initial",
+      "name": "mnap-init",
       "label": null,
       "description": "Execute MNAP Turnkey initial with full study upload and data cleanup",
       "contexts": [

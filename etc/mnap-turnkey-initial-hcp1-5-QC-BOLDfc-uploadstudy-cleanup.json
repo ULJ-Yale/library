@@ -177,7 +177,7 @@
   ],
   "xnat": [
     {
-      "name": "mnap-initial:hcp5+QC:BOLDfc",
+      "name": "mnap-init-to-hcp5-QC-BOLDfc",
       "label": null,
       "description": "Execute MNAP Turnkey initial, hcp1-5 with QC, BOLD fc with full study upload and data cleanup",
       "contexts": [

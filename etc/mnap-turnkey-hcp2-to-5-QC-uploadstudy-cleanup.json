@@ -177,7 +177,7 @@
   ],
   "xnat": [
     {
-      "name": "mnap-hcp2:5+QC",
+      "name": "mnap-hcp2-to-5-QC",
       "label": null,
       "description": "Execute MNAP Turnkey hcp2-5 and QC with full study upload and data cleanup, depends on competed hcp1",
       "contexts": [
