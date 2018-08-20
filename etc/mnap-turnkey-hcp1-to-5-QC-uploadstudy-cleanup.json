@@ -135,7 +135,7 @@
       "description": "Steps to execute",
       "type": "string",
       "matcher": null,
-      "default-value": "hcp1,hcp2,hcp3,QCPreprocT1w,QCPreprocT2w,QCPreprocMyelin,hcp4,hcp5,QCPreprocBOLD",
+      "default-value": "hcp1,hcp2,hcp3,QCPreprocT1w,QCPreprocT2w,QCPreprocMyelin,hcp4,hcp5,QCPreprocBOLD,mapHCPData",
       "required": true,
       "replacement-key": "#TURNKEYSTEPS_ARG#",
       "command-line-flag": "--turnkeysteps",
@@ -179,7 +179,7 @@
     {
       "name": "mnap-hcp1-to-5-QC",
       "label": null,
-      "description": "Execute MNAP Turnkey hcp1-5 and QC with full study upload and data cleanup, depends on competed initial steps",
+      "description": "Execute MNAP Turnkey hcp1-5, QC and mapHCPData with full study upload and data cleanup, depends on competed initial steps",
       "contexts": [
         "xnat:imageSessionData"
       ],
