@@ -258,6 +258,7 @@ if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="workbench"; fi
 if [[ -z ${PALMDIR} ]]; then PALMDIR="PALM/palm-alpha111"; fi
 if [[ -z ${AFNIDIR} ]]; then AFNIDIR="afni_linux_openmp_64"; fi
 if [[ -z ${DCM2NIIDIR} ]]; then DCM2NIIDIR="dcm2niix"; fi
+if [[ -z ${DICM2NIIDIR} ]]; then DICM2NIIDIR="dicm2nii"; fi
 if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="Octave/4.2.1"; fi
 if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="octavepkg"; fi
 if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="pylib"; fi
@@ -452,6 +453,11 @@ export MATLABPATH
 DCMNII=${TOOLS}/${DCM2NIIDIR}/build/bin
 PATH=${DCMNII}:${PATH}
 export DCMNII PATH
+
+# -- dicm2nii path
+DICMNII=${TOOLS}/${DICM2NIIDIR}
+MATLABPATH=$DICMNII:$MATLABPATH
+export MATLABPATH
 
 # -- Octave path
 OCTAVEPATH=${TOOLS}/${OCTAVEDIR}/bin
