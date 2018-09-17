@@ -955,21 +955,22 @@ if [[ ${LMODPRESENT} != "yes" ]]; then
     PATH=/usr/local/cuda-7.5/bin:$PATH
     LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LD_LIBRARY_PATH
     export LD_LIBRARY_PATH
-    export PATH
+    BedpostXGPUDir="bedpostx_gpu_cuda_7.5" 
+    ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.0"
+    bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu
+    export BedpostXGPUDir; export ProbTrackXDIR; export bindir; PATH=${bindir}:${PATH}; PATH=${bindir}/lib:${PATH}; PATH=${bindir}/bin:${PATH}; PATH=${ProbTrackXDIR}:${PATH}; export PATH
+    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
 fi
-
 if [[ ! -z `command -v nvcc` ]]; then
-    if [[ `nvcc --version | grep "release"` == *"6.0"* ]]; then NVCCVer="6.0"; BedpostXGPUDir="bedpostx_gpu_cuda_6.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_6.0"; fi
-    if [[ `nvcc --version | grep "release"` == *"6.5"* ]]; then NVCCVer="6.5"; BedpostXGPUDir="bedpostx_gpu_cuda_6.5" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_6.5"; fi
-    if [[ `nvcc --version | grep "release"` == *"7.0"* ]]; then NVCCVer="7.0"; BedpostXGPUDir="bedpostx_gpu_cuda_7.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.0"; fi
-    if [[ `nvcc --version | grep "release"` == *"7.5"* ]]; then NVCCVer="7.5"; BedpostXGPUDir="bedpostx_gpu_cuda_7.5" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.5"; fi
-    if [[ `nvcc --version | grep "release"` == *"8.0"* ]]; then NVCCVer="8.0"; BedpostXGPUDir="bedpostx_gpu_cuda_8.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_8.0"; fi
-    export BedpostXGPUDir
-    export ProbTrackXDIR
-    export bindir
-    PATH=${bindir}:${PATH}
-    PATH=${ProbTrackXDIR}:${PATH}
-    ln -fs ${bindir}/lib/* ${FSLDIR}/lib/ &> /dev/null
-    export PATH
+    if [[ `nvcc --version | grep "release"` == *"6.0"* ]]; then NVCCVer="6.0"; fi
+    if [[ `nvcc --version | grep "release"` == *"6.5"* ]]; then NVCCVer="6.5"; fi
+    if [[ `nvcc --version | grep "release"` == *"7.0"* ]]; then NVCCVer="7.0"; fi
+    if [[ `nvcc --version | grep "release"` == *"7.5"* ]]; then NVCCVer="7.5"; fi
+    if [[ `nvcc --version | grep "release"` == *"8.0"* ]]; then NVCCVer="8.0"; fi
+    BedpostXGPUDir="bedpostx_gpu_cuda_${NVCCVer}" 
+    ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_${NVCCVer}"
+    bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu
+    export BedpostXGPUDir; export ProbTrackXDIR; export bindir; PATH=${bindir}:${PATH}; PATH=${bindir}/lib:${PATH}; PATH=${bindir}/bin:${PATH}; PATH=${ProbTrackXDIR}:${PATH}; export PATH
+    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
     module load GPU/Cuda/${NVCCVer} &> /dev/null
 fi
