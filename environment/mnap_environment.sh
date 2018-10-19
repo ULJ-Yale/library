@@ -938,7 +938,7 @@ alias gitmnap=function_gitmnap
 
 # -- Load additional needed modules
 if [[ ${LMODPRESENT} == "yes" ]]; then
-    LoadModules="Libs/netlib Libs/QT/5.6.2 Apps/R Rpkgs/RCURL/1.95 Langs/Python/2.7.14 Tools/GIT/2.6.2 Tools/Mercurial/3.6 GPU/Cuda/7.5 Apps/R/3.2.2-generic Rpkgs/GGPLOT2/2.0.0 Libs/SCIPY/0.13.3 Libs/PYDICOM/0.9.9 Libs/NIBABEL/2.0.1 Libs/MATPLOTLIB/1.4.3 Libs/AWS/1.11.66 Libs/NetCDF/4.3.3.1-parallel-intel2013 Libs/NUMPY/1.13.1 Langs/Lua/5.3.3"
+    LoadModules="Libs/netlib Libs/QT/5.6.2 Apps/R Rpkgs/RCURL/1.95 Langs/Python/2.7.14 Tools/GIT/2.6.2 Tools/Mercurial/3.6 GPU/Cuda/7.5 Apps/R/3.2.2-generic Rpkgs/GGPLOT2/2.0.0 Libs/SCIPY/0.13.3 Libs/PYDICOM/0.9.9 Libs/NIBABEL/2.0.1 Libs/MATPLOTLIB/1.4.3 Libs/AWS/1.11.66 Libs/NetCDF/4.3.3.1-parallel-intel2013 Libs/NUMPY/1.9.2 Langs/Lua/5.3.3"
     echo ""; cyaneho " ---> LMOD present. Loading Modules..."
     for LoadModule in ${LoadModules}; do
         module load ${LoadModule} &> /dev/null
