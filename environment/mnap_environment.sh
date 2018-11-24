@@ -251,7 +251,7 @@ fi
 
 # -- Check if folders for dependencies are set in the global path
 if [[ -z ${FSLFolder} ]]; then unset FSLDIR; FSLFolder="fsl-5.0.9"; fi
-if [[ -z ${FIXICAFolder} ]]; then FIXICAFolder="fix1.06"; fi
+if [[ -z ${FIXICAFolder} ]]; then FIXICAFolder="fix1.067"; fi
 if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="freesurfer-5.3-HCP"; fi
 if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="FreeSurferScheduler"; fi
 if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="workbench"; fi
@@ -380,20 +380,6 @@ export PKG_CONFIG_PATH
 PATH=$TOOLS/bin:$TOOLS/lib/bin:$TOOLS/lib/lib/:$PATH
 export PATH
 
-# -- FIX ICA path
-FIXICADIR=${TOOLS}/${FIXICAFolder}
-PATH=${FIXICADIR}:${PATH}
-export FIXICADIR PATH
-MATLABPATH=$FIXICADIR:$MATLABPATH
-export MATLABPATH
-
-# -- POST FIX ICA path
-POSTFIXICADIR=${TOOLS}/${MNAPREPO}/hcpmodified/PostFix
-PATH=${POSTFIXICADIR}:${PATH}
-export POSTFIXICADIR PATH
-MATLABPATH=$POSTFIXICADIR:$MATLABPATH
-export MATLABPATH
-
 # -- FSL probtrackx2_gpu command path
 FSLGPUDIR=${FSLDIR}/bin
 PATH=${FSLGPUDIR}:${PATH}
@@ -465,7 +451,7 @@ PATH=${OCTAVEPATH}:${PATH}
 export OCTAVEPATH PATH
 
 # ------------------------------------------------------------------------------
-# -- Setup overal MNAP paths
+# -- Setup overall MNAP paths
 # ------------------------------------------------------------------------------
 
 MNAPCONNPATH=$MNAPPATH/connector
@@ -532,6 +518,52 @@ export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries; PATH=${FSLGPUBi
 export EDDYCUDADIR=${FSLGPUBinary}/eddy_cuda; PATH=${EDDYCUDADIR}:${PATH}; export PATH; eddy_cuda="eddy_cuda_wQC"; export eddy_cuda
 
 # ------------------------------------------------------------------------------
+# -- Setup FIX ICA paths and variables
+# ------------------------------------------------------------------------------
+
+# -- FIX ICA path
+FSL_FIXDIR=${TOOLS}/${FIXICAFolder}
+PATH=${FSL_FIXDIR}:${PATH}
+export FSL_FIXDIR PATH
+MATLABPATH=$FSL_FIXDIR:$MATLABPATH
+export MATLABPATH
+MATLABBIN=$(dirname `which matlab`)
+export MATLABBIN
+MATLABROOT=`cd $MATLABBIN; cd ..; pwd`
+export MATLABROOT
+
+# -- Setup HCP Pipelines global matlab path relevant for FIX ICA
+HCPDIRMATLAB=$HCPPIPEDIR/global/matlab/
+export HCPDIRMATLAB
+PATH=${HCPDIRMATLAB}:${PATH}
+MATLABPATH=$HCPDIRMATLAB:$MATLABPATH
+export MATLABPATH
+export PATH
+
+# -- FIX ICA Dependencies Folder
+FIXDIR_DEPEND=${MNAPPATH}/library/etc/ICAFIXDependencies
+export FIXDIR_DEPEND
+PATH=${FIXDIR_DEPEND}:${PATH}
+MATLABPATH=$FIXDIR_DEPEND:$MATLABPATH
+export MATLABPATH
+
+# -- Setup MATLAB_GIFTI_LIB relevant for FIX ICA
+MATLAB_GIFTI_LIB=$FIXDIR_DEPEND/gifti/
+export MATLAB_GIFTI_LIB
+PATH=${MATLAB_GIFTI_LIB}:${PATH}
+MATLABPATH=$MATLAB_GIFTI_LIB:$MATLABPATH
+export MATLABPATH
+export PATH
+. ${FIXDIR_DEPEND}/ICAFIX_settings.sh > /dev/null 2>&1
+
+# -- POST FIX ICA path
+POSTFIXICADIR=${TOOLS}/${MNAPREPO}/hcpmodified/PostFix
+PATH=${POSTFIXICADIR}:${PATH}
+export POSTFIXICADIR PATH
+MATLABPATH=$POSTFIXICADIR:$MATLABPATH
+export MATLABPATH
+
+# ------------------------------------------------------------------------------
 # -- MNAP - NIUtilities and Matlab Paths
 # ------------------------------------------------------------------------------
 
@@ -577,10 +609,11 @@ export PYTHONPATH
 
 # -- Set and export Matlab paths
 MATLABPATH=$MNAPPATH/matlab/fcMRI:$MATLABPATH
+
+MATLABPATH=$MNAPPATH/matlab/fcMRI:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/general:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/gmri:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/stats:$MATLABPATH
-export MATLABPATH
 
 # ------------------------------------------------------------------------------
 # -- Path to additional dependencies
@@ -938,7 +971,7 @@ alias gitmnap=function_gitmnap
 
 # -- Load additional needed modules
 if [[ ${LMODPRESENT} == "yes" ]]; then
-    LoadModules="Libs/netlib Libs/QT/5.6.2 Apps/R Rpkgs/RCURL/1.95 Langs/Python/2.7.14 Tools/GIT/2.6.2 Tools/Mercurial/3.6 GPU/Cuda/7.5 Apps/R/3.2.2-generic Rpkgs/GGPLOT2/2.0.0 Libs/SCIPY/0.13.3 Libs/PYDICOM/0.9.9 Libs/NIBABEL/2.0.1 Libs/MATPLOTLIB/1.4.3 Libs/AWS/1.11.66 Libs/NetCDF/4.3.3.1-parallel-intel2013 Libs/NUMPY/1.9.2 Langs/Lua/5.3.3"
+    LoadModules="Libs/netlib Libs/QT/5.6.2 Apps/R/3.5.1-generic Rpkgs/RCURL/1.95 Langs/Python/2.7.14 Tools/GIT/2.6.2 Tools/Mercurial/3.6 GPU/Cuda/7.5 Rpkgs/GGPLOT2/2.0.0 Libs/SCIPY/0.13.3 Libs/PYDICOM/0.9.9 Libs/NIBABEL/2.0.1 Libs/MATPLOTLIB/1.4.3 Libs/AWS/1.11.66 Libs/NetCDF/4.3.3.1-parallel-intel2013 Libs/NUMPY/1.9.2 Langs/Lua/5.3.3"
     echo ""; cyaneho " ---> LMOD present. Loading Modules..."
     for LoadModule in ${LoadModules}; do
         module load ${LoadModule} &> /dev/null
