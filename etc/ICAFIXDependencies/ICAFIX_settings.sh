@@ -7,10 +7,10 @@ FIXVERSION=1.067
 FSL_FIX_OS=`uname -s`
 FSL_FIX_ARCH=`uname -m`
 
-if [ -z "${FSL_FIXDIR}" ]; then
-	FSL_FIXDIR=$( cd $(dirname $0) ; pwd)
-	export FSL_FIXDIR
-fi
+# if [ -z "${FSL_FIXDIR}" ]; then
+# 	FSL_FIXDIR=$( cd $(dirname $0) ; pwd)
+# 	export FSL_FIXDIR
+# fi
 
 # edit the following variables according to your local setup
 
@@ -40,7 +40,7 @@ FSL_FIX_MCC=${FSL_FIX_MATLAB_ROOT}/bin/glnxa64
 #FSL_FIX_MCRROOT=/opt/fmrib/MATLAB/MATLAB_Compiler_Runtime
 
 # WUSTL CHPC Cluster 2.0 setting
-FSL_FIX_MCRROOT=/gpfs/apps/hpc.rhel6/Apps/Matlab/R2014a
+FSL_FIX_MCRROOT=/gpfs/apps/hpc/Apps/Matlab/R2018a
 
 if [ -f ${FSL_FIXDIR}/MCR.version ]; then
 	FSL_FIX_MCRV=`cat ${FSL_FIXDIR}/MCR.version`

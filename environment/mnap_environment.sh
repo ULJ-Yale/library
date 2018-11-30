@@ -519,16 +519,18 @@ export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries; PATH=${FSLGPUBi
 export EDDYCUDADIR=${FSLGPUBinary}/eddy_cuda; PATH=${EDDYCUDADIR}:${PATH}; export PATH; eddy_cuda="eddy_cuda_wQC"; export eddy_cuda
 
 # ------------------------------------------------------------------------------
-# -- Setup FIX ICA paths and variables
+# -- Setup ICA FIX paths and variables
 # ------------------------------------------------------------------------------
 
-# -- FIX ICA path
+# -- ICA FIX path
 FSL_FIXDIR=${TOOLS}/${FIXICAFolder}
 PATH=${FSL_FIXDIR}:${PATH}
 export FSL_FIXDIR PATH
 MATLABPATH=$FSL_FIXDIR:$MATLABPATH
 export MATLABPATH
-MATLABBIN=$(dirname `which matlab`)
+if [ ! -z `which matlab 2>/dev/null` ]; then
+    MATLABBIN=$(dirname `which matlab 2>/dev/null`)
+fi
 export MATLABBIN
 MATLABROOT=`cd $MATLABBIN; cd ..; pwd`
 export MATLABROOT

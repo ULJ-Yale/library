@@ -10,29 +10,40 @@ is.installed <- function(mypkg){
 
 # -- R dependencies --> Install these packages for R to run in fix
 if (!is.installed("devtools")){
-  install.packages("devtools", repos="https://cloud.r-project.org", lib="~/R_libs/")
+  install.packages("devtools", repos="https://cloud.r-project.org", dependencies=TRUE, lib="~/R_libs/")
 }
 
 # -- Dependencies and install for party
 if (!is.installed("mvtnorm")){
-  install.packages('mvtnorm', repos="https://cloud.r-project.org", lib="~/R_libs/")
+  install.packages('mvtnorm', repos="https://cloud.r-project.org", dependencies=TRUE, lib="~/R_libs/")
 }
 if (!is.installed("modeltools")){
-  install.packages('modeltools', repos="https://cloud.r-project.org", lib="~/R_libs/")
+  install.packages('modeltools', repos="https://cloud.r-project.org", dependencies=TRUE, lib="~/R_libs/")
 }
 if (!is.installed("strucchange")){
-   install.packages('strucchange', repos="https://cloud.r-project.org", lib="~/R_libs/")
+   install.packages('strucchange', repos="https://cloud.r-project.org", dependencies=TRUE, lib="~/R_libs/")
 }
 if (!is.installed("coin")){
-  install.packages('coin', repos="https://cloud.r-project.org", lib="~/R_libs/")
+  install.packages('coin', repos="https://cloud.r-project.org", dependencies=TRUE, lib="~/R_libs/")
 }
 if (!is.installed("zoo")){
-  install.packages('zoo', repos="https://cloud.r-project.org", lib="~/R_libs/")
+  install.packages('zoo', repos="https://cloud.r-project.org", dependencies=TRUE, lib="~/R_libs/")
 }
 if (!is.installed("sandwich")){
-  install.packages('sandwich', repos="https://cloud.r-project.org", lib="~/R_libs/")
+  install.packages('sandwich', repos="https://cloud.r-project.org", dependencies=TRUE, lib="~/R_libs/")
 }
-
+if (!is.installed("lattice")){
+  install.packages('lattice', repos="https://cloud.r-project.org", dependencies=TRUE, lib="~/R_libs/")
+}
+if (!is.installed("Matrix")){
+  install.packages('Matrix', repos="https://cloud.r-project.org", dependencies=TRUE, lib="~/R_libs/")
+}
+if (!is.installed("codetools")){
+  install.packages('codetools', repos="https://cloud.r-project.org", dependencies=TRUE, lib="~/R_libs/")
+}
+if (!is.installed("MASS")){
+  install.packages('MASS', repos="https://cloud.r-project.org", dependencies=TRUE, lib="~/R_libs/")
+}
 # -- Dependencies and install for party
 if (is.installed("party")){
   CheckVersionParty <- packageVersion("party")=="1.0-25"
@@ -44,7 +55,7 @@ if (CheckVersionParty!="TRUE"){
     remove.packages("party")
   }
   packageurl <- "https://cran.r-project.org/src/contrib/Archive/party/party_1.0-25.tar.gz"
-  install.packages(packageurl, repos=NULL, type="source", lib="~/R_libs/")
+  install.packages(packageurl, repos=NULL, type="source", dependencies=TRUE, lib="~/R_libs/")
   packageVersion('party')
 }
 
