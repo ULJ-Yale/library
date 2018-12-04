@@ -255,7 +255,6 @@ if [[ -z ${FIXICAFolder} ]]; then FIXICAFolder="fix1.06"; fi
 if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="freesurfer-5.3-HCP"; fi
 if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="FreeSurferScheduler"; fi
 if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="workbench"; fi
-if [[ -z ${PALMDIR} ]]; then PALMDIR="PALM/palm-alpha111"; fi
 if [[ -z ${AFNIDIR} ]]; then AFNIDIR="afni_linux_openmp_64"; fi
 if [[ -z ${DCM2NIIDIR} ]]; then DCM2NIIDIR="dcm2niix"; fi
 if [[ -z ${DICM2NIIDIR} ]]; then DICM2NIIDIR="dicm2nii"; fi
@@ -354,6 +353,7 @@ if [ -f ~/.mnapuseoctave ]; then
              cp ${MNAPPATH}/library/.octaverc ~/.octaverc
          fi
          export LD_LIBRARY_PATH=/usr/lib64/hdf5/:LD_LIBRARY_PATH > /dev/null 2>&1
+         if [[ -z ${PALMDIR} ]]; then PALMDIR="PALM/palm-alpha112o"; fi
     fi
 fi
 if [ ! -f ~/.mnapuseoctave ]; then 
@@ -363,6 +363,7 @@ if [ ! -f ~/.mnapuseoctave ]; then
          cyaneho " ---> Setting up Matlab "; echo ""
          MNAPMCOMMAND='matlab -nodisplay -nosplash -r'
     fi
+    if [[ -z ${PALMDIR} ]]; then PALMDIR="PALM/palm-alpha112"; fi
 fi
 # -- Use the following command to run .m code in Matlab
 export MNAPMCOMMAND
