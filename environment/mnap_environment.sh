@@ -259,7 +259,7 @@ if [[ -z ${AFNIDIR} ]]; then AFNIDIR="afni_linux_openmp_64"; fi
 if [[ -z ${DCM2NIIDIR} ]]; then DCM2NIIDIR="dcm2niix"; fi
 if [[ -z ${DICM2NIIDIR} ]]; then DICM2NIIDIR="dicm2nii"; fi
 if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="Octave/4.2.1"; fi
-if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="octavepkg/packages"; fi
+if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="${TOOLS}/octavepkg/packages"; fi
 if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="pylib"; fi
 
 # -- Checks for version
