@@ -12,5 +12,4 @@ PATH=${MNAPCONTAINER}:${PATH}
 export MNAPCONTAINER PATH
 
 # -- Command to execute the shell script with MNAP-specific commands
-CWD=`pwd`
-singularity exec ${MNAPCONTAINER}/mnap_suite.simg ${CWD}/MNAPSingularity_Commands.sh
+singularity exec ${MNAPCONTAINER}/mnap_suite.simg ${TOOLS}/mnaptools/library/bin/MNAPSingularity_Commands.sh
