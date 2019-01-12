@@ -73,7 +73,7 @@ usage() {
     echo ""
     echo "  TOOLS                                                              -- the base folder for the installation"
     echo "  ├── afni                         Env. Variable = AFNIDIR           -- AFNI: Analysis of Functional NeuroImages (https://github.com/afni/afni)"
-    echo "  ├── dcm2niix                     Env. Variable = DCM2NIIDIR        -- dcm2niix (https://github.com/rordenlab/dcm2niix)"
+    echo "  ├── dcm2niix                     Env. Variable = DCMNII            -- dcm2niix (https://github.com/rordenlab/dcm2niix)"
     echo "  ├── fix                          Env. Variable = FIXICAFolder      -- FIX ICA (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FIX/UserGuide)"
     echo "  ├── freesurfer-5.3-HCP           Env. Variable = FSDIR53HCP        -- FreeSurfer (v5.3-HCP version for HCP-compatible data; http://ftp.nmr.mgh.harvard.edu/pub/dist/freesurfer/5.3.0-HCP/)"
     echo "  ├── freesurfer-<LATEST_VERSION>  Env. Variable = FSDIRLATEST       -- FreeSurfer (v6.0 or later stable for all other data; https://surfer.nmr.mgh.harvard.edu/fswiki/DownloadAndInstall)"
@@ -226,41 +226,136 @@ fi
 # -- Load dependent software
 # ------------------------------------------------------------------------------
 # 
-#  $TOOLS                           # -- the base folder for the installation
-#  ├── afni                         # Env. Variable = $AFNIDIR            # -- AFNI: Analysis of Functional NeuroImages (https://github.com/afni/afni)
-#  ├── dcm2niix                     # Env. Variable = $DCM2NIIDIR         # -- dcm2niix (https://github.com/rordenlab/dcm2niix)
-#  ├── fix                          # Env. Variable = $FIXICAFolder       # -- FIX ICA (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FIX/UserGuide)
-#  ├── freesurfer-5.3-HCP           # Env. Variable = $FSDIR53HCP         # -- FreeSurfer (v5.3-HCP version for HCP-compatible data; http://ftp.nmr.mgh.harvard.edu/pub/dist/freesurfer/5.3.0-HCP/)
-#  ├── freesurfer-<LATEST_VERSION>  # Env. Variable = $FSDIRLATEST        # -- FreeSurfer (v6.0 or later stable for all other data; https://surfer.nmr.mgh.harvard.edu/fswiki/DownloadAndInstall)
-#  ├── fsl-<VERSION>                # Env. Variable = $FSLFolder          # -- FSL (v5.0.9 or above with GPU-enabled DWI tools; https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
-#  ├── mnaptools                    # Env. Variable = $MNAPREPO           # -- All MNAP Suite repositories (https://bitbucket.org/hidradev/mnaptools)
-#  ├── Octave/<version>             # Env. Variable = $OCTAVEDIR          # -- Octave v.4.2.1 or higher. If Octave is installed system-wide then a symlink is created here
-#  ├── octavepkg                    # Env. Variable = $OCTAVEPKGDIR       # -- If Octave packages need manual deployment then the installed packages go here
-#  ├── PALM/palm-<VERSION>          # Env. Variable = $PALMDIR            # -- PALM: Permutation Analysis of Linear Models (https://github.com/andersonwinkler/PALM)
-#  ├── pylib                        # Env. Variable = $PYLIBDIR           # -- All python libraries and tools
-#  │   ├── gradunwarp               # Env. Variable = $GRADUNWARPDIR      # -- HCP version of gradunwarp (https://github.com/Washington-University/gradunwarp)
-#  │   ├── nibabel                  # Env. Variable = $NIBABELDIR         # -- NiBabel (http://nipy.org/nibabel/)
-#  │   └── pydicom                  # Env. Variable = $PYDICOMDIR         # -- pydicom (v1.1.0 or later; https://pydicom.github.io) 
-#  └── workbench                    # Env. Variable = $HCPWBDIR           # -- Connectome Workbench (v1.0 or above; https://www.humanconnectome.org/software/connectome-workbench)
+#  $TOOLS                                         # The base folder for the dependency installation
+#  │
+#  ├── mnaptools                                  # Env. Variable = $MNAPREPO -- All MNAP Suite repositories (https://bitbucket.org/hidradev/mnaptools)
+#  │
+#  ├── HCPpipelines                               # Human Connectome Pipelines Folder (https://github.com/Washington-University/HCPpipelines)
+#  │   ├── HCPpipelines-stable                    # Env. Variable = $HCPPIPEDIR  Note: Only Human Connectome Pipelines Stable Branch is set by default
+#  │   ├── HCPpipelines-<VERSION>                 # Point any other desired version point to $HCPPIPEDIR
+#  │   └── HCPpipelinesRunUtils                   # Env. Variable = $HCPPIPERUNUTILS
+#  │
+#  ├── fmriprep                                   # fMRIPrep Pipelines (https://github.com/poldracklab/fmriprep)
+#  │   └── fmriprep-<VERSION>                     # Env. Variable = $FMRIPREP
+#  │
+#  ├── afni                                       # AFNI: Analysis of Functional NeuroImages (https://github.com/afni/afni)
+#  │   └── afni-<VERSION>                         # Env. Variable = $AFNIDIR (default
+#  │
+#  ├── dcm2niix                                   # dcm2niix conversion tool (https://github.com/rordenlab/dcm2niix)
+#  │   └── dcm2niix-<VERSION>                     # Env. Variable = $DCMNII
 #
-#  FreeSurferScheduler       Environment Variable --> $FreeSurferSchedulerDIR
+#  ├── dicm2nii                                   # dicm2nii conversion tool (https://github.com/xiangruili/dicm2nii)
+#  │   └── dicm2nii-latest                        # Env. Variable = $DICMNII
+#  │
+#  ├── freesurfer                                 # FreeSurfer (http://ftp.nmr.mgh.harvard.edu/pub/dist/freesurfer/5.3.0-HCP/)
+#  │   └── freesurfer-5.3-HCP                     # Env. Variable = $FSDIR53HCP (v5.3-HCP version for HCP-compatible data)
+#  │   └── freesurfer-<VERSION>                   # Env. Variable = $FSDIRLATEST (v6.0 or later stable for all other data
+#  │   └── FreeSurferScheduler                    # Env. Variable = $FreeSurferSchedulerDIR
+#  │
+#  ├── fsl                                        # FSL (v5.0.9 or above with GPU-enabled DWI tools; https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
+#  │   └── fsl-<VERSION>                          # Env. Variable = $FSLDIR
+#  │   └── fix-<VERSION>                          # Env. Variable = $FSL_FIXDIR -- ICA FIX (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FIX/UserGuide)
+#  │
+#  ├── Octave/Octave-<VERSION>                    # Octave v.4.4.1 or higher. If Octave is installed system-wide then a symlink is created here
+#  │   └── Octave-<VERSION>                       # Env. Variable = $OCTAVEDIR
+#  │
+#  ├── octavepkg                                  # Env. Variable = $OCTAVEPKGDIR -- If Octave packages need manual deployment then the installed packages go here
+#  │
+#  ├── PALM/palm-<VERSION>                        # PALM: Permutation Analysis of Linear Models (https://github.com/andersonwinkler/PALM)
+#  │   └── palm-latest-o                          # Env. Variable = $PALMDIR (If using Octave)
+#  │   └── palm-latest-m                          # Env. Variable = $PALMDIR (If using Matlab)
+#  │   └── palm-<VERSION>                         # Set any other version
+#  │
+#  ├── pylib                                      # Env. Variable = $PYLIBDIR           # -- All python libraries and tools
+#  │   ├── gradunwarp                             # Env. Variable = $GRADUNWARPDIR      # -- HCP version of gradunwarp (https://github.com/Washington-University/gradunwarp)
+#  │   ├── nibabel                                # Env. Variable = $NIBABELDIR         # -- NiBabel (http://nipy.org/nibabel/)
+#  │   └── pydicom                                # Env. Variable = $PYDICOMDIR         # -- pydicom (v1.1.0 or later; https://pydicom.github.io) 
+#  │
+#  └── workbench/workbench-<VERSION>              # Connectome Workbench (v1.0 or above; https://www.humanconnectome.org/software/connectome-workbench)
+#      └── workbench-<VERSION>                    # Env. Variable = $HCPWBDIR
+#
+# ------------------------------------------------------------------------------
+# -- Unset environment from userspace if we are running code from the container:
+# ------------------------------------------------------------------------------
+
+if [ -f /opt/.container ]; then
+    unset MNAPVer
+    unset TOOLS
+    unset MNAPREPO
+    unset MNAPPATH
+    unset TemplateFolder
+    unset FSL_FIXDIR
+    unset POSTFIXICADIR
+    unset FREESURFERDIR
+    unset FREESURFER_HOME
+    unset FREESURFER_SCHEDULER
+    unset FreeSurferSchedulerDIR
+    unset WORKBENCHDIR
+    unset AFNIPATH
+    unset DCMNII
+    unset DICMNII
+    unset OCTAVEDIR
+    unset OCTAVEPKGDIR
+    unset OCTAVEPATH
+    unset HCPWBDIR
+    unset AFNIDIR
+    unset PYLIBDIR
+
+    unset FSLDIR
+    unset FSLGPUDIR
+    unset PALMPATH
+    unset GRADUNWARPDIR
+    unset MNAPMCOMMAND
+
+    unset HCPPIPEDIR
+    unset CARET7DIR
+    unset GRADUNWARPDIR
+    unset HCPPIPEDIR_Templates
+    unset HCPPIPEDIR_Bin
+    unset HCPPIPEDIR_Config
+    unset HCPPIPEDIR_PreFS
+    unset HCPPIPEDIR_FS
+    unset HCPPIPEDIR_PostFS
+    unset HCPPIPEDIR_fMRISurf
+    unset HCPPIPEDIR_fMRIVol
+    unset HCPPIPEDIR_tfMRI
+    unset HCPPIPEDIR_dMRI
+    unset HCPPIPEDIR_dMRITract
+    unset HCPPIPEDIR_Global
+    unset HCPPIPEDIR_tfMRIAnalysis
+    unset MSMBin
+    unset HCPPIPEDIR_dMRITracFull
+    unset HCPPIPEDIR_dMRILegacy
+    unset AutoPtxFolder
+    unset FSLGPUBinary
+    unset EDDYCUDADIR
+
+    # -- Check for specific settings a user might want:
+
+    if [ -f ~/.mnap_container.rc ]; then
+        source ~/.mnap_container.rc
+    elif [[ -v MNAPCONTAINERENV ]]
+        source $MNAPCONTAINERENV
+    fi         
+fi
 
 # ------------------------------------------------------------------------------
 # -- Set default folder names for dependencies if undefined by user environment:
 # ------------------------------------------------------------------------------
 
 # -- Check if folders for dependencies are set in the global path
-if [[ -z ${FSLFolder} ]]; then unset FSLDIR; FSLFolder="fsl-5.0.9"; fi
-if [[ -z ${FIXICAFolder} ]]; then FIXICAFolder="fix1.067"; fi
-if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="freesurfer-5.3-HCP"; fi
-if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="FreeSurferScheduler"; fi
-if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="workbench"; fi
-if [[ -z ${AFNIDIR} ]]; then AFNIDIR="afni_linux_openmp_64"; fi
-if [[ -z ${DCM2NIIDIR} ]]; then DCM2NIIDIR="dcm2niix"; fi
-if [[ -z ${DICM2NIIDIR} ]]; then DICM2NIIDIR="dicm2nii"; fi
-if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="Octave/4.2.1"; fi
+if [[ -z ${FSLDIR} ]]; then FSLDIR="${TOOLS}/fsl/fsl-5.0.9"; fi
+if [[ -z ${FSL_FIXDIR} ]]; then FSL_FIXDIR="${TOOLS}/fsl/fix-1.067"; fi
+if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="${TOOLS}/freesurfer/freesurfer-5.3-HCP"; fi
+if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="${TOOLS}/freesurfer/FreeSurferScheduler"; fi
+if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="${TOOLS}/workbench/workbench-1.3.2"; fi
+if [[ -z ${AFNIDIR} ]]; then AFNIDIR="${TOOLS}/afni/afni-latest"; fi
+if [[ -z ${DCMNII} ]]; then DCMNII="${TOOLS}/dcm2niix/dcm2niix-latest"; fi
+if [[ -z ${DICMNII} ]]; then DICMNII="${TOOLS}/dicm2nii/dicm2nii-latest"; fi
+if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="${TOOLS}/Octave/Octave-4.4.1"; fi
 if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="${TOOLS}/octavepkg/packages"; fi
-if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="pylib"; fi
+if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="${TOOLS}/pylib"; fi
+if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/HCPpipelines/HCPpipelines-stable"; fi
 
 # -- Checks for version
 showVersion() {
@@ -353,7 +448,7 @@ if [ -f ~/.mnapuseoctave ]; then
              cp ${MNAPPATH}/library/.octaverc ~/.octaverc
          fi
          export LD_LIBRARY_PATH=/usr/lib64/hdf5/:LD_LIBRARY_PATH > /dev/null 2>&1
-         PALMDIR="PALM/palm-alpha112o"
+         if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/PALM/palm-latest-o"; fi
     fi
 fi
 if [ ! -f ~/.mnapuseoctave ]; then 
@@ -362,7 +457,7 @@ if [ ! -f ~/.mnapuseoctave ]; then
     else
          cyaneho " ---> Setting up Matlab "; echo ""
          MNAPMCOMMAND='matlab -nodisplay -nosplash -r'
-         PALMDIR="PALM/palm-alpha112"
+         if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/PALM/palm-latest-m"; fi
     fi
 fi
 # -- Use the following command to run .m code in Matlab
@@ -389,7 +484,7 @@ MATLABPATH=$FSLGPUDIR:$MATLABPATH
 export MATLABPATH
 
 # -- FreeSurfer path
-FREESURFER_HOME=${TOOLS}/${FREESURFERDIR}
+FREESURFER_HOME=${FREESURFERDIR}
 PATH=${FREESURFER_HOME}:${PATH}
 export FREESURFER_HOME PATH
 . ${FREESURFER_HOME}/SetUpFreeSurfer.sh > /dev/null 2>&1
@@ -397,7 +492,6 @@ export FREESURFER_HOME PATH
 # -- FSL path
 # -- Note: Always run after FreeSurfer for correct environment specification
 #          because SetUpFreeSurfer.sh can mis-specify the $FSLDIR path
-FSLDIR=${TOOLS}/${FSLFolder}
 PATH=${FSLDIR}/bin:${PATH}
 . ${FSLDIR}/etc/fslconf/fsl.sh > /dev/null 2>&1
 export FSLDIR PATH
@@ -405,17 +499,17 @@ MATLABPATH=$FSLDIR:$MATLABPATH
 export MATLABPATH
 
 # -- FreeSurfer Scheduler for GPU acceleration path
-FREESURFER_SCHEDULER=${TOOLS}/${FreeSurferSchedulerDIR}
+FREESURFER_SCHEDULER=${FreeSurferSchedulerDIR}
 PATH=${FREESURFER_SCHEDULER}:${PATH}
 export FREESURFER_SCHEDULER PATH
 
 # -- Workbench path (set OS)
 if [ "$OSInfo" == "Darwin" ]; then
-    WORKBENCHDIR=${TOOLS}/${HCPWBDIR}/bin_macosx64
+    WORKBENCHDIR=${HCPWBDIR}/bin_macosx64
 elif [ "$OSInfo" == "Ubuntu" ] || [ "$OSInfo" == "Debian" ]; then
-    WORKBENCHDIR=${TOOLS}/workbench/bin_linux64
+    WORKBENCHDIR=${HCPWBDIR}/bin_linux64
 elif [ "$OSInfo" == "RedHat" ]; then
-    WORKBENCHDIR=${TOOLS}/workbench/bin_rh_linux64
+    WORKBENCHDIR=${HCPWBDIR}/bin_rh_linux64
 fi
 PATH=${WORKBENCHDIR}:${PATH}
 export WORKBENCHDIR PATH
@@ -423,31 +517,31 @@ MATLABPATH=$WORKBENCHDIR:$MATLABPATH
 export MATLABPATH
 
 # -- PALM path
-PALMPATH=${TOOLS}/${PALMDIR}
+PALMPATH=${PALMDIR}
 PATH=${PALMPATH}:${PATH}
 export PALMPATH PATH
 MATLABPATH=$PALMPATH:$MATLABPATH
 export MATLABPATH
 
 # -- AFNI path
-AFNIPATH=${TOOLS}/${AFNIDIR}
+AFNIPATH=${AFNIDIR}
 PATH=${AFNIPATH}:${PATH}
 export AFNIPATH PATH
 MATLABPATH=$AFNIPATH:$MATLABPATH
 export MATLABPATH
 
 # -- dcm2niix path
-DCMNII=${TOOLS}/${DCM2NIIDIR}/build/bin
+DCMNII=${DCMNII}/build/bin
 PATH=${DCMNII}:${PATH}
 export DCMNII PATH
 
 # -- dicm2nii path
-DICMNII=${TOOLS}/${DICM2NIIDIR}
+export DICMNII PATH
 MATLABPATH=$DICMNII:$MATLABPATH
 export MATLABPATH
 
 # -- Octave path
-OCTAVEPATH=${TOOLS}/${OCTAVEDIR}/bin
+OCTAVEPATH=${OCTAVEDIR}/bin
 PATH=${OCTAVEPATH}:${PATH}
 export OCTAVEPATH PATH
 
@@ -495,9 +589,10 @@ if [ -e ~/.mnaphcpe ];
     reho " ---> MNAP HCP path is set to: $HCPPIPEDIR"
     echo ""
 fi
+
 export HCPPIPEDIR=$MNAPPATH/hcpmodified; PATH=${HCPPIPEDIR}:${PATH}; export PATH
 export CARET7DIR=$WORKBENCHDIR; PATH=${CARET7DIR}:${PATH}; export PATH
-export GRADUNWARPDIR=${TOOLS}/$PYLIBDIR/gradunwarp/core; PATH=${GRADUNWARPDIR}:${PATH}; export PATH
+export GRADUNWARPDIR=$PYLIBDIR/gradunwarp/core; PATH=${GRADUNWARPDIR}:${PATH}; export PATH
 export HCPPIPEDIR_Templates=${HCPPIPEDIR}/global/templates; PATH=${HCPPIPEDIR_Templates}:${PATH}; export PATH
 export HCPPIPEDIR_Bin=${HCPPIPEDIR}/global/binaries; PATH=${HCPPIPEDIR_Bin}:${PATH}; export PATH
 export HCPPIPEDIR_Config=${HCPPIPEDIR}/global/config; PATH=${HCPPIPEDIR_Config}:${PATH}; export PATH
@@ -523,7 +618,6 @@ export EDDYCUDADIR=${FSLGPUBinary}/eddy_cuda; PATH=${EDDYCUDADIR}:${PATH}; expor
 # ------------------------------------------------------------------------------
 
 # -- ICA FIX path
-FSL_FIXDIR=${TOOLS}/${FIXICAFolder}
 PATH=${FSL_FIXDIR}:${PATH}
 export FSL_FIXDIR PATH
 MATLABPATH=$FSL_FIXDIR:$MATLABPATH
@@ -536,7 +630,7 @@ MATLABROOT=`cd $MATLABBIN; cd ..; pwd`
 export MATLABROOT
 
 # -- Setup HCP Pipelines global matlab path relevant for FIX ICA
-HCPDIRMATLAB=$HCPPIPEDIR/global/matlab/
+HCPDIRMATLAB=${HCPPIPEDIR}/global/matlab/
 export HCPDIRMATLAB
 PATH=${HCPDIRMATLAB}:${PATH}
 MATLABPATH=$HCPDIRMATLAB:$MATLABPATH
@@ -557,7 +651,7 @@ PATH=${MATLAB_GIFTI_LIB}:${PATH}
 MATLABPATH=$MATLAB_GIFTI_LIB:$MATLABPATH
 export MATLABPATH
 export PATH
-. ${FIXDIR_DEPEND}/ICAFIX_settings.sh > /dev/null 2>&1
+#. ${FIXDIR_DEPEND}/ICAFIX_settings.sh > /dev/null 2>&1 
 
 # -- POST FIX ICA path
 POSTFIXICADIR=${TOOLS}/${MNAPREPO}/hcpmodified/PostFix
@@ -578,11 +672,11 @@ PATH=$MNAPPATH/connector:$PATH
 PATH=$MNAPPATH/niutilities:$PATH
 PATH=$MNAPPATH/matlab:$PATH
 PATH=$TOOLS/bin:$PATH
-PATH=$TOOLS/$PYLIBDIR/gradunwarp:$PATH
-PATH=$TOOLS/$PYLIBDIR/gradunwarp/core:$PATH
-PATH=$TOOLS/$PYLIBDIR/xmlutils.py:$PATH
-PATH=$TOOLS/$PYLIBDIR:$PATH
-PATH=$TOOLS/$PYLIBDIR/bin:$PATH
+PATH=$PYLIBDIR/gradunwarp:$PATH
+PATH=$PYLIBDIR/gradunwarp/core:$PATH
+PATH=$PYLIBDIR/xmlutils.py:$PATH
+PATH=$PYLIBDIR:$PATH
+PATH=$PYLIBDIR/bin:$PATH
 PATH=$TOOLS/MeshNet:$PATH
 PATH=/usr/local/bin:$PATH
 PATH=$PATH:/bin
@@ -598,21 +692,20 @@ PYTHONPATH=$MNAPPATH:$PYTHONPATH
 PYTHONPATH=$MNAPPATH/connector:$PYTHONPATH
 PYTHONPATH=$MNAPPATH/niutilities:$PYTHONPATH
 PYTHONPATH=$MNAPPA$TH/matlab:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR/pydicom:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR/gradunwarp:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR/gradunwarp/core:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR/xmlutils.py:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR/bin:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR/lib/python2.7/site-packages:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR/lib64/python2.7/site-packages:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR:$PYTHONPATH
+PYTHONPATH=$PYLIBDIR/pydicom:$PYTHONPATH
+PYTHONPATH=$PYLIBDIR/gradunwarp:$PYTHONPATH
+PYTHONPATH=$PYLIBDIR/gradunwarp/core:$PYTHONPATH
+PYTHONPATH=$PYLIBDIR/xmlutils.py:$PYTHONPATH
+PYTHONPATH=$PYLIBDIR/bin:$PYTHONPATH
+PYTHONPATH=$PYLIBDIR/lib/python2.7/site-packages:$PYTHONPATH
+PYTHONPATH=$PYLIBDIR/lib64/python2.7/site-packages:$PYTHONPATH
+PYTHONPATH=$PYLIBDIR:$PYTHONPATH
 PYTHONPATH=$TOOLS/MeshNet:$PYTHONPATH
 export PATH
 export PYTHONPATH
 
 # -- Set and export Matlab paths
 MATLABPATH=$MNAPPATH/matlab/fcMRI:$MATLABPATH
-
 MATLABPATH=$MNAPPATH/matlab/fcMRI:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/general:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/gmri:$MATLABPATH
@@ -972,15 +1065,19 @@ unset MNAPSubModule
 # -- define function_gitmnap alias
 alias gitmnap=function_gitmnap
 
-# -- Load additional needed modules
-if [[ ${LMODPRESENT} == "yes" ]]; then
-    LoadModules="Libs/netlib Libs/QT/5.6.2 Apps/R Rpkgs/RCURL/1.95 Langs/Python/2.7.14 Tools/GIT/2.6.2 Tools/Mercurial/3.6 GPU/Cuda/7.5 Rpkgs/GGPLOT2 Libs/SCIPY/0.13.3 Libs/PYDICOM/0.9.9 Libs/NIBABEL/2.0.1 Libs/MATPLOTLIB/1.4.3 Libs/AWS/1.11.66 Libs/NetCDF/4.3.3.1-parallel-intel2013 Libs/NUMPY/1.9.2 Langs/Lua/5.3.3"
-    echo ""; cyaneho " ---> LMOD present. Loading Modules..."
-    for LoadModule in ${LoadModules}; do
-        module load ${LoadModule} &> /dev/null
-    done
-    echo ""; cyaneho " ---> Loaded Modules:  ${LoadModules}"; echo ""
-fi
+# ------------------------------------------------------------------------------
+# -- Module setup if using a cluster
+# ------------------------------------------------------------------------------
+
+# # -- Load additional needed modules
+# if [[ ${LMODPRESENT} == "yes" ]]; then
+#     LoadModules="Libs/netlib Libs/QT/5.6.2 Apps/R Rpkgs/RCURL/1.95 Langs/Python/2.7.14 Tools/GIT/2.6.2 Tools/Mercurial/3.6 GPU/Cuda/7.5 Rpkgs/GGPLOT2 Libs/SCIPY/0.13.3 Libs/PYDICOM/0.9.9 Libs/NIBABEL/2.0.1 Libs/MATPLOTLIB/1.4.3 Libs/AWS/1.11.66 Libs/NetCDF/4.3.3.1-parallel-intel2013 Libs/NUMPY/1.9.2 Langs/Lua/5.3.3"
+#     echo ""; cyaneho " ---> LMOD present. Loading Modules..."
+#     for LoadModule in ${LoadModules}; do
+#         module load ${LoadModule} &> /dev/null
+#     done
+#     echo ""; cyaneho " ---> Loaded Modules:  ${LoadModules}"; echo ""
+# fi
 
 # ------------------------------------------------------------------------------
 # -- Setup CUDA
@@ -1008,5 +1105,5 @@ if [[ ! -z `command -v nvcc` ]]; then
     bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu
     export BedpostXGPUDir; export ProbTrackXDIR; export bindir; PATH=${bindir}:${PATH}; PATH=${bindir}/lib:${PATH}; PATH=${bindir}/bin:${PATH}; PATH=${ProbTrackXDIR}:${PATH}; export PATH
     export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
-    module load GPU/Cuda/${NVCCVer} &> /dev/null
+    #module load GPU/Cuda/${NVCCVer} &> /dev/null # Module setup if using a cluster
 fi
