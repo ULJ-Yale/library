@@ -334,7 +334,7 @@ if [ -f /opt/.container ]; then
 
     if [ -f ~/.mnap_container.rc ]; then
         source ~/.mnap_container.rc
-    elif [[ -v MNAPCONTAINERENV ]]
+    elif [[ -v MNAPCONTAINERENV ]]; then
         source $MNAPCONTAINERENV
     fi         
 fi
