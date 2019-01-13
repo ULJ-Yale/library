@@ -71,25 +71,260 @@ usage() {
     echo " The MNAP Suite assumes a set default folder names for dependencies if undefined by user environment."
     echo " These are defined relative to the ${TOOLS} folder which should be set as a global system variable."
     echo ""
-    echo "  TOOLS                                                              -- the base folder for the installation"
-    echo "  ├── afni                         Env. Variable = AFNIDIR           -- AFNI: Analysis of Functional NeuroImages (https://github.com/afni/afni)"
-    echo "  ├── dcm2niix                     Env. Variable = DCMNII            -- dcm2niix (https://github.com/rordenlab/dcm2niix)"
-    echo "  ├── fix                          Env. Variable = FIXICAFolder      -- FIX ICA (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FIX/UserGuide)"
-    echo "  ├── freesurfer-5.3-HCP           Env. Variable = FSDIR53HCP        -- FreeSurfer (v5.3-HCP version for HCP-compatible data; http://ftp.nmr.mgh.harvard.edu/pub/dist/freesurfer/5.3.0-HCP/)"
-    echo "  ├── freesurfer-<LATEST_VERSION>  Env. Variable = FSDIRLATEST       -- FreeSurfer (v6.0 or later stable for all other data; https://surfer.nmr.mgh.harvard.edu/fswiki/DownloadAndInstall)"
-    echo "  ├── fsl-<VERSION>                Env. Variable = FSLFolder         -- FSL (v5.0.9 or above with GPU-enabled DWI tools; https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)"
-    echo "  ├── mnaptools                    Env. Variable = MNAPREPO          -- All MNAP Suite repositories (https://bitbucket.org/hidradev/mnaptools)"
-    echo "  ├── Octave/<version>             Env. Variable = OCTAVEDIR         -- Octave v.4.2.1 or higher. If Octave is installed system-wide then a symlink is created here"
-    echo "  ├── octavepkg                    Env. Variable = OCTAVEPKGDIR      -- If Octave packages need manual deployment then the installed packages go here"
-    echo "  ├── PALM/palm-<VERSION>          Env. Variable = PALMDIR           -- PALM: Permutation Analysis of Linear Models (https://github.com/andersonwinkler/PALM)"
-    echo "  ├── pylib                        Env. Variable = PYLIBDIR          -- All python libraries and tools"
-    echo "  │   ├── gradunwarp               Env. Variable = GRADUNWARPDIR     -- HCP version of gradunwarp (https://github.com/Washington-University/gradunwarp)"
-    echo "  │   ├── nibabel                  Env. Variable = NIBABELDIR        -- NiBabel (http://nipy.org/nibabel/)"
-    echo "  │   └── pydicom                  Env. Variable = PYDICOMDIR        -- pydicom (v1.1.0 or later; https://pydicom.github.io)"
-    echo "  └── workbench                    Env. Variable = HCPWBDIR          -- Connectome Workbench (v1.0 or above; https://www.humanconnectome.org/software/connectome-workbench)"
+    echo "  TOOLS                              --> The base folder for the dependency installation "
+    echo "  │ "
+    echo "  ├── mnaptools                       --> Env. Variable => MNAPREPO -- All MNAP Suite repositories (https://bitbucket.org/hidradev/mnaptools) "
+    echo "  │ "
+    echo "  ├── HCPpipelines                    --> Human Connectome Pipelines Folder (https://github.com/Washington-University/HCPpipelines) "
+    echo "  │   ├── HCPpipelines-stable         --> Env. Variable => HCPPIPEDIR  Note: Only Human Connectome Pipelines Stable Branch is set by default "
+    echo "  │   ├── HCPpipelines-<VERSION>      --> Point any other desired version point to HCPPIPEDIR "
+    echo "  │   └── HCPpipelinesRunUtils        --> Env. Variable => HCPPIPERUNUTILS "
+    echo "  │ "
+    echo "  ├── fmriprep                        --> fMRIPrep Pipelines (https://github.com/poldracklab/fmriprep) "
+    echo "  │   ├── fmriprep-latest             --> Env. Variable => FMRIPREP "
+    echo "  │   └── fmriprep-<VERSION>          --> Set any other version to FMRIPREP "
+    echo "  │ "
+    echo "  ├── afni                            --> AFNI: Analysis of Functional NeuroImages (https://github.com/afni/afni) "
+    echo "  │   └── afni-<VERSION>              --> Env. Variable => AFNIDIR "
+    echo "  │ "
+    echo "  ├── dcm2niix                        --> dcm2niix conversion tool (https://github.com/rordenlab/dcm2niix) "
+    echo "  │   └── dcm2niix-latest             --> Env. Variable => DCMNII "
+    echo "  │ "
+    echo "  ├── dicm2nii                        --> dicm2nii conversion tool (https://github.com/xiangruili/dicm2nii) "
+    echo "  │   └── dicm2nii-latest             --> Env. Variable => DICMNII "
+    echo "  │ "
+    echo "  ├── freesurfer                      --> FreeSurfer (http://ftp.nmr.mgh.harvard.edu/pub/dist/freesurfer/5.3.0-HCP/) "
+    echo "  │   └── freesurfer-5.3-HCP          --> Env. Variable => FSDIR53HCP (v5.3-HCP version for HCP-compatible data) "
+    echo "  │   └── freesurfer-<VERSION>        --> Env. Variable => FSDIRLATEST (v6.0 or later stable for all other data "
+    echo "  │   └── FreeSurferScheduler         --> Env. Variable => FreeSurferSchedulerDIR "
+    echo "  │ "
+    echo "  ├── fsl                             --> FSL (v5.0.9 or above with GPU-enabled DWI tools; https://fsl.fmrib.ox.ac.uk/fsl/fslwiki) "
+    echo "  │   └── fsl-<VERSION>               --> Env. Variable => FSLDIR "
+    echo "  │   └── fix-<VERSION>               --> Env. Variable => FSL_FIXDIR -- ICA FIX (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FIX/UserGuide) "
+    echo "  │ "
+    echo "  ├── Octave/Octave-<VERSION>         --> Octave v.4.4.1 or higher. If Octave is installed system-wide then a symlink is created here "
+    echo "  │   └── Octave-<VERSION>            --> Env. Variable => OCTAVEDIR "
+    echo "  │ "
+    echo "  ├── octavepkg                       --> Env. Variable => OCTAVEPKGDIR -- If Octave packages need manual deployment then the installed packages go here "
+    echo "  │ "
+    echo "  ├── PALM                            --> PALM: Permutation Analysis of Linear Models (https://github.com/andersonwinkler/PALM) "
+    echo "  │   └── palm-latest-o               --> Env. Variable => PALMDIR (If using Octave) "
+    echo "  │   └── palm-latest-m               --> Env. Variable => PALMDIR (If using Matlab) "
+    echo "  │   └── palm-<VERSION>              --> Set any other version to PALMDIR " 
+    echo "  │ "
+    echo "  ├── pylib                           --> Env. Variable => PYLIBDIR      -- All MNAP python libraries and tools "
+    echo "  │   ├── gradunwarp                  --> Env. Variable => GRADUNWARPDIR -- HCP version of gradunwarp (https://github.com/Washington-University/gradunwarp) "
+    echo "  │   ├── nibabel                     --> Env. Variable => NIBABELDIR    -- NiBabel (http://nipy.org/nibabel/) "
+    echo "  │   └── pydicom                     --> Env. Variable => PYDICOMDIR    -- pydicom (v1.1.0 or later; https://pydicom.github.io) "
+    echo "  │ "
+    echo "  └── workbench/workbench-<VERSION>   Connectome Workbench (v1.0 or above; https://www.humanconnectome.org/software/connectome-workbench) "
+    echo "      └── workbench-<VERSION>         Env. Variable = HCPWBDIR "
     echo ""
     echo " These defaults can be redefined if the above paths are declared as global variables in the .bash_profile profile after loading the MNAP environment."
     echo ""
+    geho "  ==> For full environment report run 'mnap environment'"
+    echo ""
+    exit 0
+}
+
+# ------------------------------------------------------------------------------
+#  Print out environment
+# ------------------------------------------------------------------------------
+
+environment() {
+    echo ""
+    geho "--------------------------------------------------------------"
+    geho " MNAP Environment Report"
+    geho "--------------------------------------------------------------"
+    unset EnvErrorReport
+    echo ""
+    echo ""
+    geho "   MNAP General Environment Variables"
+    geho "----------------------------------------------"
+    echo ""
+    echo "                  MNAPVer : $MNAPVer";              if [[ -z $MNAPVer ]]; then EnvError="yes"; EnvErrorReport="MNAPVer"; fi
+    echo "                    TOOLS : $TOOLS";                if [[ -z $TOOLS ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport TOOLS"; fi
+    echo "                 MNAPREPO : $MNAPREPO";             if [[ -z $MNAPREPO ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MNAPREPO"; fi
+    echo "                 MNAPPATH : $MNAPPATH";             if [[ -z $MNAPPATH ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MNAPPATH"; fi
+    echo "           TemplateFolder : $TemplateFolder";       if [[ -z $TemplateFolder ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport TemplateFolder"; fi
+    echo "             MNAPMCOMMAND : $MNAPMCOMMAND";         if [[ -z $MNAPMCOMMAND ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MNAPMCOMMAND"; fi
+    echo ""
+    geho "   Core Dependencies Environment Variables"
+    geho "----------------------------------------------"
+    echo ""
+    echo "                   FSLDIR : $FSLDIR";               if [[ -z $FSLDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport FSLDIR"; fi
+    echo "                FSLGPUDIR : $FSLGPUDIR";            if [[ -z $FSLGPUDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport FSLGPUDIR"; fi
+    echo "             FSLGPUBinary : $FSLGPUBinary";         if [[ -z $FSLGPUBinary ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport FSLGPUBinary"; fi
+    echo "               FSL_FIXDIR : $FSL_FIXDIR";           if [[ -z $FSL_FIXDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport FSL_FIXDIR"; fi
+    echo "            POSTFIXICADIR : $POSTFIXICADIR";        if [[ -z $POSTFIXICADIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport POSTFIXICADIR"; fi
+    echo "          FREESURFER_HOME : $FREESURFER_HOME";      if [[ -z $FREESURFER_HOME ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport FREESURFER_HOME"; fi
+    echo "     FREESURFER_SCHEDULER : $FREESURFER_SCHEDULER"; if [[ -z $FREESURFER_SCHEDULER ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport FREESURFER_SCHEDULER"; fi
+    echo "             WORKBENCHDIR : $WORKBENCHDIR";         if [[ -z $WORKBENCHDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport WORKBENCHDIR"; fi
+    echo "                CARET7DIR : $CARET7DIR";            if [[ -z $CARET7DIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport CARET7DIR"; fi
+    echo "                 AFNIPATH : $AFNIPATH";             if [[ -z $AFNIPATH ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport AFNIPATH"; fi
+    echo "                   DCMNII : $DCMNII";               if [[ -z $DCMNII ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport DCMNII"; fi
+    echo "                  DICMNII : $DICMNII";              if [[ -z $DICMNII ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport DICMNII"; fi
+    if [ -f ~/.mnapuseoctave ]; then
+    echo "             OCTAVEPKGDIR : $OCTAVEPKGDIR";         if [[ -z $OCTAVEPKGDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport OCTAVEPKGDIR"; fi
+    echo "               OCTAVEPATH : $OCTAVEPATH";           if [[ -z $OCTAVEPATH ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport OCTAVEPATH"; fi
+    fi
+    echo "                 PALMPATH : $PALMPATH";             if [[ -z $PALMPATH ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport PALMPATH"; fi
+    echo ""
+    geho "   HCP Pipelines Environment Variables"
+    geho "----------------------------------------------"
+    echo ""
+    echo "               HCPPIPEDIR : $HCPPIPEDIR";               if [[ -z $HCPPIPEDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR"; fi
+    echo "            GRADUNWARPDIR : $GRADUNWARPDIR";            if [[ -z $GRADUNWARPDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport GRADUNWARPDIR"; fi
+    echo "     HCPPIPEDIR_Templates : $HCPPIPEDIR_Templates";     if [[ -z $HCPPIPEDIR_Templates ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_Templates"; fi
+    echo "           HCPPIPEDIR_Bin : $HCPPIPEDIR_Bin";           if [[ -z $HCPPIPEDIR_Bin ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_Bin"; fi
+    echo "        HCPPIPEDIR_Config : $HCPPIPEDIR_Config";        if [[ -z $HCPPIPEDIR_Config ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_Config"; fi
+    echo "         HCPPIPEDIR_PreFS : $HCPPIPEDIR_PreFS";         if [[ -z $HCPPIPEDIR_PreFS ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_PreFS"; fi
+    echo "            HCPPIPEDIR_FS : $HCPPIPEDIR_FS";            if [[ -z $HCPPIPEDIR_FS ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_FS"; fi
+    echo "        HCPPIPEDIR_PostFS : $HCPPIPEDIR_PostFS";        if [[ -z $HCPPIPEDIR_PostFS ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_PostFS"; fi
+    echo "      HCPPIPEDIR_fMRISurf : $HCPPIPEDIR_fMRISurf";      if [[ -z $HCPPIPEDIR_fMRISurf ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_fMRISurf"; fi
+    echo "       HCPPIPEDIR_fMRIVol : $HCPPIPEDIR_fMRIVol";       if [[ -z $HCPPIPEDIR_fMRIVol ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_fMRIVol"; fi
+    echo "         HCPPIPEDIR_tfMRI : $HCPPIPEDIR_tfMRI";         if [[ -z $HCPPIPEDIR_tfMRI ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_tfMRI"; fi
+    echo "          HCPPIPEDIR_dMRI : $HCPPIPEDIR_dMRI";          if [[ -z $HCPPIPEDIR_dMRI ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_dMRI"; fi
+    echo "     HCPPIPEDIR_dMRITract : $HCPPIPEDIR_dMRITract";     if [[ -z $HCPPIPEDIR_dMRITract ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_dMRITract"; fi
+    echo "        HCPPIPEDIR_Global : $HCPPIPEDIR_Global";        if [[ -z $HCPPIPEDIR_Global ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_Global"; fi
+    echo " HCPPIPEDIR_tfMRIAnalysis : $HCPPIPEDIR_tfMRIAnalysis"; if [[ -z $HCPPIPEDIR_tfMRIAnalysis ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_tfMRIAnalysis"; fi
+    echo "                   MSMBin : $MSMBin";                   if [[ -z $MSMBin ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MSMBin"; fi
+    echo "  HCPPIPEDIR_dMRITracFull : $HCPPIPEDIR_dMRITracFull";  if [[ -z $HCPPIPEDIR_dMRITracFull ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_dMRITracFull"; fi
+    echo "    HCPPIPEDIR_dMRILegacy : $HCPPIPEDIR_dMRILegacy";    if [[ -z $HCPPIPEDIR_dMRILegacy ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_dMRILegacy"; fi
+    echo "            AutoPtxFolder : $AutoPtxFolder";            if [[ -z $AutoPtxFolder ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport AutoPtxFolder"; fi
+    echo "              EDDYCUDADIR : $EDDYCUDADIR";              if [[ -z $EDDYCUDADIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport EDDYCUDADIR"; fi
+    echo ""
+    echo ""
+    geho "   Binary / Executable Locations and Versions"
+    geho "----------------------------------------------"
+    echo ""
+    unset BinaryErrorReport
+    
+    ## -- Check for FSL
+    echo "         FSL Binary  : $(which fsl 2>&1 | grep -v 'no fsl')"
+    if [[ -z $(which fsl 2>&1 | grep -v 'no fsl') ]]; then 
+    BinaryError="yes"; BinaryErrorReport="fsl"
+    reho "         FSL Version : Binary not found!"
+    else
+    echo "         FSL Version : $(cat $FSLDIR/etc/fslversion)"
+    fi
+    echo ""
+    
+    ## -- Check for FreeSurfer
+    echo "  FreeSurfer Binary  : $(which freesurfer 2>&1 | grep -v 'no freesurfer')"
+    if [[ -z $(which freesurfer 2>&1 | grep -v 'no freesurfer') ]]; then 
+    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport freesurfer"
+    reho "  FreeSurfer Version : Binary not found!"
+    else
+    echo "  FreeSurfer Version : $(freesurfer | tail -n 2)"
+    fi
+    echo ""
+    
+    # -- Check for AFNI
+    echo "        AFNI Binary  : $(which afni 2>&1 | grep -v 'no afni')"
+    if [[ -z $(which afni 2>&1 | grep -v 'no afni') ]]; then 
+    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport afni"
+    reho "        AFNI Version : Binary not found!"
+    else
+    echo "        AFNI Version : $(afni --version)"
+    fi
+    echo ""
+    
+    ## -- Check for dcm2niix
+    echo "    dcm2niix Binary  : $(which dcm2niix 2>&1 | grep -v 'no dcm2niix')"
+    if [[ -z $(which dcm2niix 2>&1 | grep -v 'no dcm2niix') ]]; then 
+    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport dcm2niix"
+    reho "    dcm2niix Version : Binary not found!"
+    else
+    echo "    dcm2niix Version : $(dcm2niix -v | head -1)"
+    fi
+    echo ""
+    
+    # -- Check for dicm2nii
+    echo "    dicm2nii Binary  : $DICMNII/dicm2nii.m"
+    if [[ -z `ls $DICMNII/dicm2nii.m` ]]; then 
+    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport dicm2nii"
+    reho "    dicm2nii Version : Executable not found!"
+    else    
+    echo "    dicm2nii Version : $(cat $DICMNII/README.md | grep "(version" )"
+    fi
+    echo ""
+    
+    ## -- Check for fix
+    echo "         FIX Binary  : $(which fix 2>&1 | grep -v 'no fix')"
+    if [[ -z $(which fix 2>&1 | grep -v 'no fix') ]]; then 
+    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport fix"
+    reho "         FIX Version : Binary not found!"
+    else
+    echo "         FIX Version : $(fix -v | grep FMRIB)"
+    fi
+    echo ""
+
+    ## -- Check for Octave
+    if [ -f ~/.mnapuseoctave ]; then
+    echo "      Octave Binary  : $(which octave 2>&1 | grep -v 'no octave')"
+    if [[ -z $(which octave 2>&1 | grep -v 'no octave') ]]; then 
+    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport octave"
+    reho "      Octave Version : Binary not found!"
+    else
+    echo "      Octave Version : $(octave -q --eval "v=version;fprintf('%s', v);")"
+    fi
+    else
+    echo "      Matlab Binary  : $(which matlab 2>&1 | grep -v 'no matlab')"
+    if [[ -z $(which matlab 2>&1 | grep -v 'no matlab') ]]; then
+    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport matlab"
+    reho "      Matlab Version : Binary not found!"
+    else
+    echo "      Matlab Version : $(which matlab 2>&1 | grep -v 'no matlab')"
+    fi
+    # echo "     matlab : $(matlab -nodisplay -nojvm -nosplash -r "v=version;fprintf('%s', v);" | tail -1)"  
+    fi
+    echo ""
+    
+    ## -- Check for PALM
+    echo "        PALM Binary  : $PALMPATH/palm.m"
+    if [[ -z `ls $PALMPATH/palm.m` ]]; then 
+    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport palm"
+    reho "        PALM Version : Executable not found!"
+    else
+    echo "        PALM Version : $(cat $PALMPATH/palm_version.txt)"
+    fi
+    echo ""
+
+    ## -- Check for Workbench
+    echo "  wb_command Binary  : $(which wb_command 2>&1 | grep -v 'no wb_command')"
+    if [[ -z $(which wb_command 2>&1 | grep -v 'no wb_command') ]]; then
+    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport wb_command"
+    reho "  wb_command Version : Binary not found!"
+    else
+    echo "  wb_command Version : $(wb_command | head -1)"
+    fi
+    echo ""
+
+    geho "  Full Environment Paths"
+    geho "----------------------------------------------"
+    echo ""
+    echo "  PATH : $PATH"
+    echo ""
+    echo "  PYTHONPATH : $PYTHONPATH"
+    echo ""
+    echo "  MATLABPATH : $MATLABPATH"
+    echo ""
+    
+    if [[ ${EnvError} == "yes" ]]; then
+        echo ""
+        reho "  ERROR: The following environment variable(s) are missing: ${EnvErrorReport}"
+        echo ""
+    elif [[ ${BinaryError} == "yes" ]]; then
+        echo ""
+        reho "  ERROR: The following binaries / executables are not found: ${BinaryErrorReport}"
+        echo ""
+    else
+        echo ""
+        geho "=================== MNAP environment set successfully! ===================="
+        echo ""
+    fi
+    exit 0
 }
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=
@@ -145,7 +380,6 @@ done
 
 if [ "$1" == "--help" ] || [ "$1" == "-help" ] || [ "$1" == "help" ] || [ "$1" == "?help" ] || [ "$1" == "--usage" ] || [ "$1" == "-usage" ] || [ "$1" == "usage" ] || [ "$1" == "?usage" ]; then
     usage
-    return 0
 fi
 
 # ------------------------------------------------------------------------------
@@ -209,10 +443,9 @@ if [ -e ~/mnapinit.sh ]; then
     source ~/mnapinit.sh
 fi
 
-# PATH=${MNAPREPO}:${PATH}
-# export MNAPREPO PATH
 MNAPPATH=${TOOLS}/${MNAPREPO}
-export MNAPPATH MNAPREPO
+MNAPVer=`cat ${TOOLS}/${MNAPREPO}/VERSION.md`
+export MNAPPATH MNAPREPO MNAPVer
 
 if [ -e ~/mnapinit.sh ]; then
     echo ""
@@ -225,118 +458,22 @@ fi
 # ------------------------------------------------------------------------------
 # -- Load dependent software
 # ------------------------------------------------------------------------------
-# 
-#  $TOOLS                                         # The base folder for the dependency installation
-#  │
-#  ├── mnaptools                                  # Env. Variable = $MNAPREPO -- All MNAP Suite repositories (https://bitbucket.org/hidradev/mnaptools)
-#  │
-#  ├── HCPpipelines                               # Human Connectome Pipelines Folder (https://github.com/Washington-University/HCPpipelines)
-#  │   ├── HCPpipelines-stable                    # Env. Variable = $HCPPIPEDIR  Note: Only Human Connectome Pipelines Stable Branch is set by default
-#  │   ├── HCPpipelines-<VERSION>                 # Point any other desired version point to $HCPPIPEDIR
-#  │   └── HCPpipelinesRunUtils                   # Env. Variable = $HCPPIPERUNUTILS
-#  │
-#  ├── fmriprep                                   # fMRIPrep Pipelines (https://github.com/poldracklab/fmriprep)
-#  │   └── fmriprep-<VERSION>                     # Env. Variable = $FMRIPREP
-#  │
-#  ├── afni                                       # AFNI: Analysis of Functional NeuroImages (https://github.com/afni/afni)
-#  │   └── afni-<VERSION>                         # Env. Variable = $AFNIDIR (default
-#  │
-#  ├── dcm2niix                                   # dcm2niix conversion tool (https://github.com/rordenlab/dcm2niix)
-#  │   └── dcm2niix-<VERSION>                     # Env. Variable = $DCMNII
-#
-#  ├── dicm2nii                                   # dicm2nii conversion tool (https://github.com/xiangruili/dicm2nii)
-#  │   └── dicm2nii-latest                        # Env. Variable = $DICMNII
-#  │
-#  ├── freesurfer                                 # FreeSurfer (http://ftp.nmr.mgh.harvard.edu/pub/dist/freesurfer/5.3.0-HCP/)
-#  │   └── freesurfer-5.3-HCP                     # Env. Variable = $FSDIR53HCP (v5.3-HCP version for HCP-compatible data)
-#  │   └── freesurfer-<VERSION>                   # Env. Variable = $FSDIRLATEST (v6.0 or later stable for all other data
-#  │   └── FreeSurferScheduler                    # Env. Variable = $FreeSurferSchedulerDIR
-#  │
-#  ├── fsl                                        # FSL (v5.0.9 or above with GPU-enabled DWI tools; https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
-#  │   └── fsl-<VERSION>                          # Env. Variable = $FSLDIR
-#  │   └── fix-<VERSION>                          # Env. Variable = $FSL_FIXDIR -- ICA FIX (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FIX/UserGuide)
-#  │
-#  ├── Octave/Octave-<VERSION>                    # Octave v.4.4.1 or higher. If Octave is installed system-wide then a symlink is created here
-#  │   └── Octave-<VERSION>                       # Env. Variable = $OCTAVEDIR
-#  │
-#  ├── octavepkg                                  # Env. Variable = $OCTAVEPKGDIR -- If Octave packages need manual deployment then the installed packages go here
-#  │
-#  ├── PALM/palm-<VERSION>                        # PALM: Permutation Analysis of Linear Models (https://github.com/andersonwinkler/PALM)
-#  │   └── palm-latest-o                          # Env. Variable = $PALMDIR (If using Octave)
-#  │   └── palm-latest-m                          # Env. Variable = $PALMDIR (If using Matlab)
-#  │   └── palm-<VERSION>                         # Set any other version
-#  │
-#  ├── pylib                                      # Env. Variable = $PYLIBDIR           # -- All python libraries and tools
-#  │   ├── gradunwarp                             # Env. Variable = $GRADUNWARPDIR      # -- HCP version of gradunwarp (https://github.com/Washington-University/gradunwarp)
-#  │   ├── nibabel                                # Env. Variable = $NIBABELDIR         # -- NiBabel (http://nipy.org/nibabel/)
-#  │   └── pydicom                                # Env. Variable = $PYDICOMDIR         # -- pydicom (v1.1.0 or later; https://pydicom.github.io) 
-#  │
-#  └── workbench/workbench-<VERSION>              # Connectome Workbench (v1.0 or above; https://www.humanconnectome.org/software/connectome-workbench)
-#      └── workbench-<VERSION>                    # Env. Variable = $HCPWBDIR
-#
+
 # ------------------------------------------------------------------------------
 # -- Unset environment from userspace if we are running code from the container:
 # ------------------------------------------------------------------------------
 
 if [ -f /opt/.container ]; then
-    unset MNAPVer
-    unset TOOLS
-    unset MNAPREPO
-    unset MNAPPATH
-    unset TemplateFolder
-    unset FSL_FIXDIR
-    unset POSTFIXICADIR
-    unset FREESURFERDIR
-    unset FREESURFER_HOME
-    unset FREESURFER_SCHEDULER
-    unset FreeSurferSchedulerDIR
-    unset WORKBENCHDIR
-    unset AFNIPATH
-    unset DCMNII
-    unset DICMNII
-    unset OCTAVEDIR
-    unset OCTAVEPKGDIR
-    unset OCTAVEPATH
-    unset HCPWBDIR
-    unset AFNIDIR
-    unset PYLIBDIR
-
-    unset FSLDIR
-    unset FSLGPUDIR
-    unset PALMPATH
-    unset GRADUNWARPDIR
-    unset MNAPMCOMMAND
-
-    unset HCPPIPEDIR
-    unset CARET7DIR
-    unset GRADUNWARPDIR
-    unset HCPPIPEDIR_Templates
-    unset HCPPIPEDIR_Bin
-    unset HCPPIPEDIR_Config
-    unset HCPPIPEDIR_PreFS
-    unset HCPPIPEDIR_FS
-    unset HCPPIPEDIR_PostFS
-    unset HCPPIPEDIR_fMRISurf
-    unset HCPPIPEDIR_fMRIVol
-    unset HCPPIPEDIR_tfMRI
-    unset HCPPIPEDIR_dMRI
-    unset HCPPIPEDIR_dMRITract
-    unset HCPPIPEDIR_Global
-    unset HCPPIPEDIR_tfMRIAnalysis
-    unset MSMBin
-    unset HCPPIPEDIR_dMRITracFull
-    unset HCPPIPEDIR_dMRILegacy
-    unset AutoPtxFolder
-    unset FSLGPUBinary
-    unset EDDYCUDADIR
-
+    ENVVARIABLES="MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR AFNIPATH DCMNII DICMNII OCTAVEDIR OCTAVEPKGDIR OCTAVEPATH HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMPATH GRADUNWARPDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR"
+    for ENVVARIABLE in ${ENVVARIABLES}; do
+        unset ${ENVVARIABLE}
+    done
     # -- Check for specific settings a user might want:
-
     if [ -f ~/.mnap_container.rc ]; then
         source ~/.mnap_container.rc
     elif [[ -v MNAPCONTAINERENV ]]; then
         source $MNAPCONTAINERENV
-    fi         
+    fi
 fi
 
 # ------------------------------------------------------------------------------
@@ -345,7 +482,7 @@ fi
 
 # -- Check if folders for dependencies are set in the global path
 if [[ -z ${FSLDIR} ]]; then FSLDIR="${TOOLS}/fsl/fsl-5.0.9"; fi
-if [[ -z ${FSL_FIXDIR} ]]; then FSL_FIXDIR="${TOOLS}/fsl/fix-1.067"; fi
+if [[ -z ${FSL_FIXDIR} ]]; then FSL_FIXDIR="${TOOLS}/fsl/fix-latest"; fi
 if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="${TOOLS}/freesurfer/freesurfer-5.3-HCP"; fi
 if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="${TOOLS}/freesurfer/FreeSurferScheduler"; fi
 if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="${TOOLS}/workbench/workbench-1.3.2"; fi
@@ -356,6 +493,7 @@ if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="${TOOLS}/Octave/Octave-4.4.1"; fi
 if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="${TOOLS}/octavepkg/packages"; fi
 if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="${TOOLS}/pylib"; fi
 if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/HCPpipelines/HCPpipelines-stable"; fi
+if [[ -z ${FMRIPREP} ]]; then FMRIPREP="${TOOLS}/fmriprep/fmriprep-latest"; fi
 
 # -- Checks for version
 showVersion() {
@@ -363,6 +501,14 @@ showVersion() {
     echo ""
     geho " Loading Multimodal Neuroimaging Analysis Platform (MNAP) Suite Version: v${MNAPVer}"
 }
+
+# ------------------------------------------------------------------------------
+# -- Manual Environment Check
+# ------------------------------------------------------------------------------
+
+if [ "$1" == "environment" ] || [ "$1" == "--environment" ] || [ "$1" == "-environment" ] || [ "$1" == "?environment" ]; then
+    environment
+fi
 
 # ------------------------------------------------------------------------------
 # -- License and version disclaimer
@@ -580,16 +726,18 @@ alias mnap_environment='$MNAPPATH/library/environment/mnap_environment.sh --help
 # -- Setup HCP Pipeline paths
 # ------------------------------------------------------------------------------
 
-export HCPPIPEDIR=${MNAPPATH}/hcpmodified
+# -- Re-Set HCP Pipeline path to different version if needed 
+HCPPIPEDIR=${MNAPPATH}/hcpmodified
 if [ -e ~/.mnaphcpe ];
     then
-    export HCPPIPEDIR=${MNAPPATH}/hcpextendedpull
+    HCPPIPEDIR=${MNAPPATH}/hcpextendedpull
     echo ""
     reho " ===> NOTE: You are in MNAP HCP development mode!"
     reho " ---> MNAP HCP path is set to: $HCPPIPEDIR"
     echo ""
 fi
 
+# -- Export HCP Pipeline and relevant variables
 export HCPPIPEDIR=$MNAPPATH/hcpmodified; PATH=${HCPPIPEDIR}:${PATH}; export PATH
 export CARET7DIR=$WORKBENCHDIR; PATH=${CARET7DIR}:${PATH}; export PATH
 export GRADUNWARPDIR=$PYLIBDIR/gradunwarp/core; PATH=${GRADUNWARPDIR}:${PATH}; export PATH
@@ -1106,4 +1254,12 @@ if [[ ! -z `command -v nvcc` ]]; then
     export BedpostXGPUDir; export ProbTrackXDIR; export bindir; PATH=${bindir}:${PATH}; PATH=${bindir}/lib:${PATH}; PATH=${bindir}/bin:${PATH}; PATH=${ProbTrackXDIR}:${PATH}; export PATH
     export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
     #module load GPU/Cuda/${NVCCVer} &> /dev/null # Module setup if using a cluster
+fi
+
+if [[ -z `mnap environment | grep 'ERROR in MNAP environment'` ]]; then
+    geho " ---> MNAP environment set successfully!"
+    echo ""
+else
+    reho "   --> ERROR in MNAP environment. Run 'mnap environment' to check missing variables!"
+    echo ""
 fi
