@@ -1,13 +1,7 @@
 warning('off');
 PATHS = getenv("MATLABPATH");
-addpath(PATHS);
-addpath('/opt/PALM/palm-alpha112o/');
+addpath(getenv("PALMPATH"));
 LOCALLIST = getenv("OCTAVEPKGDIR");
-#if isempty(LOCALLIST)
-#  LOCALLIST='~/packages';
-#else
-#  LOCALLIST=[getenv("TOOLS") '/' LOCALLIST '/packages'];
-#end
 pkg('local_list', LOCALLIST);
 pkg load image
 pkg load control
