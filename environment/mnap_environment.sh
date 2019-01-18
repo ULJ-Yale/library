@@ -471,7 +471,7 @@ if [ -f /opt/.container ]; then
     # -- Check for specific settings a user might want:
     if [ -f ~/.mnap_container.rc ]; then
         source ~/.mnap_container.rc
-    elif [[ -v MNAPCONTAINERENV ]]; then
+    elif [[ ! -z "$MNAPCONTAINERENV$" ]]; then
         source $MNAPCONTAINERENV
     fi
 fi
@@ -832,6 +832,7 @@ PATH=$TOOLS/olib:$PATH
 
 # -- Export Python paths
 PYTHONPATH=$TOOLS:$PYTHONPATH
+PYTHONPATH=$TOOLS/pylib:$PYTHONPATH
 PYTHONPATH=/usr/local/bin:$PYTHONPATH
 PYTHONPATH=/usr/local/bin/python2.7:$PYTHONPATH
 PYTHONPATH=/usr/lib/python2.7/site-packages:$PYTHONPATH
