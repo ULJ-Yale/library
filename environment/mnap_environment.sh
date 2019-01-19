@@ -492,7 +492,7 @@ if [[ -z ${DICMNII} ]]; then DICMNII="${TOOLS}/dicm2nii/dicm2nii-latest"; fi
 if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="${TOOLS}/Octave/Octave-4.4.1"; fi
 if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="${TOOLS}/octavepkg/packages"; fi
 if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="${TOOLS}/pylib"; fi
-if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/HCPpipelines/HCPpipelines-stable"; fi
+if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="$MNAPPATH/hcpmodified"; fi
 if [[ -z ${FMRIPREP} ]]; then FMRIPREP="${TOOLS}/fmriprep/fmriprep-latest"; fi
 
 # -- Checks for version
@@ -550,7 +550,6 @@ geho ""
 #    Lmod is a Lua based module system that easily handles the MODULEPATH Hierarchical problem.
 if [[ `module -t --redirect help | grep 'Lua'` = *"Lua"* ]]; then LMODPRESENT="yes"; else LMODPRESENT="no"; fi > /dev/null 2>&1
 if [[ ${LMODPRESENT} == "yes" ]]; then
-    module purge
     module load StdEnv &> /dev/null
     # -- Check for presence of system install via Lmod
     if [[ `module -t --redirect avail /Matlab` = *"matlab"* ]] || [[ `module -t --redirect avail /Matlab` = *"Matlab"* ]]; then LMODMATLAB="yes"; else LMODMATLAB="no"; fi > /dev/null 2>&1
@@ -727,7 +726,6 @@ alias mnap_environment='$MNAPPATH/library/environment/mnap_environment.sh --help
 # ------------------------------------------------------------------------------
 
 # -- Re-Set HCP Pipeline path to different version if needed 
-HCPPIPEDIR=${MNAPPATH}/hcpmodified
 if [ -e ~/.mnaphcpe ];
     then
     HCPPIPEDIR=${MNAPPATH}/hcpextendedpull
@@ -738,7 +736,7 @@ if [ -e ~/.mnaphcpe ];
 fi
 
 # -- Export HCP Pipeline and relevant variables
-export HCPPIPEDIR=$MNAPPATH/hcpmodified; PATH=${HCPPIPEDIR}:${PATH}; export PATH
+export PATH=${HCPPIPEDIR}:${PATH};
 export CARET7DIR=$WORKBENCHDIR; PATH=${CARET7DIR}:${PATH}; export PATH
 export GRADUNWARPDIR=$PYLIBDIR/gradunwarp/core; PATH=${GRADUNWARPDIR}:${PATH}; export PATH
 export HCPPIPEDIR_Templates=${HCPPIPEDIR}/global/templates; PATH=${HCPPIPEDIR_Templates}:${PATH}; export PATH
