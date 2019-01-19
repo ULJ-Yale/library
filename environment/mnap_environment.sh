@@ -677,8 +677,8 @@ MATLABPATH=$AFNIPATH:$MATLABPATH
 export MATLABPATH
 
 # -- dcm2niix path
-DCMNII=${DCMNII}/build/bin
-PATH=${DCMNII}:${PATH}
+DCMNIIBIN=${DCMNII}/build/bin
+PATH=${DCMNII}:${DCMNIIBIN}:${PATH}
 export DCMNII PATH
 
 # -- dicm2nii path
