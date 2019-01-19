@@ -550,7 +550,6 @@ geho ""
 #    Lmod is a Lua based module system that easily handles the MODULEPATH Hierarchical problem.
 if [[ `module -t --redirect help | grep 'Lua'` = *"Lua"* ]]; then LMODPRESENT="yes"; else LMODPRESENT="no"; fi > /dev/null 2>&1
 if [[ ${LMODPRESENT} == "yes" ]]; then
-    module purge
     module load StdEnv &> /dev/null
     # -- Check for presence of system install via Lmod
     if [[ `module -t --redirect avail /Matlab` = *"matlab"* ]] || [[ `module -t --redirect avail /Matlab` = *"Matlab"* ]]; then LMODMATLAB="yes"; else LMODMATLAB="no"; fi > /dev/null 2>&1
