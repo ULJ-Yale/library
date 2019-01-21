@@ -132,6 +132,7 @@ usage() {
 # ------------------------------------------------------------------------------
 
 environment() {
+
     echo ""
     geho "--------------------------------------------------------------"
     geho " MNAP Environment Report"
@@ -199,7 +200,7 @@ environment() {
     geho "----------------------------------------------"
     echo ""
     unset BinaryErrorReport
-    
+
     ## -- Check for FSL
     echo "         FSL Binary  : $(which fsl 2>&1 | grep -v 'no fsl')"
     if [[ -z $(which fsl 2>&1 | grep -v 'no fsl') ]]; then 
@@ -209,7 +210,7 @@ environment() {
     echo "         FSL Version : $(cat $FSLDIR/etc/fslversion)"
     fi
     echo ""
-    
+
     ## -- Check for FreeSurfer
     echo "  FreeSurfer Binary  : $(which freesurfer 2>&1 | grep -v 'no freesurfer')"
     if [[ -z $(which freesurfer 2>&1 | grep -v 'no freesurfer') ]]; then 
@@ -219,8 +220,8 @@ environment() {
     echo "  FreeSurfer Version : $(freesurfer | tail -n 2)"
     fi
     echo ""
-    
-    # -- Check for AFNI
+
+    ## -- Check for AFNI
     echo "        AFNI Binary  : $(which afni 2>&1 | grep -v 'no afni')"
     if [[ -z $(which afni 2>&1 | grep -v 'no afni') ]]; then 
     BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport afni"
@@ -229,7 +230,7 @@ environment() {
     echo "        AFNI Version : $(afni --version)"
     fi
     echo ""
-    
+
     ## -- Check for dcm2niix
     echo "    dcm2niix Binary  : $(which dcm2niix 2>&1 | grep -v 'no dcm2niix')"
     if [[ -z $(which dcm2niix 2>&1 | grep -v 'no dcm2niix') ]]; then 
@@ -239,8 +240,9 @@ environment() {
     echo "    dcm2niix Version : $(dcm2niix -v | head -1)"
     fi
     echo ""
-    
-    # -- Check for dicm2nii
+
+    ## -- Check for dicm2nii only if outside the container
+    if [ ! -f /opt/.container ]; then
     echo "    dicm2nii Binary  : $DICMNII/dicm2nii.m"
     if [[ -z `ls $DICMNII/dicm2nii.m` ]]; then 
     BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport dicm2nii"
@@ -249,7 +251,8 @@ environment() {
     echo "    dicm2nii Version : $(cat $DICMNII/README.md | grep "(version" )"
     fi
     echo ""
-    
+    fi
+
     ## -- Check for fix
     echo "         FIX Binary  : $(which fix 2>&1 | grep -v 'no fix')"
     if [[ -z $(which fix 2>&1 | grep -v 'no fix') ]]; then 
@@ -280,7 +283,7 @@ environment() {
     # echo "     matlab : $(matlab -nodisplay -nojvm -nosplash -r "v=version;fprintf('%s', v);" | tail -1)"  
     fi
     echo ""
-    
+
     ## -- Check for PALM
     echo "        PALM Binary  : $PALMPATH/palm.m"
     if [[ -z `ls $PALMPATH/palm.m` ]]; then 
@@ -407,6 +410,26 @@ if [[ `gcc --version | grep 'darwin'` != "" ]]; then OSInfo="Darwin"; else
 fi
 
 # ------------------------------------------------------------------------------
+# -- Unset environment from userspace if we are running code from the container:
+# ------------------------------------------------------------------------------
+
+if [ -f /opt/.container ]; then
+    ENVVARIABLES="MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR AFNIPATH DCMNII DICMNII OCTAVEDIR OCTAVEPKGDIR OCTAVEPATH HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMPATH GRADUNWARPDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR"
+    for ENVVARIABLE in ${ENVVARIABLES}; do
+        unset ${ENVVARIABLE}
+    done
+    TOOLS="/opt"
+    PATH=${TOOLS}:${PATH}
+    export TOOLS PATH
+    # -- Check for specific settings a user might want:
+    # if [ -f ~/.mnap_container.rc ]; then
+    #     bash ~/.mnap_container.rc
+    # elif [[ ! -z "$MNAPCONTAINERENV" ]]; then
+    #     bash $MNAPCONTAINERENV
+    # fi
+fi
+
+# ------------------------------------------------------------------------------
 # -- Check for and setup master software folder
 # ------------------------------------------------------------------------------
 
@@ -460,23 +483,6 @@ fi
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
-# -- Unset environment from userspace if we are running code from the container:
-# ------------------------------------------------------------------------------
-
-if [ -f /opt/.container ]; then
-    ENVVARIABLES="MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR AFNIPATH DCMNII DICMNII OCTAVEDIR OCTAVEPKGDIR OCTAVEPATH HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMPATH GRADUNWARPDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR"
-    for ENVVARIABLE in ${ENVVARIABLES}; do
-        unset ${ENVVARIABLE}
-    done
-    # -- Check for specific settings a user might want:
-    if [ -f ~/.mnap_container.rc ]; then
-        source ~/.mnap_container.rc
-    elif [[ ! -z "$MNAPCONTAINERENV$" ]]; then
-        source $MNAPCONTAINERENV
-    fi
-fi
-
-# ------------------------------------------------------------------------------
 # -- Set default folder names for dependencies if undefined by user environment:
 # ------------------------------------------------------------------------------
 
@@ -492,7 +498,7 @@ if [[ -z ${DICMNII} ]]; then DICMNII="${TOOLS}/dicm2nii/dicm2nii-latest"; fi
 if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="${TOOLS}/Octave/Octave-4.4.1"; fi
 if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="${TOOLS}/octavepkg/packages"; fi
 if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="${TOOLS}/pylib"; fi
-if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="$MNAPPATH/hcpmodified"; fi
+if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${MNAPPATH}/hcpmodified"; fi
 if [[ -z ${FMRIPREP} ]]; then FMRIPREP="${TOOLS}/fmriprep/fmriprep-latest"; fi
 
 # -- Checks for version
@@ -1255,7 +1261,8 @@ if [[ ! -z `command -v nvcc` ]]; then
     #module load GPU/Cuda/${NVCCVer} &> /dev/null # Module setup if using a cluster
 fi
 
-if [[ -z `mnap environment | grep 'ERROR in MNAP environment'` ]]; then
+MNAPEnvCheck=`mnap environment | grep 'ERROR in MNAP environment'`
+if [[ -z ${MNAPEnvCheck} ]]; then
     geho " ---> MNAP environment set successfully!"
     echo ""
 else
