@@ -48,6 +48,53 @@
 #~ND~END~
 
 # ------------------------------------------------------------------------------
+# -- Setup color outputs
+# ------------------------------------------------------------------------------
+
+BLACK_F="\033[30m"; BLACK_B="\033[40m"
+RED_F="\033[31m"; RED_B="\033[41m"
+GREEN_F="\033[32m"; GREEN_B="\033[42m"
+YELLOW_F="\033[33m"; YELLOW_B="\033[43m"
+BLUE_F="\033[34m"; BLUE_B="\033[44m"
+MAGENTA_F="\033[35m"; MAGENTA_B="\033[45m"
+CYAN_F="\033[36m"; CYAN_B="\033[46m"
+WHITE_F="\033[37m"; WHITE_B="\033[47m"
+
+reho() {
+    echo -e "$RED_F$1 \033[0m"
+}
+geho() {
+    echo -e "$GREEN_F$1 \033[0m"
+}
+yeho() {
+    echo -e "$YELLOW_F$1 \033[0m"
+}
+beho() {
+    echo -e "$BLUE_F$1 \033[0m"
+}
+mageho() {
+    echo -e "$MAGENTA_F$1 \033[0m"
+}
+cyaneho() {
+    echo -e "$CYAN_F$1 \033[0m"
+}
+weho() {
+    echo -e "$WHITE_F$1 \033[0m"
+}
+
+# -- Set general options functions
+opts_GetOpt() {
+sopt="$1"
+shift 1
+for fn in "$@" ; do
+    if [ `echo ${fn} | grep -- "^${sopt}=" | wc -w` -gt 0 ]; then
+        echo "${fn}" | sed "s/^${sopt}=//"
+        return 0
+    fi
+done
+}
+
+# ------------------------------------------------------------------------------
 # -- General help usage function
 # ------------------------------------------------------------------------------
 
@@ -127,263 +174,38 @@ usage() {
     exit 0
 }
 
+if [ "$1" == "--help" ] || [ "$1" == "-help" ] || [ "$1" == "help" ] || [ "$1" == "?help" ] || [ "$1" == "--usage" ] || [ "$1" == "-usage" ] || [ "$1" == "usage" ] || [ "$1" == "?usage" ]; then
+    usage
+fi
+
 # ------------------------------------------------------------------------------
-#  Print out environment
+#  Environment clear and check functions
 # ------------------------------------------------------------------------------
 
-environment() {
+ENVVARIABLES='MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR GRADUNWARPDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR'
+export ENVVARIABLES
 
-    echo ""
-    geho "--------------------------------------------------------------"
-    geho " MNAP Environment Report"
-    geho "--------------------------------------------------------------"
-    unset EnvErrorReport
-    echo ""
-    echo ""
-    geho "   MNAP General Environment Variables"
-    geho "----------------------------------------------"
-    echo ""
-    echo "                  MNAPVer : $MNAPVer";              if [[ -z $MNAPVer ]]; then EnvError="yes"; EnvErrorReport="MNAPVer"; fi
-    echo "                    TOOLS : $TOOLS";                if [[ -z $TOOLS ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport TOOLS"; fi
-    echo "                 MNAPREPO : $MNAPREPO";             if [[ -z $MNAPREPO ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MNAPREPO"; fi
-    echo "                 MNAPPATH : $MNAPPATH";             if [[ -z $MNAPPATH ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MNAPPATH"; fi
-    echo "           TemplateFolder : $TemplateFolder";       if [[ -z $TemplateFolder ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport TemplateFolder"; fi
-    echo "             MNAPMCOMMAND : $MNAPMCOMMAND";         if [[ -z $MNAPMCOMMAND ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MNAPMCOMMAND"; fi
-    echo ""
-    geho "   Core Dependencies Environment Variables"
-    geho "----------------------------------------------"
-    echo ""
-    echo "                   FSLDIR : $FSLDIR";               if [[ -z $FSLDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport FSLDIR"; fi
-    echo "                FSLGPUDIR : $FSLGPUDIR";            if [[ -z $FSLGPUDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport FSLGPUDIR"; fi
-    echo "             FSLGPUBinary : $FSLGPUBinary";         if [[ -z $FSLGPUBinary ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport FSLGPUBinary"; fi
-    echo "               FSL_FIXDIR : $FSL_FIXDIR";           if [[ -z $FSL_FIXDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport FSL_FIXDIR"; fi
-    echo "            POSTFIXICADIR : $POSTFIXICADIR";        if [[ -z $POSTFIXICADIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport POSTFIXICADIR"; fi
-    echo "          FREESURFER_HOME : $FREESURFER_HOME";      if [[ -z $FREESURFER_HOME ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport FREESURFER_HOME"; fi
-    echo "     FREESURFER_SCHEDULER : $FREESURFER_SCHEDULER"; if [[ -z $FREESURFER_SCHEDULER ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport FREESURFER_SCHEDULER"; fi
-    echo "             WORKBENCHDIR : $WORKBENCHDIR";         if [[ -z $WORKBENCHDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport WORKBENCHDIR"; fi
-    echo "                CARET7DIR : $CARET7DIR";            if [[ -z $CARET7DIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport CARET7DIR"; fi
-    echo "                  AFNIDIR : $AFNIDIR";              if [[ -z $AFNIDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport AFNIDIR"; fi
-    echo "                DCMNIIDIR : $DCMNIIDIR";            if [[ -z $DCMNIIDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport DCMNIIDIR"; fi
-    echo "               DICMNIIDIR : $DICMNIIDIR";           if [[ -z $DICMNIIDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport DICMNIIDIR"; fi
-    if [ -f ~/.mnapuseoctave ]; then
-    echo "             OCTAVEPKGDIR : $OCTAVEPKGDIR";         if [[ -z $OCTAVEPKGDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport OCTAVEPKGDIR"; fi
-    echo "             OCTAVEBINDIR : $OCTAVEBINDIR";         if [[ -z $OCTAVEBINDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport OCTAVEBINDIR"; fi
+# -- Check if inside the container and reset the environment on first setup
+if [[ -f /opt/.container ]]; then
+    # -- Perform initial reset for the environment in the container
+    if [[ ! -z "$FIRSTRUNDONE" ]]; then
+        unset $ENVVARIABLES
+        TOOLS="/opt"
+        PATH=${TOOLS}:${PATH}
+        export TOOLS PATH
+        export FIRSTRUNDONE="TRUE"
     fi
-    echo "                  PALMDIR : $PALMDIR";              if [[ -z $PALMDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport PALMDIR"; fi
-    echo ""
-    geho "   HCP Pipelines Environment Variables"
-    geho "----------------------------------------------"
-    echo ""
-    echo "               HCPPIPEDIR : $HCPPIPEDIR";               if [[ -z $HCPPIPEDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR"; fi
-    echo "            GRADUNWARPDIR : $GRADUNWARPDIR";            if [[ -z $GRADUNWARPDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport GRADUNWARPDIR"; fi
-    echo "     HCPPIPEDIR_Templates : $HCPPIPEDIR_Templates";     if [[ -z $HCPPIPEDIR_Templates ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_Templates"; fi
-    echo "           HCPPIPEDIR_Bin : $HCPPIPEDIR_Bin";           if [[ -z $HCPPIPEDIR_Bin ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_Bin"; fi
-    echo "        HCPPIPEDIR_Config : $HCPPIPEDIR_Config";        if [[ -z $HCPPIPEDIR_Config ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_Config"; fi
-    echo "         HCPPIPEDIR_PreFS : $HCPPIPEDIR_PreFS";         if [[ -z $HCPPIPEDIR_PreFS ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_PreFS"; fi
-    echo "            HCPPIPEDIR_FS : $HCPPIPEDIR_FS";            if [[ -z $HCPPIPEDIR_FS ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_FS"; fi
-    echo "        HCPPIPEDIR_PostFS : $HCPPIPEDIR_PostFS";        if [[ -z $HCPPIPEDIR_PostFS ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_PostFS"; fi
-    echo "      HCPPIPEDIR_fMRISurf : $HCPPIPEDIR_fMRISurf";      if [[ -z $HCPPIPEDIR_fMRISurf ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_fMRISurf"; fi
-    echo "       HCPPIPEDIR_fMRIVol : $HCPPIPEDIR_fMRIVol";       if [[ -z $HCPPIPEDIR_fMRIVol ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_fMRIVol"; fi
-    echo "         HCPPIPEDIR_tfMRI : $HCPPIPEDIR_tfMRI";         if [[ -z $HCPPIPEDIR_tfMRI ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_tfMRI"; fi
-    echo "          HCPPIPEDIR_dMRI : $HCPPIPEDIR_dMRI";          if [[ -z $HCPPIPEDIR_dMRI ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_dMRI"; fi
-    echo "     HCPPIPEDIR_dMRITract : $HCPPIPEDIR_dMRITract";     if [[ -z $HCPPIPEDIR_dMRITract ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_dMRITract"; fi
-    echo "        HCPPIPEDIR_Global : $HCPPIPEDIR_Global";        if [[ -z $HCPPIPEDIR_Global ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_Global"; fi
-    echo " HCPPIPEDIR_tfMRIAnalysis : $HCPPIPEDIR_tfMRIAnalysis"; if [[ -z $HCPPIPEDIR_tfMRIAnalysis ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_tfMRIAnalysis"; fi
-    echo "                   MSMBin : $MSMBin";                   if [[ -z $MSMBin ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MSMBin"; fi
-    echo "  HCPPIPEDIR_dMRITracFull : $HCPPIPEDIR_dMRITracFull";  if [[ -z $HCPPIPEDIR_dMRITracFull ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_dMRITracFull"; fi
-    echo "    HCPPIPEDIR_dMRILegacy : $HCPPIPEDIR_dMRILegacy";    if [[ -z $HCPPIPEDIR_dMRILegacy ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_dMRILegacy"; fi
-    echo "            AutoPtxFolder : $AutoPtxFolder";            if [[ -z $AutoPtxFolder ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport AutoPtxFolder"; fi
-    echo "              EDDYCUDADIR : $EDDYCUDADIR";              if [[ -z $EDDYCUDADIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport EDDYCUDADIR"; fi
-    echo ""
-    echo ""
-    geho "   Binary / Executable Locations and Versions"
-    geho "----------------------------------------------"
-    echo ""
-    unset BinaryErrorReport
-
-    ## -- Check for FSL
-    echo "         FSL Binary  : $(which fsl 2>&1 | grep -v 'no fsl')"
-    if [[ -z $(which fsl 2>&1 | grep -v 'no fsl') ]]; then 
-    BinaryError="yes"; BinaryErrorReport="fsl"
-    reho "         FSL Version : Binary not found!"
-    else
-    echo "         FSL Version : $(cat $FSLDIR/etc/fslversion)"
+    # -- Check for specific settings a user might want:
+    if [ -f ~/.mnap_container.rc ]; then         # --- This is a file that should reside in a user's home folder and it should contain the settings the user want's to make that are different from the defaults.
+        bash ~/.mnap_container.rc
+    elif [[ ! -z "$MNAPCONTAINERENV" ]]; then    # --- This is an environmental variable that if set should hold a path to a bash script that contains the settings the user want's to make that are different from the defaults.
+        bash $MNAPCONTAINERENV
     fi
-    echo ""
-
-    ## -- Check for FreeSurfer
-    echo "  FreeSurfer Binary  : $(which freesurfer 2>&1 | grep -v 'no freesurfer')"
-    if [[ -z $(which freesurfer 2>&1 | grep -v 'no freesurfer') ]]; then 
-    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport freesurfer"
-    reho "  FreeSurfer Version : Binary not found!"
-    else
-    echo "  FreeSurfer Version : $(freesurfer | tail -n 2)"
-    fi
-    echo ""
-
-    ## -- Check for AFNI
-    echo "        AFNI Binary  : $(which afni 2>&1 | grep -v 'no afni')"
-    if [[ -z $(which afni 2>&1 | grep -v 'no afni') ]]; then 
-    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport afni"
-    reho "        AFNI Version : Binary not found!"
-    else
-    echo "        AFNI Version : $(afni --version)"
-    fi
-    echo ""
-
-    ## -- Check for dcm2niix
-    echo "    dcm2niix Binary  : $(which dcm2niix 2>&1 | grep -v 'no dcm2niix')"
-    if [[ -z $(which dcm2niix 2>&1 | grep -v 'no dcm2niix') ]]; then 
-    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport dcm2niix"
-    reho "    dcm2niix Version : Binary not found!"
-    else
-    echo "    dcm2niix Version : $(dcm2niix -v | head -1)"
-    fi
-    echo ""
-
-    ## -- Check for dicm2nii only if outside the container
-    if [ ! -f /opt/.container ]; then
-    echo "    dicm2nii Binary  : $DICMNIIDIR/dicm2nii.m"
-    if [[ -z `ls $DICMNIIDIR/dicm2nii.m` ]]; then 
-    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport dicm2nii"
-    reho "    dicm2nii Version : Executable not found!"
-    else    
-    echo "    dicm2nii Version : $(cat $DICMNIIDIR/README.md | grep "(version" )"
-    fi
-    echo ""
-    fi
-
-    ## -- Check for fix
-    echo "         FIX Binary  : $(which fix 2>&1 | grep -v 'no fix')"
-    if [[ -z $(which fix 2>&1 | grep -v 'no fix') ]]; then 
-    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport fix"
-    reho "         FIX Version : Binary not found!"
-    else
-    echo "         FIX Version : $(fix -v | grep FMRIB)"
-    fi
-    echo ""
-
-    ## -- Check for Octave
-    if [ -f ~/.mnapuseoctave ]; then
-    echo "      Octave Binary  : $(which octave 2>&1 | grep -v 'no octave')"
-    if [[ -z $(which octave 2>&1 | grep -v 'no octave') ]]; then 
-    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport octave"
-    reho "      Octave Version : Binary not found!"
-    else
-    echo "      Octave Version : $(octave -q --eval "v=version;fprintf('%s', v);")"
-    fi
-    else
-    echo "      Matlab Binary  : $(which matlab 2>&1 | grep -v 'no matlab')"
-    if [[ -z $(which matlab 2>&1 | grep -v 'no matlab') ]]; then
-    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport matlab"
-    reho "      Matlab Version : Binary not found!"
-    else
-    echo "      Matlab Version : $(which matlab 2>&1 | grep -v 'no matlab')"
-    fi
-    # echo "     matlab : $(matlab -nodisplay -nojvm -nosplash -r "v=version;fprintf('%s', v);" | tail -1)"  
-    fi
-    echo ""
-
-    ## -- Check for PALM
-    echo "        PALM Binary  : $PALMDIR/palm.m"
-    if [[ -z `ls $PALMDIR/palm.m` ]]; then 
-    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport palm"
-    reho "        PALM Version : Executable not found!"
-    else
-    echo "        PALM Version : $(cat $PALMDIR/palm_version.txt)"
-    fi
-    echo ""
-
-    ## -- Check for Workbench
-    echo "  wb_command Binary  : $(which wb_command 2>&1 | grep -v 'no wb_command')"
-    if [[ -z $(which wb_command 2>&1 | grep -v 'no wb_command') ]]; then
-    BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport wb_command"
-    reho "  wb_command Version : Binary not found!"
-    else
-    echo "  wb_command Version : $(wb_command | head -1)"
-    fi
-    echo ""
-
-    geho "  Full Environment Paths"
-    geho "----------------------------------------------"
-    echo ""
-    echo "  PATH : $PATH"
-    echo ""
-    echo "  PYTHONPATH : $PYTHONPATH"
-    echo ""
-    echo "  MATLABPATH : $MATLABPATH"
-    echo ""
-    
-    if [[ ${EnvError} == "yes" ]]; then
-        echo ""
-        reho "  ERROR: The following environment variable(s) are missing: ${EnvErrorReport}"
-        echo ""
-    elif [[ ${BinaryError} == "yes" ]]; then
-        echo ""
-        reho "  ERROR: The following binaries / executables are not found: ${BinaryErrorReport}"
-        echo ""
-    else
-        echo ""
-        geho "=================== MNAP environment set successfully! ===================="
-        echo ""
-    fi
-    exit 0
-}
+fi
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= CODE START =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=
-
-# ------------------------------------------------------------------------------
-# -- Setup color outputs
-# ------------------------------------------------------------------------------
-
-BLACK_F="\033[30m"; BLACK_B="\033[40m"
-RED_F="\033[31m"; RED_B="\033[41m"
-GREEN_F="\033[32m"; GREEN_B="\033[42m"
-YELLOW_F="\033[33m"; YELLOW_B="\033[43m"
-BLUE_F="\033[34m"; BLUE_B="\033[44m"
-MAGENTA_F="\033[35m"; MAGENTA_B="\033[45m"
-CYAN_F="\033[36m"; CYAN_B="\033[46m"
-WHITE_F="\033[37m"; WHITE_B="\033[47m"
-
-reho() {
-    echo -e "$RED_F$1 \033[0m"
-}
-geho() {
-    echo -e "$GREEN_F$1 \033[0m"
-}
-yeho() {
-    echo -e "$YELLOW_F$1 \033[0m"
-}
-beho() {
-    echo -e "$BLUE_F$1 \033[0m"
-}
-mageho() {
-    echo -e "$MAGENTA_F$1 \033[0m"
-}
-cyaneho() {
-    echo -e "$CYAN_F$1 \033[0m"
-}
-weho() {
-    echo -e "$WHITE_F$1 \033[0m"
-}
-
-# -- Set general options functions
-opts_GetOpt() {
-sopt="$1"
-shift 1
-for fn in "$@" ; do
-    if [ `echo ${fn} | grep -- "^${sopt}=" | wc -w` -gt 0 ]; then
-        echo "${fn}" | sed "s/^${sopt}=//"
-        return 0
-    fi
-done
-}
-
-if [ "$1" == "--help" ] || [ "$1" == "-help" ] || [ "$1" == "help" ] || [ "$1" == "?help" ] || [ "$1" == "--usage" ] || [ "$1" == "-usage" ] || [ "$1" == "usage" ] || [ "$1" == "?usage" ]; then
-    usage
-fi
 
 # ------------------------------------------------------------------------------
 # -- Setup server login messages
@@ -406,26 +228,6 @@ if [[ `gcc --version | grep 'darwin'` != "" ]]; then OSInfo="Darwin"; else
     if [[ `cat /etc/*-release | grep 'Red Hat'` != "" ]] || [[ `cat /etc/*-release | grep 'rhel'` != "" ]]; then OSInfo="RedHat";
         elif [[ `cat /etc/*-release| grep 'ubuntu'` != "" ]]; then OSInfo="Ubuntu";
             elif [[ `cat /etc/*-release | grep 'debian'` != "" ]]; then OSInfo="Debian";
-    fi
-fi
-
-# ------------------------------------------------------------------------------
-# -- Unset environment from userspace if we are running code from the container:
-# ------------------------------------------------------------------------------
-
-if [ -f /opt/.container ]; then
-    ENVVARIABLES="MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR GRADUNWARPDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR"
-    for ENVVARIABLE in ${ENVVARIABLES}; do
-        unset ${ENVVARIABLE}
-    done
-    TOOLS="/opt"
-    PATH=${TOOLS}:${PATH}
-    export TOOLS PATH
-    # -- Check for specific settings a user might want:
-    if [ -f ~/.mnap_container.rc ]; then         # --- This is a file that should reside in a user's home folder and it should contain the settings the user want's to make that are different from the defaults.
-        bash ~/.mnap_container.rc
-    elif [[ ! -z "$MNAPCONTAINERENV" ]]; then    # --- This is an environmental variable that if set should hold a path to a bash script that contains the settings the user want's to make that are different from the defaults.
-        bash $MNAPCONTAINERENV
     fi
 fi
 
@@ -487,19 +289,19 @@ fi
 # ------------------------------------------------------------------------------
 
 # -- Check if folders for dependencies are set in the global path
-if [[ -z ${FSLDIR} ]]; then FSLDIR="${TOOLS}/fsl/fsl-latest"; fi
+if [[ -z ${FSLDIR} ]]; then FSLDIR="${TOOLS}/fsl/fsl-latest"; export FSLDIR; fi
 if [[ -z ${FSL_FIXDIR} ]]; then FSL_FIXDIR="${TOOLS}/fsl/fix-latest"; fi
-if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="${TOOLS}/freesurfer/freesurfer-5.3-HCP"; fi
-if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="${TOOLS}/freesurfer/FreeSurferScheduler"; fi
-if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="${TOOLS}/workbench/workbench-latest"; fi
-if [[ -z ${AFNIDIR} ]]; then AFNIDIR="${TOOLS}/afni/afni-latest"; fi
-if [[ -z ${DCMNIIDIR} ]]; then DCMNIIDIR="${TOOLS}/dcm2niix/dcm2niix-latest"; fi
-if [[ -z ${DICMNIIDIR} ]]; then DICMNIIDIR="${TOOLS}/dicm2nii/dicm2nii-latest"; fi
-if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="${TOOLS}/octave/octave-latest"; fi
-if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="${TOOLS}/octave/octavepkg"; fi
-if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="${TOOLS}/pylib"; fi
-if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${MNAPPATH}/hcpmodified"; fi
-if [[ -z ${FMRIPREPDIR} ]]; then FMRIPREPDIR="${TOOLS}/fmriprep/fmriprep-latest"; fi
+if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="${TOOLS}/freesurfer/freesurfer-5.3-HCP"; export FREESURFERDIR; fi
+if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="${TOOLS}/freesurfer/FreeSurferScheduler"; export FreeSurferSchedulerDIR; fi
+if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="${TOOLS}/workbench/workbench-latest"; export HCPWBDIR; fi
+if [[ -z ${AFNIDIR} ]]; then AFNIDIR="${TOOLS}/afni/afni-latest"; export AFNIDIR; fi
+if [[ -z ${DCMNIIDIR} ]]; then DCMNIIDIR="${TOOLS}/dcm2niix/dcm2niix-latest"; export DCMNIIDIR; fi
+if [[ -z ${DICMNIIDIR} ]]; then DICMNIIDIR="${TOOLS}/dicm2nii/dicm2nii-latest"; export DICMNIIDIR; fi
+if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="${TOOLS}/octave/octave-latest"; export OCTAVEDIR; fi
+if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="${TOOLS}/octave/octavepkg"; export OCTAVEPKGDIR; fi
+if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="${TOOLS}/pylib"; export PYLIBDIR; fi
+if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/${MNAPREPO}/hcpmodified"; export HCPPIPEDIR; fi
+if [[ -z ${FMRIPREPDIR} ]]; then FMRIPREPDIR="${TOOLS}/fmriprep/fmriprep-latest"; export FMRIPREPDIR; fi
 
 # -- Checks for version
 showVersion() {
@@ -507,14 +309,6 @@ showVersion() {
     echo ""
     geho " Loading Multimodal Neuroimaging Analysis Platform (MNAP) Suite Version: v${MNAPVer}"
 }
-
-# ------------------------------------------------------------------------------
-# -- Manual Environment Check
-# ------------------------------------------------------------------------------
-
-if [ "$1" == "environment" ] || [ "$1" == "--environment" ] || [ "$1" == "-environment" ] || [ "$1" == "?environment" ]; then
-    environment
-fi
 
 # ------------------------------------------------------------------------------
 # -- License and version disclaimer
@@ -538,7 +332,7 @@ geho ""
 geho "                            Anticevic Lab                                    " 
 geho "                       MBLab led by Grega Repovs                             "
 geho ""
-geho "                      COPYRIGHT & LCENSE NOTICE:                             "
+geho "                      COPYRIGHT & LICENSE NOTICE:                            "
 geho ""
 geho "Use of this software is subject to the terms and conditions defined by the   "
 geho " Yale University Copyright Policies:"
@@ -722,8 +516,15 @@ export MATLABPATH
 unset MNAPSubModules
 MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
 
-alias mnap='bash $MNAPPATH/connector/mnap.sh'
-alias mnap_environment='$MNAPPATH/library/environment/mnap_environment.sh --help'
+alias mnap='bash ${TOOLS}/${MNAPREPO}/connector/mnap.sh'
+alias mnap_envset='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh'
+alias mnap_envhelp='bash ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh --help'
+alias mnap_envcheck='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
+alias mnap_envstatus='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
+alias mnap_envreport='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
+alias mnap_envreset='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
+alias mnap_envclear='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
+alias mnap_envpurge='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
 
 # ------------------------------------------------------------------------------
 # -- Setup HCP Pipeline paths
@@ -732,7 +533,7 @@ alias mnap_environment='$MNAPPATH/library/environment/mnap_environment.sh --help
 # -- Re-Set HCP Pipeline path to different version if needed 
 if [ -e ~/.mnaphcpe ];
     then
-    HCPPIPEDIR=${MNAPPATH}/hcpextendedpull
+    HCPPIPEDIR=${TOOLS}/${MNAPREPO}/hcpextendedpull
     echo ""
     reho " ===> NOTE: You are in MNAP HCP development mode!"
     reho " ---> MNAP HCP path is set to: $HCPPIPEDIR"
@@ -740,7 +541,7 @@ if [ -e ~/.mnaphcpe ];
 fi
 
 # -- Export HCP Pipeline and relevant variables
-export PATH=${HCPPIPEDIR}:${PATH};
+export PATH=${HCPPIPEDIR}:${PATH}; export PATH
 export CARET7DIR=$WORKBENCHDIR; PATH=${CARET7DIR}:${PATH}; export PATH
 export GRADUNWARPDIR=$PYLIBDIR/gradunwarp/core; PATH=${GRADUNWARPDIR}:${PATH}; export PATH
 export HCPPIPEDIR_Templates=${HCPPIPEDIR}/global/templates; PATH=${HCPPIPEDIR_Templates}:${PATH}; export PATH
@@ -1258,7 +1059,7 @@ if [[ ! -z `command -v nvcc` ]]; then
     #module load GPU/Cuda/${NVCCVer} &> /dev/null # Module setup if using a cluster
 fi
 
-MNAPEnvCheck=`mnap environment | grep "ERROR"` > /dev/null 2>&1
+MNAPEnvCheck=`source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus | grep "ERROR"` > /dev/null 2>&1
 if [[ -z ${MNAPEnvCheck} ]]; then
     geho " ---> MNAP environment set successfully!"
     echo ""
