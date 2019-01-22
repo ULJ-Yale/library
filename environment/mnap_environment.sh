@@ -149,6 +149,10 @@ usage() {
     echo "  │   └── fsl-latest                  --> Env. Variable => FSLDIR "
     echo "  │   └── fix-latest                  --> Env. Variable => FSL_FIXDIR -- ICA FIX (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FIX/UserGuide) "
     echo "  │ "
+    echo "  ├── matlab                          --> Matlab vR2017b or higher. If Matlab is installed system-wide then a symlink is created here "
+    echo "  │   └── matlab-latest               --> Env. Variable => MATLABDIR "
+    echo "  │   └── matlab-latest/bin           --> Env. Variable => MATLABBINDIR "
+    echo "  │ "
     echo "  ├── octave                          --> Octave v.4.4.1 or higher. If Octave is installed system-wide then a symlink is created here "
     echo "  │   └── octave-latest               --> Env. Variable => OCTAVEDIR "
     echo "  │   └── octave-latest/bin           --> Env. Variable => OCTAVEBINDIR "
@@ -158,6 +162,9 @@ usage() {
     echo "  │   └── palm-latest-o               --> Env. Variable => PALMDIR (If using Octave) "
     echo "  │   └── palm-latest-m               --> Env. Variable => PALMDIR (If using Matlab) "
     echo "  │   └── palm-<VERSION>              --> Set any other version to PALMDIR " 
+    echo "  │ "
+    echo "  ├── R                               --> R Statistical computing environment"
+    echo "  │   └── R-latest                    --> Env. Variable => RDIR "
     echo "  │ "
     echo "  ├── pylib                           --> Env. Variable => PYLIBDIR      -- All MNAP python libraries and tools "
     echo "  │   ├── gradunwarp                  --> Env. Variable => GRADUNWARPDIR -- HCP version of gradunwarp (https://github.com/Washington-University/gradunwarp) "
@@ -182,13 +189,13 @@ fi
 #  Environment clear and check functions
 # ------------------------------------------------------------------------------
 
-ENVVARIABLES='MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR GRADUNWARPDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR'
+ENVVARIABLES='MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR MATLABDIR MATLABBINDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR RDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR GRADUNWARPDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR'
 export ENVVARIABLES
 
 # -- Check if inside the container and reset the environment on first setup
 if [[ -f /opt/.container ]]; then
     # -- Perform initial reset for the environment in the container
-    if [[ ! -z "$FIRSTRUNDONE" ]]; then
+    if [[ "$FIRSTRUNDONE" != "TRUE" ]]; then
         unset $ENVVARIABLES
         TOOLS="/opt"
         PATH=${TOOLS}:${PATH}
@@ -196,11 +203,11 @@ if [[ -f /opt/.container ]]; then
         export FIRSTRUNDONE="TRUE"
     fi
     # -- Check for specific settings a user might want:
-    if [ -f ~/.mnap_container.rc ]; then         # --- This is a file that should reside in a user's home folder and it should contain the settings the user want's to make that are different from the defaults.
-        bash ~/.mnap_container.rc
-    elif [[ ! -z "$MNAPCONTAINERENV" ]]; then    # --- This is an environmental variable that if set should hold a path to a bash script that contains the settings the user want's to make that are different from the defaults.
-        bash $MNAPCONTAINERENV
-    fi
+    # if [ -f ~/.mnap_container.rc ]; then         # --- This is a file that should reside in a user's home folder and it should contain the settings the user want's to make that are different from the defaults.
+    #     bash ~/.mnap_container.rc
+    # elif [[ ! -z "$MNAPCONTAINERENV" ]]; then    # --- This is an environmental variable that if set should hold a path to a bash script that contains the settings the user want's to make that are different from the defaults.
+    #     bash $MNAPCONTAINERENV
+    # fi
 fi
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=
@@ -302,6 +309,8 @@ if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="${TOOLS}/octave/octavepkg"; expo
 if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="${TOOLS}/pylib"; export PYLIBDIR; fi
 if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/${MNAPREPO}/hcpmodified"; export HCPPIPEDIR; fi
 if [[ -z ${FMRIPREPDIR} ]]; then FMRIPREPDIR="${TOOLS}/fmriprep/fmriprep-latest"; export FMRIPREPDIR; fi
+if [[ -z ${MATLABDIR} ]]; then MATLABDIR="${TOOLS}/matlab/matlab-latest"; export MATLABDIR; fi
+if [[ -z ${RDIR} ]]; then RDIR="${TOOLS}/R/R-latest"; export RDIR; fi
 
 # -- Checks for version
 showVersion() {
@@ -343,38 +352,38 @@ geho "    https://bitbucket.org/hidradev/mnaptools/src/master/LICENSE.md"
 geho ""
 
 # ------------------------------------------------------------------------------
-#  Check for Lmod and Load software modules
+#  Check for Lmod and Load software modules -- deprecated to ensure container compatibility
 # ------------------------------------------------------------------------------
 
 # -- Check if Lmod is installed and if Matlab is available https://lmod.readthedocs.io/en/latest/index.html
 #    Lmod is a Lua based module system that easily handles the MODULEPATH Hierarchical problem.
-if [[ `module -t --redirect help | grep 'Lua'` = *"Lua"* ]]; then LMODPRESENT="yes"; else LMODPRESENT="no"; fi > /dev/null 2>&1
-if [[ ${LMODPRESENT} == "yes" ]]; then
-    module load StdEnv &> /dev/null
-    # -- Check for presence of system install via Lmod
-    if [[ `module -t --redirect avail /Matlab` = *"matlab"* ]] || [[ `module -t --redirect avail /Matlab` = *"Matlab"* ]]; then LMODMATLAB="yes"; else LMODMATLAB="no"; fi > /dev/null 2>&1
-    if [[ `module -t --redirect avail /Matlab` = *"octave"* ]] || [[ `module -t --redirect avail /Octave` = *"Octave"* ]]; then LMODOCTAVE="yes"; else LMODOCTAVE="no"; fi > /dev/null 2>&1
-    # --- Matlab vs Octave
-    if [ -f ~/.mnapuseoctave ] && [[ ${LMODOCTAVE} == "yes" ]]; then
-        module load Libs/netlib &> /dev/null
-        module load Apps/Octave/4.2.1 &> /dev/null
-        echo ""; cyaneho " ---> Selected to use Octave instead of Matlab! "
-        OctaveTest="pass"
-    fi
-    if [ -f ~/.mnapuseoctave ] && [[ ${LMODOCTAVE} == "no" ]]; then
-        echo ""; reho " ===> ERROR: .mnapuseoctave set but no Octave module is present on the system."; echo ""
-        OctaveTest="fail"
-    fi
-    if [ ! -f ~/.mnapuseoctave ] && [[ ${LMODMATLAB} == "yes" ]]; then
-        module load Apps/Matlab/R2018a &> /dev/null
-        echo ""; cyaneho " ---> Selected to use Matlab!"
-        MatlabTest="pass"
-    fi
-    if [ ! -f ~/.mnapuseoctave ] && [[ ${LMODMATLAB} == "no" ]]; then
-        echo ""; reho " ===> ERROR: Matlab selected and Lmod found but Matlab module missing. Alert your SysAdmin"; echo ""
-        MatlabTest="fail"
-    fi
-fi
+# if [[ `module -t --redirect help | grep 'Lua'` = *"Lua"* ]]; then LMODPRESENT="yes"; else LMODPRESENT="no"; fi > /dev/null 2>&1
+# if [[ ${LMODPRESENT} == "yes" ]]; then
+#     module load StdEnv &> /dev/null
+#     # -- Check for presence of system install via Lmod
+#     if [[ `module -t --redirect avail /Matlab` = *"matlab"* ]] || [[ `module -t --redirect avail /Matlab` = *"Matlab"* ]]; then LMODMATLAB="yes"; else LMODMATLAB="no"; fi > /dev/null 2>&1
+#     if [[ `module -t --redirect avail /Matlab` = *"octave"* ]] || [[ `module -t --redirect avail /Octave` = *"Octave"* ]]; then LMODOCTAVE="yes"; else LMODOCTAVE="no"; fi > /dev/null 2>&1
+#     # --- Matlab vs Octave
+#     if [ -f ~/.mnapuseoctave ] && [[ ${LMODOCTAVE} == "yes" ]]; then
+#         module load Libs/netlib &> /dev/null
+#         module load Apps/Octave/4.2.1 &> /dev/null
+#         echo ""; cyaneho " ---> Selected to use Octave instead of Matlab! "
+#         OctaveTest="pass"
+#     fi
+#     if [ -f ~/.mnapuseoctave ] && [[ ${LMODOCTAVE} == "no" ]]; then
+#         echo ""; reho " ===> ERROR: .mnapuseoctave set but no Octave module is present on the system."; echo ""
+#         OctaveTest="fail"
+#     fi
+#     if [ ! -f ~/.mnapuseoctave ] && [[ ${LMODMATLAB} == "yes" ]]; then
+#         module load Apps/Matlab/R2018a &> /dev/null
+#         echo ""; cyaneho " ---> Selected to use Matlab!"
+#         MatlabTest="pass"
+#     fi
+#     if [ ! -f ~/.mnapuseoctave ] && [[ ${LMODMATLAB} == "no" ]]; then
+#         echo ""; reho " ===> ERROR: Matlab selected and Lmod found but Matlab module missing. Alert your SysAdmin"; echo ""
+#         MatlabTest="fail"
+#     fi
+# fi
 
 # ------------------------------------------------------------------------------
 # -- Running matlab vs. octave
@@ -387,6 +396,7 @@ if [ -f ~/.mnapuseoctave ]; then
          ln -s `which octave` ${OCTAVEDIR}/octave > /dev/null 2>&1
          export OCTAVEPKGDIR
          export OCTAVEDIR
+         export OCTAVEBINDIR
          cyaneho " ---> Setting up Octave "; echo ""
          MNAPMCOMMAND='octave -q --eval'
          if [ ! -e ~/.octaverc ]; then
@@ -397,13 +407,14 @@ if [ -f ~/.mnapuseoctave ]; then
     fi
 fi
 if [ ! -f ~/.mnapuseoctave ]; then 
-    if [[ ${MatlabTest} == "fail" ]]; then
-         reho " ===> ERROR: Cannot setup Matlab because module test failed."
-    else
+    # if [[ ${MatlabTest} == "fail" ]]; then
+    #     reho " ===> ERROR: Cannot setup Matlab because module test failed."
+    # else
+         
          cyaneho " ---> Setting up Matlab "; echo ""
          MNAPMCOMMAND='matlab -nodisplay -nosplash -r'
          if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-latest-m"; fi
-    fi
+    # fi
 fi
 # -- Use the following command to run .m code in Matlab
 export MNAPMCOMMAND
@@ -488,6 +499,15 @@ OCTAVEBINDIR=${OCTAVEDIR}/bin
 PATH=${OCTAVEBINDIR}:${PATH}
 export OCTAVEBINDIR PATH
 
+# -- Matlab path
+MATLABBINDIR=${MATLABDIR}/bin
+PATH=${MATLABBINDIR}:${PATH}
+export MATLABBINDIR PATH
+
+# -- R path
+PATH=${RDIR}:${PATH}
+export RDIR PATH
+
 # ------------------------------------------------------------------------------
 # -- Setup overall MNAP paths
 # ------------------------------------------------------------------------------
@@ -518,13 +538,24 @@ MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's
 
 alias mnap='bash ${TOOLS}/${MNAPREPO}/connector/mnap.sh'
 alias mnap_envset='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh'
+alias mnap_environment_set='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh'
+
 alias mnap_envhelp='bash ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh --help'
+alias mnap_environment_help='bash ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh --help'
+
 alias mnap_envcheck='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
 alias mnap_envstatus='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
 alias mnap_envreport='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
+alias mnap_environment_check='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
+alias mnap_environment_status='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
+alias mnap_environment_report='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
+
 alias mnap_envreset='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
 alias mnap_envclear='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
 alias mnap_envpurge='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
+alias mnap_environment_reset='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
+alias mnap_environment_clear='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
+alias mnap_environment_purge='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
 
 # ------------------------------------------------------------------------------
 # -- Setup HCP Pipeline paths
@@ -1064,6 +1095,6 @@ if [[ -z ${MNAPEnvCheck} ]]; then
     geho " ---> MNAP environment set successfully!"
     echo ""
 else
-    reho "   --> ERROR in MNAP environment. Run 'mnap environment' to check missing variables!"
+    reho "   --> ERROR in MNAP environment. Run 'mnap_envstatus' to check missing variables!"
     echo ""
 fi
