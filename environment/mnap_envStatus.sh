@@ -97,17 +97,34 @@ usage() {
 
 main() {
 
-# -- Clear MNAP environment for the container
+# -- Clear MNAP environment
 
 # -- Hard reset for the environment in the container manually
+     #
+     #   Useful links on how to rename variables to be passe back to parent shell: 
+     #   --> https://unix.stackexchange.com/questions/129084/in-bash-how-can-i-echo-the-variable-name-not-the-variable-value
+     #   --> https://stackoverflow.com/questions/23564995/how-to-modify-a-global-variable-within-a-function-in-bash
+     #
+
 if [[ "$1" == "--envreset" ]] || [[ "$1" == "--envclear" ]] || [[ "$1" == "--envpurge" ]]; then
+    unset $ENVVARIABLES
     echo ""
     reho " ---> Requested a hard reset of the MNAP environment! "
     echo ""
-    for ENVVARIABLE in ${ENVVARIABLES}; do reho " --> Unsetting ${ENVVARIABLE}"; done
+    for ENVVARIABLE in ${ENVVARIABLES}; do 
+        reho " --> Unsetting ${ENVVARIABLE}"
+        EnvVarName=(${!ENVVARIABLE@})
+        unset $EnvVarName
+        if [ -z ${ENVVARIABLE+x} ]; then 
+            geho "     --> Unset successful: $ENVVARIABLE"; 
+        else 
+            reho "     --> $ENVVARIABLE is still set!"; 
+        fi
+    done
     echo ""
-    unset -v $ENVVARIABLES
 fi
+
+# -- Check MNAP environment
 
 if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--env" ]] || [[ "$1" == "--environment" ]]; then
     echo ""
@@ -116,7 +133,7 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
     geho "--------------------------------------------------------------"
     unset EnvErrorReport
     unset EnvError
-   
+    echo ""
     echo ""
     echo ""
     geho "   MNAP General Environment Variables"
@@ -145,9 +162,15 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
     echo "                DCMNIIDIR : $DCMNIIDIR";            if [[ -z $DCMNIIDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport DCMNIIDIR"; fi
     echo "               DICMNIIDIR : $DICMNIIDIR";           if [[ -z $DICMNIIDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport DICMNIIDIR"; fi
     if [ -f ~/.mnapuseoctave ]; then
+    echo "                OCTAVEDIR : $OCTAVEDIR";            if [[ -z $OCTAVEDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport OCTAVEDIR"; fi
     echo "             OCTAVEPKGDIR : $OCTAVEPKGDIR";         if [[ -z $OCTAVEPKGDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport OCTAVEPKGDIR"; fi
     echo "             OCTAVEBINDIR : $OCTAVEBINDIR";         if [[ -z $OCTAVEBINDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport OCTAVEBINDIR"; fi
     fi
+    if [ ! -f ~/.mnapuseoctave ]; then
+    echo "                MATLABDIR : $MATLABDIR";            if [[ -z $MATLABDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MATLABDIR"; fi
+    echo "             MATLABBINDIR : $MATLABBINDIR";         if [[ -z $MATLABBINDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MATLABBINDIR"; fi
+    fi
+    echo "                     RDIR : $RDIR";                 if [[ -z $RDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport RDIR"; fi
     echo "                  PALMDIR : $PALMDIR";              if [[ -z $PALMDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport PALMDIR"; fi
     echo ""
     geho "   HCP Pipelines Environment Variables"
@@ -293,6 +316,19 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
     fi
     echo ""
 
+    ## -- Check for R
+    echo "            R Binary : $(which R 2>&1 | grep -v 'no R')"
+        if [[ -z $(which R 2>&1 | grep -v 'no R') ]]; then
+        BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport R"
+        reho "  R Version : Binary not found!"
+        if [[ -L "$RDIR"  && ! -e "$RDIR" ]]; then
+            reho "                     : $RDIR is a link to a nonexisiting folder!"
+        fi
+    else
+        echo "           R Version : $(R --version | head -1)"
+    fi
+    echo ""
+    
     ## -- Check for PALM
     echo "        PALM Binary  : $PALMDIR/palm.m"
     if [[ -z `ls $PALMDIR/palm.m` ]]; then 
