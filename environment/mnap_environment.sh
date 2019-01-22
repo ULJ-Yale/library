@@ -564,6 +564,7 @@ export AutoPtxFolder=${HCPPIPEDIR_dMRITracFull}/autoPtx_HCP_extended; PATH=${Aut
 export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries; PATH=${FSLGPUBinary}:${PATH}; export PATH
 export EDDYCUDADIR=${FSLGPUBinary}/eddy_cuda; PATH=${EDDYCUDADIR}:${PATH}; export PATH; eddy_cuda="eddy_cuda_wQC"; export eddy_cuda
 
+# --- HCPPipelines specific settings --- TO BE EDITED FURTHER
 export MATLAB_COMPILER_RUNTIME=DUMMYVarianbleNotUsedCurrently
 export MSMBINDIR="DUMMYVarianbleNotUsedCurrently"
 export MSMCONFIGDIR=${HCPPIPEDIR}/MSMConfig; PATH=${MSMCONFIGDIR}:${PATH}; export PATH
