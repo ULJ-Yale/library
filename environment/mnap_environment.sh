@@ -208,7 +208,24 @@ if [[ -f /opt/.container ]]; then
     # elif [[ ! -z "$MNAPCONTAINERENV" ]]; then    # --- This is an environmental variable that if set should hold a path to a bash script that contains the settings the user want's to make that are different from the defaults.
     #     bash $MNAPCONTAINERENV
     # fi
+
+    # -- Check whether we are in the HCP container
+
+    if [ -e /opt/.hcppipelines ]; then
+
+        # --- HCPPipelines specific settings --- TO BE EDITED FURTHER
+
+        export HCPPIPEDIR=${TOOLS}/HCP/Pipelines
+        export FREESURFER_HOME=${TOOLS}/freesurfer/freesurfer-6.0
+        export FREESURFERDIR=$FREESURFER_HOME
+
+        export MATLAB_COMPILER_RUNTIME=DUMMYVarianbleNotUsedCurrently
+        export MSMBINDIR="DUMMYVarianbleNotUsedCurrently"
+        export MSMCONFIGDIR=${HCPPIPEDIR}/MSMConfig; PATH=${MSMCONFIGDIR}:${PATH}; export PATH
+    fi
+
 fi
+
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= CODE START =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -398,7 +415,7 @@ if [ -f ~/.mnapuseoctave ]; then
          export OCTAVEDIR
          export OCTAVEBINDIR
          cyaneho " ---> Setting up Octave "; echo ""
-         MNAPMCOMMAND='octave -q --eval'
+         MNAPMCOMMAND='octave -q --eval--no-init-file'
          if [ ! -e ~/.octaverc ]; then
              cp ${MNAPPATH}/library/.octaverc ~/.octaverc
          fi
@@ -564,7 +581,7 @@ alias mnap_environment_purge='source ${TOOLS}/${MNAPREPO}/library/environment/mn
 # -- Re-Set HCP Pipeline path to different version if needed 
 if [ -e ~/.mnaphcpe ];
     then
-    HCPPIPEDIR=${TOOLS}/${MNAPREPO}/hcpextendedpull
+    export HCPPIPEDIR=${TOOLS}/${MNAPREPO}/hcpextendedpull
     echo ""
     reho " ===> NOTE: You are in MNAP HCP development mode!"
     reho " ---> MNAP HCP path is set to: $HCPPIPEDIR"
@@ -594,6 +611,7 @@ export HCPPIPEDIR_dMRILegacy=${TOOLS}/${MNAPREPO}/connector/functions; PATH=${HC
 export AutoPtxFolder=${HCPPIPEDIR_dMRITracFull}/autoPtx_HCP_extended; PATH=${AutoPtxFolder}:${PATH}; export PATH
 export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries; PATH=${FSLGPUBinary}:${PATH}; export PATH
 export EDDYCUDADIR=${FSLGPUBinary}/eddy_cuda; PATH=${EDDYCUDADIR}:${PATH}; export PATH; eddy_cuda="eddy_cuda_wQC"; export eddy_cuda
+
 
 # ------------------------------------------------------------------------------
 # -- Setup ICA FIX paths and variables
