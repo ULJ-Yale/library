@@ -193,7 +193,7 @@ ENVVARIABLES='MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXI
 export ENVVARIABLES
 
 # -- Check if inside the container and reset the environment on first setup
-if [[ -f /opt/.container ]]; then
+if [[ -e /opt/.container ]]; then
     # -- Perform initial reset for the environment in the container
     if [[ "$FIRSTRUNDONE" != "TRUE" ]]; then
         unset $ENVVARIABLES
