@@ -370,21 +370,26 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
         return result
 
 
-
-
 def main(args=None):
+    """
+    mnapSingularity command [parameters] --simage="<path to the singularity image>" [--script="<path to the script to run>"] [--scheduler="<scheduler settings>"] [--]
+    """
 
     if args is None:
         args = sys.argv[1:]
 
     scheduler = None
-    simage = None
-    command = ""
+    simage    = None
+    command   = ""
+    script    = None
+
     for arg in args:
         if "scheduler" in arg:
             k, scheduler = arg.split("=", 1)
         elif "simage" in arg:
             k, simage = arg.split("=", 1)
+        elif "script" in arg:
+            k, script = arg.split("=", 1)
         elif "=" in arg:
             k, v = arg.split('=', 1)
             command += '%s="%s" ' % (k, v)
@@ -402,7 +407,15 @@ def main(args=None):
     f = os.fdopen(fid, 'w')
 
     print >> f, "source /opt/mnaptools/library/environment/mnap_environment.sh"
-    print >> f, "bash /opt/mnaptools/connector/mnap.sh " + command
+    print >> f, 'export FSLDIR="/opt/fsl/fsl-5.0.9"'
+    print >> f, 'export PATH=${FSLDIR}:${FSLDIR}/bin:${PATH}'
+
+    # --- run command or script
+    if script:
+        print >> f, "bash " + script
+    else:        
+        print >> f, "bash /opt/mnaptools/connector/mnap.sh " + command
+    
     print >> f, "rm " + scriptPath
 
     f.close()
@@ -418,3 +431,7 @@ def main(args=None):
 
 if __name__ == "__main__":
     main()
+
+
+
+
