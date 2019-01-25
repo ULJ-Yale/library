@@ -318,7 +318,7 @@ fi
 # -- Check if folders for dependencies are set in the global path
 if [[ -z ${FSLDIR} ]]; then FSLDIR="${TOOLS}/fsl/fsl-latest"; export FSLDIR; fi
 if [[ -z ${FSL_FIXDIR} ]]; then FSL_FIXDIR="${TOOLS}/fsl/fix-latest"; fi
-if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="${TOOLS}/freesurfer/freesurfer-5.3-HCP"; export FREESURFERDIR; fi
+if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="${TOOLS}/freesurfer/freesurfer-6.0"; export FREESURFERDIR; fi
 if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="${TOOLS}/freesurfer/FreeSurferScheduler"; export FreeSurferSchedulerDIR; fi
 if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="${TOOLS}/workbench/workbench-latest"; export HCPWBDIR; fi
 if [[ -z ${AFNIDIR} ]]; then AFNIDIR="${TOOLS}/afni/afni-latest"; export AFNIDIR; fi
