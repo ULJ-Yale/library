@@ -189,11 +189,11 @@ fi
 #  Environment clear and check functions
 # ------------------------------------------------------------------------------
 
-ENVVARIABLES='MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR MATLABDIR MATLABBINDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR RDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR GRADUNWARPDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR'
+ENVVARIABLES='MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR MATLABDIR MATLABBINDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR RDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR GRADUNWARPDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR USEOCTAVE'
 export ENVVARIABLES
 
 # -- Check if inside the container and reset the environment on first setup
-if [[ -f /opt/.container ]]; then
+if [[ -e /opt/.container ]]; then
     # -- Perform initial reset for the environment in the container
     if [[ "$FIRSTRUNDONE" != "TRUE" ]]; then
         unset $ENVVARIABLES
@@ -201,6 +201,7 @@ if [[ -f /opt/.container ]]; then
         PATH=${TOOLS}:${PATH}
         export TOOLS PATH
         export FIRSTRUNDONE="TRUE"
+        export USEOCTAVE="TRUE"
     fi
     # -- Check for specific settings a user might want:
     # if [ -f ~/.mnap_container.rc ]; then         # --- This is a file that should reside in a user's home folder and it should contain the settings the user want's to make that are different from the defaults.
@@ -224,6 +225,8 @@ if [[ -f /opt/.container ]]; then
         export MSMCONFIGDIR=${HCPPIPEDIR}/MSMConfig; PATH=${MSMCONFIGDIR}:${PATH}; export PATH
     fi
 
+elif [[ -e ~/.mnapuseoctave ]]; then
+    export USEOCTAVE="TRUE"
 fi
 
 
@@ -315,7 +318,7 @@ fi
 # -- Check if folders for dependencies are set in the global path
 if [[ -z ${FSLDIR} ]]; then FSLDIR="${TOOLS}/fsl/fsl-latest"; export FSLDIR; fi
 if [[ -z ${FSL_FIXDIR} ]]; then FSL_FIXDIR="${TOOLS}/fsl/fix-latest"; fi
-if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="${TOOLS}/freesurfer/freesurfer-5.3-HCP"; export FREESURFERDIR; fi
+if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="${TOOLS}/freesurfer/freesurfer-6.0"; export FREESURFERDIR; fi
 if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="${TOOLS}/freesurfer/FreeSurferScheduler"; export FreeSurferSchedulerDIR; fi
 if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="${TOOLS}/workbench/workbench-latest"; export HCPWBDIR; fi
 if [[ -z ${AFNIDIR} ]]; then AFNIDIR="${TOOLS}/afni/afni-latest"; export AFNIDIR; fi
@@ -328,6 +331,7 @@ if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/${MNAPREPO}/hcpmodified"; e
 if [[ -z ${FMRIPREPDIR} ]]; then FMRIPREPDIR="${TOOLS}/fmriprep/fmriprep-latest"; export FMRIPREPDIR; fi
 if [[ -z ${MATLABDIR} ]]; then MATLABDIR="${TOOLS}/matlab/matlab-latest"; export MATLABDIR; fi
 if [[ -z ${RDIR} ]]; then RDIR="${TOOLS}/R/R-latest"; export RDIR; fi
+if [[ -z ${USEOCTAVE} ]]; then USEOCTAVE="FALSE"; export USEOCTAVE; fi
 
 # -- Checks for version
 showVersion() {
@@ -406,7 +410,7 @@ geho ""
 # -- Running matlab vs. octave
 # ------------------------------------------------------------------------------
 
-if [ -f ~/.mnapuseoctave ]; then
+if [ "$USEOCTAVE" == "TRUE" ]; then
     if [[ ${OctaveTest} == "fail" ]]; then 
         reho " ===> ERROR: Cannot setup Octave because module test failed."
     else
@@ -415,15 +419,14 @@ if [ -f ~/.mnapuseoctave ]; then
          export OCTAVEDIR
          export OCTAVEBINDIR
          cyaneho " ---> Setting up Octave "; echo ""
-         MNAPMCOMMAND='octave -q --eval--no-init-file'
+         MNAPMCOMMAND='octave -q --no-init-file --eval'
          if [ ! -e ~/.octaverc ]; then
              cp ${MNAPPATH}/library/.octaverc ~/.octaverc
          fi
          export LD_LIBRARY_PATH=/usr/lib64/hdf5/:LD_LIBRARY_PATH > /dev/null 2>&1
          if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-latest-o"; fi
     fi
-fi
-if [ ! -f ~/.mnapuseoctave ]; then 
+else
     # if [[ ${MatlabTest} == "fail" ]]; then
     #     reho " ===> ERROR: Cannot setup Matlab because module test failed."
     # else
@@ -457,6 +460,7 @@ MATLABPATH=$FSLGPUDIR:$MATLABPATH
 export MATLABPATH
 
 # -- FreeSurfer path
+unset FSL_DIR
 FREESURFER_HOME=${FREESURFERDIR}
 PATH=${FREESURFER_HOME}:${PATH}
 export FREESURFER_HOME PATH

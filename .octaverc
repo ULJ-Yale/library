@@ -1,6 +1,6 @@
 warning('off');
-PATHS = getenv("MATLABPATH");
 addpath(getenv("PALMDIR"));
+addpath(getenv("MATLABPATH"));
 LOCALLIST = getenv("OCTAVEPKGDIR");
 pkg('local_list', LOCALLIST);
 pkg load image
