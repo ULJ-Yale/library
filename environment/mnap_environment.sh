@@ -122,6 +122,9 @@ usage() {
     echo "  │ "
     echo "  ├── mnaptools                       --> Env. Variable => MNAPREPO -- All MNAP Suite repositories (https://bitbucket.org/hidradev/mnaptools) "
     echo "  │ "
+    echo "  ├── env                             --> conda environments with python packages"
+    echo "  │   └── mnap                        --> Env. Variable => MNAPENV (python2.7 versions of the required packages)"
+    echo "  │ "
     echo "  ├── HCPpipelines                    --> Human Connectome Pipelines Folder (https://github.com/Washington-University/HCPpipelines) "
     echo "  │   ├── HCPpipelines-stable         --> Env. Variable => HCPPIPEDIR  Note: Only Human Connectome Pipelines Stable Branch is set by default "
     echo "  │   ├── HCPpipelines-<VERSION>      --> Point any other desired version point to HCPPIPEDIR "
@@ -153,6 +156,8 @@ usage() {
     echo "  │   └── matlab-latest               --> Env. Variable => MATLABDIR "
     echo "  │   └── matlab-latest/bin           --> Env. Variable => MATLABBINDIR "
     echo "  │ "
+    echo "  ├── miniconda2                      --> miniconda2 for python environment management and package installation (https://conda.io/projects/conda/en/latest/user-guide/install/) "
+    echo "  │ "
     echo "  ├── octave                          --> Octave v.4.4.1 or higher. If Octave is installed system-wide then a symlink is created here "
     echo "  │   └── octave-latest               --> Env. Variable => OCTAVEDIR "
     echo "  │   └── octave-latest/bin           --> Env. Variable => OCTAVEBINDIR "
@@ -167,9 +172,8 @@ usage() {
     echo "  │   └── R-latest                    --> Env. Variable => RDIR "
     echo "  │ "
     echo "  ├── pylib                           --> Env. Variable => PYLIBDIR      -- All MNAP python libraries and tools "
-    echo "  │   ├── gradunwarp                  --> Env. Variable => GRADUNWARPDIR -- HCP version of gradunwarp (https://github.com/Washington-University/gradunwarp) "
-    echo "  │   ├── nibabel                     --> Env. Variable => NIBABELDIR    -- NiBabel (http://nipy.org/nibabel/) "
-    echo "  │   └── pydicom                     --> Env. Variable => PYDICOMDIR    -- pydicom (v1.1.0 or later; https://pydicom.github.io) "
+    echo "  ├── gradunwarp                      --> HCP version of gradunwarp (https://github.com/Washington-University/gradunwarp) "
+    echo "  │   └── gradunwarp-latest           --> Env. Variable => GRADUNWARPDIR"
     echo "  │ "
     echo "  └── workbench/workbench-<VERSION>   Connectome Workbench (v1.0 or above; https://www.humanconnectome.org/software/connectome-workbench) "
     echo "      └── workbench-<VERSION>         Env. Variable = HCPWBDIR "
@@ -189,7 +193,7 @@ fi
 #  Environment clear and check functions
 # ------------------------------------------------------------------------------
 
-ENVVARIABLES='MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR MATLABDIR MATLABBINDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR RDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR USEOCTAVE'
+ENVVARIABLES='MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR MATLABDIR MATLABBINDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR RDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR USEOCTAVE MNAPENV'
 export ENVVARIABLES
 
 # -- Check if inside the container and reset the environment on first setup
@@ -330,6 +334,8 @@ if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="${TOOLS}/pylib"; export PYLIBDIR; fi
 if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/${MNAPREPO}/hcpmodified"; export HCPPIPEDIR; fi
 if [[ -z ${FMRIPREPDIR} ]]; then FMRIPREPDIR="${TOOLS}/fmriprep/fmriprep-latest"; export FMRIPREPDIR; fi
 if [[ -z ${MATLABDIR} ]]; then MATLABDIR="${TOOLS}/matlab/matlab-latest"; export MATLABDIR; fi
+if [[ -z ${GRADUNWARPDIR} ]]; then GRADUNWARPDIR="${TOOLS}/gradunwarp/gradunwarp-latest"; export GRADUNWARPDIR; fi
+if [[ -z ${MNAPENV} ]]; then MNAPENV="${TOOLS}/env/mnap"; export MNAPENV; fi
 if [[ -z ${RDIR} ]]; then RDIR="${TOOLS}/R/R-latest"; export RDIR; fi
 if [[ -z ${USEOCTAVE} ]]; then USEOCTAVE="FALSE"; export USEOCTAVE; fi
 
@@ -470,7 +476,7 @@ export FREESURFER_HOME PATH
 # -- Note: Always run after FreeSurfer for correct environment specification
 #          because SetUpFreeSurfer.sh can mis-specify the $FSLDIR path
 PATH=${FSLDIR}/bin:${PATH}
-. ${FSLDIR}/etc/fslconf/fsl.sh > /dev/null 2>&1
+source ${FSLDIR}/etc/fslconf/fsl.sh > /dev/null 2>&1
 export FSLDIR PATH
 MATLABPATH=$FSLDIR:$MATLABPATH
 export MATLABPATH
@@ -676,8 +682,8 @@ PATH=$MNAPPATH/connector:$PATH
 PATH=$MNAPPATH/niutilities:$PATH
 PATH=$MNAPPATH/matlab:$PATH
 PATH=$TOOLS/bin:$PATH
-PATH=$PYLIBDIR/gradunwarp:$PATH
-PATH=$PYLIBDIR/gradunwarp/core:$PATH
+# PATH=$PYLIBDIR/gradunwarp:$PATH
+# PATH=$PYLIBDIR/gradunwarp/core:$PATH
 PATH=$PYLIBDIR/xmlutils.py:$PATH
 PATH=$PYLIBDIR:$PATH
 PATH=$PYLIBDIR/bin:$PATH
@@ -707,7 +713,7 @@ PATH=$TOOLS/olib:$PATH
 # PYTHONPATH=$PYLIBDIR:$PYTHONPATH
 # PYTHONPATH=$TOOLS/MeshNet:$PYTHONPATH
 export PATH
-source activate $TOOLS/env/mnap
+source activate $MNAPENV
 # export PYTHONPATH
 
 # -- Set and export Matlab paths
