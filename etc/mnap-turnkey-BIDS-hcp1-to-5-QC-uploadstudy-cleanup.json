@@ -9,7 +9,7 @@
   "type": "docker",
   "index": null,
   "working-directory": "/output",
-  "command-line": "/opt/mnaptools/library/etc/cs-wrapper.sh #BIDSFORMAT_ARG# #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #OVERWRITEPROJECTXNAT_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #EXPT# #XNAT_PROJECT# #SUBJECTID#",
+  "command-line": "/opt/mnaptools/library/etc/cs-wrapper.sh #BIDSFORMAT_ARG# #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #OVERWRITEPROJECTXNAT_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #XNAT_PROJECT# #SUBJECTID#",
   "override-entrypoint": null,
   "mounts": [
     {
@@ -87,19 +87,6 @@
       "required": true,
       "replacement-key": "#LABEL#",
       "command-line-flag": "--xnatsessionlabels",
-      "command-line-separator": "=",
-      "true-value": null,
-      "false-value": null
-    },
-    {
-      "name": "expt_label",
-      "description": "Experiment Label",
-      "type": "string",
-      "matcher": null,
-      "default-value": null,
-      "required": true,
-      "replacement-key": "#EXPT#",
-      "command-line-flag": "--xnatexperimentlabel",
       "command-line-separator": "=",
       "true-value": null,
       "false-value": null

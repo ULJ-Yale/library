@@ -161,12 +161,11 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
     echo "                  AFNIDIR : $AFNIDIR";              if [[ -z $AFNIDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport AFNIDIR"; fi
     echo "                DCMNIIDIR : $DCMNIIDIR";            if [[ -z $DCMNIIDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport DCMNIIDIR"; fi
     echo "               DICMNIIDIR : $DICMNIIDIR";           if [[ -z $DICMNIIDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport DICMNIIDIR"; fi
-    if [ -f ~/.mnapuseoctave ]; then
+    if [ "$USEOCTAVE" == "TRUE" ]; then
     echo "                OCTAVEDIR : $OCTAVEDIR";            if [[ -z $OCTAVEDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport OCTAVEDIR"; fi
     echo "             OCTAVEPKGDIR : $OCTAVEPKGDIR";         if [[ -z $OCTAVEPKGDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport OCTAVEPKGDIR"; fi
     echo "             OCTAVEBINDIR : $OCTAVEBINDIR";         if [[ -z $OCTAVEBINDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport OCTAVEBINDIR"; fi
-    fi
-    if [ ! -f ~/.mnapuseoctave ]; then
+    else
     echo "                MATLABDIR : $MATLABDIR";            if [[ -z $MATLABDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MATLABDIR"; fi
     echo "             MATLABBINDIR : $MATLABBINDIR";         if [[ -z $MATLABBINDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MATLABBINDIR"; fi
     fi
@@ -290,7 +289,7 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
     fi
 
     ## -- Check for Octave
-    if [ -f ~/.mnapuseoctave ]; then
+    if [ "$USEOCTAVE" == "TRUE" ]; then
         echo "      Octave Binary  : $(which octave 2>&1 | grep -v 'no octave')"
         if [[ -z $(which octave 2>&1 | grep -v 'no octave') ]]; then 
             BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport octave"
