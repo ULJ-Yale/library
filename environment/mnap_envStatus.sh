@@ -150,6 +150,7 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
     geho "   Core Dependencies Environment Variables"
     geho "----------------------------------------------"
     echo ""
+    echo "                 CONDADIR : $CONDADIR";             if [[ -z $CONDADIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport CONDADIR"; fi
     echo "                   FSLDIR : $FSLDIR";               if [[ -z $FSLDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport FSLDIR"; fi
     echo "                FSLGPUDIR : $FSLGPUDIR";            if [[ -z $FSLGPUDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport FSLGPUDIR"; fi
     echo "             FSLGPUBinary : $FSLGPUBinary";         if [[ -z $FSLGPUBinary ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport FSLGPUBinary"; fi
