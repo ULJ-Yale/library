@@ -346,7 +346,6 @@ if [[ -z ${USEOCTAVE} ]]; then USEOCTAVE="FALSE"; export USEOCTAVE; fi
 CONDABIN=${CONDADIR}/bin
 PATH=${CONDABIN}:${PATH}
 export CONDABIN PATH
-
 source deactivate
 
 # -- Checks for version
