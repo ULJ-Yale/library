@@ -263,7 +263,7 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
     ## -- Check for dicm2nii only if outside the container
     if [ ! -f /opt/.container ]; then
         echo "    dicm2nii Binary  : $DICMNIIDIR/dicm2nii.m"
-        if [[ -z `ls $DICMNIIDIR/dicm2nii.m` ]]; then 
+        if [[ -z `ls $DICMNIIDIR/dicm2nii.m 2> /dev/null` ]]; then 
             BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport dicm2nii"
             reho "    dicm2nii Version : Executable not found!"
             if [[ -L "$DICMNIIDIR"  && ! -e "$DICMNIIDIR" ]]; then
@@ -332,7 +332,7 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
     
     ## -- Check for PALM
     echo "        PALM Binary  : $PALMDIR/palm.m"
-    if [[ -z `ls $PALMDIR/palm.m` ]]; then 
+    if [[ -z `ls $PALMDIR/palm.m 2> /dev/null` ]]; then 
         BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport palm"
         reho "        PALM Version : Executable not found!"
         if [[ -L "$PALMDIR"  && ! -e "$PALMDIR" ]]; then

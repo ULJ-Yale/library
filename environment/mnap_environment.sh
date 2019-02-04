@@ -346,7 +346,7 @@ if [[ -z ${USEOCTAVE} ]]; then USEOCTAVE="FALSE"; export USEOCTAVE; fi
 CONDABIN=${CONDADIR}/bin
 PATH=${CONDABIN}:${PATH}
 export CONDABIN PATH
-source deactivate
+source deactivate 2> /dev/null
 
 # -- Checks for version
 showVersion() {
@@ -733,7 +733,7 @@ MATLABPATH=$MNAPPATH/matlab/stats:$MATLABPATH
 
 # source deactivate
 # source activate $MNAPENV
-source activate $MNAPENV
+source activate $MNAPENV 2> /dev/null
 
 # ------------------------------------------------------------------------------
 # -- Path to additional dependencies
