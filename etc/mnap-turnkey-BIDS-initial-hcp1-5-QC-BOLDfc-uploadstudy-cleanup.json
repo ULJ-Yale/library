@@ -29,7 +29,7 @@
       "description": "Specify if files are in BIDS format",
       "type": "string",
       "matcher": null,
-      "default-value": null,
+      "default-value": "yes",
       "required": true,
       "replacement-key": "#BIDSFORMAT_ARG#",
       "command-line-flag": "--bidsformat",
