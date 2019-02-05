@@ -343,10 +343,14 @@ if [[ -z ${USEOCTAVE} ]]; then USEOCTAVE="FALSE"; export USEOCTAVE; fi
 
 
 # -- conda management
-CONDABIN=${CONDADIR}/bin
-PATH=${CONDABIN}:${PATH}
-export CONDABIN PATH
-source deactivate 2> /dev/null
+
+if [ -e /opt/.hcppipelines ]; then    
+    CONDABIN=${CONDADIR}/bin
+    PATH=${CONDABIN}:${PATH}
+    export CONDABIN PATH
+    source deactivate 2> /dev/null
+fi 
+
 
 # -- Checks for version
 showVersion() {
@@ -703,27 +707,30 @@ PATH=$TOOLS/olib:$PATH
 PATH=$TOOLS/bin:$PATH
 
 
-# --- setup PYTHONPATH and PATH for BTRX
+# --- setup PYTHONPATH and PATH When not conda
 
-PYTHONPATH=$TOOLS:$PYTHONPATH
-#PYTHONPATH=$TOOLS/pylib:$PYTHONPATH
-PYTHONPATH=/usr/local/bin:$PYTHONPATH
-PYTHONPATH=$TOOLS/env/mnap/bin:$PYTHONPATH
-PYTHONPATH=$TOOLS/miniconda/miniconda-latest/pkgs:$PYTHONPATH
-PYTHINPATH=$TOOLS/env/mnap/lib/python2.7/site-packages:$PYTHONPATH
-PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/nibabel/xmlutils.py:$PYTHONPATH
-PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/pydicom:$PYTHONPATH
-PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/gradunwarp:$PYTHONPATH
-PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/gradunwarp/core:$PYTHONPATH
-PYTHONPATH=$MNAPPATH:$PYTHONPATH
-PYTHONPATH=$MNAPPATH/connector:$PYTHONPATH
-PYTHONPATH=$MNAPPATH/niutilities:$PYTHONPATH
-PYTHONPATH=$MNAPPATH/matlab:$PYTHONPATH
-# PYTHONPATH=$PYLIBDIR/bin:$PYTHONPATH
-# PYTHONPATH=$PYLIBDIR/lib/python2.7/site-packages:$PYTHONPATH
-# PYTHONPATH=$PYLIBDIR/lib64/python2.7/site-packages:$PYTHONPATH
-# PYTHONPATH=$PYLIBDIR:$PYTHONPATH
-PATH=$TOOLS/env/mnap/bin:$PATH
+if [ ! -e /opt/.hcppipelines ]; then 
+    PYTHONPATH=$TOOLS:$PYTHONPATH
+    #PYTHONPATH=$TOOLS/pylib:$PYTHONPATH
+    PYTHONPATH=/usr/local/bin:$PYTHONPATH
+    PYTHONPATH=$TOOLS/env/mnap/bin:$PYTHONPATH
+    PYTHONPATH=$TOOLS/miniconda/miniconda-latest/pkgs:$PYTHONPATH
+    PYTHINPATH=$TOOLS/env/mnap/lib/python2.7/site-packages:$PYTHONPATH
+    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/nibabel/xmlutils.py:$PYTHONPATH
+    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/pydicom:$PYTHONPATH
+    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/gradunwarp:$PYTHONPATH
+    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/gradunwarp/core:$PYTHONPATH
+    PYTHONPATH=$MNAPPATH:$PYTHONPATH
+    PYTHONPATH=$MNAPPATH/connector:$PYTHONPATH
+    PYTHONPATH=$MNAPPATH/niutilities:$PYTHONPATH
+    PYTHONPATH=$MNAPPATH/matlab:$PYTHONPATH
+    # PYTHONPATH=$PYLIBDIR/bin:$PYTHONPATH
+    # PYTHONPATH=$PYLIBDIR/lib/python2.7/site-packages:$PYTHONPATH
+    # PYTHONPATH=$PYLIBDIR/lib64/python2.7/site-packages:$PYTHONPATH
+    # PYTHONPATH=$PYLIBDIR:$PYTHONPATH
+    PATH=$TOOLS/env/mnap/bin:$PATH
+fi
+
 export PATH
 export PYTHONPATH
 
@@ -760,7 +767,9 @@ MATLABPATH=$MNAPPATH/matlab/stats:$MATLABPATH
 
 # source deactivate
 # source activate $MNAPENV
-source activate $MNAPENV 2> /dev/null
+if [ -e /opt/.hcppipelines ]; then 
+    source activate $MNAPENV 2> /dev/null
+fi
 
 # ------------------------------------------------------------------------------
 # -- Path to additional dependencies
