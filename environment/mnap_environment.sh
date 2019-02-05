@@ -693,15 +693,42 @@ PATH=$MNAPPATH/matlab:$PATH
 PATH=$TOOLS/bin:$PATH
 # PATH=$PYLIBDIR/gradunwarp:$PATH
 # PATH=$PYLIBDIR/gradunwarp/core:$PATH
-PATH=$PYLIBDIR/xmlutils.py:$PATH
-PATH=$PYLIBDIR:$PATH
-PATH=$PYLIBDIR/bin:$PATH
-PATH=$TOOLS/MeshNet:$PATH
+# PATH=$PYLIBDIR/xmlutils.py:$PATH
+# PATH=$PYLIBDIR:$PATH
+# PATH=$PYLIBDIR/bin:$PATH
+# PATH=$TOOLS/MeshNet:$PATH
 PATH=/usr/local/bin:$PATH
 PATH=$PATH:/bin
 PATH=$TOOLS/olib:$PATH
+PATH=$TOOLS/bin:$PATH
 
-# -- Export Python paths
+
+# --- setup PYTHONPATH and PATH for BTRX
+
+PYTHONPATH=$TOOLS:$PYTHONPATH
+#PYTHONPATH=$TOOLS/pylib:$PYTHONPATH
+PYTHONPATH=/usr/local/bin:$PYTHONPATH
+PYTHONPATH=$TOOLS/env/mnap/bin:$PYTHONPATH
+PYTHONPATH=$TOOLS/miniconda/miniconda-latest/pkgs:$PYTHONPATH
+PYTHINPATH=$TOOLS/env/mnap/lib/python2.7/site-packages:$PYTHONPATH
+PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/nibabel/xmlutils.py:$PYTHONPATH
+PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/pydicom:$PYTHONPATH
+PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/gradunwarp:$PYTHONPATH
+PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/gradunwarp/core:$PYTHONPATH
+PYTHONPATH=$MNAPPATH:$PYTHONPATH
+PYTHONPATH=$MNAPPATH/connector:$PYTHONPATH
+PYTHONPATH=$MNAPPATH/niutilities:$PYTHONPATH
+PYTHONPATH=$MNAPPATH/matlab:$PYTHONPATH
+# PYTHONPATH=$PYLIBDIR/bin:$PYTHONPATH
+# PYTHONPATH=$PYLIBDIR/lib/python2.7/site-packages:$PYTHONPATH
+# PYTHONPATH=$PYLIBDIR/lib64/python2.7/site-packages:$PYTHONPATH
+# PYTHONPATH=$PYLIBDIR:$PYTHONPATH
+PATH=$TOOLS/env/mnap/bin:$PATH
+export PATH
+export PYTHONPATH
+
+
+# -- Export Python paths (before change to conda)
 # PYTHONPATH=$TOOLS:$PYTHONPATH
 # PYTHONPATH=$TOOLS/pylib:$PYTHONPATH
 # PYTHONPATH=/usr/local/bin:$PYTHONPATH
@@ -721,7 +748,7 @@ PATH=$TOOLS/olib:$PATH
 # PYTHONPATH=$PYLIBDIR/lib64/python2.7/site-packages:$PYTHONPATH
 # PYTHONPATH=$PYLIBDIR:$PYTHONPATH
 # PYTHONPATH=$TOOLS/MeshNet:$PYTHONPATH
-export PATH
+# export PATH
 # export PYTHONPATH
 
 # -- Set and export Matlab paths
