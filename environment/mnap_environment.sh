@@ -715,7 +715,7 @@ if [ ! -e /opt/.hcppipelines ]; then
     PYTHONPATH=/usr/local/bin:$PYTHONPATH
     PYTHONPATH=$TOOLS/env/mnap/bin:$PYTHONPATH
     PYTHONPATH=$TOOLS/miniconda/miniconda-latest/pkgs:$PYTHONPATH
-    PYTHINPATH=$TOOLS/env/mnap/lib/python2.7/site-packages:$PYTHONPATH
+    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages:$PYTHONPATH
     PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/nibabel/xmlutils.py:$PYTHONPATH
     PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/pydicom:$PYTHONPATH
     PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/gradunwarp:$PYTHONPATH
