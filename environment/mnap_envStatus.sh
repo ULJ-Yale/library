@@ -330,6 +330,20 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
     fi
     echo ""
     
+    ## -- Check for R packages that are required
+    unset RPackageTest RPackage
+    RPackages="ggplot2"   # <-- Add R packages here
+    echo "           R required packages : ${RPackages}"
+    for RPackage in ${RPackages}; do
+        RPackageTest=`R --slave -e "tpkg <- '$RPackage'; if (is.element(tpkg, installed.packages()[,1])) {packageVersion(tpkg)} else {print('package not installed')}" | sed 's/\[1\]//g'`
+        if [[ `echo ${RPackageTest} | grep 'not installed'` ]]; then 
+                reho "  R Package : ${RPackage} not installed!"
+        else
+                echo "           R Package : ${RPackage} ${RPackageTest}"
+        fi
+    done
+    echo ""
+        
     ## -- Check for PALM
     echo "        PALM Binary  : $PALMDIR/palm.m"
     if [[ -z `ls $PALMDIR/palm.m 2> /dev/null` ]]; then 
