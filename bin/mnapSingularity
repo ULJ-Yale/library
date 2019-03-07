@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-
+from __future__ import print_function, division
 import subprocess
 import os
 import tempfile
 import sys
+import re
+import os
+import glob
+import math
 
 def schedule(command=None, script=None, settings=None, replace=None, workdir=None, environment=None, output=None):
     '''
@@ -213,6 +217,8 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
                  Added checking for validity of log file directories.
     2018-10-04 - Grega Repovs
                  Excluded log validity checking for 'return'.
+    2019-03-07 - Jure Demsar
+                 Python3 support.
     '''
 
     # --- check inputs
@@ -246,7 +252,7 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
     if command is None:
         if not os.path.exists(script):
             raise ge.CommandFailed("schedule", "File not found", "The specified script does not exist! [%s]" % (script))
-        command = file(script).read()
+        command = open(script, "r")
 
     if workdir is not None:
         if not os.path.exists(workdir):
@@ -256,7 +262,7 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
     if environment is not None:
         if not os.path.exists(environment):
             raise ge.CommandFailed("schedule", "File not found", "The specified environment script does not exist! [%s]" % (environment))
-        command = file(environment).read() + "\n" + command
+        command = open(environment, "r") + "\n" + command
 
     # --- do search replace
 
@@ -341,7 +347,7 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
 
     # --- run scheduler
 
-    print "Submitting:\n------------------------------\n", sCommand + command
+    print("Submitting:\n------------------------------\n", sCommand + command)
 
     if outputs['return'] is None:
         serr = None
@@ -370,6 +376,112 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
         return result
 
 
+def getSubjidFromBatchFile(filename,):
+    '''
+    getSubjidFromBatchFile(filename)
+
+    An internal function for reading batch.txt files. It reads the file and
+    returns a list of subjects with the information on images and the additional
+    parameters specified in the header.
+
+    ---
+    Written by Grega Repovs and Jure Demsar.
+    '''
+
+    if not os.path.exists(filename):
+        print("\n\n=====================================================\nERROR: Batch file does not exist [%s]", file=filename)
+        raise ValueError("ERROR: Batch file not found: %s" % (filename))
+
+    s = open(filename, "r")
+    s = s.replace("\r", "\n")
+    s = s.replace("\n\n", "\n")
+    s = re.sub("^#.*?\n", "", s)
+
+    s = s.split("\n---")
+    s = [e for e in s if len(e) > 10]
+
+    subjid = []
+
+    for sub in s:
+        sub = sub.split('\n')
+        sub = [e.strip() for e in sub]
+        sub = [e.split("#")[0].strip() for e in sub]
+        sub = [e for e in sub if len(e) > 0]
+
+        for line in sub:
+            line = [e.strip() for e in line.split(":")]
+
+            # id line
+            if len(line) == 2 and line[0] == "id":
+                subjid.append(line[1])
+                break
+
+    return subjid
+
+
+def getSubjidFromList(filename):
+    '''
+    getSubjidFromList(filename)
+
+    An internal function for reading list files. It reads the file and
+    returns a list of subjects ids.
+
+    ---
+    Written by Grega Repovs and Jure Demsar.
+    '''
+
+    if not os.path.exists(filename):
+        print("\n\n=====================================================\nERROR: List file does not exist [%s]", file=filename)
+        raise ValueError("ERROR: List file not found: %s" % (filename))
+
+    subjid  = []
+
+    with open(filename) as f:
+        for line in f:
+            if line.strip()[:1] == "#":
+                continue
+
+            line = [e.strip() for e in line.split(":")]
+
+            if len(line) == 2 and line[0] == "subject id":
+                subjid.append(line[1])
+
+    return subjid
+
+
+def getSubjid(listString):
+    '''
+    getSubjid(listString)
+
+    An internal function for getting a list of subject ids.
+
+    The provided listString can be:
+
+    * a comma, space or pipe separated list of subject id codes,
+    * a path to a batch file (identified by .txt extension),
+    * a path to a *.list file (identified by .list extension).
+
+    ---
+    Written by Grega Repovs and Jure Demsar.
+    '''
+
+    listString = listString.strip()
+
+    if re.match(".*\.list$", listString):
+        subjid = getSubjidFromList(listString)
+
+    elif os.path.isfile(listString):
+        subjid = getSubjidFromBatchFile(listString)
+
+    elif re.match(".*\.txt$", listString) or '/' in listString:
+        raise ValueError("ERROR: The specified subject file is not found! [%s]!" % listString)
+
+    else:
+        subjid = [e.strip() for e in re.split(' +|,|\|', listString)]
+
+    return subjid
+
+
 def main(args=None):
     """
     mnapSingularity command [parameters] --simage="<path to the singularity image>" [--script="<path to the script to run>"] [--scheduler="<scheduler settings>"] [--]
@@ -378,10 +490,12 @@ def main(args=None):
     if args is None:
         args = sys.argv[1:]
 
-    scheduler = None
-    simage    = None
-    command   = ""
-    script    = None
+    scheduler      = None
+    simage         = None
+    command        = ""
+    script         = None
+    cores          = None
+    subjects       = None
 
     for arg in args:
         if "scheduler" in arg:
@@ -390,6 +504,10 @@ def main(args=None):
             k, simage = arg.split("=", 1)
         elif "script" in arg:
             k, script = arg.split("=", 1)
+        elif "subjects" in arg:
+            k, subjects = arg.split("=", 1)
+        elif "cores" in arg:
+            k, cores = arg.split("=", 1)
         elif "=" in arg:
             k, v = arg.split('=', 1)
             command += '%s="%s" ' % (k, v)
@@ -400,30 +518,46 @@ def main(args=None):
         if "MNAPSIMAGE" in os.environ:
             simage = os.environ['MNAPSIMAGE']
         else:
-            print "ERROR: No Singularity image specified either on command line or as a MNAPSIMAGE environment variable!"
+            print("ERROR: No Singularity image specified either on command line or as a MNAPSIMAGE environment variable!")
             exit(1)
 
     fid, scriptPath = tempfile.mkstemp(dir="./")
     f = os.fdopen(fid, 'w')
 
-    print >> f, "source /opt/mnaptools/library/environment/mnap_environment.sh"
-    print >> f, 'export FSLDIR="/opt/fsl/fsl-5.0.9"'
-    print >> f, 'export PATH=${FSLDIR}:${FSLDIR}/bin:${PATH}'
+    print("source /opt/mnaptools/library/environment/mnap_environment.sh", file=f)
+    print('export FSLDIR="/opt/fsl/fsl-5.0.9"', file=f)
+    print('export PATH=${FSLDIR}:${FSLDIR}/bin:${PATH}', file=f)
 
     # --- run command or script
     if script:
-        print >> f, "bash " + script
+        print("bash " + script, file=f)
     else:        
-        print >> f, "bash /opt/mnaptools/connector/mnap.sh " + command
+        print("bash /opt/mnaptools/connector/mnap.sh " + command, file=f)
     
-    print >> f, "rm " + scriptPath
+    print("rm " + scriptPath, file=f)
 
     f.close()
 
     command = "singularity exec %s bash %s " % (simage, scriptPath)
 
-    if scheduler:        
-        schedule(command=command, settings=scheduler)
+    if scheduler:
+        # if cores and subjects are provided split and run multiple containers
+        if cores is not None and subjects is not None:
+            # get all subjids
+            subjid = getSubjid(subjects)
+
+            # split subjids to cores and execute via scheduler
+            start = 0
+            end = len(subjid)
+            chunks = int(math.ceil(end / float(cores)))
+            for i in range(start, end, chunks):
+                start = i
+                ids = subjid[start:start+chunks]
+                newCommand = command + ' %s="%s" ' % ("subjid", ','.join(ids))
+                schedule(command=newCommand, settings=scheduler)
+
+        else:
+            schedule(command=command, settings=scheduler)
 
     else:
         subprocess.Popen(command, shell=True)
@@ -431,7 +565,3 @@ def main(args=None):
 
 if __name__ == "__main__":
     main()
-
-
-
-
