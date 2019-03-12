@@ -629,10 +629,11 @@ def main(args=None):
             containerCommand = "singularity exec %s bash %s " % (image, scriptPath)
         else:
             # run docker image
-            dockerName = "mnapDocker%d" % i
-            containerCommand = "docker run --name %s %s" % (dockerName, image)
-            containerCommand += " && docker exec -it %s bash %s" % (dockerName, scriptPath)
-            containerCommand += " && docker stop %s" % (dockerName)
+            containerCommand = "docker run -d %s %s" % (image, scriptPath)
+            #dockerName = "mnapDocker%d" % i
+            #containerCommand = "docker run --name %s %s" % (dockerName, image)
+            #containerCommand += " && docker exec -it %s bash %s" % (dockerName, scriptPath)
+            #containerCommand += " && docker stop %s" % (dockerName)
 
         if scheduler:
             schedule(command=containerCommand, settings=scheduler)
