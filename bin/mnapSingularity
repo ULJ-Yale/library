@@ -606,8 +606,8 @@ def main(args=None):
                 start = i
                 subjidChunk = subjid[start:start+chunks]
                 scheduleCommand = command + 'subjid="%s"' % (','.join(subjidChunk))
-                schedule(command=scheduleCommand, settings=scheduler)
                 print(scheduleCommand)
+                schedule(command=scheduleCommand, settings=scheduler)
 
         else:
             # add subjid back
