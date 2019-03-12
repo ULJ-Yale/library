@@ -523,14 +523,14 @@ def getSubjid(listString, subjectsfolder=None):
 
 def main(args=None):
     """
-    mnapSingularity command [parameters] --simage="<path to the singularity image>" [--script="<path to the script to run>"] [--scheduler="<scheduler settings>"] [--]
+    mnapContainer command [parameters] --image="<path to the singularity image or docker container name>" [--script="<path to the script to run>"] [--scheduler="<scheduler settings>"] [--]
     """
 
     if args is None:
         args = sys.argv[1:]
 
     scheduler      = None
-    simage         = None
+    image          = None
     command        = ""
     script         = None
     cores          = None
@@ -562,11 +562,11 @@ def main(args=None):
         else:
             command += '%s ' % (arg)
 
-    if simage is None:
+    if image is None:
         if "MNAPSIMAGE" in os.environ:
-            simage = os.environ['MNAPSIMAGE']
+            image = os.environ['MNAPSIMAGE']
         else:
-            print("ERROR: No Singularity image specified either on command line or as a MNAPSIMAGE environment variable!")
+            print("ERROR: No Singularity image or Docker container name specified either on command line or as a MNAPSIMAGE environment variable!")
             exit(1)
 
     # run in parallel if:
@@ -622,12 +622,20 @@ def main(args=None):
 
         f.close()
 
-        singularityCommand = "singularity exec %s bash %s " % (simage, scriptPath)
-        
-        if scheduler:
-            schedule(command=singularityCommand, settings=scheduler)
+        # singularity or docker?
+        if image.endswith(".simg"):
+            containerCommand = "singularity exec %s bash %s " % (image, scriptPath)
         else:
-            subprocess.Popen(singularityCommand, shell=True)
+            # run docker image
+            dockerName = "mnapDocker%d" % i
+            containerCommand = "docker run --name %s %s" % (dockerName, image)
+            containerCommand += " && docker exec -it %s bash %s " % (dockerName, scriptPath)
+            containerCommand += " && docker stop %s" % (dockerName)
+
+        if scheduler:
+            schedule(command=containerCommand, settings=scheduler)
+        else:
+            subprocess.Popen(containerCommand, shell=True)
 
 if __name__ == "__main__":
     main()
