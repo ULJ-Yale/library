@@ -548,12 +548,12 @@ def main(args=None):
         elif "cores" in arg:
             k, cores = arg.split("=", 1)
             command += '%s="%s" ' % (k, cores)
-        elif "subjects" in arg:
-            k, subjects = arg.split("=", 1)
-            command += '%s="%s" ' % (k, subjects)
         elif "subjectsfolder" in arg:
             k, subjectsfolder = arg.split("=", 1)
             command += '%s="%s" ' % (k, subjectsfolder)
+        elif "subjects" in arg:
+            k, subjects = arg.split("=", 1)
+            command += '%s="%s" ' % (k, subjects)
         elif "subjid" in arg:
             k, subjid = arg.split("=", 1)
         elif "=" in arg:
@@ -569,60 +569,65 @@ def main(args=None):
             print("ERROR: No Singularity image specified either on command line or as a MNAPSIMAGE environment variable!")
             exit(1)
 
-    fid, scriptPath = tempfile.mkstemp(dir="./")
-    f = os.fdopen(fid, 'w')
-
-    print("source /opt/mnaptools/library/environment/mnap_environment.sh", file=f)
-    print('export FSLDIR="/opt/fsl/fsl-5.0.9"', file=f)
-    print('export PATH=${FSLDIR}:${FSLDIR}/bin:${PATH}', file=f)
-
-    # --- run command or script
-    if script:
-        print("bash " + script, file=f)
-    else:        
-        print("bash /opt/mnaptools/connector/mnap.sh " + command, file=f)
-    
-    print("rm " + scriptPath, file=f)
-
-    f.close()
-
-    command = "singularity exec %s bash %s " % (simage, scriptPath)
-
-    if scheduler:
-        # if cores and subjects are provided split and run multiple containers
-        if cores is not None and subjects is not None:
-            # if subjids not provided get them from subjects 
-            if subjid is None:
-                subjid = getSubjid(subjects, subjectsfolder=subjectsfolder)
-            else:
-                subjidSplit = re.split(' +|,|\|', subjid)
-                subjid = [e for e in subjid if e['id'] in subjidSplit]
-
-            # split subjids to cores and execute via scheduler
-            start = 0
-            end = len(subjid)
-            chunks = int(math.ceil(end / float(cores)))
-            for i in range(start, end, chunks):
-                start = i
-                subjidChunk = subjid[start:start+chunks]
-                scheduleCommand = command + 'subjid="%s"' % (','.join(subjidChunk))
-                print(scheduleCommand)
-                schedule(command=scheduleCommand, settings=scheduler)
-
+    # run in parallel if:
+    # - cores is not None
+    # - cores is >1
+    # - schedulers is not None
+    # - subjects is not None
+    subjidArray = []
+    if cores is not None and int(cores) > 1 and scheduler is not None and subjects is not None:
+        containers = int(cores)
+        # split subjects via subjid or split existing subjid
+        if subjid is None:
+            subjid = getSubjid(subjects, subjectsfolder=subjectsfolder)
         else:
-            # add subjid back
-            if subjid is not None:
-                command += 'subjid="%s"' % (subjid)
+            subjidSplit = re.split(' +|,|\|', subjid)
+            subjid = [e for e in subjid if e['id'] in subjidSplit]
 
-            schedule(command=command, settings=scheduler)
-
+        # split subjids according to cores and add to array
+        start = 0
+        end = len(subjid)
+        chunks = int(math.ceil(end / float(cores)))
+        for i in range(start, end, chunks):
+            start = i
+            subjidChunk = subjid[start:start+chunks]
+            subjidArray.append(','.join(subjidChunk))
     else:
-        # add subjid back
+        # do not run parallel
+        containers = 1
+        # add subjid filter back if exists
         if subjid is not None:
-            command += 'subjid="%s"' % (subjid)
+            subjidArray.append(subjid)
 
-        subprocess.Popen(command, shell=True)
+    for i in range(0, containers):
+        # add subjid to command
+        scheduleCommand = command
+        subjid = subjidArray[i]
+        scheduleCommand += 'subjid="%s" ' % (subjid)
 
+        fid, scriptPath = tempfile.mkstemp(dir="./")
+        f = os.fdopen(fid, 'w')
+
+        print("source /opt/mnaptools/library/environment/mnap_environment.sh", file=f)
+        print('export FSLDIR="/opt/fsl/fsl-5.0.9"', file=f)
+        print('export PATH=${FSLDIR}:${FSLDIR}/bin:${PATH}', file=f)
+
+        # --- run command or script
+        if script:
+            print("bash " + script, file=f)
+        else:        
+            print("bash /opt/mnaptools/connector/mnap.sh " + scheduleCommand, file=f)
+        
+        print("rm " + scriptPath, file=f)
+
+        f.close()
+
+        singularityCommand = "singularity exec %s bash %s " % (simage, scriptPath)
+        
+        if scheduler:
+            schedule(command=singularityCommand, settings=scheduler)
+        else:
+            subprocess.Popen(singularityCommand, shell=True)
 
 if __name__ == "__main__":
     main()
