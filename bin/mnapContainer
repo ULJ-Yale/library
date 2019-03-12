@@ -541,8 +541,8 @@ def main(args=None):
     for arg in args:
         if "scheduler" in arg:
             k, scheduler = arg.split("=", 1)
-        elif "simage" in arg:
-            k, simage = arg.split("=", 1)
+        elif "image" in arg:
+            k, image = arg.split("=", 1)
         elif "script" in arg:
             k, script = arg.split("=", 1)
         elif "cores" in arg:
