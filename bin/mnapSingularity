@@ -425,7 +425,7 @@ def getSubjidFromBatchFile(filename,):
         print("\n\n=====================================================\nERROR: Batch file does not exist [%s]", file=filename)
         raise ValueError("ERROR: Batch file not found: %s" % (filename))
 
-    s = open(filename, "r")
+    s = open(filename, "r").read()
     s = s.replace("\r", "\n")
     s = s.replace("\n\n", "\n")
     s = re.sub("^#.*?\n", "", s)
