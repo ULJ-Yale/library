@@ -600,10 +600,12 @@ def main(args=None):
             subjidArray.append(subjid)
 
     for i in range(0, containers):
-        # add subjid to command
         scheduleCommand = command
-        subjid = subjidArray[i]
-        scheduleCommand += 'subjid="%s" ' % (subjid)
+
+        # add subjid to command?
+        if i < len(subjidArray):
+            subjid = subjidArray[i]
+            scheduleCommand += 'subjid="%s" ' % (subjid)
 
         fid, scriptPath = tempfile.mkstemp(dir="./")
         f = os.fdopen(fid, 'w')
