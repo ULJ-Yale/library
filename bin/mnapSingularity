@@ -605,13 +605,21 @@ def main(args=None):
             for i in range(start, end, chunks):
                 start = i
                 subjidChunk = subjid[start:start+chunks]
-                scheduleCommand = command + ' %s="%s" ' % ("subjid", ','.join(subjidChunk))
+                scheduleCommand = command + 'subjid="%s"' % (','.join(subjidChunk))
                 schedule(command=scheduleCommand, settings=scheduler)
 
         else:
+            # add subjid back
+            if subjid is not None:
+                command += 'subjid="%s"' % (subjid)
+
             schedule(command=command, settings=scheduler)
 
     else:
+        # add subjid back
+        if subjid is not None:
+            command += 'subjid="%s"' % (subjid)
+
         subprocess.Popen(command, shell=True)
 
 
