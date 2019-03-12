@@ -631,7 +631,7 @@ def main(args=None):
             # run docker image
             dockerName = "mnapDocker%d" % i
             containerCommand = "docker run --name %s %s" % (dockerName, image)
-            containerCommand += " && docker exec -it %s bash %s " % (dockerName, scriptPath)
+            containerCommand += " && docker exec -it %s bash %s" % (dockerName, scriptPath)
             containerCommand += " && docker stop %s" % (dockerName)
 
         if scheduler:
