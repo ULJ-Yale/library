@@ -627,13 +627,13 @@ def main(args=None):
         # singularity or docker?
         if image.endswith(".simg"):
             containerCommand = "singularity exec %s bash %s " % (image, scriptPath)
-        else:
+        elif not script:
             # run docker image
-            containerCommand = "docker run -d %s %s" % (image, scriptPath)
-            #dockerName = "mnapDocker%d" % i
-            #containerCommand = "docker run --name %s %s" % (dockerName, image)
-            #containerCommand += " && docker exec -it %s bash %s" % (dockerName, scriptPath)
-            #containerCommand += " && docker stop %s" % (dockerName)
+            cstring = "source /opt/mnaptools/library/environment/mnap_environment.sh; export FSLDIR=/opt/fsl/fsl-5.0.9; bash /opt/mnaptools/connector/mnap.sh " + scheduleCommand
+            containerCommand = "docker container run -d %s bash -c \"%s\"" % (image, cstring)
+        else:
+            print("ERROR: mnapContainer can not run scripts against a Docker container!")
+            return
 
         if scheduler:
             schedule(command=containerCommand, settings=scheduler)
