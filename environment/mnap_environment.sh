@@ -48,55 +48,6 @@
 #~ND~END~
 
 # ------------------------------------------------------------------------------
-# -- General help usage function
-# ------------------------------------------------------------------------------
-
-usage() {
-    echo ""
-    echo "-- DESCRIPTION:"
-    echo ""
-    echo "This script implements the global environment setup for the MNAP Suite."
-    echo ""
-    echo ""
-    echo "    Configure the environment script by adding the following lines to the .bash_profile "
-    echo ""
-    echo "    -->TOOLS=<path_to_folder_with_mnap_software> "
-    echo "    -->export TOOLS "
-    echo "    -->source <path_to_folder_with_mnap_software>/library/environment/mnap_environment.sh "
-    echo ""
-    echo "    Permissions of this file need to be set to 770 "
-    echo ""
-    echo "-- REQUIRED DEPENDENCIES:"
-    echo ""
-    echo " The MNAP Suite assumes a set default folder names for dependencies if undefined by user environment."
-    echo " These are defined relative to the ${TOOLS} folder which should be set as a global system variable."
-    echo ""
-    echo "  TOOLS                                                              -- the base folder for the installation"
-    echo "  ├── afni                         Env. Variable = AFNIDIR           -- AFNI: Analysis of Functional NeuroImages (https://github.com/afni/afni)"
-    echo "  ├── dcm2niix                     Env. Variable = DCM2NIIDIR        -- dcm2niix (https://github.com/rordenlab/dcm2niix)"
-    echo "  ├── fix                          Env. Variable = FIXICAFolder      -- FIX ICA (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FIX/UserGuide)"
-    echo "  ├── freesurfer-5.3-HCP           Env. Variable = FSDIR53HCP        -- FreeSurfer (v5.3-HCP version for HCP-compatible data; http://ftp.nmr.mgh.harvard.edu/pub/dist/freesurfer/5.3.0-HCP/)"
-    echo "  ├── freesurfer-<LATEST_VERSION>  Env. Variable = FSDIRLATEST       -- FreeSurfer (v6.0 or later stable for all other data; https://surfer.nmr.mgh.harvard.edu/fswiki/DownloadAndInstall)"
-    echo "  ├── fsl-<VERSION>                Env. Variable = FSLFolder         -- FSL (v5.0.9 or above with GPU-enabled DWI tools; https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)"
-    echo "  ├── mnaptools                    Env. Variable = MNAPREPO          -- All MNAP Suite repositories (https://bitbucket.org/hidradev/mnaptools)"
-    echo "  ├── Octave/<version>             Env. Variable = OCTAVEDIR         -- Octave v.4.2.1 or higher. If Octave is installed system-wide then a symlink is created here"
-    echo "  ├── octavepkg                    Env. Variable = OCTAVEPKGDIR      -- If Octave packages need manual deployment then the installed packages go here"
-    echo "  ├── PALM/palm-<VERSION>          Env. Variable = PALMDIR           -- PALM: Permutation Analysis of Linear Models (https://github.com/andersonwinkler/PALM)"
-    echo "  ├── pylib                        Env. Variable = PYLIBDIR          -- All python libraries and tools"
-    echo "  │   ├── gradunwarp               Env. Variable = GRADUNWARPDIR     -- HCP version of gradunwarp (https://github.com/Washington-University/gradunwarp)"
-    echo "  │   ├── nibabel                  Env. Variable = NIBABELDIR        -- NiBabel (http://nipy.org/nibabel/)"
-    echo "  │   └── pydicom                  Env. Variable = PYDICOMDIR        -- pydicom (v1.1.0 or later; https://pydicom.github.io)"
-    echo "  └── workbench                    Env. Variable = HCPWBDIR          -- Connectome Workbench (v1.0 or above; https://www.humanconnectome.org/software/connectome-workbench)"
-    echo ""
-    echo " These defaults can be redefined if the above paths are declared as global variables in the .bash_profile profile after loading the MNAP environment."
-    echo ""
-}
-
-# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=
-# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= CODE START =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=
-
-# ------------------------------------------------------------------------------
 # -- Setup color outputs
 # ------------------------------------------------------------------------------
 
@@ -143,10 +94,150 @@ for fn in "$@" ; do
 done
 }
 
+# ------------------------------------------------------------------------------
+# -- General help usage function
+# ------------------------------------------------------------------------------
+
+usage() {
+    echo ""
+    echo "-- DESCRIPTION:"
+    echo ""
+    echo "This script implements the global environment setup for the MNAP Suite."
+    echo ""
+    echo ""
+    echo "    Configure the environment script by adding the following lines to the .bash_profile "
+    echo ""
+    echo "    -->TOOLS=<path_to_folder_with_mnap_software> "
+    echo "    -->export TOOLS "
+    echo "    -->source <path_to_folder_with_mnap_software>/library/environment/mnap_environment.sh "
+    echo ""
+    echo "    Permissions of this file need to be set to 770 "
+    echo ""
+    echo "-- REQUIRED DEPENDENCIES:"
+    echo ""
+    echo " The MNAP Suite assumes a set default folder names for dependencies if undefined by user environment."
+    echo " These are defined relative to the ${TOOLS} folder which should be set as a global system variable."
+    echo ""
+    echo "  TOOLS                              --> The base folder for the dependency installation "
+    echo "  │ "
+    echo "  ├── mnaptools                       --> Env. Variable => MNAPREPO -- All MNAP Suite repositories (https://bitbucket.org/hidradev/mnaptools) "
+    echo "  │ "
+    echo "  ├── env                             --> conda environments with python packages"
+    echo "  │   └── mnap                        --> Env. Variable => MNAPENV (python2.7 versions of the required packages)"
+    echo "  │ "
+    echo "  ├── HCPpipelines                    --> Human Connectome Pipelines Folder (https://github.com/Washington-University/HCPpipelines) "
+    echo "  │   ├── HCPpipelines-stable         --> Env. Variable => HCPPIPEDIR  Note: Only Human Connectome Pipelines Stable Branch is set by default "
+    echo "  │   ├── HCPpipelines-<VERSION>      --> Point any other desired version point to HCPPIPEDIR "
+    echo "  │   └── HCPpipelinesRunUtils        --> Env. Variable => HCPPIPERUNUTILS "
+    echo "  │ "
+    echo "  ├── fmriprep                        --> fMRIPrep Pipelines (https://github.com/poldracklab/fmriprep) "
+    echo "  │   ├── fmriprep-latest             --> Env. Variable => FMRIPREPDIR "
+    echo "  │   └── fmriprep-<VERSION>          --> Set any other version to FMRIPREPDIR "
+    echo "  │ "
+    echo "  ├── afni                            --> AFNI: Analysis of Functional NeuroImages (https://github.com/afni/afni) "
+    echo "  │   └── afni-latest                 --> Env. Variable => AFNIDIR "
+    echo "  │ "
+    echo "  ├── dcm2niix                        --> dcm2niix conversion tool (https://github.com/rordenlab/dcm2niix) "
+    echo "  │   └── dcm2niix-latest             --> Env. Variable => DCMNIIDIR "
+    echo "  │ "
+    echo "  ├── dicm2nii                        --> dicm2nii conversion tool (https://github.com/xiangruili/dicm2nii) "
+    echo "  │   └── dicm2nii-latest             --> Env. Variable => DICMNIIDIR "
+    echo "  │ "
+    echo "  ├── freesurfer                      --> FreeSurfer (http://ftp.nmr.mgh.harvard.edu/pub/dist/freesurfer/5.3.0-HCP/) "
+    echo "  │   └── freesurfer-5.3-HCP          --> Env. Variable => FREESURFER_HOME (v5.3-HCP version for HCP-compatible data) "
+    echo "  │   └── freesurfer-<VERSION>        --> Env. Variable => FREESURFER_HOME (v6.0 or later stable for all other data) "
+    echo "  │   └── FreeSurferScheduler         --> Env. Variable => FreeSurferSchedulerDIR "
+    echo "  │ "
+    echo "  ├── fsl                             --> FSL (v5.0.9 or above with GPU-enabled DWI tools; https://fsl.fmrib.ox.ac.uk/fsl/fslwiki) "
+    echo "  │   └── fsl-latest                  --> Env. Variable => FSLDIR "
+    echo "  │   └── fix-latest                  --> Env. Variable => FSL_FIXDIR -- ICA FIX (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FIX/UserGuide) "
+    echo "  │ "
+    echo "  ├── matlab                          --> Matlab vR2017b or higher. If Matlab is installed system-wide then a symlink is created here "
+    echo "  │   └── matlab-latest               --> Env. Variable => MATLABDIR "
+    echo "  │   └── matlab-latest/bin           --> Env. Variable => MATLABBINDIR "
+    echo "  │ "
+    echo "  ├── miniconda                       --> miniconda2 for python environment management and package installation (https://conda.io/projects/conda/en/latest/user-guide/install/) "
+    echo "  │   └── miniconda-latest            --> Env. Variable => CONDADIR "
+    echo "  │ "
+    echo "  ├── octave                          --> Octave v.4.4.1 or higher. If Octave is installed system-wide then a symlink is created here "
+    echo "  │   └── octave-latest               --> Env. Variable => OCTAVEDIR "
+    echo "  │   └── octave-latest/bin           --> Env. Variable => OCTAVEBINDIR "
+    echo "  │   └── octavepkg                   --> Env. Variable => OCTAVEPKGDIR -- If Octave packages need manual deployment then the installed packages go here "
+    echo "  │ "
+    echo "  ├── palm                            --> PALM: Permutation Analysis of Linear Models (https://github.com/andersonwinkler/PALM) "
+    echo "  │   └── palm-latest-o               --> Env. Variable => PALMDIR (If using Octave) "
+    echo "  │   └── palm-latest-m               --> Env. Variable => PALMDIR (If using Matlab) "
+    echo "  │   └── palm-<VERSION>              --> Set any other version to PALMDIR " 
+    echo "  │ "
+    echo "  ├── R                               --> R Statistical computing environment"
+    echo "  │   └── R-latest                    --> Env. Variable => RDIR "
+    echo "  │ "
+    echo "  ├── pylib                           --> Env. Variable => PYLIBDIR      -- All MNAP python libraries and tools "
+    echo "  ├── gradunwarp                      --> HCP version of gradunwarp (https://github.com/Washington-University/gradunwarp) "
+    echo "  │   └── gradunwarp-latest           --> Env. Variable => GRADUNWARPDIR"
+    echo "  │ "
+    echo "  └── workbench/workbench-<VERSION>   Connectome Workbench (v1.0 or above; https://www.humanconnectome.org/software/connectome-workbench) "
+    echo "      └── workbench-<VERSION>         Env. Variable = HCPWBDIR "
+    echo ""
+    echo " These defaults can be redefined if the above paths are declared as global variables in the .bash_profile profile after loading the MNAP environment."
+    echo ""
+    geho "  ==> For full environment report run 'mnap environment'"
+    echo ""
+    exit 0
+}
+
 if [ "$1" == "--help" ] || [ "$1" == "-help" ] || [ "$1" == "help" ] || [ "$1" == "?help" ] || [ "$1" == "--usage" ] || [ "$1" == "-usage" ] || [ "$1" == "usage" ] || [ "$1" == "?usage" ]; then
     usage
-    exit 0
 fi
+
+# ------------------------------------------------------------------------------
+#  Environment clear and check functions
+# ------------------------------------------------------------------------------
+
+ENVVARIABLES='MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR MATLABDIR MATLABBINDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR RDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR USEOCTAVE MNAPENV CONDADIR'
+export ENVVARIABLES
+
+# -- Check if inside the container and reset the environment on first setup
+if [[ -e /opt/.container ]]; then
+    # -- Perform initial reset for the environment in the container
+    if [[ "$FIRSTRUNDONE" != "TRUE" ]]; then
+        unset $ENVVARIABLES
+        TOOLS="/opt"
+        PATH=${TOOLS}:${PATH}
+        export TOOLS PATH
+        export FIRSTRUNDONE="TRUE"
+        export USEOCTAVE="TRUE"
+    fi
+    # -- Check for specific settings a user might want:
+    # if [ -f ~/.mnap_container.rc ]; then         # --- This is a file that should reside in a user's home folder and it should contain the settings the user want's to make that are different from the defaults.
+    #     bash ~/.mnap_container.rc
+    # elif [[ ! -z "$MNAPCONTAINERENV" ]]; then    # --- This is an environmental variable that if set should hold a path to a bash script that contains the settings the user want's to make that are different from the defaults.
+    #     bash $MNAPCONTAINERENV
+    # fi
+
+    # -- Check whether we are in the HCP container
+
+    if [ -e /opt/.hcppipelines ]; then
+
+        # --- HCPPipelines specific settings --- TO BE EDITED FURTHER
+
+        export HCPPIPEDIR=${TOOLS}/HCP/Pipelines
+        export FREESURFER_HOME=${TOOLS}/freesurfer/freesurfer-6.0
+        export FREESURFERDIR=$FREESURFER_HOME
+
+        export MATLAB_COMPILER_RUNTIME=DUMMYVarianbleNotUsedCurrently
+        export MSMBINDIR="DUMMYVarianbleNotUsedCurrently"
+        export MSMCONFIGDIR=${HCPPIPEDIR}/MSMConfig; PATH=${MSMCONFIGDIR}:${PATH}; export PATH
+    fi
+
+elif [[ -e ~/.mnapuseoctave ]]; then
+    export USEOCTAVE="TRUE"
+fi
+
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= CODE START =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=
 
 # ------------------------------------------------------------------------------
 # -- Setup server login messages
@@ -209,10 +300,9 @@ if [ -e ~/mnapinit.sh ]; then
     source ~/mnapinit.sh
 fi
 
-# PATH=${MNAPREPO}:${PATH}
-# export MNAPREPO PATH
 MNAPPATH=${TOOLS}/${MNAPREPO}
-export MNAPPATH MNAPREPO
+MNAPVer=`cat ${TOOLS}/${MNAPREPO}/VERSION.md`
+export MNAPPATH MNAPREPO MNAPVer
 
 if [ -e ~/mnapinit.sh ]; then
     echo ""
@@ -225,42 +315,42 @@ fi
 # ------------------------------------------------------------------------------
 # -- Load dependent software
 # ------------------------------------------------------------------------------
-# 
-#  $TOOLS                           # -- the base folder for the installation
-#  ├── afni                         # Env. Variable = $AFNIDIR            # -- AFNI: Analysis of Functional NeuroImages (https://github.com/afni/afni)
-#  ├── dcm2niix                     # Env. Variable = $DCM2NIIDIR         # -- dcm2niix (https://github.com/rordenlab/dcm2niix)
-#  ├── fix                          # Env. Variable = $FIXICAFolder       # -- FIX ICA (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FIX/UserGuide)
-#  ├── freesurfer-5.3-HCP           # Env. Variable = $FSDIR53HCP         # -- FreeSurfer (v5.3-HCP version for HCP-compatible data; http://ftp.nmr.mgh.harvard.edu/pub/dist/freesurfer/5.3.0-HCP/)
-#  ├── freesurfer-<LATEST_VERSION>  # Env. Variable = $FSDIRLATEST        # -- FreeSurfer (v6.0 or later stable for all other data; https://surfer.nmr.mgh.harvard.edu/fswiki/DownloadAndInstall)
-#  ├── fsl-<VERSION>                # Env. Variable = $FSLFolder          # -- FSL (v5.0.9 or above with GPU-enabled DWI tools; https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
-#  ├── mnaptools                    # Env. Variable = $MNAPREPO           # -- All MNAP Suite repositories (https://bitbucket.org/hidradev/mnaptools)
-#  ├── Octave/<version>             # Env. Variable = $OCTAVEDIR          # -- Octave v.4.2.1 or higher. If Octave is installed system-wide then a symlink is created here
-#  ├── octavepkg                    # Env. Variable = $OCTAVEPKGDIR       # -- If Octave packages need manual deployment then the installed packages go here
-#  ├── PALM/palm-<VERSION>          # Env. Variable = $PALMDIR            # -- PALM: Permutation Analysis of Linear Models (https://github.com/andersonwinkler/PALM)
-#  ├── pylib                        # Env. Variable = $PYLIBDIR           # -- All python libraries and tools
-#  │   ├── gradunwarp               # Env. Variable = $GRADUNWARPDIR      # -- HCP version of gradunwarp (https://github.com/Washington-University/gradunwarp)
-#  │   ├── nibabel                  # Env. Variable = $NIBABELDIR         # -- NiBabel (http://nipy.org/nibabel/)
-#  │   └── pydicom                  # Env. Variable = $PYDICOMDIR         # -- pydicom (v1.1.0 or later; https://pydicom.github.io) 
-#  └── workbench                    # Env. Variable = $HCPWBDIR           # -- Connectome Workbench (v1.0 or above; https://www.humanconnectome.org/software/connectome-workbench)
-#
-#  FreeSurferScheduler       Environment Variable --> $FreeSurferSchedulerDIR
 
 # ------------------------------------------------------------------------------
 # -- Set default folder names for dependencies if undefined by user environment:
 # ------------------------------------------------------------------------------
 
 # -- Check if folders for dependencies are set in the global path
-if [[ -z ${FSLFolder} ]]; then unset FSLDIR; FSLFolder="fsl-5.0.9"; fi
-if [[ -z ${FIXICAFolder} ]]; then FIXICAFolder="fix1.06"; fi
-if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="freesurfer-5.3-HCP"; fi
-if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="FreeSurferScheduler"; fi
-if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="workbench"; fi
-if [[ -z ${PALMDIR} ]]; then PALMDIR="PALM/palm-alpha111"; fi
-if [[ -z ${AFNIDIR} ]]; then AFNIDIR="afni_linux_openmp_64"; fi
-if [[ -z ${DCM2NIIDIR} ]]; then DCM2NIIDIR="dcm2niix"; fi
-if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="Octave/4.2.1"; fi
-if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="octavepkg"; fi
-if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="pylib"; fi
+if [[ -z ${FSLDIR} ]]; then FSLDIR="${TOOLS}/fsl/fsl-latest"; export FSLDIR; fi
+if [[ -z ${FSL_FIXDIR} ]]; then FSL_FIXDIR="${TOOLS}/fsl/fix-latest"; fi
+if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="${TOOLS}/freesurfer/freesurfer-6.0"; export FREESURFERDIR; fi
+if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="${TOOLS}/freesurfer/FreeSurferScheduler"; export FreeSurferSchedulerDIR; fi
+if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="${TOOLS}/workbench/workbench-latest"; export HCPWBDIR; fi
+if [[ -z ${AFNIDIR} ]]; then AFNIDIR="${TOOLS}/afni/afni-latest"; export AFNIDIR; fi
+if [[ -z ${DCMNIIDIR} ]]; then DCMNIIDIR="${TOOLS}/dcm2niix/dcm2niix-latest"; export DCMNIIDIR; fi
+if [[ -z ${DICMNIIDIR} ]]; then DICMNIIDIR="${TOOLS}/dicm2nii/dicm2nii-latest"; export DICMNIIDIR; fi
+if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="${TOOLS}/octave/octave-latest"; export OCTAVEDIR; fi
+if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="${TOOLS}/octave/octavepkg"; export OCTAVEPKGDIR; fi
+if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="${TOOLS}/pylib"; export PYLIBDIR; fi
+if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/${MNAPREPO}/hcpmodified"; export HCPPIPEDIR; fi
+if [[ -z ${FMRIPREPDIR} ]]; then FMRIPREPDIR="${TOOLS}/fmriprep/fmriprep-latest"; export FMRIPREPDIR; fi
+if [[ -z ${MATLABDIR} ]]; then MATLABDIR="${TOOLS}/matlab/matlab-latest"; export MATLABDIR; fi
+if [[ -z ${GRADUNWARPDIR} ]]; then GRADUNWARPDIR="${TOOLS}/gradunwarp/gradunwarp-latest"; export GRADUNWARPDIR; fi
+if [[ -z ${MNAPENV} ]]; then MNAPENV="${TOOLS}/env/mnap"; export MNAPENV; fi
+if [[ -z ${CONDADIR} ]]; then CONDADIR="${TOOLS}/miniconda/miniconda-latest"; export CONDADIR; fi
+if [[ -z ${RDIR} ]]; then RDIR="${TOOLS}/R/R-latest"; export RDIR; fi
+if [[ -z ${USEOCTAVE} ]]; then USEOCTAVE="FALSE"; export USEOCTAVE; fi
+
+
+# -- conda management
+
+if [ -e /opt/.hcppipelines ]; then    
+    CONDABIN=${CONDADIR}/bin
+    PATH=${CONDABIN}:${PATH}
+    export CONDABIN PATH
+    source deactivate 2> /dev/null
+fi 
+
 
 # -- Checks for version
 showVersion() {
@@ -286,10 +376,15 @@ geho "                  ██║╚██╔╝██║██║╚██╗�
 geho "                  ██║ ╚═╝ ██║██║ ╚████║██║  ██║██║                           "
 geho "                  ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝                           "
 geho ""
+geho "                     DEVELOPED & MAINTAINED BY: "
+geho ""
+geho "                            Anticevic Lab                                    " 
+geho "                       MBLab led by Grega Repovs                             "
+geho ""
 geho "                      COPYRIGHT & LICENSE NOTICE:                            "
 geho ""
-geho " Use of this software is subject to the terms and conditions defined by the  "
-geho " Yale University Copyright Policies:                                         "
+geho "Use of this software is subject to the terms and conditions defined by the   "
+geho " Yale University Copyright Policies:"
 geho "    http://ocr.yale.edu/faculty/policies/yale-university-copyright-policy    "
 geho " and the terms and conditions defined in the file 'LICENSE.md' which is      "
 geho " a part of the MNAP Suite source code package:"
@@ -297,66 +392,68 @@ geho "    https://bitbucket.org/hidradev/mnaptools/src/master/LICENSE.md"
 geho ""
 
 # ------------------------------------------------------------------------------
-#  Check for Lmod and Load software modules
+#  Check for Lmod and Load software modules -- deprecated to ensure container compatibility
 # ------------------------------------------------------------------------------
 
 # -- Check if Lmod is installed and if Matlab is available https://lmod.readthedocs.io/en/latest/index.html
 #    Lmod is a Lua based module system that easily handles the MODULEPATH Hierarchical problem.
-if [[ `module -t --redirect help | grep 'Lua'` = *"Lua"* ]]; then LMODPRESENT="yes"; else LMODPRESENT="no"; fi > /dev/null 2>&1
-if [[ ${LMODPRESENT} == "yes" ]]; then
-    module purge
-    module load StdEnv &> /dev/null
-    # -- Check for presence of system install via Lmod
-    if [[ `module -t --redirect avail /Matlab` = *"matlab"* ]] || [[ `module -t --redirect avail /Matlab` = *"Matlab"* ]]; then LMODMATLAB="yes"; else LMODMATLAB="no"; fi > /dev/null 2>&1
-    if [[ `module -t --redirect avail /Matlab` = *"octave"* ]] || [[ `module -t --redirect avail /Octave` = *"Octave"* ]]; then LMODOCTAVE="yes"; else LMODOCTAVE="no"; fi > /dev/null 2>&1
-    # --- Matlab vs Octave
-    if [ -f ~/.mnapuseoctave ] && [[ ${LMODOCTAVE} == "yes" ]]; then
-        module load Libs/netlib &> /dev/null
-        module load Apps/Octave/4.2.1 &> /dev/null
-        echo ""; cyaneho " ---> Selected to use Octave instead of Matlab! "
-        OctaveTest="pass"
-    fi
-    if [ -f ~/.mnapuseoctave ] && [[ ${LMODOCTAVE} == "no" ]]; then
-        echo ""; reho " ===> ERROR: .mnapuseoctave set but no Octave module is present on the system."; echo ""
-        OctaveTest="fail"
-    fi
-    if [ ! -f ~/.mnapuseoctave ] && [[ ${LMODMATLAB} == "yes" ]]; then
-        module load Apps/Matlab/R2018a &> /dev/null
-        echo ""; cyaneho " ---> Selected to use Matlab!"
-        MatlabTest="pass"
-    fi
-    if [ ! -f ~/.mnapuseoctave ] && [[ ${LMODMATLAB} == "no" ]]; then
-        echo ""; reho " ===> ERROR: Matlab selected and Lmod found but Matlab module missing. Alert your SysAdmin"; echo ""
-        MatlabTest="fail"
-    fi
-fi
+# if [[ `module -t --redirect help | grep 'Lua'` = *"Lua"* ]]; then LMODPRESENT="yes"; else LMODPRESENT="no"; fi > /dev/null 2>&1
+# if [[ ${LMODPRESENT} == "yes" ]]; then
+#     module load StdEnv &> /dev/null
+#     # -- Check for presence of system install via Lmod
+#     if [[ `module -t --redirect avail /Matlab` = *"matlab"* ]] || [[ `module -t --redirect avail /Matlab` = *"Matlab"* ]]; then LMODMATLAB="yes"; else LMODMATLAB="no"; fi > /dev/null 2>&1
+#     if [[ `module -t --redirect avail /Matlab` = *"octave"* ]] || [[ `module -t --redirect avail /Octave` = *"Octave"* ]]; then LMODOCTAVE="yes"; else LMODOCTAVE="no"; fi > /dev/null 2>&1
+#     # --- Matlab vs Octave
+#     if [ -f ~/.mnapuseoctave ] && [[ ${LMODOCTAVE} == "yes" ]]; then
+#         module load Libs/netlib &> /dev/null
+#         module load Apps/Octave/4.2.1 &> /dev/null
+#         echo ""; cyaneho " ---> Selected to use Octave instead of Matlab! "
+#         OctaveTest="pass"
+#     fi
+#     if [ -f ~/.mnapuseoctave ] && [[ ${LMODOCTAVE} == "no" ]]; then
+#         echo ""; reho " ===> ERROR: .mnapuseoctave set but no Octave module is present on the system."; echo ""
+#         OctaveTest="fail"
+#     fi
+#     if [ ! -f ~/.mnapuseoctave ] && [[ ${LMODMATLAB} == "yes" ]]; then
+#         module load Apps/Matlab/R2018a &> /dev/null
+#         echo ""; cyaneho " ---> Selected to use Matlab!"
+#         MatlabTest="pass"
+#     fi
+#     if [ ! -f ~/.mnapuseoctave ] && [[ ${LMODMATLAB} == "no" ]]; then
+#         echo ""; reho " ===> ERROR: Matlab selected and Lmod found but Matlab module missing. Alert your SysAdmin"; echo ""
+#         MatlabTest="fail"
+#     fi
+# fi
 
 # ------------------------------------------------------------------------------
 # -- Running matlab vs. octave
 # ------------------------------------------------------------------------------
 
-if [ -f ~/.mnapuseoctave ]; then
+if [ "$USEOCTAVE" == "TRUE" ]; then
     if [[ ${OctaveTest} == "fail" ]]; then 
         reho " ===> ERROR: Cannot setup Octave because module test failed."
     else
-         ln -s `which octave` $TOOLS/$OCTAVEDIR/octave > /dev/null 2>&1
+         ln -s `which octave` ${OCTAVEDIR}/octave > /dev/null 2>&1
          export OCTAVEPKGDIR
          export OCTAVEDIR
+         export OCTAVEBINDIR
          cyaneho " ---> Setting up Octave "; echo ""
-         MNAPMCOMMAND='octave -q --eval'
+         MNAPMCOMMAND='octave -q --no-init-file --eval'
          if [ ! -e ~/.octaverc ]; then
              cp ${MNAPPATH}/library/.octaverc ~/.octaverc
          fi
          export LD_LIBRARY_PATH=/usr/lib64/hdf5/:LD_LIBRARY_PATH > /dev/null 2>&1
+         if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-latest-o"; fi
     fi
-fi
-if [ ! -f ~/.mnapuseoctave ]; then 
-    if [[ ${MatlabTest} == "fail" ]]; then
-         reho " ===> ERROR: Cannot setup Matlab because module test failed."
-    else
+else
+    # if [[ ${MatlabTest} == "fail" ]]; then
+    #     reho " ===> ERROR: Cannot setup Matlab because module test failed."
+    # else
+         
          cyaneho " ---> Setting up Matlab "; echo ""
          MNAPMCOMMAND='matlab -nodisplay -nosplash -r'
-    fi
+         if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-latest-m"; fi
+    # fi
 fi
 # -- Use the following command to run .m code in Matlab
 export MNAPMCOMMAND
@@ -374,20 +471,6 @@ export PKG_CONFIG_PATH
 PATH=$TOOLS/bin:$TOOLS/lib/bin:$TOOLS/lib/lib/:$PATH
 export PATH
 
-# -- FIX ICA path
-FIXICADIR=${TOOLS}/${FIXICAFolder}
-PATH=${FIXICADIR}:${PATH}
-export FIXICADIR PATH
-MATLABPATH=$FIXICADIR:$MATLABPATH
-export MATLABPATH
-
-# -- POST FIX ICA path
-POSTFIXICADIR=${TOOLS}/${MNAPREPO}/hcpmodified/PostFix
-PATH=${POSTFIXICADIR}:${PATH}
-export POSTFIXICADIR PATH
-MATLABPATH=$POSTFIXICADIR:$MATLABPATH
-export MATLABPATH
-
 # -- FSL probtrackx2_gpu command path
 FSLGPUDIR=${FSLDIR}/bin
 PATH=${FSLGPUDIR}:${PATH}
@@ -396,7 +479,8 @@ MATLABPATH=$FSLGPUDIR:$MATLABPATH
 export MATLABPATH
 
 # -- FreeSurfer path
-FREESURFER_HOME=${TOOLS}/${FREESURFERDIR}
+unset FSL_DIR
+FREESURFER_HOME=${FREESURFERDIR}
 PATH=${FREESURFER_HOME}:${PATH}
 export FREESURFER_HOME PATH
 . ${FREESURFER_HOME}/SetUpFreeSurfer.sh > /dev/null 2>&1
@@ -404,25 +488,24 @@ export FREESURFER_HOME PATH
 # -- FSL path
 # -- Note: Always run after FreeSurfer for correct environment specification
 #          because SetUpFreeSurfer.sh can mis-specify the $FSLDIR path
-FSLDIR=${TOOLS}/${FSLFolder}
 PATH=${FSLDIR}/bin:${PATH}
-. ${FSLDIR}/etc/fslconf/fsl.sh > /dev/null 2>&1
+source ${FSLDIR}/etc/fslconf/fsl.sh > /dev/null 2>&1
 export FSLDIR PATH
 MATLABPATH=$FSLDIR:$MATLABPATH
 export MATLABPATH
 
 # -- FreeSurfer Scheduler for GPU acceleration path
-FREESURFER_SCHEDULER=${TOOLS}/${FreeSurferSchedulerDIR}
+FREESURFER_SCHEDULER=${FreeSurferSchedulerDIR}
 PATH=${FREESURFER_SCHEDULER}:${PATH}
 export FREESURFER_SCHEDULER PATH
 
 # -- Workbench path (set OS)
 if [ "$OSInfo" == "Darwin" ]; then
-    WORKBENCHDIR=${TOOLS}/${HCPWBDIR}/bin_macosx64
+    WORKBENCHDIR=${HCPWBDIR}/bin_macosx64
 elif [ "$OSInfo" == "Ubuntu" ] || [ "$OSInfo" == "Debian" ]; then
-    WORKBENCHDIR=${TOOLS}/workbench/bin_linux64
+    WORKBENCHDIR=${HCPWBDIR}/bin_linux64
 elif [ "$OSInfo" == "RedHat" ]; then
-    WORKBENCHDIR=${TOOLS}/workbench/bin_rh_linux64
+    WORKBENCHDIR=${HCPWBDIR}/bin_rh_linux64
 fi
 PATH=${WORKBENCHDIR}:${PATH}
 export WORKBENCHDIR PATH
@@ -430,31 +513,43 @@ MATLABPATH=$WORKBENCHDIR:$MATLABPATH
 export MATLABPATH
 
 # -- PALM path
-PALMPATH=${TOOLS}/${PALMDIR}
-PATH=${PALMPATH}:${PATH}
-export PALMPATH PATH
-MATLABPATH=$PALMPATH:$MATLABPATH
+PATH=${PALMDIR}:${PATH}
+export PALMDIR PATH
+MATLABPATH=$PALMDIR:$MATLABPATH
 export MATLABPATH
 
 # -- AFNI path
-AFNIPATH=${TOOLS}/${AFNIDIR}
-PATH=${AFNIPATH}:${PATH}
-export AFNIPATH PATH
-MATLABPATH=$AFNIPATH:$MATLABPATH
+PATH=${AFNIDIR}:${PATH}
+export AFNIDIR PATH
+MATLABPATH=$AFNIDIR:$MATLABPATH
 export MATLABPATH
 
 # -- dcm2niix path
-DCMNII=${TOOLS}/${DCM2NIIDIR}/build/bin
-PATH=${DCMNII}:${PATH}
-export DCMNII PATH
+DCMNIIBINDIR=${DCMNIIDIR}/build/bin
+PATH=${DCMNIIDIR}:${DCMNIIBINDIR}:${PATH}
+export DCMNIIDIR PATH
+
+# -- dicm2nii path
+export DICMNIIDIR PATH
+MATLABPATH=$DICMNIIDIR:$MATLABPATH
+export MATLABPATH
 
 # -- Octave path
-OCTAVEPATH=${TOOLS}/${OCTAVEDIR}/bin
-PATH=${OCTAVEPATH}:${PATH}
-export OCTAVEPATH PATH
+OCTAVEBINDIR=${OCTAVEDIR}/bin
+PATH=${OCTAVEBINDIR}:${PATH}
+export OCTAVEBINDIR PATH
+
+# -- Matlab path
+MATLABBINDIR=${MATLABDIR}/bin
+PATH=${MATLABBINDIR}:${PATH}
+export MATLABBINDIR PATH
+
+# -- R path
+PATH=${RDIR}:${PATH}
+export RDIR PATH
 
 # ------------------------------------------------------------------------------
-# -- Setup overal MNAP paths
+# -- Setup overall MNAP paths
 # ------------------------------------------------------------------------------
 
 MNAPCONNPATH=$MNAPPATH/connector
@@ -481,25 +576,45 @@ export MATLABPATH
 unset MNAPSubModules
 MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
 
-alias mnap='bash $MNAPPATH/connector/mnap.sh'
-alias mnap_environment='$MNAPPATH/library/environment/mnap_environment.sh --help'
+alias mnap='bash ${TOOLS}/${MNAPREPO}/connector/mnap.sh'
+alias mnap_envset='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh'
+alias mnap_environment_set='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh'
+
+alias mnap_envhelp='bash ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh --help'
+alias mnap_environment_help='bash ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh --help'
+
+alias mnap_envcheck='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
+alias mnap_envstatus='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
+alias mnap_envreport='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
+alias mnap_environment_check='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
+alias mnap_environment_status='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
+alias mnap_environment_report='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
+
+alias mnap_envreset='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
+alias mnap_envclear='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
+alias mnap_envpurge='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
+alias mnap_environment_reset='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
+alias mnap_environment_clear='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
+alias mnap_environment_purge='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
 
 # ------------------------------------------------------------------------------
 # -- Setup HCP Pipeline paths
 # ------------------------------------------------------------------------------
 
-export HCPPIPEDIR=${MNAPPATH}/hcpmodified
+# -- Re-Set HCP Pipeline path to different version if needed 
 if [ -e ~/.mnaphcpe ];
     then
-    export HCPPIPEDIR=${MNAPPATH}/hcpextendedpull
+    export HCPPIPEDIR=${TOOLS}/${MNAPREPO}/hcpextendedpull
     echo ""
     reho " ===> NOTE: You are in MNAP HCP development mode!"
     reho " ---> MNAP HCP path is set to: $HCPPIPEDIR"
     echo ""
 fi
-export HCPPIPEDIR=$MNAPPATH/hcpmodified; PATH=${HCPPIPEDIR}:${PATH}; export PATH
+
+# -- Export HCP Pipeline and relevant variables
+export PATH=${HCPPIPEDIR}:${PATH}; export PATH
 export CARET7DIR=$WORKBENCHDIR; PATH=${CARET7DIR}:${PATH}; export PATH
-export GRADUNWARPDIR=${TOOLS}/$PYLIBDIR/gradunwarp/core; PATH=${GRADUNWARPDIR}:${PATH}; export PATH
+export GRADUNWARPBIN=$GRADUNWARPDIR/gradunwarp/core; PATH=${GRADUNWARPBIN}:${PATH}; export PATH
 export HCPPIPEDIR_Templates=${HCPPIPEDIR}/global/templates; PATH=${HCPPIPEDIR_Templates}:${PATH}; export PATH
 export HCPPIPEDIR_Bin=${HCPPIPEDIR}/global/binaries; PATH=${HCPPIPEDIR_Bin}:${PATH}; export PATH
 export HCPPIPEDIR_Config=${HCPPIPEDIR}/global/config; PATH=${HCPPIPEDIR_Config}:${PATH}; export PATH
@@ -520,6 +635,54 @@ export AutoPtxFolder=${HCPPIPEDIR_dMRITracFull}/autoPtx_HCP_extended; PATH=${Aut
 export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries; PATH=${FSLGPUBinary}:${PATH}; export PATH
 export EDDYCUDADIR=${FSLGPUBinary}/eddy_cuda; PATH=${EDDYCUDADIR}:${PATH}; export PATH; eddy_cuda="eddy_cuda_wQC"; export eddy_cuda
 
+
+# ------------------------------------------------------------------------------
+# -- Setup ICA FIX paths and variables
+# ------------------------------------------------------------------------------
+
+# -- ICA FIX path
+PATH=${FSL_FIXDIR}:${PATH}
+export FSL_FIXDIR PATH
+MATLABPATH=$FSL_FIXDIR:$MATLABPATH
+export MATLABPATH
+if [ ! -z `which matlab 2>/dev/null` ]; then
+    MATLABBIN=$(dirname `which matlab 2>/dev/null`)
+fi
+export MATLABBIN
+MATLABROOT=`cd $MATLABBIN; cd ..; pwd`
+export MATLABROOT
+
+# -- Setup HCP Pipelines global matlab path relevant for FIX ICA
+HCPDIRMATLAB=${HCPPIPEDIR}/global/matlab/
+export HCPDIRMATLAB
+PATH=${HCPDIRMATLAB}:${PATH}
+MATLABPATH=$HCPDIRMATLAB:$MATLABPATH
+export MATLABPATH
+export PATH
+
+# -- FIX ICA Dependencies Folder
+FIXDIR_DEPEND=${MNAPPATH}/library/etc/ICAFIXDependencies
+export FIXDIR_DEPEND
+PATH=${FIXDIR_DEPEND}:${PATH}
+MATLABPATH=$FIXDIR_DEPEND:$MATLABPATH
+export MATLABPATH
+
+# -- Setup MATLAB_GIFTI_LIB relevant for FIX ICA
+MATLAB_GIFTI_LIB=$FIXDIR_DEPEND/gifti/
+export MATLAB_GIFTI_LIB
+PATH=${MATLAB_GIFTI_LIB}:${PATH}
+MATLABPATH=$MATLAB_GIFTI_LIB:$MATLABPATH
+export MATLABPATH
+export PATH
+#. ${FIXDIR_DEPEND}/ICAFIX_settings.sh > /dev/null 2>&1 
+
+# -- POST FIX ICA path
+POSTFIXICADIR=${TOOLS}/${MNAPREPO}/hcpmodified/PostFix
+PATH=${POSTFIXICADIR}:${PATH}
+export POSTFIXICADIR PATH
+MATLABPATH=$POSTFIXICADIR:$MATLABPATH
+export MATLABPATH
+
 # ------------------------------------------------------------------------------
 # -- MNAP - NIUtilities and Matlab Paths
 # ------------------------------------------------------------------------------
@@ -532,44 +695,81 @@ PATH=$MNAPPATH/connector:$PATH
 PATH=$MNAPPATH/niutilities:$PATH
 PATH=$MNAPPATH/matlab:$PATH
 PATH=$TOOLS/bin:$PATH
-PATH=$TOOLS/$PYLIBDIR/gradunwarp:$PATH
-PATH=$TOOLS/$PYLIBDIR/gradunwarp/core:$PATH
-PATH=$TOOLS/$PYLIBDIR/xmlutils.py:$PATH
-PATH=$TOOLS/$PYLIBDIR:$PATH
-PATH=$TOOLS/$PYLIBDIR/bin:$PATH
-PATH=$TOOLS/MeshNet:$PATH
+# PATH=$PYLIBDIR/gradunwarp:$PATH
+# PATH=$PYLIBDIR/gradunwarp/core:$PATH
+# PATH=$PYLIBDIR/xmlutils.py:$PATH
+# PATH=$PYLIBDIR:$PATH
+# PATH=$PYLIBDIR/bin:$PATH
+# PATH=$TOOLS/MeshNet:$PATH
 PATH=/usr/local/bin:$PATH
 PATH=$PATH:/bin
 PATH=$TOOLS/olib:$PATH
+PATH=$TOOLS/bin:$PATH
 
-# -- Export Python paths
-PYTHONPATH=$TOOLS:$PYTHONPATH
-PYTHONPATH=/usr/local/bin:$PYTHONPATH
-PYTHONPATH=/usr/local/bin/python2.7:$PYTHONPATH
-PYTHONPATH=/usr/lib/python2.7/site-packages:$PYTHONPATH
-PYTHONPATH=/usr/lib64/python2.7/site-packages:$PYTHONPATH
-PYTHONPATH=$MNAPPATH:$PYTHONPATH
-PYTHONPATH=$MNAPPATH/connector:$PYTHONPATH
-PYTHONPATH=$MNAPPATH/niutilities:$PYTHONPATH
-PYTHONPATH=$MNAPPA$TH/matlab:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR/pydicom:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR/gradunwarp:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR/gradunwarp/core:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR/xmlutils.py:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR/bin:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR/lib/python2.7/site-packages:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR/lib64/python2.7/site-packages:$PYTHONPATH
-PYTHONPATH=$TOOLS/$PYLIBDIR:$PYTHONPATH
-PYTHONPATH=$TOOLS/MeshNet:$PYTHONPATH
+
+# --- setup PYTHONPATH and PATH When not conda
+
+if [ ! -e /opt/.hcppipelines ]; then 
+    PYTHONPATH=$TOOLS:$PYTHONPATH
+    #PYTHONPATH=$TOOLS/pylib:$PYTHONPATH
+    PYTHONPATH=/usr/local/bin:$PYTHONPATH
+    PYTHONPATH=$TOOLS/env/mnap/bin:$PYTHONPATH
+    PYTHONPATH=$TOOLS/miniconda/miniconda-latest/pkgs:$PYTHONPATH
+    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages:$PYTHONPATH
+    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/nibabel/xmlutils.py:$PYTHONPATH
+    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/pydicom:$PYTHONPATH
+    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/gradunwarp:$PYTHONPATH
+    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/gradunwarp/core:$PYTHONPATH
+    PYTHONPATH=$MNAPPATH:$PYTHONPATH
+    PYTHONPATH=$MNAPPATH/connector:$PYTHONPATH
+    PYTHONPATH=$MNAPPATH/niutilities:$PYTHONPATH
+    PYTHONPATH=$MNAPPATH/matlab:$PYTHONPATH
+    # PYTHONPATH=$PYLIBDIR/bin:$PYTHONPATH
+    # PYTHONPATH=$PYLIBDIR/lib/python2.7/site-packages:$PYTHONPATH
+    # PYTHONPATH=$PYLIBDIR/lib64/python2.7/site-packages:$PYTHONPATH
+    # PYTHONPATH=$PYLIBDIR:$PYTHONPATH
+    PATH=$TOOLS/env/mnap/bin:$PATH
+fi
+
 export PATH
 export PYTHONPATH
 
+
+# -- Export Python paths (before change to conda)
+# PYTHONPATH=$TOOLS:$PYTHONPATH
+# PYTHONPATH=$TOOLS/pylib:$PYTHONPATH
+# PYTHONPATH=/usr/local/bin:$PYTHONPATH
+# PYTHONPATH=/usr/local/bin/python2.7:$PYTHONPATH
+# PYTHONPATH=/usr/lib/python2.7/site-packages:$PYTHONPATH
+# PYTHONPATH=/usr/lib64/python2.7/site-packages:$PYTHONPATH
+# PYTHONPATH=$MNAPPATH:$PYTHONPATH
+# PYTHONPATH=$MNAPPATH/connector:$PYTHONPATH
+# PYTHONPATH=$MNAPPATH/niutilities:$PYTHONPATH
+# PYTHONPATH=$MNAPPA$TH/matlab:$PYTHONPATH
+# PYTHONPATH=$PYLIBDIR/pydicom:$PYTHONPATH
+# PYTHONPATH=$PYLIBDIR/gradunwarp:$PYTHONPATH
+# PYTHONPATH=$PYLIBDIR/gradunwarp/core:$PYTHONPATH
+# PYTHONPATH=$PYLIBDIR/xmlutils.py:$PYTHONPATH
+# PYTHONPATH=$PYLIBDIR/bin:$PYTHONPATH
+# PYTHONPATH=$PYLIBDIR/lib/python2.7/site-packages:$PYTHONPATH
+# PYTHONPATH=$PYLIBDIR/lib64/python2.7/site-packages:$PYTHONPATH
+# PYTHONPATH=$PYLIBDIR:$PYTHONPATH
+# PYTHONPATH=$TOOLS/MeshNet:$PYTHONPATH
+# export PATH
+# export PYTHONPATH
+
 # -- Set and export Matlab paths
+MATLABPATH=$MNAPPATH/matlab/fcMRI:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/fcMRI:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/general:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/gmri:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/stats:$MATLABPATH
-export MATLABPATH
+
+# source deactivate
+# source activate $MNAPENV
+if [ -e /opt/.hcppipelines ]; then 
+    source activate $MNAPENV 2> /dev/null
+fi
 
 # ------------------------------------------------------------------------------
 # -- Path to additional dependencies
@@ -628,146 +828,260 @@ gitmnap_usage() {
 }
 
 function_gitmnapbranch() {
-# -- Check path
-if [[ -z ${MNAPBranchPath} ]]; then
-    cd $TOOLS/$MNAPREPO
-else
-    cd ${MNAPBranchPath}
-fi
-if [[ ! -z ${MNAPSubModule} ]]; then
-    cd ${MNAPBranchPath}/${MNAPSubModule}
-fi
-# -- Update remote
-git remote update > /dev/null 2>&1
-MNAPDirBranchTest=`pwd`
-echo ""
-geho "--- Running git status checks in $MNAPDirBranchTest"
-# -- Set git variables
-unset UPSTREAM; unset LOCAL; unset REMOTE; unset BASE
-UPSTREAM=${1:-'@{u}'}
-LOCAL=$(git rev-parse origin)
-REMOTE=$(git rev-parse "$UPSTREAM")
-BASE=$(git merge-base @ "$UPSTREAM")
-echo ""
-echo "   ==> Local commit:   $LOCAL"
-echo "   ==> Remote commit:  $REMOTE"
-# -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
-if [[ $LOCAL == $REMOTE ]]; then
-    cyaneho "   ==> STATUS OK: LOCAL equals REMOTE in $MNAPDirBranchTest."; echo ""
-elif [[ $LOCAL == $BASE ]]; then
-    reho "   ==> ACTION NEEDED: LOCAL equals BASE in ${MNAPDirBranchTest}. You need to pull."; echo ""
-elif [[ $REMOTE == $BASE ]]; then
-    reho "   ==> ACTION NEEDED: REMOTE equals BASE in ${MNAPDirBranchTest}. You need to push."; echo ""
-else
+    # -- Check path
+    if [[ -z ${MNAPBranchPath} ]]; then
+        cd $TOOLS/$MNAPREPO
+    else
+        cd ${MNAPBranchPath}
+    fi
+    if [[ ! -z ${MNAPSubModule} ]]; then
+        cd ${MNAPBranchPath}/${MNAPSubModule}
+    fi
+    # -- Update remote
+    git remote update > /dev/null 2>&1
+    MNAPDirBranchTest=`pwd`
     echo ""
-    reho "   ===> ERROR: LOCAL, BASE and REMOTE tips have diverged in ${MNAPDirBranchTest}."
+    geho "--- Running git status checks in $MNAPDirBranchTest"
+    # -- Set git variables
+    unset UPSTREAM; unset LOCAL; unset REMOTE; unset BASE
+    UPSTREAM=${1:-'@{u}'}
+    LOCAL=$(git rev-parse origin)
+    REMOTE=$(git rev-parse "$UPSTREAM")
+    BASE=$(git merge-base @ "$UPSTREAM")
     echo ""
-    reho "   ------------------------------------------------"
-    reho "      LOCAL: ${LOCAL}"
-    reho "      BASE: ${BASE}"
-    reho "      REMOTE: ${REMOTE}"
-    reho "   ------------------------------------------------"
-    echo ""
-    reho "   ===> Check 'git status -uno' to inspect and re-run after cleaning things up."
-    echo ""
-fi
+    echo "   ==> Local commit:   $LOCAL"
+    echo "   ==> Remote commit:  $REMOTE"
+    # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
+    if [[ $LOCAL == $REMOTE ]]; then
+        cyaneho "   ==> STATUS OK: LOCAL equals REMOTE in $MNAPDirBranchTest."; echo ""
+    elif [[ $LOCAL == $BASE ]]; then
+        reho "   ==> ACTION NEEDED: LOCAL equals BASE in ${MNAPDirBranchTest}. You need to pull."; echo ""
+    elif [[ $REMOTE == $BASE ]]; then
+        reho "   ==> ACTION NEEDED: REMOTE equals BASE in ${MNAPDirBranchTest}. You need to push."; echo ""
+    else
+        echo ""
+        reho "   ===> ERROR: LOCAL, BASE and REMOTE tips have diverged in ${MNAPDirBranchTest}."
+        echo ""
+        reho "   ------------------------------------------------"
+        reho "      LOCAL: ${LOCAL}"
+        reho "      BASE: ${BASE}"
+        reho "      REMOTE: ${REMOTE}"
+        reho "   ------------------------------------------------"
+        echo ""
+        reho "   ===> Check 'git status -uno' to inspect and re-run after cleaning things up."
+        echo ""
+    fi
 }
 alias gitmnapbranch=function_gitmnapbranch
 
-
 function_gitmnapstatus() {
-echo ""
-geho "================ Running MNAP Suite Repository Status Check ================"
-echo ""
-unset MNAPBranchPath; unset MNAPSubModules; unset MNAPSubModule
-# -- Run it for the main module
-cd ${TOOLS}/${MNAPREPO}
-echo ""; geho "--- Checking status in MNAP Suite location: ${TOOLS}/${MNAPREPO} "; echo ""
-git status -uno; function_gitmnapbranch
-# -- Then iterate over submodules
-MNAPSubModules=`cd ${TOOLS}/${MNAPREPO}; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-MNAPBranchPath="${MNAPPATH}"
-for MNAPSubModule in ${MNAPSubModules}; do
-    cd ${MNAPBranchPath}/${MNAPSubModule}
-    function_gitmnapbranch
-    git status -uno
-done
-cd ${TOOLS}/${MNAPREPO}
-echo ""
-geho "================ Completed MNAP Suite Repository Status Check ================"
-echo ""
+    echo ""
+    geho "================ Running MNAP Suite Repository Status Check ================"
+    echo ""
+    unset MNAPBranchPath; unset MNAPSubModules; unset MNAPSubModule
+    # -- Run it for the main module
+    cd ${TOOLS}/${MNAPREPO}
+    echo ""; geho "--- Checking status in MNAP Suite location: ${TOOLS}/${MNAPREPO} "; echo ""
+    git status -uno; function_gitmnapbranch
+    # -- Then iterate over submodules
+    MNAPSubModules=`cd ${TOOLS}/${MNAPREPO}; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+    MNAPBranchPath="${MNAPPATH}"
+    for MNAPSubModule in ${MNAPSubModules}; do
+        cd ${MNAPBranchPath}/${MNAPSubModule}
+        function_gitmnapbranch
+        git status -uno
+    done
+    cd ${TOOLS}/${MNAPREPO}
+    echo ""
+    geho "================ Completed MNAP Suite Repository Status Check ================"
+    echo ""
 }
 alias gitmnapstatus=function_gitmnapstatus
 
 # -- function_gitmnap start
 
 function_gitmnap() {
-unset MNAPSubModules
-MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-# -- Inputs
-unset MNAPBranch
-unset MNAPAddFiles
-unset MNAPGitCommand
-unset MNAPBranchPath
-unset CommitMessage
-unset GitStatus
-unset MNAPSubModulesList
-MNAPGitCommand=`opts_GetOpt "--command" $@`
-MNAPAddFiles=`opts_GetOpt "--add" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of input cases; removing comma or pipes
-MNAPBranch=`opts_GetOpt "--branch" $@`
-MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
-CommitMessage=`opts_GetOpt "--message" "${@}"`
-MNAPSubModulesList=`opts_GetOpt "--submodules" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of input cases; removing comma or pipes
+    unset MNAPSubModules
+    MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+    # -- Inputs
+    unset MNAPBranch
+    unset MNAPAddFiles
+    unset MNAPGitCommand
+    unset MNAPBranchPath
+    unset CommitMessage
+    unset GitStatus
+    unset MNAPSubModulesList
+    MNAPGitCommand=`opts_GetOpt "--command" $@`
+    MNAPAddFiles=`opts_GetOpt "--add" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of input cases; removing comma or pipes
+    MNAPBranch=`opts_GetOpt "--branch" $@`
+    MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
+    CommitMessage=`opts_GetOpt "--message" "${@}"`
+    MNAPSubModulesList=`opts_GetOpt "--submodules" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of input cases; removing comma or pipes
 
-# -- Check for help calls
-if [[ ${1} == "help" ]] || [[ ${1} == "-help" ]] || [[ ${1} == "--help" ]] || [[ ${1} == "?help" ]] || [[ -z ${1} ]]; then
-    gitmnap_usage
-    return 0
-fi
-if [[ ${1} == "usage" ]] || [[ ${1} == "-usage" ]] || [[ ${1} == "--usage" ]] || [[ ${1} == "?usage" ]] || [[ -z ${1} ]]; then
-    gitmnap_usage
-    return 0
-fi
+    # -- Check for help calls
+    if [[ ${1} == "help" ]] || [[ ${1} == "-help" ]] || [[ ${1} == "--help" ]] || [[ ${1} == "?help" ]] || [[ -z ${1} ]]; then
+        gitmnap_usage
+        return 0
+    fi
+    if [[ ${1} == "usage" ]] || [[ ${1} == "-usage" ]] || [[ ${1} == "--usage" ]] || [[ ${1} == "?usage" ]] || [[ -z ${1} ]]; then
+        gitmnap_usage
+        return 0
+    fi
 
-# -- Start execution
-echo ""
-geho "=============== Executing MNAP $MNAPGitCommand function ============== "
-# -- Performing flag checks
-echo ""
-geho "--- Checking inputs ... "
-echo ""
-if [[ -z ${MNAPGitCommand} ]]; then reho ""; reho "   Error: --command flag not defined. Specify 'pull' or 'push' option."; echo ""; gitmnap_usage; return 1; fi
-if [[ -z ${MNAPBranch} ]]; then reho ""; reho "   Error: --branch flag not defined."; echo ""; gitmnap_usage; return 1; fi
-if [[ -z ${MNAPBranchPath} ]]; then reho ""; reho "   Error: --branchpath flag for specified branch not defined. Specify absolute path of the relevant MNAP repo."; echo ""; gitmnap_usage; return 1; fi
-if [[ -z ${MNAPSubModulesList} ]]; then reho ""; reho "   Error: --submodules flag not not defined. Specify 'main', 'all' or specific submodule to commit."; echo ""; gitmnap_usage; return 1; fi
-if [[ ${MNAPSubModulesList} == "all" ]]; then reho ""; geho "   Note: --submodules flag set to all. Setting update for all submodules."; echo ""; fi
-if [[ ${MNAPSubModulesList} == "main" ]]; then reho ""; geho "   Note: --submodules flag set to main MNAP repo only in $MNAPBranchPath"; echo ""; fi
-if [[ ${MNAPGitCommand} == "push" ]]; then
-    if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitmnap_usage; return 1; else CommitMessage="${CommitMessage}"; fi
-    if [[ -z ${MNAPAddFiles} ]]; then reho ""; reho "   Error: --add flag not defined. Run 'gitmnapstatus' and specify which files to add."; echo ""; gitmnap_usage; return 1; fi
-fi
-
-# -- Perform checks that MNAP contains requested branch and that it is actively checked out
-cd ${MNAPBranchPath}
-echo ""
-mageho "  * Checking active branch for main MNAP repo in $MNAPBranchPath..."
-echo ""
-if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch found in $MNAPBranchPath"; echo ""; fi
-if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch is active in $MNAPBranchPath"; echo ""; fi
-mageho "  * All checks for main MNAP repo passed."
-echo ""
-
-# -- Not perform further checks
-if [ "${MNAPSubModulesList}" == "main" ]; then
+    # -- Start execution
     echo ""
-    geho "   Note: --submodules flag set to main MNAP repo only. Omitting individual submodules."
+    geho "=============== Executing MNAP $MNAPGitCommand function ============== "
+    # -- Performing flag checks
     echo ""
-    # -- Check git command
+    geho "--- Checking inputs ... "
+    echo ""
+    if [[ -z ${MNAPGitCommand} ]]; then reho ""; reho "   Error: --command flag not defined. Specify 'pull' or 'push' option."; echo ""; gitmnap_usage; return 1; fi
+    if [[ -z ${MNAPBranch} ]]; then reho ""; reho "   Error: --branch flag not defined."; echo ""; gitmnap_usage; return 1; fi
+    if [[ -z ${MNAPBranchPath} ]]; then reho ""; reho "   Error: --branchpath flag for specified branch not defined. Specify absolute path of the relevant MNAP repo."; echo ""; gitmnap_usage; return 1; fi
+    if [[ -z ${MNAPSubModulesList} ]]; then reho ""; reho "   Error: --submodules flag not not defined. Specify 'main', 'all' or specific submodule to commit."; echo ""; gitmnap_usage; return 1; fi
+    if [[ ${MNAPSubModulesList} == "all" ]]; then reho ""; geho "   Note: --submodules flag set to all. Setting update for all submodules."; echo ""; fi
+    if [[ ${MNAPSubModulesList} == "main" ]]; then reho ""; geho "   Note: --submodules flag set to main MNAP repo only in $MNAPBranchPath"; echo ""; fi
+    if [[ ${MNAPGitCommand} == "push" ]]; then
+        if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitmnap_usage; return 1; else CommitMessage="${CommitMessage}"; fi
+        if [[ -z ${MNAPAddFiles} ]]; then reho ""; reho "   Error: --add flag not defined. Run 'gitmnapstatus' and specify which files to add."; echo ""; gitmnap_usage; return 1; fi
+    fi
+
+    # -- Perform checks that MNAP contains requested branch and that it is actively checked out
+    cd ${MNAPBranchPath}
+    echo ""
+    mageho "  * Checking active branch for main MNAP repo in $MNAPBranchPath..."
+    echo ""
+    if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch found in $MNAPBranchPath"; echo ""; fi
+    if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch is active in $MNAPBranchPath"; echo ""; fi
+    mageho "  * All checks for main MNAP repo passed."
+    echo ""
+
+    # -- Not perform further checks
+    if [ "${MNAPSubModulesList}" == "main" ]; then
+        echo ""
+        geho "   Note: --submodules flag set to main MNAP repo only. Omitting individual submodules."
+        echo ""
+        # -- Check git command
+        echo ""
+        geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
+        echo
+        cd ${MNAPBranchPath}
+        # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
+        function_gitmnapbranch > /dev/null 2>&1
+        # -- Check git command request
+        if [[ ${MNAPGitCommand} == "pull" ]]; then
+            cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
+        fi
+        if [[ ${MNAPGitCommand} == "push" ]]; then
+            cd ${MNAPBranchPath}
+            if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
+                echo ""
+                reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
+                echo ""
+                return 1
+            else
+                if [[ ${MNAPAddFiles} == "all" ]]; then
+                    git add ./*
+                else
+                    git add ${MNAPAddFiles}
+                fi
+                git commit . --message="${CommitMessage}"
+                git push origin ${MNAPBranch}
+            fi
+        fi
+        function_gitmnapbranch
+        echo ""
+        geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."; echo ""
+        return 1
+    fi
+
+    # -- Check if all submodules are requested or only specific ones
+    if [ ${MNAPSubModulesList} == "all" ]; then
+        # -- Reset submodules variable to all
+        unset MNAPSubModulesList
+        MNAPSubModulesList=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+        MNAPSubModules=${MNAPSubModulesList}
+        if [[ ${MNAPAddFiles} != "all" ]] && [[ ${MNAPGitCommand} == "push" ]]; then
+            reho "ERROR: Cannot specify all submodules and select files. Specify specific files for a given submodule or specify -add='all' "
+            return 1
+            gitmnap_usage
+        else
+            GitAddCommand="git add ./*"
+        fi
+    elif [ ${MNAPSubModulesList} == "main" ]; then
+        echo ""
+        geho "Note: --submodules flag set to the main MNAP repo."
+        echo ""
+        MNAPSubModules="main"
+        if [[ ${MNAPAddFiles} == "all" ]] && [[ ${MNAPGitCommand} == "push" ]]; then
+            GitAddCommand="git add ./*"
+        else
+            GitAddCommand="git add ${MNAPAddFiles}"
+        fi
+    elif [[ ${MNAPSubModulesList} != "main*" ]] && [[ ${MNAPSubModulesList} != "all*" ]]; then
+        MNAPSubModules=${MNAPSubModulesList}
+        echo ""
+        geho "Note: --submodules flag set to selected MNAP repos: $MNAPSubModules"
+        echo ""
+        if [[ ${MNAPAddFiles} != "all" ]] && [[ ${MNAPGitCommand} == "push" ]]; then
+            if [[ `echo ${MNAPSubModules} | wc -w` != 1 ]]; then 
+                reho "Note: More than one submodule requested"
+                reho "ERROR: Cannot specify several submodules and select specific files. Specify specific files for a given submodule or specify -add='all' "
+                return 1
+            fi 
+            GitAddCommand="git add ${MNAPAddFiles}"
+        else
+            GitAddCommand="git add ./*"
+        fi
+    fi
+
+    # -- Continue with specific submodules
+    echo ""
+    mageho "  * Checking active branch ${MNAPBranch} for specified submodules in ${MNAPBranchPath}... "
+    echo ""
+    for MNAPSubModule in ${MNAPSubModules}; do
+        cd ${MNAPBranchPath}/${MNAPSubModule}
+        if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch found in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
+        if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch is active in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
+    done
+    mageho "  * All checks passed for specified submodules... "
+    echo ""
+    # -- First run over specific modules
+    for MNAPSubModule in ${MNAPSubModules}; do
+        echo ""
+        geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."
+        echo
+        cd ${MNAPBranchPath}/${MNAPSubModule}
+        # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
+        function_gitmnapbranch > /dev/null 2>&1
+        # -- Check git command requests
+        if [[ ${MNAPGitCommand} == "pull" ]]; then
+            cd ${MNAPBranchPath}/${MNAPSubModule}; git pull origin ${MNAPBranch}
+        fi
+        if [[ ${MNAPGitCommand} == "push" ]]; then
+            if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
+                echo ""
+                reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
+                echo ""
+                return 1
+            else
+                cd ${MNAPBranchPath}/${MNAPSubModule}
+                eval ${GitAddCommand}
+                git commit . --message="${CommitMessage}"
+                git push origin ${MNAPBranch}
+            fi
+        fi
+        function_gitmnapbranch
+        echo ""
+        geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."; echo ""; echo ""
+    done
+    unset MNAPSubModule
+
+    # -- Finish up with the main submodule after individual modules are committed
     echo ""
     geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
     echo
     cd ${MNAPBranchPath}
-    # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
     function_gitmnapbranch > /dev/null 2>&1
     # -- Check git command request
     if [[ ${MNAPGitCommand} == "pull" ]]; then
@@ -775,17 +1089,13 @@ if [ "${MNAPSubModulesList}" == "main" ]; then
     fi
     if [[ ${MNAPGitCommand} == "push" ]]; then
         cd ${MNAPBranchPath}
-        if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
+            if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
             echo ""
-            reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
+                reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
             echo ""
             return 1
         else
-            if [[ ${MNAPAddFiles} == "all" ]]; then
-                git add ./*
-            else
-                git add ${MNAPAddFiles}
-            fi
+            git add ./*
             git commit . --message="${CommitMessage}"
             git push origin ${MNAPBranch}
         fi
@@ -793,147 +1103,40 @@ if [ "${MNAPSubModulesList}" == "main" ]; then
     function_gitmnapbranch
     echo ""
     geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."; echo ""
-    return 1
-fi
 
-# -- Check if all submodules are requested or only specific ones
-if [ ${MNAPSubModulesList} == "all" ]; then
-    # -- Reset submodules variable to all
+    # -- Report final completion
+    echo ""
+    geho "=============== Completed MNAP $MNAPGitCommand function ============== "
+    echo ""
+
+    # -- Reset submodules variable
+    unset MNAPSubModules
+    MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+    unset MNAPBranch
+    unset MNAPGitCommand
+    unset MNAPBranchPath
+    unset CommitMessage
+    unset GitStatus
     unset MNAPSubModulesList
-    MNAPSubModulesList=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-    MNAPSubModules=${MNAPSubModulesList}
-    if [[ ${MNAPAddFiles} != "all" ]] && [[ ${MNAPGitCommand} == "push" ]]; then
-        reho "ERROR: Cannot specify all submodules and select files. Specify specific files for a given submodule or specify -add='all' "
-        return 1
-        gitmnap_usage
-    else
-        GitAddCommand="git add ./*"
-    fi
-elif [ ${MNAPSubModulesList} == "main" ]; then
-    echo ""
-    geho "Note: --submodules flag set to the main MNAP repo."
-    echo ""
-    MNAPSubModules="main"
-    if [[ ${MNAPAddFiles} == "all" ]] && [[ ${MNAPGitCommand} == "push" ]]; then
-        GitAddCommand="git add ./*"
-    else
-        GitAddCommand="git add ${MNAPAddFiles}"
-    fi
-elif [[ ${MNAPSubModulesList} != "main*" ]] && [[ ${MNAPSubModulesList} != "all*" ]]; then
-    MNAPSubModules=${MNAPSubModulesList}
-    echo ""
-    geho "Note: --submodules flag set to selected MNAP repos: $MNAPSubModules"
-    echo ""
-    if [[ ${MNAPAddFiles} != "all" ]] && [[ ${MNAPGitCommand} == "push" ]]; then
-        if [[ `echo ${MNAPSubModules} | wc -w` != 1 ]]; then 
-            reho "Note: More than one submodule requested"
-            reho "ERROR: Cannot specify several submodules and select specific files. Specify specific files for a given submodule or specify -add='all' "
-            return 1
-        fi 
-        GitAddCommand="git add ${MNAPAddFiles}"
-    else
-        GitAddCommand="git add ./*"
-    fi
-fi
-
-# -- Continue with specific submodules
-echo ""
-mageho "  * Checking active branch ${MNAPBranch} for specified submodules in ${MNAPBranchPath}... "
-echo ""
-for MNAPSubModule in ${MNAPSubModules}; do
-    cd ${MNAPBranchPath}/${MNAPSubModule}
-    if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch found in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
-    if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch is active in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
-done
-mageho "  * All checks passed for specified submodules... "
-echo ""
-# -- First run over specific modules
-for MNAPSubModule in ${MNAPSubModules}; do
-    echo ""
-    geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."
-    echo
-    cd ${MNAPBranchPath}/${MNAPSubModule}
-    # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
-    function_gitmnapbranch > /dev/null 2>&1
-    # -- Check git command requests
-    if [[ ${MNAPGitCommand} == "pull" ]]; then
-        cd ${MNAPBranchPath}/${MNAPSubModule}; git pull origin ${MNAPBranch}
-    fi
-    if [[ ${MNAPGitCommand} == "push" ]]; then
-        if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
-            echo ""
-            reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
-            echo ""
-            return 1
-        else
-            cd ${MNAPBranchPath}/${MNAPSubModule}
-            eval ${GitAddCommand}
-            git commit . --message="${CommitMessage}"
-            git push origin ${MNAPBranch}
-        fi
-    fi
-    function_gitmnapbranch
-    echo ""
-    geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."; echo ""; echo ""
-done
-unset MNAPSubModule
-
-# -- Finish up with the main submodule after individual modules are committed
-echo ""
-geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
-echo
-cd ${MNAPBranchPath}
-function_gitmnapbranch > /dev/null 2>&1
-# -- Check git command request
-if [[ ${MNAPGitCommand} == "pull" ]]; then
-    cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
-fi
-if [[ ${MNAPGitCommand} == "push" ]]; then
-    cd ${MNAPBranchPath}
-        if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
-        echo ""
-            reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
-        echo ""
-        return 1
-    else
-        git add ./*
-        git commit . --message="${CommitMessage}"
-        git push origin ${MNAPBranch}
-    fi
-fi
-function_gitmnapbranch
-echo ""
-geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."; echo ""
-
-# -- Report final completion
-echo ""
-geho "=============== Completed MNAP $MNAPGitCommand function ============== "
-echo ""
-
-# -- Reset submodules variable
-unset MNAPSubModules
-MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-unset MNAPBranch
-unset MNAPGitCommand
-unset MNAPBranchPath
-unset CommitMessage
-unset GitStatus
-unset MNAPSubModulesList
-unset MNAPSubModule
+    unset MNAPSubModule
 }
 
 # -- define function_gitmnap alias
 alias gitmnap=function_gitmnap
 
-# -- Load additional needed modules
-if [[ ${LMODPRESENT} == "yes" ]]; then
-    LoadModules="Libs/netlib Libs/QT/5.6.2 Apps/R Rpkgs/RCURL/1.95 Langs/Python/2.7.14 Tools/GIT/2.6.2 Tools/Mercurial/3.6 GPU/Cuda/7.5 Apps/R/3.2.2-generic Rpkgs/GGPLOT2/2.0.0 Libs/SCIPY/0.13.3 Libs/PYDICOM/0.9.9 Libs/NIBABEL/2.0.1 Libs/MATPLOTLIB/1.4.3 Libs/AWS/1.11.66 Libs/NetCDF/4.3.3.1-parallel-intel2013 Libs/NUMPY/1.13.1 Langs/Lua/5.3.3"
-    echo ""; cyaneho " ---> LMOD present. Loading Modules..."
-    for LoadModule in ${LoadModules}; do
-        module load ${LoadModule} &> /dev/null
-    done
-    echo ""; cyaneho " ---> Loaded Modules:  ${LoadModules}"; echo ""
-fi
+# ------------------------------------------------------------------------------
+# -- Module setup if using a cluster
+# ------------------------------------------------------------------------------
+
+# # -- Load additional needed modules
+# if [[ ${LMODPRESENT} == "yes" ]]; then
+#     LoadModules="Libs/netlib Libs/QT/5.6.2 Apps/R Rpkgs/RCURL/1.95 Langs/Python/2.7.14 Tools/GIT/2.6.2 Tools/Mercurial/3.6 GPU/Cuda/7.5 Rpkgs/GGPLOT2 Libs/SCIPY/0.13.3 Libs/PYDICOM/0.9.9 Libs/NIBABEL/2.0.1 Libs/MATPLOTLIB/1.4.3 Libs/AWS/1.11.66 Libs/NetCDF/4.3.3.1-parallel-intel2013 Libs/NUMPY/1.9.2 Langs/Lua/5.3.3"
+#     echo ""; cyaneho " ---> LMOD present. Loading Modules..."
+#     for LoadModule in ${LoadModules}; do
+#         module load ${LoadModule} &> /dev/null
+#     done
+#     echo ""; cyaneho " ---> Loaded Modules:  ${LoadModules}"; echo ""
+# fi
 
 # ------------------------------------------------------------------------------
 # -- Setup CUDA
@@ -944,21 +1147,31 @@ if [[ ${LMODPRESENT} != "yes" ]]; then
     PATH=/usr/local/cuda-7.5/bin:$PATH
     LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LD_LIBRARY_PATH
     export LD_LIBRARY_PATH
-    export PATH
+    BedpostXGPUDir="bedpostx_gpu_cuda_7.5" 
+    ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.0"
+    bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu
+    export BedpostXGPUDir; export ProbTrackXDIR; export bindir; PATH=${bindir}:${PATH}; PATH=${bindir}/lib:${PATH}; PATH=${bindir}/bin:${PATH}; PATH=${ProbTrackXDIR}:${PATH}; export PATH
+    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
+fi
+if [[ ! -z `command -v nvcc` ]]; then
+    if [[ `nvcc --version | grep "release"` == *"6.0"* ]]; then NVCCVer="6.0"; fi
+    if [[ `nvcc --version | grep "release"` == *"6.5"* ]]; then NVCCVer="6.5"; fi
+    if [[ `nvcc --version | grep "release"` == *"7.0"* ]]; then NVCCVer="7.0"; fi
+    if [[ `nvcc --version | grep "release"` == *"7.5"* ]]; then NVCCVer="7.5"; fi
+    if [[ `nvcc --version | grep "release"` == *"8.0"* ]]; then NVCCVer="8.0"; fi
+    BedpostXGPUDir="bedpostx_gpu_cuda_${NVCCVer}" 
+    ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_${NVCCVer}"
+    bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu
+    export BedpostXGPUDir; export ProbTrackXDIR; export bindir; PATH=${bindir}:${PATH}; PATH=${bindir}/lib:${PATH}; PATH=${bindir}/bin:${PATH}; PATH=${ProbTrackXDIR}:${PATH}; export PATH
+    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
+    #module load GPU/Cuda/${NVCCVer} &> /dev/null # Module setup if using a cluster
 fi
 
-if [[ ! -z `command -v nvcc` ]]; then
-    if [[ `nvcc --version | grep "release"` == *"6.0"* ]]; then NVCCVer="6.0"; BedpostXGPUDir="bedpostx_gpu_cuda_6.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_6.0"; fi
-    if [[ `nvcc --version | grep "release"` == *"6.5"* ]]; then NVCCVer="6.5"; BedpostXGPUDir="bedpostx_gpu_cuda_6.5" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_6.5"; fi
-    if [[ `nvcc --version | grep "release"` == *"7.0"* ]]; then NVCCVer="7.0"; BedpostXGPUDir="bedpostx_gpu_cuda_7.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.0"; fi
-    if [[ `nvcc --version | grep "release"` == *"7.5"* ]]; then NVCCVer="7.5"; BedpostXGPUDir="bedpostx_gpu_cuda_7.5" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.5"; fi
-    if [[ `nvcc --version | grep "release"` == *"8.0"* ]]; then NVCCVer="8.0"; BedpostXGPUDir="bedpostx_gpu_cuda_8.0" bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu; ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_8.0"; fi
-    export BedpostXGPUDir
-    export ProbTrackXDIR
-    export bindir
-    PATH=${bindir}:${PATH}
-    PATH=${ProbTrackXDIR}:${PATH}
-    ln -fs ${bindir}/lib/* ${FSLDIR}/lib/ &> /dev/null
-    export PATH
-    module load GPU/Cuda/${NVCCVer} &> /dev/null
+MNAPEnvCheck=`source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus | grep "ERROR"` > /dev/null 2>&1
+if [[ -z ${MNAPEnvCheck} ]]; then
+    geho " ---> MNAP environment set successfully!"
+    echo ""
+else
+    reho "   --> ERROR in MNAP environment. Run 'mnap_envstatus' to check missing variables!"
+    echo ""
 fi
