@@ -1,12 +1,7 @@
 warning('off');
-PATHS = getenv("MATLABPATH");
-addpath(PATHS);
+addpath(getenv("PALMDIR"));
+addpath(getenv("MATLABPATH"));
 LOCALLIST = getenv("OCTAVEPKGDIR");
-if isempty(LOCALLIST)
-  LOCALLIST='~/.octave_packages';
-else
-  LOCALLIST=[getenv("TOOLS") '/' LOCALLIST '/octave_packages'];
-end
 pkg('local_list', LOCALLIST);
 pkg load image
 pkg load control
@@ -19,3 +14,4 @@ pkg load miscellaneous
 pkg load optim
 pkg load struct
 warning('on');
+warning('off', 'Octave:possible-matlab-short-circuit-operator');
