@@ -201,19 +201,42 @@ export ENVVARIABLES
 if [[ -e /opt/.container ]]; then
     # -- Perform initial reset for the environment in the container
     if [[ "$FIRSTRUNDONE" != "TRUE" ]]; then
+
+        # -- First unset all conflicting variables in the environment
+        echo "--> unsetting all environment variables: $ENVVARIABLES"
         unset $ENVVARIABLES
-        TOOLS="/opt"
+
+        # -- Check for specific settings a user might want:
+
+        # --- This is a file that should reside in a user's home folder and it should contain the settings the user wants to make that are different from the defaults.
+        if [ -f ~/.mnap_container.rc ]; then
+            echo "--> sourcing  ~/.mnap_container.rc"
+            . ~/.mnap_container.rc
+        fi
+
+        # --- This is an environmental variable that if set should hold a path to a bash script that contains the settings the user wants to make that are different from the defaults.
+        if [[ ! -z "$MNAPCONTAINERENV" ]]; then    
+            echo "--> MNAPCONTAINERENV set: sourcing $MNAPCONTAINERENV"
+            . $MNAPCONTAINERENV
+        fi
+
+        # --- Check for presence of set con_<VariableName>. If present <VariableName> is set to con_<VariableName>
+
+        for ENVVAR in $ENVVARIABLES
+        do
+            if [[ ! -z $(eval echo "\${con_$ENVVAR+x}") ]]; then
+                echo "--> setting $ENVVAR to value of con_$ENVVAR [$(eval echo \"\$con_$ENVVAR\")]"
+                export $ENVVAR="$(eval echo \"\$con_$ENVVAR\")"
+            fi
+        done
+
+        if [ -z ${TOOLS+x} ]; then TOOLS="/opt"; fi
+        if [ -z ${USEOCTAVE+x} ]; then USEOCTAVE="TRUE"; fi
+
         PATH=${TOOLS}:${PATH}
-        export TOOLS PATH
+        export TOOLS PATH USEOCTAVE
         export FIRSTRUNDONE="TRUE"
-        export USEOCTAVE="TRUE"
     fi
-    # -- Check for specific settings a user might want:
-    # if [ -f ~/.mnap_container.rc ]; then         # --- This is a file that should reside in a user's home folder and it should contain the settings the user want's to make that are different from the defaults.
-    #     bash ~/.mnap_container.rc
-    # elif [[ ! -z "$MNAPCONTAINERENV" ]]; then    # --- This is an environmental variable that if set should hold a path to a bash script that contains the settings the user want's to make that are different from the defaults.
-    #     bash $MNAPCONTAINERENV
-    # fi
 
     # -- Check whether we are in the HCP container
 
