@@ -747,8 +747,10 @@ def main(args=None):
         if subjid is None:
             subjid = getSubjid(subjects, subjectsfolder=subjectsfolder)
         else:
+            subjids = getSubjid(subjects, subjectsfolder=subjectsfolder)
             subjidSplit = re.split(' +|,|\|', subjid)
-            subjid = [e for e in subjid if e['id'] in subjidSplit]
+            print("subjidSplit:", subjidSplit, "\nsubjid",  subjid, "\nsubjids", subjids)
+            subjid = [e for e in subjids if e in subjidSplit]
 
         # split subjids according to cores and add to array
         start = 0
