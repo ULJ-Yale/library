@@ -776,7 +776,7 @@ def main(args=None):
             scheduleCommand += 'subjid="%s" ' % (subjid)
 
         # setup for Singularity
-        if image.endswith(".simg"):
+        if image.endswith(".simg") or image.endswith(".sif"):
             fid, scriptPath = tempfile.mkstemp(dir="./")
             f = os.fdopen(fid, 'w')
 
@@ -787,6 +787,9 @@ def main(args=None):
             # --- run command or script
             if script:
                 print("bash " + script, file=f)
+            elif 'runTurnkey' in scheduleCommand:
+                scheduleCommand = scheduleCommand.replace('runTurnkey', '')
+                print("bash /opt/mnaptools/connector/functions/RunTurnkey.sh" + scheduleCommand, file=f)
             else:        
                 print("bash /opt/mnaptools/connector/mnap.sh " + scheduleCommand, file=f)
             
@@ -804,7 +807,12 @@ def main(args=None):
             for k, v in envars:
                 cstring += "export con_%s=\"%s\"; " % (k, v)
 
-            cstring = "source /opt/mnaptools/library/environment/mnap_environment.sh; bash /opt/mnaptools/connector/mnap.sh " + scheduleCommand
+            if scheduleCommand == 'runTurnkey':
+                scheduleCommand = scheduleCommand.replace('runTurnkey', '')
+                cstring = "source /opt/mnaptools/library/environment/mnap_environment.sh; bash /opt/mnaptools/connector/functions/RunTurnkey.sh " + scheduleCommand
+            else:
+                cstring = "source /opt/mnaptools/library/environment/mnap_environment.sh; bash /opt/mnaptools/connector/mnap.sh " + scheduleCommand
+
             containerCommand = "docker container run %s %s bash -c \"%s\"" % (dockeropt, image, cstring)
 
         # Docker and scripts
