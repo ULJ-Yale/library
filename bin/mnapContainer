@@ -527,7 +527,7 @@ def main(args=None):
 
     mnapContaiiner is a self-standing command that can run MNAP commands 
     against a Singularity or a Docker MNAP container. To run an MNAP command 
-    against a conainer the basic call is:
+    against a container the basic call is:
 
     $ mnapContainer <mnap command> [parameters] --image="<a path to the Singularity image or a Docker container name>" [additional options]
     
@@ -625,7 +625,7 @@ def main(args=None):
     will be saved in a folder where the command was run based on each scheduler
     system defauls. By specifying the `output` parameter the command output can
     be redirected. The parameter supports three different directives provided by
-    "<key>:<value>" pairs in a pipe separated string
+    "<key>:<value>" pairs in a pipe separated string:
 
     * stdout - specifies a path to a log file that should store standard output
                of the submitted job
@@ -776,7 +776,7 @@ def main(args=None):
             scheduleCommand += 'subjid="%s" ' % (subjid)
 
         # setup for Singularity
-        if image.endswith(".simg"):
+        if image.endswith(".simg") or image.endswith(".sif"):
             fid, scriptPath = tempfile.mkstemp(dir="./")
             f = os.fdopen(fid, 'w')
 
@@ -787,6 +787,9 @@ def main(args=None):
             # --- run command or script
             if script:
                 print("bash " + script, file=f)
+            elif 'runTurnkey' in scheduleCommand:
+                scheduleCommand = scheduleCommand.replace('runTurnkey', '')
+                print("bash /opt/mnaptools/connector/functions/RunTurnkey.sh" + scheduleCommand, file=f)
             else:        
                 print("bash /opt/mnaptools/connector/mnap.sh " + scheduleCommand, file=f)
             
@@ -804,7 +807,12 @@ def main(args=None):
             for k, v in envars:
                 cstring += "export con_%s=\"%s\"; " % (k, v)
 
-            cstring = "source /opt/mnaptools/library/environment/mnap_environment.sh; bash /opt/mnaptools/connector/mnap.sh " + scheduleCommand
+            if 'runTurnkey' in scheduleCommand:
+                scheduleCommand = scheduleCommand.replace('runTurnkey', '')
+                cstring = "source /opt/mnaptools/library/environment/mnap_environment.sh; bash /opt/mnaptools/connector/functions/RunTurnkey.sh " + scheduleCommand
+            else:
+                cstring = "source /opt/mnaptools/library/environment/mnap_environment.sh; bash /opt/mnaptools/connector/mnap.sh " + scheduleCommand
+
             containerCommand = "docker container run %s %s bash -c \"%s\"" % (dockeropt, image, cstring)
 
         # Docker and scripts
