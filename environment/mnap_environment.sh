@@ -197,6 +197,12 @@ fi
 ENVVARIABLES='MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR MATLABDIR MATLABBINDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR RDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR USEOCTAVE MNAPENV CONDADIR'
 export ENVVARIABLES
 
+# -- Unset PATH and MATLABPATH
+unset PATH
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+unset MATLABPATH
+unset PYTHONPATH
+
 # -- Check if inside the container and reset the environment on first setup
 if [[ -e /opt/.container ]]; then
     # -- Perform initial reset for the environment in the container
@@ -366,13 +372,13 @@ if [[ -z ${USEOCTAVE} ]]; then USEOCTAVE="FALSE"; export USEOCTAVE; fi
 
 
 # -- conda management
+CONDABIN=${CONDADIR}/bin
+PATH=${CONDABIN}:${PATH}
+export CONDABIN PATH
+source deactivate 2> /dev/null
 
-if [ -e /opt/.hcppipelines ]; then    
-    CONDABIN=${CONDADIR}/bin
-    PATH=${CONDABIN}:${PATH}
-    export CONDABIN PATH
-    source deactivate 2> /dev/null
-fi 
+# Activate conda environment
+source activate $MNAPENV 2> /dev/null
 
 
 # -- Checks for version
@@ -599,7 +605,7 @@ export MATLABPATH
 unset MNAPSubModules
 MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
 
-alias mnap='bash ${TOOLS}/${MNAPREPO}/connector/mnap.sh'
+#alias mnap='bash ${TOOLS}/${MNAPREPO}/connector/mnap.sh'
 alias mnap_envset='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh'
 alias mnap_environment_set='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh'
 
@@ -716,6 +722,7 @@ chmod ugo+x $MNAPPATH/niutilities/gmri &> /dev/null
 # -- Setup additional paths
 PATH=$MNAPPATH/connector:$PATH
 PATH=$MNAPPATH/niutilities:$PATH
+PATH=$MNAPPATH/library/bin:$PATH
 PATH=$MNAPPATH/matlab:$PATH
 PATH=$TOOLS/bin:$PATH
 # PATH=$PYLIBDIR/gradunwarp:$PATH
@@ -732,30 +739,30 @@ PATH=$TOOLS/bin:$PATH
 
 # --- setup PYTHONPATH and PATH When not conda
 
-if [ ! -e /opt/.hcppipelines ]; then 
-    PYTHONPATH=$TOOLS:$PYTHONPATH
-    #PYTHONPATH=$TOOLS/pylib:$PYTHONPATH
-    PYTHONPATH=/usr/local/bin:$PYTHONPATH
-    PYTHONPATH=$TOOLS/env/mnap/bin:$PYTHONPATH
-    PYTHONPATH=$TOOLS/miniconda/miniconda-latest/pkgs:$PYTHONPATH
-    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages:$PYTHONPATH
-    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/nibabel/xmlutils.py:$PYTHONPATH
-    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/pydicom:$PYTHONPATH
-    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/gradunwarp:$PYTHONPATH
-    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/gradunwarp/core:$PYTHONPATH
-    PYTHONPATH=$MNAPPATH:$PYTHONPATH
-    PYTHONPATH=$MNAPPATH/connector:$PYTHONPATH
-    PYTHONPATH=$MNAPPATH/niutilities:$PYTHONPATH
-    PYTHONPATH=$MNAPPATH/matlab:$PYTHONPATH
-    # PYTHONPATH=$PYLIBDIR/bin:$PYTHONPATH
-    # PYTHONPATH=$PYLIBDIR/lib/python2.7/site-packages:$PYTHONPATH
-    # PYTHONPATH=$PYLIBDIR/lib64/python2.7/site-packages:$PYTHONPATH
-    # PYTHONPATH=$PYLIBDIR:$PYTHONPATH
-    PATH=$TOOLS/env/mnap/bin:$PATH
-fi
+#if [ ! -e /opt/.hcppipelines ]; then 
+#    PYTHONPATH=$TOOLS:$PYTHONPATH
+#    PYTHONPATH=$TOOLS/pylib:$PYTHONPATH
+#    PYTHONPATH=/usr/local/bin:$PYTHONPATH
+#    PYTHONPATH=$TOOLS/env/mnap/bin:$PYTHONPATH
+#    PYTHONPATH=$TOOLS/miniconda/miniconda-latest/pkgs:$PYTHONPATH
+#    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages:$PYTHONPATH
+#    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/nibabel/xmlutils.py:$PYTHONPATH
+#    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/pydicom:$PYTHONPATH
+#    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/gradunwarp:$PYTHONPATH
+#    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/gradunwarp/core:$PYTHONPATH
+#    PYTHONPATH=$MNAPPATH:$PYTHONPATH
+#    PYTHONPATH=$MNAPPATH/connector:$PYTHONPATH
+#    PYTHONPATH=$MNAPPATH/niutilities:$PYTHONPATH
+#    PYTHONPATH=$MNAPPATH/matlab:$PYTHONPATH
+#    PYTHONPATH=$PYLIBDIR/bin:$PYTHONPATH
+#    PYTHONPATH=$PYLIBDIR/lib/python2.7/site-packages:$PYTHONPATH
+#    PYTHONPATH=$PYLIBDIR/lib64/python2.7/site-packages:$PYTHONPATH
+#    PYTHONPATH=$PYLIBDIR:$PYTHONPATH
+#    PATH=$TOOLS/env/mnap/bin:$PATH
+#fi
 
-export PATH
-export PYTHONPATH
+#export PATH
+#export PYTHONPATH
 
 
 # -- Export Python paths (before change to conda)
@@ -787,12 +794,6 @@ MATLABPATH=$MNAPPATH/matlab/fcMRI:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/general:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/gmri:$MATLABPATH
 MATLABPATH=$MNAPPATH/matlab/stats:$MATLABPATH
-
-# source deactivate
-# source activate $MNAPENV
-if [ -e /opt/.hcppipelines ]; then 
-    source activate $MNAPENV 2> /dev/null
-fi
 
 # ------------------------------------------------------------------------------
 # -- Path to additional dependencies
@@ -863,60 +864,84 @@ function_gitmnapbranch() {
     # -- Update remote
     git remote update > /dev/null 2>&1
     MNAPDirBranchTest=`pwd`
+    MNAPDirBranchCurrent=`git branch | grep '*'`
     echo ""
-    geho "--- Running git status checks in $MNAPDirBranchTest"
+    geho "==> Running git status checks in ${MNAPDirBranchTest}"
+    geho "    Active branch: ${MNAPDirBranchCurrent}"
     # -- Set git variables
     unset UPSTREAM; unset LOCAL; unset REMOTE; unset BASE
     UPSTREAM=${1:-'@{u}'}
     LOCAL=$(git rev-parse origin)
     REMOTE=$(git rev-parse "$UPSTREAM")
-    BASE=$(git merge-base @ "$UPSTREAM")
+    BASE=$(git merge-base "$LOCAL" "$UPSTREAM")
     echo ""
-    echo "   ==> Local commit:   $LOCAL"
-    echo "   ==> Remote commit:  $REMOTE"
+    geho "    -------------------------------------------------------------------------"
+    geho "    --> Local commit:                $LOCAL"
+    geho "    --> Remote commit:               $REMOTE"
+    geho "    --> Base common ancestor commit: $REMOTE"
+    echo ""
+    
     # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
     if [[ $LOCAL == $REMOTE ]]; then
-        cyaneho "   ==> STATUS OK: LOCAL equals REMOTE in $MNAPDirBranchTest."; echo ""
+        cyaneho "    ==> STATUS OK: LOCAL equals REMOTE in $MNAPDirBranchTest"; echo ""
     elif [[ $LOCAL == $BASE ]]; then
-        reho "   ==> ACTION NEEDED: LOCAL equals BASE in ${MNAPDirBranchTest}. You need to pull."; echo ""
+        reho "    ==> ACTION NEEDED: LOCAL equals BASE in ${MNAPDirBranchTest} --> You need to pull."; echo ""
     elif [[ $REMOTE == $BASE ]]; then
-        reho "   ==> ACTION NEEDED: REMOTE equals BASE in ${MNAPDirBranchTest}. You need to push."; echo ""
+        reho "    ==> ACTION NEEDED: REMOTE equals BASE in ${MNAPDirBranchTest} --> You need to push."; echo ""
     else
+        reho "    ==> ERROR: LOCAL, BASE and REMOTE tips have diverged in ${MNAPDirBranchTest}"
         echo ""
-        reho "   ===> ERROR: LOCAL, BASE and REMOTE tips have diverged in ${MNAPDirBranchTest}."
-        echo ""
-        reho "   ------------------------------------------------"
+        reho "    ------------------------------------------------"
         reho "      LOCAL: ${LOCAL}"
         reho "      BASE: ${BASE}"
         reho "      REMOTE: ${REMOTE}"
-        reho "   ------------------------------------------------"
+        reho "    ------------------------------------------------"
         echo ""
-        reho "   ===> Check 'git status -uno' to inspect and re-run after cleaning things up."
+        reho "    ==> Check 'git status -uno' to inspect and re-run after cleaning things up."
         echo ""
     fi
 }
 alias gitmnapbranch=function_gitmnapbranch
 
 function_gitmnapstatus() {
+    
+    # -- Function for reporting git status
+    function_gitstatusreport() { 
+                        #GitStatusReport="$(git status -uno --porcelain | sed 's/M/Modified:/')"
+                        GitStatusReport="$(git status --porcelain | sed 's/^/    /' | sed 's/M/Modified:/' | sed 's/??/ Untracked:/')"
+                        #GitStatusReport="$(echo ${GitStatusReport} | sed 's/M/-> Modified:/' | sed 's/^/    /')"
+                        #GitStatusReport="$(echo ${GitStatusReport} | sed 's/??/\n    -> Untracked:/')"
+                        if [[ ! -z ${GitStatusReport} ]]; then
+                            reho "${GitStatusReport}"
+                        fi
+                        geho "    -------------------------------------------------------------------------"
+                        echo ""; echo ""
+    }
+
     echo ""
-    geho "================ Running MNAP Suite Repository Status Check ================"
-    echo ""
+    geho " ================ Running MNAP Suite Repository Status Check ================"
+    geho ""
     unset MNAPBranchPath; unset MNAPSubModules; unset MNAPSubModule
+    
     # -- Run it for the main module
     cd ${TOOLS}/${MNAPREPO}
-    echo ""; geho "--- Checking status in MNAP Suite location: ${TOOLS}/${MNAPREPO} "; echo ""
-    git status -uno; function_gitmnapbranch
+    geho "          MNAP Suite location: ${TOOLS}/${MNAPREPO}"
+    geho " ============================================================================"
+    echo ""
+    function_gitmnapbranch
+    function_gitstatusreport
+    
     # -- Then iterate over submodules
     MNAPSubModules=`cd ${TOOLS}/${MNAPREPO}; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
     MNAPBranchPath="${MNAPPATH}"
     for MNAPSubModule in ${MNAPSubModules}; do
         cd ${MNAPBranchPath}/${MNAPSubModule}
         function_gitmnapbranch
-        git status -uno
+        function_gitstatusreport
     done
     cd ${TOOLS}/${MNAPREPO}
     echo ""
-    geho "================ Completed MNAP Suite Repository Status Check ================"
+    geho " ================ Completed MNAP Suite Repository Status Check ================"
     echo ""
 }
 alias gitmnapstatus=function_gitmnapstatus
