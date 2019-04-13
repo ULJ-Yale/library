@@ -527,7 +527,7 @@ def main(args=None):
 
     mnapContaiiner is a self-standing command that can run MNAP commands 
     against a Singularity or a Docker MNAP container. To run an MNAP command 
-    against a conainer the basic call is:
+    against a container the basic call is:
 
     $ mnapContainer <mnap command> [parameters] --image="<a path to the Singularity image or a Docker container name>" [additional options]
     
@@ -625,7 +625,7 @@ def main(args=None):
     will be saved in a folder where the command was run based on each scheduler
     system defauls. By specifying the `output` parameter the command output can
     be redirected. The parameter supports three different directives provided by
-    "<key>:<value>" pairs in a pipe separated string
+    "<key>:<value>" pairs in a pipe separated string:
 
     * stdout - specifies a path to a log file that should store standard output
                of the submitted job
