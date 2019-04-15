@@ -481,7 +481,7 @@ def main(args=None):
     against a Singularity or a Docker MNAP container. To run an MNAP command 
     against a container the basic call is:
 
-    $ mnapContainer <mnap command> [parameters] --image="<a path to the Singularity image or a Docker container name>" [additional options]
+    $ mnapContainer <mnap command> [parameters] --container="<a path to the Singularity image or a Docker container name>" [additional options]
     
     `mnap command` is any command supported by MNAP. `parameters` are any
     parameters that should be passed to the mnap command. This part is the same
@@ -497,7 +497,7 @@ def main(args=None):
     Required parameter:
     -------------------
 
-    --image     ... specifies either the path to the Singularity container image 
+    --container ... specifies either the path to the Singularity container image 
                     or the name of the Docker container to be used. This 
                     parameter can be omitted if the value is specified in the 
                     `MNAPCONIMAGE` environmental variable.
@@ -623,7 +623,7 @@ def main(args=None):
       --subjectsfolder=/data/study/subjects \\
       --subjects=/data/study/processing/batch.txt \\
       --cores=4 \\
-      --image=/singularity/mnap_suite-0_38_10.simg \\
+      --container=/singularity/mnap_suite-0_38_10.simg \\
       --scheduler="SLURM,time=2-00:00:00,ntasks=1,cpus-per-task=2,mem-per-cpu=15000,partition=pi_anticevic"
 
     ---
@@ -634,6 +634,7 @@ def main(args=None):
                  First complete version with documentation.
     2019-04-15 - Grega Repovs
                  Updated Docker submission to enable script support.
+                 Changed image parameter to container
     """
 
     if args is None:
@@ -658,7 +659,7 @@ def main(args=None):
     for arg in args:
         if "scheduler=" in arg:
             k, scheduler = arg.split("=", 1)
-        elif "image=" in arg:
+        elif "container=" in arg:
             k, image = arg.split("=", 1)
         elif "envars=" in arg:
             k, envars = arg.split("=", 1)
@@ -721,8 +722,8 @@ def main(args=None):
     # - schedulers is not None
     # - subjects is not None
     subjidArray = []
-    if cores is not None and int(cores) > 1 and scheduler is not None and subjects is not None:
-        containers = int(cores)
+    if cores is not None and int(cores) > 1 and subjects is not None and scheduler is not None:
+                
         # split subjects via subjid or split existing subjid
         if subjid is None:
             subjid = getSubjid(subjects, subjectsfolder=subjectsfolder)
@@ -732,14 +733,27 @@ def main(args=None):
             print("subjidSplit:", subjidSplit, "\nsubjid",  subjid, "\nsubjids", subjids)
             subjid = [e for e in subjids if e in subjidSplit]
 
-        # split subjids according to cores and add to array
-        start = 0
-        end = len(subjid)
-        chunks = int(math.ceil(end / float(cores)))
-        for i in range(start, end, chunks):
-            start = i
-            subjidChunk = subjid[start:start+chunks]
-            subjidArray.append(','.join(subjidChunk))
+        if scheduler is None:
+            containers = int(cores)
+
+            # split subjids according to cores and add to array
+            start = 0
+            end = len(subjid)
+            chunks = int(math.ceil(end / float(cores)))
+            for i in range(start, end, chunks):
+                start = i
+                subjidChunk = subjid[start:start+chunks]
+                subjidArray.append(','.join(subjidChunk))        
+        
+        else:
+            containers = 0
+
+            # split subjids according to cores and add to array
+            while subjid:
+                containers += 1
+                subjidChunk = [subjid.pop(0) for e in range(cores) if subjid]
+                subjidArray.append(','.join(subjidChunk))
+
     else:
         # do not run parallel
         containers = 1
