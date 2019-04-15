@@ -751,7 +751,7 @@ def main(args=None):
             # split subjids according to cores and add to array
             while subjid:
                 containers += 1
-                subjidChunk = [subjid.pop(0) for e in range(cores) if subjid]
+                subjidChunk = [subjid.pop(0) for e in range(int(cores)) if subjid]
                 subjidArray.append(','.join(subjidChunk))
 
     else:
