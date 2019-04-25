@@ -723,7 +723,7 @@ chmod ugo+x $MNAPPATH/niutilities/gmri &> /dev/null
 PATH=$MNAPPATH/connector:$PATH
 PATH=$MNAPPATH/niutilities:$PATH
 PATH=$MNAPPATH/library/bin:$PATH
-PATH=$MNAPPATH/matlab:$PATH
+PATH=$MNAPPATH/nitools:$PATH
 PATH=$TOOLS/bin:$PATH
 # PATH=$PYLIBDIR/gradunwarp:$PATH
 # PATH=$PYLIBDIR/gradunwarp/core:$PATH
@@ -789,11 +789,11 @@ PATH=$TOOLS/bin:$PATH
 # export PYTHONPATH
 
 # -- Set and export Matlab paths
-MATLABPATH=$MNAPPATH/matlab/fcMRI:$MATLABPATH
-MATLABPATH=$MNAPPATH/matlab/fcMRI:$MATLABPATH
-MATLABPATH=$MNAPPATH/matlab/general:$MATLABPATH
-MATLABPATH=$MNAPPATH/matlab/gmri:$MATLABPATH
-MATLABPATH=$MNAPPATH/matlab/stats:$MATLABPATH
+MATLABPATH=$MNAPPATH/nitools/fcMRI:$MATLABPATH
+MATLABPATH=$MNAPPATH/nitools/fcMRI:$MATLABPATH
+MATLABPATH=$MNAPPATH/nitools/general:$MATLABPATH
+MATLABPATH=$MNAPPATH/nitools/gmri:$MATLABPATH
+MATLABPATH=$MNAPPATH/nitools/stats:$MATLABPATH
 
 # ------------------------------------------------------------------------------
 # -- Path to additional dependencies
