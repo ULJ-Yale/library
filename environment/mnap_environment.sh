@@ -51,6 +51,8 @@
 # -- Setup color outputs
 # ------------------------------------------------------------------------------
 
+
+
 BLACK_F="\033[30m"; BLACK_B="\033[40m"
 RED_F="\033[31m"; RED_B="\033[41m"
 GREEN_F="\033[32m"; GREEN_B="\033[42m"
@@ -125,10 +127,10 @@ usage() {
     echo "  ├── env                             --> conda environments with python packages"
     echo "  │   └── mnap                        --> Env. Variable => MNAPENV (python2.7 versions of the required packages)"
     echo "  │ "
-    echo "  ├── HCPpipelines                    --> Human Connectome Pipelines Folder (https://github.com/Washington-University/HCPpipelines) "
-    echo "  │   ├── HCPpipelines-stable         --> Env. Variable => HCPPIPEDIR  Note: Only Human Connectome Pipelines Stable Branch is set by default "
-    echo "  │   ├── HCPpipelines-<VERSION>      --> Point any other desired version point to HCPPIPEDIR "
-    echo "  │   └── HCPpipelinesRunUtils        --> Env. Variable => HCPPIPERUNUTILS "
+    echo "  ├── HCP                             --> Human Connectome Tools Folder "
+    echo "  │   ├── Pipelines                   --> Human Connectome Pipelines Folder (https://github.com/Washington-University/HCPpipelines) | Env. Variable => HCPPIPEDIR "
+    echo "  │   ├── Pipelines-<VERSION>         --> Point any other desired version point to HCPPIPEDIR "
+    echo "  │   └── RunUtils                    --> Env. Variable => HCPPIPERUNUTILS "
     echo "  │ "
     echo "  ├── fmriprep                        --> fMRIPrep Pipelines (https://github.com/poldracklab/fmriprep) "
     echo "  │   ├── fmriprep-latest             --> Env. Variable => FMRIPREPDIR "
@@ -194,7 +196,7 @@ fi
 #  Environment clear and check functions
 # ------------------------------------------------------------------------------
 
-ENVVARIABLES='PATH MATLABPATH PYTHONPATH MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR MATLABDIR MATLABBINDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR RDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR USEOCTAVE MNAPENV CONDADIR'
+ENVVARIABLES='PATH MATLABPATH PYTHONPATH MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR MATLABDIR MATLABBINDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR RDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR USEOCTAVE MNAPENV CONDADIR MSMBINDIR MSMCONFIGDIR'
 export ENVVARIABLES
 
 # -- Check if inside the container and reset the environment on first setup
@@ -240,23 +242,6 @@ if [[ -e /opt/.container ]]; then
         export TOOLS PATH USEOCTAVE
         export FIRSTRUNDONE="TRUE"
     fi
-
-    # -- Check whether we are in the HCP container
-
-    if [ -e /opt/.hcppipelines ]; then
-
-        # --- HCPPipelines specific settings --- TO BE EDITED FURTHER
-
-        export HCPPIPEDIR=${TOOLS}/HCP/Pipelines
-        export FREESURFER_HOME=${TOOLS}/freesurfer/freesurfer-6.0
-        export FREESURFERDIR=$FREESURFER_HOME
-
-        export MATLAB_COMPILER_RUNTIME=DUMMYVarianbleNotUsedCurrently
-        export MSMBINDIR="DUMMYVarianbleNotUsedCurrently"
-        export MSMCONFIGDIR=${HCPPIPEDIR}/MSMConfig; PATH=${MSMCONFIGDIR}:${PATH}; export PATH
-    fi
-
-
 
 elif [[ -e ~/.mnapuseoctave ]]; then
     export USEOCTAVE="TRUE"
@@ -348,6 +333,8 @@ fi
 # -- Set default folder names for dependencies if undefined by user environment:
 # ------------------------------------------------------------------------------
 
+
+
 # -- Check if folders for dependencies are set in the global path
 if [[ -z ${FSLDIR} ]]; then FSLDIR="${TOOLS}/fsl/fsl-latest"; export FSLDIR; fi
 if [[ -z ${FSL_FIXDIR} ]]; then FSL_FIXDIR="${TOOLS}/fsl/fix-latest"; fi
@@ -360,7 +347,7 @@ if [[ -z ${DICMNIIDIR} ]]; then DICMNIIDIR="${TOOLS}/dicm2nii/dicm2nii-latest"; 
 if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="${TOOLS}/octave/octave-latest"; export OCTAVEDIR; fi
 if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="${TOOLS}/octave/octavepkg"; export OCTAVEPKGDIR; fi
 if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="${TOOLS}/pylib"; export PYLIBDIR; fi
-if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/${MNAPREPO}/hcpmodified"; export HCPPIPEDIR; fi
+if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/HCP/Pipelines"; export HCPPIPEDIR; fi
 if [[ -z ${FMRIPREPDIR} ]]; then FMRIPREPDIR="${TOOLS}/fmriprep/fmriprep-latest"; export FMRIPREPDIR; fi
 if [[ -z ${MATLABDIR} ]]; then MATLABDIR="${TOOLS}/matlab/matlab-latest"; export MATLABDIR; fi
 if [[ -z ${GRADUNWARPDIR} ]]; then GRADUNWARPDIR="${TOOLS}/gradunwarp/gradunwarp-latest"; export GRADUNWARPDIR; fi
@@ -368,6 +355,9 @@ if [[ -z ${MNAPENV} ]]; then MNAPENV="${TOOLS}/env/mnap"; export MNAPENV; fi
 if [[ -z ${CONDADIR} ]]; then CONDADIR="${TOOLS}/miniconda/miniconda-latest"; export CONDADIR; fi
 if [[ -z ${RDIR} ]]; then RDIR="${TOOLS}/R/R-latest"; export RDIR; fi
 if [[ -z ${USEOCTAVE} ]]; then USEOCTAVE="FALSE"; export USEOCTAVE; fi
+if [[ -z ${MSMBINDIR} ]]; then MSMBINDIR="$TOOLS/HCP/MSM_HOCR_v1/Centos"; export MSMBINDIR; fi
+if [[ -z ${MSMCONFIGDIR} ]]; then MSMCONFIGDIR=${HCPPIPEDIR}/MSMConfig; export MSMCONFIGDIR; fi
+if [[ -z ${MATLAB_COMPILER_RUNTIME} ]]; then MATLAB_COMPILER_RUNTIME=${MATLABDIR}/runtime; export MATLAB_COMPILER_RUNTIME; fi
 
 
 # -- conda management
@@ -516,6 +506,7 @@ export FREESURFER_HOME PATH
 # -- FSL path
 # -- Note: Always run after FreeSurfer for correct environment specification
 #          because SetUpFreeSurfer.sh can mis-specify the $FSLDIR path
+
 PATH=${FSLDIR}/bin:${PATH}
 source ${FSLDIR}/etc/fslconf/fsl.sh > /dev/null 2>&1
 export FSLDIR PATH
@@ -640,7 +631,7 @@ if [ -e ~/.mnaphcpe ];
 fi
 
 # -- Export HCP Pipeline and relevant variables
-export PATH=${HCPPIPEDIR}:${PATH}; export PATH
+export PATH=${HCPPIPEDIR}:${MSMCONFIGDIR}:${PATH}; export PATH
 export CARET7DIR=$WORKBENCHDIR; PATH=${CARET7DIR}:${PATH}; export PATH
 export GRADUNWARPBIN=$GRADUNWARPDIR/gradunwarp/core; PATH=${GRADUNWARPBIN}:${PATH}; export PATH
 export HCPPIPEDIR_Templates=${HCPPIPEDIR}/global/templates; PATH=${HCPPIPEDIR_Templates}:${PATH}; export PATH
@@ -1222,3 +1213,4 @@ else
     reho "   --> ERROR in MNAP environment. Run 'mnap_envstatus' to check missing variables!"
     echo ""
 fi
+
