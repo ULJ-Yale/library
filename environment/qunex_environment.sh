@@ -19,7 +19,7 @@
 # ## LICENSE
 #
 # * The qunex_environment.sh = the "Software"
-# * This Software conforms to the license outlined in the QuNex Suite:
+# * This Software conforms to the license outlined in the Qu|Nex Suite:
 # * https://bitbucket.org/oriadev/qunex/src/master/LICENSE.md
 #
 # ## TODO
@@ -27,11 +27,11 @@
 #
 # ## DESCRIPTION:
 #
-# * This is a general script developed as a front-end environment and path organization for the QuNex infrastructure
+# * This is a general script developed as a front-end environment and path organization for the Qu|Nex infrastructure
 #
 # ## PREREQUISITE INSTALLED SOFTWARE
 #
-# * QuNex Suite
+# * Qu|Nex Suite
 #
 # ## PREREQUISITE ENVIRONMENT VARIABLES
 #
@@ -104,7 +104,7 @@ usage() {
     echo ""
     echo "-- DESCRIPTION:"
     echo ""
-    echo "This script implements the global environment setup for the QuNex Suite."
+    echo "This script implements the global environment setup for the Qu|Nex Suite."
     echo ""
     echo ""
     echo "    Configure the environment script by adding the following lines to the .bash_profile "
@@ -117,12 +117,12 @@ usage() {
     echo ""
     echo "-- REQUIRED DEPENDENCIES:"
     echo ""
-    echo " The QuNex Suite assumes a set default folder names for dependencies if undefined by user environment."
+    echo " The Qu|Nex Suite assumes a set default folder names for dependencies if undefined by user environment."
     echo " These are defined relative to the ${TOOLS} folder which should be set as a global system variable."
     echo ""
     echo "  TOOLS                              --> The base folder for the dependency installation "
     echo "  │ "
-    echo "  ├── qunex                          --> Env. Variable => QuNexREPO -- All QuNex Suite repositories (https://bitbucket.org/hidradev/qunextools) "
+    echo "  ├── qunex                          --> Env. Variable => QuNexREPO -- All Qu|Nex Suite repositories (https://bitbucket.org/hidradev/qunextools) "
     echo "  │ "
     echo "  ├── env                             --> conda environments with python packages"
     echo "  │   └── qunex                        --> Env. Variable => QuNexENV (python2.7 versions of the required packages)"
@@ -174,14 +174,14 @@ usage() {
     echo "  ├── R                               --> R Statistical computing environment"
     echo "  │   └── R-latest                    --> Env. Variable => RDIR "
     echo "  │ "
-    echo "  ├── pylib                           --> Env. Variable => PYLIBDIR      -- All QuNex python libraries and tools "
+    echo "  ├── pylib                           --> Env. Variable => PYLIBDIR      -- All Qu|Nex python libraries and tools "
     echo "  ├── gradunwarp                      --> HCP version of gradunwarp (https://github.com/Washington-University/gradunwarp) "
     echo "  │   └── gradunwarp-latest           --> Env. Variable => GRADUNWARPDIR"
     echo "  │ "
     echo "  └── workbench/workbench-<VERSION>   Connectome Workbench (v1.0 or above; https://www.humanconnectome.org/software/connectome-workbench) "
     echo "      └── workbench-<VERSION>         Env. Variable = HCPWBDIR "
     echo ""
-    echo " These defaults can be redefined if the above paths are declared as global variables in the .bash_profile profile after loading the QuNex environment."
+    echo " These defaults can be redefined if the above paths are declared as global variables in the .bash_profile profile after loading the Qu|Nex environment."
     echo ""
     geho "  ==> For full environment report run 'qunex environment'"
     echo ""
@@ -374,7 +374,7 @@ source activate $QuNexENV 2> /dev/null
 showVersion() {
     QuNexVer=`cat ${TOOLS}/${QuNexREPO}/VERSION.md`
     echo ""
-    geho " Loading Quantitative Neuroimaging Environment & ToolboX (QuNex) Version: v${QuNexVer}"
+    geho " Loading Quantitative Neuroimaging Environment & ToolboX (Qu|Nex) Version: v${QuNexVer}"
 }
 
 # ------------------------------------------------------------------------------
@@ -409,7 +409,7 @@ geho "Use of this software is subject to the terms and conditions defined by the
 geho " Yale University Copyright Policies:"
 geho "    http://ocr.yale.edu/faculty/policies/yale-university-copyright-policy    "
 geho " and the terms and conditions defined in the file 'LICENSE.md' which is      "
-geho " a part of the QuNex Suite source code package:"
+geho " a part of the Qu|Nex Suite source code package:"
 geho "    https://bitbucket.org/hidradev/qunextools/src/master/LICENSE.md"
 geho ""
 
@@ -572,7 +572,7 @@ PATH=${RDIR}:${PATH}
 export RDIR PATH
 
 # ------------------------------------------------------------------------------
-# -- Setup overall QuNex paths
+# -- Setup overall Qu|Nex paths
 # ------------------------------------------------------------------------------
 
 QuNexCONNPATH=$QuNexPATH/connector
@@ -707,7 +707,7 @@ MATLABPATH=$POSTFIXICADIR:$MATLABPATH
 export MATLABPATH
 
 # ------------------------------------------------------------------------------
-# -- QuNex - NIUtilities and Matlab Paths
+# -- Qu|Nex - NIUtilities and Matlab Paths
 # ------------------------------------------------------------------------------
 
 # -- Make sure gmri is executable
@@ -796,7 +796,7 @@ MATLABPATH=$QuNexPATH/nitools/stats:$MATLABPATH
 # -- Define additional paths here as needed
 
 # ------------------------------------------------------------------------------
-#  QuNex Functions and git aliases for BitBucket commit and pull requests
+#  Qu|Nex Functions and git aliases for BitBucket commit and pull requests
 # ------------------------------------------------------------------------------
 
 # -- gitqunex_usage function help
@@ -805,10 +805,10 @@ gitqunex_usage() {
     echo ""
     echo " -- DESCRIPTION for gitqunex function:"
     echo ""
-    echo "The QuNex Suite provides functionality for users with repo privileges to easily pull or commit & push changes via git."
+    echo "The Qu|Nex Suite provides functionality for users with repo privileges to easily pull or commit & push changes via git."
     echo "This is done via two aliases that are setup as general environment variables: "
     echo ""
-    echo "    * gitqunex   --> Alias for the QuNex function that updates the QuNex Suite via git from the remote repo or pushes changes to remote repo."
+    echo "    * gitqunex   --> Alias for the Qu|Nex function that updates the Qu|Nex Suite via git from the remote repo or pushes changes to remote repo."
     echo ""
     echo ""
     echo " --command=<git_command>                                            Specify git command: push or pull."
@@ -821,7 +821,7 @@ gitqunex_usage() {
     echo " --submodules=<list_of_submodules>                                  Comma, space or pipe separated list of submodules to work on."
     echo "                                                                    'all'      --->  Update both the main repo and all submodules"
     echo "                                                                    'main'     --->  Update only the main repo"
-    geho "QuNex Submodules:"
+    geho "Qu|Nex Submodules:"
     echo ""
     geho "${QuNexSubModules}"
     echo ""
@@ -913,13 +913,13 @@ function_gitqunexstatus() {
     }
 
     echo ""
-    geho " ================ Running QuNex Suite Repository Status Check ================"
+    geho " ================ Running Qu|Nex Suite Repository Status Check ================"
     geho ""
     unset QuNexBranchPath; unset QuNexSubModules; unset QuNexSubModule
     
     # -- Run it for the main module
     cd ${TOOLS}/${QuNexREPO}
-    geho "          QuNex Suite location: ${TOOLS}/${QuNexREPO}"
+    geho "          Qu|Nex Suite location: ${TOOLS}/${QuNexREPO}"
     geho " ============================================================================"
     echo ""
     function_gitqunexbranch
@@ -935,7 +935,7 @@ function_gitqunexstatus() {
     done
     cd ${TOOLS}/${QuNexREPO}
     echo ""
-    geho " ================ Completed QuNex Suite Repository Status Check ================"
+    geho " ================ Completed Qu|Nex Suite Repository Status Check ================"
     echo ""
 }
 alias gitqunexstatus=function_gitqunexstatus
@@ -972,17 +972,17 @@ function_gitqunex() {
 
     # -- Start execution
     echo ""
-    geho "=============== Executing QuNex $QuNexGitCommand function ============== "
+    geho "=============== Executing Qu|Nex $QuNexGitCommand function ============== "
     # -- Performing flag checks
     echo ""
     geho "--- Checking inputs ... "
     echo ""
     if [[ -z ${QuNexGitCommand} ]]; then reho ""; reho "   Error: --command flag not defined. Specify 'pull' or 'push' option."; echo ""; gitqunex_usage; return 1; fi
     if [[ -z ${QuNexBranch} ]]; then reho ""; reho "   Error: --branch flag not defined."; echo ""; gitqunex_usage; return 1; fi
-    if [[ -z ${QuNexBranchPath} ]]; then reho ""; reho "   Error: --branchpath flag for specified branch not defined. Specify absolute path of the relevant QuNex repo."; echo ""; gitqunex_usage; return 1; fi
+    if [[ -z ${QuNexBranchPath} ]]; then reho ""; reho "   Error: --branchpath flag for specified branch not defined. Specify absolute path of the relevant Qu|Nex repo."; echo ""; gitqunex_usage; return 1; fi
     if [[ -z ${QuNexSubModulesList} ]]; then reho ""; reho "   Error: --submodules flag not not defined. Specify 'main', 'all' or specific submodule to commit."; echo ""; gitqunex_usage; return 1; fi
     if [[ ${QuNexSubModulesList} == "all" ]]; then reho ""; geho "   Note: --submodules flag set to all. Setting update for all submodules."; echo ""; fi
-    if [[ ${QuNexSubModulesList} == "main" ]]; then reho ""; geho "   Note: --submodules flag set to main QuNex repo only in $QuNexBranchPath"; echo ""; fi
+    if [[ ${QuNexSubModulesList} == "main" ]]; then reho ""; geho "   Note: --submodules flag set to main Qu|Nex repo only in $QuNexBranchPath"; echo ""; fi
     if [[ ${QuNexGitCommand} == "push" ]]; then
         if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitqunex_usage; return 1; else CommitMessage="${CommitMessage}"; fi
         if [[ -z ${QuNexAddFiles} ]]; then reho ""; reho "   Error: --add flag not defined. Run 'gitqunexstatus' and specify which files to add."; echo ""; gitqunex_usage; return 1; fi
@@ -991,21 +991,21 @@ function_gitqunex() {
     # -- Perform checks that QuNex contains requested branch and that it is actively checked out
     cd ${QuNexBranchPath}
     echo ""
-    mageho "  * Checking active branch for main QuNex repo in $QuNexBranchPath..."
+    mageho "  * Checking active branch for main Qu|Nex repo in $QuNexBranchPath..."
     echo ""
     if [[ -z `git branch | grep "${QuNexBranch}"` ]]; then reho "Error: Branch $QuNexBranch does not exist in $QuNexBranchPath. Check your repo."; echo ""; gitqunex_usage; return 1; else geho "   --> $QuNexBranch found in $QuNexBranchPath"; echo ""; fi
     if [[ -z `git branch | grep "* ${QuNexBranch}"` ]]; then reho "Error: Branch $QuNexBranch is not checked out and active in $QuNexBranchPath. Check your repo."; echo ""; gitqunex_usage; return 1; else geho "   --> $QuNexBranch is active in $QuNexBranchPath"; echo ""; fi
-    mageho "  * All checks for main QuNex repo passed."
+    mageho "  * All checks for main Qu|Nex repo passed."
     echo ""
 
     # -- Not perform further checks
     if [ "${QuNexSubModulesList}" == "main" ]; then
         echo ""
-        geho "   Note: --submodules flag set to main QuNex repo only. Omitting individual submodules."
+        geho "   Note: --submodules flag set to main Qu|Nex repo only. Omitting individual submodules."
         echo ""
         # -- Check git command
         echo ""
-        geho "--- Running QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex main repo in ${QuNexBranchPath}."
+        geho "--- Running Qu|Nex git ${QuNexGitCommand} for ${QuNexBranch} on Qu|Nex main repo in ${QuNexBranchPath}."
         echo
         cd ${QuNexBranchPath}
         # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
@@ -1033,7 +1033,7 @@ function_gitqunex() {
         fi
         function_gitqunexbranch
         echo ""
-        geho "--- Completed QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex main repo in ${QuNexBranchPath}."; echo ""
+        geho "--- Completed Qu|Nex git ${QuNexGitCommand} for ${QuNexBranch} on Qu|Nex main repo in ${QuNexBranchPath}."; echo ""
         return 1
     fi
 
@@ -1052,7 +1052,7 @@ function_gitqunex() {
         fi
     elif [ ${QuNexSubModulesList} == "main" ]; then
         echo ""
-        geho "Note: --submodules flag set to the main QuNex repo."
+        geho "Note: --submodules flag set to the main Qu|Nex repo."
         echo ""
         QuNexSubModules="main"
         if [[ ${QuNexAddFiles} == "all" ]] && [[ ${QuNexGitCommand} == "push" ]]; then
@@ -1063,7 +1063,7 @@ function_gitqunex() {
     elif [[ ${QuNexSubModulesList} != "main*" ]] && [[ ${QuNexSubModulesList} != "all*" ]]; then
         QuNexSubModules=${QuNexSubModulesList}
         echo ""
-        geho "Note: --submodules flag set to selected QuNex repos: $QuNexSubModules"
+        geho "Note: --submodules flag set to selected Qu|Nex repos: $QuNexSubModules"
         echo ""
         if [[ ${QuNexAddFiles} != "all" ]] && [[ ${QuNexGitCommand} == "push" ]]; then
             if [[ `echo ${QuNexSubModules} | wc -w` != 1 ]]; then 
@@ -1091,7 +1091,7 @@ function_gitqunex() {
     # -- First run over specific modules
     for QuNexSubModule in ${QuNexSubModules}; do
         echo ""
-        geho "--- Running QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex submodule ${QuNexBranchPath}/${QuNexSubModule}."
+        geho "--- Running Qu|Nex git ${QuNexGitCommand} for ${QuNexBranch} on Qu|Nex submodule ${QuNexBranchPath}/${QuNexSubModule}."
         echo
         cd ${QuNexBranchPath}/${QuNexSubModule}
         # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
@@ -1115,13 +1115,13 @@ function_gitqunex() {
         fi
         function_gitqunexbranch
         echo ""
-        geho "--- Completed QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex submodule ${QuNexBranchPath}/${QuNexSubModule}."; echo ""; echo ""
+        geho "--- Completed Qu|Nex git ${QuNexGitCommand} for ${QuNexBranch} on Qu|Nex submodule ${QuNexBranchPath}/${QuNexSubModule}."; echo ""; echo ""
     done
     unset QuNexSubModule
 
     # -- Finish up with the main submodule after individual modules are committed
     echo ""
-    geho "--- Running QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex main repo in ${QuNexBranchPath}."
+    geho "--- Running Qu|Nex git ${QuNexGitCommand} for ${QuNexBranch} on Qu|Nex main repo in ${QuNexBranchPath}."
     echo
     cd ${QuNexBranchPath}
     function_gitqunexbranch > /dev/null 2>&1
@@ -1144,11 +1144,11 @@ function_gitqunex() {
     fi
     function_gitqunexbranch
     echo ""
-    geho "--- Completed QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex main repo in ${QuNexBranchPath}."; echo ""
+    geho "--- Completed Qu|Nex git ${QuNexGitCommand} for ${QuNexBranch} on Qu|Nex main repo in ${QuNexBranchPath}."; echo ""
 
     # -- Report final completion
     echo ""
-    geho "=============== Completed QuNex $QuNexGitCommand function ============== "
+    geho "=============== Completed Qu|Nex $QuNexGitCommand function ============== "
     echo ""
 
     # -- Reset submodules variable
@@ -1211,10 +1211,10 @@ fi
 
 QuNexEnvCheck=`source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envstatus | grep "ERROR"` > /dev/null 2>&1
 if [[ -z ${QuNexEnvCheck} ]]; then
-    geho " ---> QuNex environment set successfully!"
+    geho " ---> Qu|Nex environment set successfully!"
     echo ""
 else
-    reho "   --> ERROR in QuNex environment. Run 'qunex_envstatus' to check missing variables!"
+    reho "   --> ERROR in Qu|Nex environment. Run 'qunex_envstatus' to check missing variables!"
     echo ""
 fi
 
