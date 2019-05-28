@@ -1,16 +1,14 @@
 {
-  "name": "mnap-turnkey-hcp1-to-5-QC-uploadstudy-cleanup",
-  "label": "MNAP TURNKEY HCP1-5, QC & DATA CLEANUP WITH FULL STUDY UPLOAD",
-  "description": "Runs MNAP Turnkey hcp1-5 & QC w/ full study upload v0.12.1.BTRX",
+  "name": "qunex-turnkey-bids-initial-hcp1-5-QC-BOLDfc-uploadstudy-cleanup",
+  "label": "QUNEX BIDS-COMPLIANT TURNKEY INITIAL, HCP1-5, QC, BOLD FC & DATA CLEANUP WITH FULL STUDY UPLOAD",
+  "description": "Runs QuNex BIDS-compliant Turnkey initial, HCP1-5 & QC, BOLD fc w/ full study upload v0.12.1.BTRX",
   "version": "1.10",
   "schema-version": "1.0",
-  "info-url": "https://bitbucket.org/hidradev/mnaptools",
-  "image": "hub.blackthornprod.radiologics.com/mnap_suite:latest",
+  "info-url": "https://bitbucket.org/oriadev/qunex",
+  "image": "hub.blackthornprod.radiologics.com/qunex_suite:0_28_01",
   "type": "docker",
-  "index": null,
   "working-directory": "/output",
-  "command-line": "/opt/mnaptools/library/etc/cs-wrapper.sh #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #OVERWRITEPROJECTXNAT_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #XNAT_PROJECT# #SUBJECTID#",
-  "override-entrypoint": null,
+  "command-line": "/opt/qunex/library/etc/cs-wrapper.sh #BIDSFORMAT_ARG# #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #OVERWRITEPROJECTXNAT_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #XNAT_PROJECT# #SUBJECTID#",
   "mounts": [
     {
       "name": "in",
@@ -27,13 +25,27 @@
   "ports": {},
   "inputs": [
     {
+      "name": "bids_format",
+      "description": "Specify if files are in BIDS format",
+      "type": "string",
+      "matcher": null,
+      "default-value": "yes",
+      "required": true,
+      "replacement-key": "#BIDSFORMAT_ARG#",
+      "command-line-flag": "--bidsformat",
+      "command-line-separator": "=",
+      "true-value": null,
+      "false-value": null
+    },
+    {
       "name": "batch_parameters_filename",
-      "description": "Name of the batch parameters file. This file is expected to be present at the MNAP_PROC resource at the project level",
+      "description": "Name of the batch parameters file. This file is expected to be present at the QUNEX_PROC resource at the project level",
       "type": "string",
       "matcher": null,
       "default-value": "final_batch_parameters.txt",
       "required": true,
       "replacement-key": "#BATCH_PARAMETERS_FILENAME_ARG#",
+      "sensitive": null,
       "command-line-flag": "--batchfile",
       "command-line-separator": "=",
       "true-value": null,
@@ -41,12 +53,13 @@
     },
     {
       "name": "scan_mapping_filename",
-      "description": "Name of the scan mapping file. This file is expected to be present at the MNAP_PROC resource at the project level",
+      "description": "Name of the scan mapping file. This file is expected to be present at the QUNEX_PROC resource at the project level",
       "type": "string",
       "matcher": null,
       "default-value": "final_mapping.txt",
       "required": true,
       "replacement-key": "#SCAN_MAPPING_FILENAME_ARG#",
+      "sensitive": null,
       "command-line-flag": "--mappingfile",
       "command-line-separator": "=",
       "true-value": null,
@@ -60,6 +73,7 @@
       "default-value": null,
       "required": true,
       "replacement-key": "#ID#",
+      "sensitive": null,
       "command-line-flag": "--xnataccsessionid",
       "command-line-separator": "=",
       "true-value": null,
@@ -73,7 +87,8 @@
       "default-value": null,
       "required": true,
       "replacement-key": "#LABEL#",
-      "command-line-flag": "--xnatsessionlabels",
+      "sensitive": null,
+      "command-line-flag": "--xnatsessionlabel",
       "command-line-separator": "=",
       "true-value": null,
       "false-value": null
@@ -86,6 +101,7 @@
       "default-value": null,
       "required": true,
       "replacement-key": "#XNAT_PROJECT#",
+      "sensitive": null,
       "command-line-flag": "--xnatprojectid",
       "command-line-separator": "=",
       "true-value": null,
@@ -99,6 +115,7 @@
       "default-value": null,
       "required": true,
       "replacement-key": "#SUBJECTID#",
+      "sensitive": null,
       "command-line-flag": "--xnatsubjectid",
       "command-line-separator": "=",
       "true-value": null,
@@ -106,12 +123,13 @@
     },
     {
       "name": "overwritestep",
-      "description": "Flag to decide if a specific step is to be overwritten by mnap scripts",
+      "description": "Flag to decide if a specific step is to be overwritten by qunex scripts",
       "type": "string",
       "matcher": null,
-      "default-value": "no",
+      "default-value": "yes",
       "required": true,
       "replacement-key": "#OVERWRITESTEP_ARG#",
+      "sensitive": null,
       "command-line-flag": "--overwritestep",
       "command-line-separator": "=",
       "true-value": null,
@@ -125,6 +143,7 @@
       "default-value": "yes",
       "required": true,
       "replacement-key": "#CLEANUP_ARG#",
+      "sensitive": null,
       "command-line-flag": "--cleanup",
       "command-line-separator": "=",
       "true-value": null,
@@ -135,9 +154,10 @@
       "description": "Steps to execute",
       "type": "string",
       "matcher": null,
-      "default-value": "hcp1,hcp2,hcp3,QCPreprocT1w,QCPreprocT2w,QCPreprocMyelin,hcp4,hcp5,QCPreprocBOLD,mapHCPData",
+      "default-value": "createStudy,mapRawData,getHCPReady,mapHCPFiles,hcp1,hcp2,hcp3,QCPreprocT1w,QCPreprocT2w,QCPreprocMyelin,hcp4,hcp5,QCPreprocBOLD,mapHCPData,createBOLDBrainMasks,computeBOLDStats,createStatsReport,extractNuisanceSignal,preprocessBold,BOLDParcellation,computeBOLDfcSeed,computeBOLDfcGBC",
       "required": true,
       "replacement-key": "#TURNKEYSTEPS_ARG#",
+      "sensitive": null,
       "command-line-flag": "--turnkeysteps",
       "command-line-separator": "=",
       "true-value": null,
@@ -148,9 +168,10 @@
       "description": "Flag to decide if the entire XNAT project is to be deleted before start",
       "type": "string",
       "matcher": null,
-      "default-value": "no",
+      "default-value": null,
       "required": true,
       "replacement-key": "#OVERWRITEPROJECTXNAT_ARG#",
+      "sensitive": null,
       "command-line-flag": "--overwriteprojectxnat",
       "command-line-separator": "=",
       "true-value": null,
@@ -159,7 +180,7 @@
   ],
   "outputs": [
     {
-      "name": "mnap_study",
+      "name": "qunex_study",
       "description": null,
       "required": false,
       "mount": "out",
@@ -177,9 +198,9 @@
   ],
   "xnat": [
     {
-      "name": "mnap-hcp1-to-5-QC",
+      "name": "qunex-bids-init-to-hcp5-QC-BOLDfc",
       "label": null,
-      "description": "Execute MNAP Turnkey hcp1-5, QC and mapHCPData with full study upload and data cleanup, depends on competed initial steps",
+      "description": "Execute QuNex BIDS-compliant Turnkey initial, hcp1-5 with QC, BOLD fc with full study upload and data cleanup",
       "contexts": [
         "xnat:imageSessionData"
       ],
@@ -192,6 +213,7 @@
           "default-value": null,
           "required": true,
           "replacement-key": null,
+          "sensitive": null,
           "provides-value-for-command-input": null,
           "provides-files-for-command-mount": "in",
           "via-setup-command": null,
@@ -202,12 +224,13 @@
       "derived-inputs": [
         {
           "name": "id",
-          "description": "Session Accession ID. Used as MNAP id variable.",
+          "description": "Session Accession ID. Used as QuNex id variable.",
           "type": "string",
           "matcher": null,
           "default-value": null,
           "required": true,
           "replacement-key": null,
+          "sensitive": null,
           "provides-value-for-command-input": "session_id",
           "provides-files-for-command-mount": null,
           "user-settable": null,
@@ -218,12 +241,13 @@
         },
         {
           "name": "label",
-          "description": "Session label. Used as MNAP subject identifier.",
+          "description": "Session label. Used as QuNex subject identifier.",
           "type": "string",
           "matcher": null,
           "default-value": null,
           "required": true,
           "replacement-key": null,
+          "sensitive": null,
           "provides-value-for-command-input": "session_label",
           "provides-files-for-command-mount": null,
           "user-settable": null,
@@ -240,6 +264,7 @@
           "default-value": null,
           "required": true,
           "replacement-key": null,
+          "sensitive": null,
           "provides-value-for-command-input": "session_project",
           "provides-files-for-command-mount": null,
           "user-settable": null,
@@ -256,6 +281,7 @@
           "default-value": null,
           "required": true,
           "replacement-key": null,
+          "sensitive": null,
           "provides-value-for-command-input": "session_subject",
           "provides-files-for-command-mount": null,
           "user-settable": null,
@@ -268,11 +294,11 @@
       "output-handlers": [
         {
           "name": "output-resource-study",
-          "accepts-command-output": "mnap_study",
+          "accepts-command-output": "qunex_study",
           "via-wrapup-command": null,
           "as-a-child-of": "session",
           "type": "Resource",
-          "label": "mnap_study"
+          "label": "qunex_study"
         },
         {
           "name": "output-resource-qc",
@@ -285,7 +311,5 @@
       ]
     }
   ],
-  "reserve-memory": 15000,
-  "limit-memory": null,
-  "limit-cpu": null
+  "reserve-memory": 15000
 }

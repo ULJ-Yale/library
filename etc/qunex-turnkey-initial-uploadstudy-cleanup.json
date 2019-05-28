@@ -1,15 +1,15 @@
 {
-  "name": "mnap-turnkey-hcp1-uploadstudy-cleanup",
-  "label": "MNAP TURNKEY HCP1 & DATA CLEANUP WITH FULL STUDY UPLOAD",
-  "description": "Runs MNAP Turnkey hcp1 w/ full study upload v0.12.1.BTRX",
+  "name": "qunex-turnkey-initial-uploadstudy-cleanup",
+  "label": "QUNEX TURNKEY INITIAL & DATA CLEANUP WITH FULL STUDY UPLOAD",
+  "description": "Runs QuNex Turnkey initial w/ full study upload and cleanup v0.12.1.BTRX",
   "version": "1.10",
   "schema-version": "1.0",
-  "info-url": "https://bitbucket.org/hidradev/mnaptools",
-  "image": "hub.blackthornprod.radiologics.com/mnap_suite:latest",
+  "info-url": "https://bitbucket.org/oriadev/qunex",
+  "image": "hub.blackthornprod.radiologics.com/qunex_suite:latest",
   "type": "docker",
   "index": null,
   "working-directory": "/output",
-  "command-line": "/opt/mnaptools/library/etc/cs-wrapper.sh #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #OVERWRITEPROJECTXNAT_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #XNAT_PROJECT# #SUBJECTID#",
+  "command-line": "/opt/qunex/library/etc/cs-wrapper.sh #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #OVERWRITEPROJECTXNAT_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #XNAT_PROJECT# #SUBJECTID#",
   "override-entrypoint": null,
   "mounts": [
     {
@@ -28,7 +28,7 @@
   "inputs": [
     {
       "name": "batch_parameters_filename",
-      "description": "Name of the batch parameters file. This file is expected to be present at the MNAP_PROC resource at the project level",
+      "description": "Name of the batch parameters file. This file is expected to be present at the QUNEX_PROC resource at the project level",
       "type": "string",
       "matcher": null,
       "default-value": "final_batch_parameters.txt",
@@ -41,7 +41,7 @@
     },
     {
       "name": "scan_mapping_filename",
-      "description": "Name of the scan mapping file. This file is expected to be present at the MNAP_PROC resource at the project level",
+      "description": "Name of the scan mapping file. This file is expected to be present at the QUNEX_PROC resource at the project level",
       "type": "string",
       "matcher": null,
       "default-value": "final_mapping.txt",
@@ -106,7 +106,7 @@
     },
     {
       "name": "overwritestep",
-      "description": "Flag to decide if a specific step is to be overwritten by mnap scripts",
+      "description": "Flag to decide if a specific step is to be overwritten by QuNex scripts",
       "type": "string",
       "matcher": null,
       "default-value": "yes",
@@ -135,7 +135,7 @@
       "description": "Steps to execute",
       "type": "string",
       "matcher": null,
-      "default-value": "hcp1",
+      "default-value": "createStudy,mapRawData,organizeDicom,getHCPReady,mapHCPFiles",
       "required": true,
       "replacement-key": "#TURNKEYSTEPS_ARG#",
       "command-line-flag": "--turnkeysteps",
@@ -148,7 +148,7 @@
       "description": "Flag to decide if the entire XNAT project is to be deleted before start",
       "type": "string",
       "matcher": null,
-      "default-value": "no",
+      "default-value": "yes",
       "required": true,
       "replacement-key": "#OVERWRITEPROJECTXNAT_ARG#",
       "command-line-flag": "--overwriteprojectxnat",
@@ -159,7 +159,7 @@
   ],
   "outputs": [
     {
-      "name": "mnap_study",
+      "name": "qunex_study",
       "description": null,
       "required": false,
       "mount": "out",
@@ -169,9 +169,9 @@
   ],
   "xnat": [
     {
-      "name": "mnap-hcp1",
+      "name": "qunex-init",
       "label": null,
-      "description": "Execute MNAP Turnkey hcp1 with full study upload and data cleanup, depends on initial being completed",
+      "description": "Execute QuNex Turnkey initial with full study upload and data cleanup",
       "contexts": [
         "xnat:imageSessionData"
       ],
@@ -194,7 +194,7 @@
       "derived-inputs": [
         {
           "name": "id",
-          "description": "Session Accession ID. Used as MNAP id variable.",
+          "description": "Session Accession ID. Used as QuNex id variable.",
           "type": "string",
           "matcher": null,
           "default-value": null,
@@ -210,7 +210,7 @@
         },
         {
           "name": "label",
-          "description": "Session label. Used as MNAP subject identifier.",
+          "description": "Session label. Used as QuNex subject identifier.",
           "type": "string",
           "matcher": null,
           "default-value": null,
@@ -260,11 +260,11 @@
       "output-handlers": [
         {
           "name": "output-resource-study",
-          "accepts-command-output": "mnap_study",
+          "accepts-command-output": "qunex_study",
           "via-wrapup-command": null,
           "as-a-child-of": "session",
           "type": "Resource",
-          "label": "mnap_study"
+          "label": "qunex_study"
         }
       ]
     }

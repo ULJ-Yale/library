@@ -122,10 +122,10 @@ usage() {
     echo ""
     echo "  TOOLS                              --> The base folder for the dependency installation "
     echo "  │ "
-    echo "  ├── qunex                          --> Env. Variable => QuNexREPO -- All Qu|Nex Suite repositories (https://bitbucket.org/hidradev/qunextools) "
+    echo "  ├── qunex                          --> Env. Variable => QUNEXREPO -- All Qu|Nex Suite repositories (https://bitbucket.org/hidradev/qunextools) "
     echo "  │ "
     echo "  ├── env                             --> conda environments with python packages"
-    echo "  │   └── qunex                        --> Env. Variable => QuNexENV (python2.7 versions of the required packages)"
+    echo "  │   └── qunex                        --> Env. Variable => QUNEXENV (python2.7 versions of the required packages)"
     echo "  │ "
     echo "  ├── HCP                             --> Human Connectome Tools Folder "
     echo "  │   ├── Pipelines                   --> Human Connectome Pipelines Folder (https://github.com/Washington-University/HCPpipelines) | Env. Variable => HCPPIPEDIR "
@@ -196,7 +196,7 @@ fi
 #  Environment clear and check functions
 # ------------------------------------------------------------------------------
 
-ENVVARIABLES='PATH MATLABPATH PYTHONPATH QuNexVer TOOLS QuNexREPO QuNexPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR MATLABDIR MATLABBINDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR RDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR QuNexMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR USEOCTAVE QuNexENV CONDADIR MSMBINDIR MSMCONFIGDIR'
+ENVVARIABLES='PATH MATLABPATH PYTHONPATH QUNEXVer TOOLS QUNEXREPO QUNEXPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR MATLABDIR MATLABBINDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR RDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR QUNEXMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR USEOCTAVE QUNEXENV CONDADIR MSMBINDIR MSMCONFIGDIR'
 export ENVVARIABLES
 
 # -- Check if inside the container and reset the environment on first setup
@@ -220,9 +220,9 @@ if [[ -e /opt/.container ]]; then
         fi
 
         # --- This is an environmental variable that if set should hold a path to a bash script that contains the settings the user wants to make that are different from the defaults.
-        if [[ ! -z "$QuNexCONTAINERENV" ]]; then    
-            echo "--> QuNexCONTAINERENV set: sourcing $QuNexCONTAINERENV"
-            . $QuNexCONTAINERENV
+        if [[ ! -z "$QUNEXCONTAINERENV" ]]; then    
+            echo "--> QUNEXCONTAINERENV set: sourcing $QUNEXCONTAINERENV"
+            . $QUNEXCONTAINERENV
         fi
 
         # --- Check for presence of set con_<VariableName>. If present <VariableName> is set to con_<VariableName>
@@ -296,15 +296,15 @@ fi
 # -- Set up prompt
 # ------------------------------------------------------------------------------
 
-PS1="\[\e[0;36m\][QuNex \W]\$\[\e[0m\] "
-PROMPT_COMMAND='echo -ne "\033]0;QuNex: ${PWD}\007"'
+PS1="\[\e[0;36m\][Qu|Nex \W]\$\[\e[0m\] "
+PROMPT_COMMAND='echo -ne "\033]0;Qu|Nex: ${PWD}\007"'
 
 # ------------------------------------------------------------------------------
-# -- QuNex - General Code
+# -- Qu|Nex - General Code
 # ------------------------------------------------------------------------------
 
-if [ -z ${QuNexREPO} ]; then
-    QuNexREPO="qunex"
+if [ -z ${QUNEXREPO} ]; then
+    QUNEXREPO="qunex"
 fi
 
 # ---- changed to work with new clone/branches setup
@@ -313,15 +313,15 @@ if [ -e ~/qunexinit.sh ]; then
     source ~/qunexinit.sh
 fi
 
-QuNexPATH=${TOOLS}/${QuNexREPO}
-QuNexVer=`cat ${TOOLS}/${QuNexREPO}/VERSION.md`
-export QuNexPATH QuNexREPO QuNexVer
+QUNEXPATH=${TOOLS}/${QUNEXREPO}
+QuNexVer=`cat ${TOOLS}/${QUNEXREPO}/VERSION.md`
+export QUNEXPATH QUNEXREPO QuNexVer
 
 if [ -e ~/qunexinit.sh ]; then
     echo ""
-    reho " --- NOTE: QuNex is set by your ~/qunexinit.sh file! ----"
+    reho " --- NOTE: Qu|Nex is set by your ~/qunexinit.sh file! ----"
     echo ""
-    reho " ---> QuNex path is set to: ${QuNexPATH} "
+    reho " ---> Qu|Nex path is set to: ${QUNEXPATH} "
     echo ""
 fi
 
@@ -351,7 +351,7 @@ if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/HCP/Pipelines"; export HCPP
 if [[ -z ${FMRIPREPDIR} ]]; then FMRIPREPDIR="${TOOLS}/fmriprep/fmriprep-latest"; export FMRIPREPDIR; fi
 if [[ -z ${MATLABDIR} ]]; then MATLABDIR="${TOOLS}/matlab/matlab-latest"; export MATLABDIR; fi
 if [[ -z ${GRADUNWARPDIR} ]]; then GRADUNWARPDIR="${TOOLS}/gradunwarp/gradunwarp-latest"; export GRADUNWARPDIR; fi
-if [[ -z ${QuNexENV} ]]; then QuNexENV="${TOOLS}/env/qunex"; export QuNexENV; fi
+if [[ -z ${QUNEXENV} ]]; then QUNEXENV="${TOOLS}/env/qunex"; export QUNEXENV; fi
 if [[ -z ${CONDADIR} ]]; then CONDADIR="${TOOLS}/miniconda/miniconda-latest"; export CONDADIR; fi
 if [[ -z ${RDIR} ]]; then RDIR="${TOOLS}/R/R-latest"; export RDIR; fi
 if [[ -z ${USEOCTAVE} ]]; then USEOCTAVE="FALSE"; export USEOCTAVE; fi
@@ -367,12 +367,12 @@ export CONDABIN PATH
 source deactivate 2> /dev/null
 
 # Activate conda environment
-source activate $QuNexENV 2> /dev/null
+source activate $QUNEXENV 2> /dev/null
 
 
 # -- Checks for version
 showVersion() {
-    QuNexVer=`cat ${TOOLS}/${QuNexREPO}/VERSION.md`
+    QuNexVer=`cat ${TOOLS}/${QUNEXREPO}/VERSION.md`
     echo ""
     geho " Loading Quantitative Neuroimaging Environment & ToolboX (Qu|Nex) Version: v${QuNexVer}"
 }
@@ -460,9 +460,9 @@ if [ "$USEOCTAVE" == "TRUE" ]; then
          export OCTAVEDIR
          export OCTAVEBINDIR
          cyaneho " ---> Setting up Octave "; echo ""
-         QuNexMCOMMAND='octave -q --no-init-file --eval'
+         QUNEXMCOMMAND='octave -q --no-init-file --eval'
          if [ ! -e ~/.octaverc ]; then
-             cp ${QuNexPATH}/library/.octaverc ~/.octaverc
+             cp ${QUNEXPATH}/library/.octaverc ~/.octaverc
          fi
          export LD_LIBRARY_PATH=/usr/lib64/hdf5/:LD_LIBRARY_PATH > /dev/null 2>&1
          if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-latest-o"; fi
@@ -473,12 +473,12 @@ else
     # else
          
          cyaneho " ---> Setting up Matlab "; echo ""
-         QuNexMCOMMAND='matlab -nodisplay -nosplash -r'
+         QUNEXMCOMMAND='matlab -nodisplay -nosplash -r'
          if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-latest-m"; fi
     # fi
 fi
 # -- Use the following command to run .m code in Matlab
-export QuNexMCOMMAND
+export QUNEXMCOMMAND
 
 # ------------------------------------------------------------------------------
 #  path to additional libraries
@@ -575,21 +575,21 @@ export RDIR PATH
 # -- Setup overall Qu|Nex paths
 # ------------------------------------------------------------------------------
 
-QuNexCONNPATH=$QuNexPATH/connector
-PATH=${QuNexCONNPATH}:${PATH}
-export QuNexCONNPATH PATH
-PATH=$QuNexPATH/connector/functions:$PATH
-export QuNexFUNCTIONS=${QuNexCONNPATH}/functions
-MATLABPATH=$QuNexPATH/connector:$MATLABPATH
+QUNEXCONNPATH=$QUNEXPATH/connector
+PATH=${QUNEXCONNPATH}:${PATH}
+export QUNEXCONNPATH PATH
+PATH=$QUNEXPATH/connector/functions:$PATH
+export QUNEXFUNCTIONS=${QUNEXCONNPATH}/functions
+MATLABPATH=$QUNEXPATH/connector:$MATLABPATH
 export MATLABPATH
 
-HCPATLAS=$QuNexPATH/library/data/atlases/HCP
+HCPATLAS=$QUNEXPATH/library/data/atlases/HCP
 PATH=${HCPATLAS}:${PATH}
 export HCPATLAS PATH
 MATLABPATH=$HCPATLAS:$MATLABPATH
 export MATLABPATH
 
-TemplateFolder=$QuNexPATH/library/data/
+TemplateFolder=$QUNEXPATH/library/data/
 PATH=${TemplateFolder}:${PATH}
 export TemplateFolder PATH
 MATLABPATH=$TemplateFolder:$MATLABPATH
@@ -597,28 +597,28 @@ export MATLABPATH
 
 # -- Define submodules, but omit hcpextendedpull to avoid conflicts
 unset QuNexSubModules
-QuNexSubModules=`cd $QuNexPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+QuNexSubModules=`cd $QUNEXPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
 
-#alias qunex='bash ${TOOLS}/${QuNexREPO}/connector/qunex.sh'
-alias qunex_envset='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_environment.sh'
-alias qunex_environment_set='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_environment.sh'
+#alias qunex='bash ${TOOLS}/${QUNEXREPO}/connector/qunex.sh'
+alias qunex_envset='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_environment.sh'
+alias qunex_environment_set='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_environment.sh'
 
-alias qunex_envhelp='bash ${TOOLS}/${QuNexREPO}/library/environment/qunex_environment.sh --help'
-alias qunex_environment_help='bash ${TOOLS}/${QuNexREPO}/library/environment/qunex_environment.sh --help'
+alias qunex_envhelp='bash ${TOOLS}/${QUNEXREPO}/library/environment/qunex_environment.sh --help'
+alias qunex_environment_help='bash ${TOOLS}/${QUNEXREPO}/library/environment/qunex_environment.sh --help'
 
-alias qunex_envcheck='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envstatus'
-alias qunex_envstatus='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envstatus'
-alias qunex_envreport='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envstatus'
-alias qunex_environment_check='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envstatus'
-alias qunex_environment_status='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envstatus'
-alias qunex_environment_report='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envstatus'
+alias qunex_envcheck='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus'
+alias qunex_envstatus='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus'
+alias qunex_envreport='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus'
+alias qunex_environment_check='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus'
+alias qunex_environment_status='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus'
+alias qunex_environment_report='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus'
 
-alias qunex_envreset='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envclear'
-alias qunex_envclear='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envclear'
-alias qunex_envpurge='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envclear'
-alias qunex_environment_reset='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envclear'
-alias qunex_environment_clear='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envclear'
-alias qunex_environment_purge='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envclear'
+alias qunex_envreset='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envclear'
+alias qunex_envclear='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envclear'
+alias qunex_envpurge='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envclear'
+alias qunex_environment_reset='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envclear'
+alias qunex_environment_clear='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envclear'
+alias qunex_environment_purge='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envclear'
 
 # ------------------------------------------------------------------------------
 # -- Setup HCP Pipeline paths
@@ -627,10 +627,10 @@ alias qunex_environment_purge='source ${TOOLS}/${QuNexREPO}/library/environment/
 # -- Re-Set HCP Pipeline path to different version if needed 
 if [ -e ~/.qunexhcpe ];
     then
-    export HCPPIPEDIR=${TOOLS}/${QuNexREPO}/hcpextendedpull
+    export HCPPIPEDIR=${TOOLS}/${QUNEXREPO}/hcpextendedpull
     echo ""
-    reho " ===> NOTE: You are in QuNex HCP development mode!"
-    reho " ---> QuNex HCP path is set to: $HCPPIPEDIR"
+    reho " ===> NOTE: You are in Qu|Nex HCP development mode!"
+    reho " ---> Qu|Nex HCP path is set to: $HCPPIPEDIR"
     echo ""
 fi
 
@@ -651,9 +651,9 @@ export HCPPIPEDIR_dMRI=${HCPPIPEDIR}/DiffusionPreprocessing/scripts; PATH=${HCPP
 export HCPPIPEDIR_Global=${HCPPIPEDIR}/global/scripts; PATH=${HCPPIPEDIR_Global}:${PATH}; export PATH
 export HCPPIPEDIR_tfMRIAnalysis=${HCPPIPEDIR}/TaskfMRIAnalysis/scripts; PATH=${HCPPIPEDIR_tfMRIAnalysis}:${PATH}; export PATH
 export MSMBin=${HCPPIPEDIR}/MSMBinaries; PATH=${MSMBin}:${PATH}; export PATH
-export HCPPIPEDIR_dMRITract=${TOOLS}/${QuNexREPO}/connector/functions/DiffusionTractography/scripts; PATH=${HCPPIPEDIR_dMRITract}:${PATH}; export PATH
-export HCPPIPEDIR_dMRITracFull=${TOOLS}/${QuNexREPO}/connector/functions/DiffusionTractographyDense; PATH=${HCPPIPEDIR_dMRITracFull}:${PATH}; export PATH
-export HCPPIPEDIR_dMRILegacy=${TOOLS}/${QuNexREPO}/connector/functions; PATH=${HCPPIPEDIR_dMRILegacy}:${PATH}; export PATH
+export HCPPIPEDIR_dMRITract=${TOOLS}/${QUNEXREPO}/connector/functions/DiffusionTractography/scripts; PATH=${HCPPIPEDIR_dMRITract}:${PATH}; export PATH
+export HCPPIPEDIR_dMRITracFull=${TOOLS}/${QUNEXREPO}/connector/functions/DiffusionTractographyDense; PATH=${HCPPIPEDIR_dMRITracFull}:${PATH}; export PATH
+export HCPPIPEDIR_dMRILegacy=${TOOLS}/${QUNEXREPO}/connector/functions; PATH=${HCPPIPEDIR_dMRILegacy}:${PATH}; export PATH
 export AutoPtxFolder=${HCPPIPEDIR_dMRITracFull}/autoPtx_HCP_extended; PATH=${AutoPtxFolder}:${PATH}; export PATH
 export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries; PATH=${FSLGPUBinary}:${PATH}; export PATH
 export EDDYCUDADIR=${FSLGPUBinary}/eddy_cuda; PATH=${EDDYCUDADIR}:${PATH}; export PATH; eddy_cuda="eddy_cuda_wQC"; export eddy_cuda
@@ -684,7 +684,7 @@ export MATLABPATH
 export PATH
 
 # -- FIX ICA Dependencies Folder
-FIXDIR_DEPEND=${QuNexPATH}/library/etc/ICAFIXDependencies
+FIXDIR_DEPEND=${QUNEXPATH}/library/etc/ICAFIXDependencies
 export FIXDIR_DEPEND
 PATH=${FIXDIR_DEPEND}:${PATH}
 MATLABPATH=$FIXDIR_DEPEND:$MATLABPATH
@@ -700,7 +700,7 @@ export PATH
 #. ${FIXDIR_DEPEND}/ICAFIX_settings.sh > /dev/null 2>&1 
 
 # -- POST FIX ICA path
-POSTFIXICADIR=${TOOLS}/${QuNexREPO}/hcpmodified/PostFix
+POSTFIXICADIR=${TOOLS}/${QUNEXREPO}/hcpmodified/PostFix
 PATH=${POSTFIXICADIR}:${PATH}
 export POSTFIXICADIR PATH
 MATLABPATH=$POSTFIXICADIR:$MATLABPATH
@@ -711,13 +711,13 @@ export MATLABPATH
 # ------------------------------------------------------------------------------
 
 # -- Make sure gmri is executable
-chmod ugo+x $QuNexPATH/niutilities/gmri &> /dev/null
+chmod ugo+x $QUNEXPATH/niutilities/gmri &> /dev/null
 
 # -- Setup additional paths
-PATH=$QuNexPATH/connector:$PATH
-PATH=$QuNexPATH/niutilities:$PATH
-PATH=$QuNexPATH/library/bin:$PATH
-PATH=$QuNexPATH/nitools:$PATH
+PATH=$QUNEXPATH/connector:$PATH
+PATH=$QUNEXPATH/niutilities:$PATH
+PATH=$QUNEXPATH/library/bin:$PATH
+PATH=$QUNEXPATH/nitools:$PATH
 PATH=$TOOLS/bin:$PATH
 # PATH=$PYLIBDIR/gradunwarp:$PATH
 # PATH=$PYLIBDIR/gradunwarp/core:$PATH
@@ -744,10 +744,10 @@ PATH=$TOOLS/bin:$PATH
 #    PYTHONPATH=$TOOLS/env/qunex/lib/python2.7/site-packages/pydicom:$PYTHONPATH
 #    PYTHONPATH=$TOOLS/env/qunex/lib/python2.7/site-packages/gradunwarp:$PYTHONPATH
 #    PYTHONPATH=$TOOLS/env/qunex/lib/python2.7/site-packages/gradunwarp/core:$PYTHONPATH
-#    PYTHONPATH=$QuNexPATH:$PYTHONPATH
-#    PYTHONPATH=$QuNexPATH/connector:$PYTHONPATH
-#    PYTHONPATH=$QuNexPATH/niutilities:$PYTHONPATH
-#    PYTHONPATH=$QuNexPATH/matlab:$PYTHONPATH
+#    PYTHONPATH=$QUNEXPATH:$PYTHONPATH
+#    PYTHONPATH=$QUNEXPATH/connector:$PYTHONPATH
+#    PYTHONPATH=$QUNEXPATH/niutilities:$PYTHONPATH
+#    PYTHONPATH=$QUNEXPATH/matlab:$PYTHONPATH
 #    PYTHONPATH=$PYLIBDIR/bin:$PYTHONPATH
 #    PYTHONPATH=$PYLIBDIR/lib/python2.7/site-packages:$PYTHONPATH
 #    PYTHONPATH=$PYLIBDIR/lib64/python2.7/site-packages:$PYTHONPATH
@@ -766,10 +766,10 @@ PATH=$TOOLS/bin:$PATH
 # PYTHONPATH=/usr/local/bin/python2.7:$PYTHONPATH
 # PYTHONPATH=/usr/lib/python2.7/site-packages:$PYTHONPATH
 # PYTHONPATH=/usr/lib64/python2.7/site-packages:$PYTHONPATH
-# PYTHONPATH=$QuNexPATH:$PYTHONPATH
-# PYTHONPATH=$QuNexPATH/connector:$PYTHONPATH
-# PYTHONPATH=$QuNexPATH/niutilities:$PYTHONPATH
-# PYTHONPATH=$QuNexPA$TH/matlab:$PYTHONPATH
+# PYTHONPATH=$QUNEXPATH:$PYTHONPATH
+# PYTHONPATH=$QUNEXPATH/connector:$PYTHONPATH
+# PYTHONPATH=$QUNEXPATH/niutilities:$PYTHONPATH
+# PYTHONPATH=$QUNEXPA$TH/matlab:$PYTHONPATH
 # PYTHONPATH=$PYLIBDIR/pydicom:$PYTHONPATH
 # PYTHONPATH=$PYLIBDIR/gradunwarp:$PYTHONPATH
 # PYTHONPATH=$PYLIBDIR/gradunwarp/core:$PYTHONPATH
@@ -783,11 +783,11 @@ PATH=$TOOLS/bin:$PATH
 # export PYTHONPATH
 
 # -- Set and export Matlab paths
-MATLABPATH=$QuNexPATH/nitools/fcMRI:$MATLABPATH
-MATLABPATH=$QuNexPATH/nitools/fcMRI:$MATLABPATH
-MATLABPATH=$QuNexPATH/nitools/general:$MATLABPATH
-MATLABPATH=$QuNexPATH/nitools/gmri:$MATLABPATH
-MATLABPATH=$QuNexPATH/nitools/stats:$MATLABPATH
+MATLABPATH=$QUNEXPATH/nitools/fcMRI:$MATLABPATH
+MATLABPATH=$QUNEXPATH/nitools/fcMRI:$MATLABPATH
+MATLABPATH=$QUNEXPATH/nitools/general:$MATLABPATH
+MATLABPATH=$QUNEXPATH/nitools/gmri:$MATLABPATH
+MATLABPATH=$QUNEXPATH/nitools/stats:$MATLABPATH
 
 # ------------------------------------------------------------------------------
 # -- Path to additional dependencies
@@ -814,7 +814,7 @@ gitqunex_usage() {
     echo " --command=<git_command>                                            Specify git command: push or pull."
     echo " --add=<absolute_path_for_file_to_add_and_commit>                   Specify file to add with absolute path when 'push' is selected. Default []. "
     echo "                                                                    Note: If 'all' is specified then will run git add on entire repo."
-    echo "                                                                    e.g. $TOOLS/$QuNexREPO/connector/qunex.sh "
+    echo "                                                                    e.g. $TOOLS/$QUNEXREPO/connector/qunex.sh "
     echo " --branch=<branch_to_work_on>                                       Specify the branch name you want to pull or commit."
     echo " --branchpath=<absolute_path_to_folder_containing_qunex_suite>       This folder has to have the selected branch checked out."
     echo " --message=<commit_message>                                         Specify commit message if running commitqunex"
@@ -831,14 +831,14 @@ gitqunex_usage() {
     echo "gitqunex \ "
     echo "--command='pull' \ "
     echo "--branch='master' \ "
-    echo "--branchpath='$TOOLS/$QuNexREPO' \ "
+    echo "--branchpath='$TOOLS/$QUNEXREPO' \ "
     echo "--submodules='all' "
     echo ""
     echo ""
     echo "gitqunex \ "
     echo "--command='push' \ "
     echo "--branch='master' \ "
-    echo "--branchpath='$TOOLS/$QuNexREPO' \ "
+    echo "--branchpath='$TOOLS/$QUNEXREPO' \ "
     echo "--submodules='all' \ "
     echo "--add='files_to_add' \ "
     echo "--message='Committing change' "
@@ -848,7 +848,7 @@ gitqunex_usage() {
 function_gitqunexbranch() {
     # -- Check path
     if [[ -z ${QuNexBranchPath} ]]; then
-        cd $TOOLS/$QuNexREPO
+        cd $TOOLS/$QUNEXREPO
     else
         cd ${QuNexBranchPath}
     fi
@@ -918,16 +918,16 @@ function_gitqunexstatus() {
     unset QuNexBranchPath; unset QuNexSubModules; unset QuNexSubModule
     
     # -- Run it for the main module
-    cd ${TOOLS}/${QuNexREPO}
-    geho "          Qu|Nex Suite location: ${TOOLS}/${QuNexREPO}"
+    cd ${TOOLS}/${QUNEXREPO}
+    geho "          Qu|Nex Suite location: ${TOOLS}/${QUNEXREPO}"
     geho " ============================================================================"
     echo ""
     function_gitqunexbranch
     function_gitstatusreport
     
     # -- Then iterate over submodules
-    QuNexSubModules=`cd ${TOOLS}/${QuNexREPO}; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-    QuNexBranchPath="${QuNexPATH}"
+    QuNexSubModules=`cd ${TOOLS}/${QUNEXREPO}; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+    QuNexBranchPath="${QUNEXPATH}"
     for QuNexSubModule in ${QuNexSubModules}; do
         cd ${QuNexBranchPath}/${QuNexSubModule}
         function_gitqunexbranch
@@ -944,7 +944,7 @@ alias gitqunexstatus=function_gitqunexstatus
 
 function_gitqunex() {
     unset QuNexSubModules
-    QuNexSubModules=`cd $QuNexPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+    QuNexSubModules=`cd $QUNEXPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
     # -- Inputs
     unset QuNexBranch
     unset QuNexAddFiles
@@ -988,7 +988,7 @@ function_gitqunex() {
         if [[ -z ${QuNexAddFiles} ]]; then reho ""; reho "   Error: --add flag not defined. Run 'gitqunexstatus' and specify which files to add."; echo ""; gitqunex_usage; return 1; fi
     fi
 
-    # -- Perform checks that QuNex contains requested branch and that it is actively checked out
+    # -- Perform checks that Qu|Nex contains requested branch and that it is actively checked out
     cd ${QuNexBranchPath}
     echo ""
     mageho "  * Checking active branch for main Qu|Nex repo in $QuNexBranchPath..."
@@ -1041,7 +1041,7 @@ function_gitqunex() {
     if [ ${QuNexSubModulesList} == "all" ]; then
         # -- Reset submodules variable to all
         unset QuNexSubModulesList
-        QuNexSubModulesList=`cd $QuNexPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+        QuNexSubModulesList=`cd $QUNEXPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
         QuNexSubModules=${QuNexSubModulesList}
         if [[ ${QuNexAddFiles} != "all" ]] && [[ ${QuNexGitCommand} == "push" ]]; then
             reho "ERROR: Cannot specify all submodules and select files. Specify specific files for a given submodule or specify -add='all' "
@@ -1153,7 +1153,7 @@ function_gitqunex() {
 
     # -- Reset submodules variable
     unset QuNexSubModules
-    QuNexSubModules=`cd $QuNexPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+    QuNexSubModules=`cd $QUNEXPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
     unset QuNexBranch
     unset QuNexGitCommand
     unset QuNexBranchPath
@@ -1209,7 +1209,7 @@ if [[ ! -z `command -v nvcc` ]]; then
     #module load GPU/Cuda/${NVCCVer} &> /dev/null # Module setup if using a cluster
 fi
 
-QuNexEnvCheck=`source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envstatus | grep "ERROR"` > /dev/null 2>&1
+QuNexEnvCheck=`source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus | grep "ERROR"` > /dev/null 2>&1
 if [[ -z ${QuNexEnvCheck} ]]; then
     geho " ---> Qu|Nex environment set successfully!"
     echo ""
