@@ -1,36 +1,35 @@
-# README File for MNAP Library Utilities
+# README File for QuNex Library Repo
 
 
 Background
 ==========
 ---
 
-This is a `library` component of the MNAP suite that contains miscellaneous dependencies, 
+This is a `library` component of the QuNex suite that contains miscellaneous dependencies, 
 environment scripts, relevant data, parameter files, etc. It is required for proper
-MNAP Suite functionality.
+QuNex Suite functionality.
 
-The MNAP `library` are maintained by Alan Anticevic, [Anticevic Lab], Yale 
-University of Ljubljana in collaboration with Grega Repovs [Mind and Brain Lab], 
-University of Ljubljana.
+The QuNex `library` repo is co-developed and co-maintained by the [Mind and Brain Lab led by Grega Repovs](http://psy.ff.uni-lj.si/mblab/en) 
+and the [Anticevic Lab](http://anticeviclab.yale.edu/).
 
 Installation
 ===============================
 ---
 
-### See https://bitbucket.org/hidradev/mnaptools/src/master/README.md
+### See https://bitbucket.org/oriadev/qunex/src/master/README.md
 
 
 External dependencies
 =====================
 ---
-### See https://bitbucket.org/hidradev/mnaptools/src/master/README.md
+### See https://bitbucket.org/oriadev/qunex/src/master/README.md
 
 
 Usage and command documentation
 ===============================
 ---
 
-### See https://bitbucket.org/hidradev/mnaptools/src/master/README.md
+### See https://bitbucket.org/oriadev/qunex/src/master/README.md
 
 
 References
