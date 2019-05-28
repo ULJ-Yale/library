@@ -141,11 +141,11 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
     echo ""
     echo "                 QuNexVer : $QuNexVer";             if [[ -z $QuNexVer ]]; then EnvError="yes"; EnvErrorReport="QuNexVer"; fi
     echo "                    TOOLS : $TOOLS";                if [[ -z $TOOLS ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport TOOLS"; fi
-    echo "                QuNexREPO : $QuNexREPO";            if [[ -z $QuNexREPO ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport QuNexREPO"; fi
-    echo "                QuNexPATH : $QuNexPATH";            if [[ -z $QuNexPATH ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport QuNexPATH"; fi
-    echo "                 QuNexENV : $QuNexENV";             if [[ -z $QuNexENV ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport QuNexENV"; fi
+    echo "                QUNEXREPO : $QUNEXREPO";            if [[ -z $QUNEXREPO ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport QUNEXREPO"; fi
+    echo "                QUNEXPATH : $QUNEXPATH";            if [[ -z $QUNEXPATH ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport QUNEXPATH"; fi
+    echo "                 QUNEXENV : $QUNEXENV";             if [[ -z $QUNEXENV ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport QUNEXENV"; fi
     echo "           TemplateFolder : $TemplateFolder";       if [[ -z $TemplateFolder ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport TemplateFolder"; fi
-    echo "            QuNexMCOMMAND : $QuNexMCOMMAND";        if [[ -z $QuNexMCOMMAND ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport QuNexMCOMMAND"; fi
+    echo "            QUNEXMCOMMAND : $QUNEXMCOMMAND";        if [[ -z $QUNEXMCOMMAND ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport QUNEXMCOMMAND"; fi
     echo ""
     geho "   Core Dependencies Environment Variables"
     geho "----------------------------------------------"

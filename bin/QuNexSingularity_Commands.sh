@@ -5,5 +5,5 @@ TimeStamp=`date +%Y-%m-%d-%H-%M-%S`
 Output="qunex_singularity_test_${TimeStamp}.out"
 export Output
 source /opt/qunextools/library/environment/qunex_environment.sh
-bash ${QuNexPATH}/connector/qunex.sh >> ~/${Output}
-bash ${QuNexPATH}/connector/qunex.sh BOLDParcellation >> ~/${Output}
+bash ${QUNEXPATH}/connector/qunex.sh >> ~/${Output}
+bash ${QUNEXPATH}/connector/qunex.sh BOLDParcellation >> ~/${Output}

@@ -477,20 +477,20 @@ def main(args=None):
     """
     qunexContainer v0.1.0
 
-    qunexContaiiner is a self-standing command that can run QuNex commands 
-    against a Singularity or a Docker QuNex container. To run an QuNex command 
+    qunexContaiiner is a self-standing command that can run Qu|Nex commands 
+    against a Singularity or a Docker Qu|Nex container. To run an Qu|Nex command 
     against a container the basic call is:
 
     $ qunexContainer <qunex command> [parameters] --container="<a path to the Singularity image or a Docker container name>" [additional options]
     
-    `qunex command` is any command supported by QuNex. `parameters` are any
+    `qunex command` is any command supported by Qu|Nex. `parameters` are any
     parameters that should be passed to the qunex command. This part is the same
     as running:
 
     $ qunex <qunex command> [parameters]
 
-    from within a container or on a self-standing QuNex installation. For list of
-    commands and their parameters consult QuNex online or in-line documentation.
+    from within a container or on a self-standing Qu|Nex installation. For list of
+    commands and their parameters consult Qu|Nex online or in-line documentation.
 
     Additionally qunexContainer accepts the following parameters:
 
@@ -500,7 +500,7 @@ def main(args=None):
     --container ... specifies either the path to the Singularity container image 
                     or the name of the Docker container to be used. This 
                     parameter can be omitted if the value is specified in the 
-                    `QuNexCONIMAGE` environmental variable.
+                    `QUNEXCONIMAGE` environmental variable.
 
     Optional parameters:
     --------------------
@@ -513,12 +513,12 @@ def main(args=None):
                     container are to be used, they can be specified in a pipe
                     separated string formatted as:
                     "<variable>=><value>|<variable>:<value>"
-                    Note that only the variables recognized by the QuNex suite
+                    Note that only the variables recognized by the Qu|Nex suite
                     will be appropriately parsed and used in the container.
 
     --dockeropt ... A string that lists the additional options to be used when
                     running the Docker container. If the parameter is ommited, 
-                    the content of `QuNexDOCKEROPT` environment variable will
+                    the content of `QUNEXDOCKEROPT` environment variable will
                     be used. If neither is specified, the container will be 
                     run in a detached mode with the current folder mounted as 
                     `/data` by specifying the following options:
@@ -691,10 +691,10 @@ def main(args=None):
         exit()
 
     if image is None:
-        if "QuNexCONIMAGE" in os.environ:
-            image = os.environ['QuNexCONIMAGE']
+        if "QUNEXCONIMAGE" in os.environ:
+            image = os.environ['QUNEXCONIMAGE']
         else:
-            print("ERROR: No Singularity image or Docker container name specified either in the command line or as a QuNexCONIMAGE environment variable!")
+            print("ERROR: No Singularity image or Docker container name specified either in the command line or as a QUNEXCONIMAGE environment variable!")
             exit(1)
 
     # -- check for environment variables
@@ -708,8 +708,8 @@ def main(args=None):
     # -- check for docker options
 
     if dockeropt is None:
-        if "QuNexDOCKEROPT" in os.environ:
-            dockeropt = os.environ['QuNexDOCKEROPT']
+        if "QUNEXDOCKEROPT" in os.environ:
+            dockeropt = os.environ['QUNEXDOCKEROPT']
         else:
             dockeropt = "-d -v \"$(pwd)\":/data"
 
