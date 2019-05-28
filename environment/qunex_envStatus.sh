@@ -14,30 +14,30 @@
 #
 # ## PRODUCT
 #
-#  mnap_envStatus.sh
+#  qunex_envStatus.sh
 #
 # ## LICENSE
 #
-# * The mnap_envStatus.sh = the "Software"
-# * This Software conforms to the license outlined in the MNAP Suite:
-# * https://bitbucket.org/hidradev/mnaptools/src/master/LICENSE.md
+# * The qunex_envStatus.sh = the "Software"
+# * This Software conforms to the license outlined in the QuNex Suite:
+# * https://bitbucket.org/oriadev/qunex/src/master/LICENSE.md
 #
 # ## TODO
 #
 #
 # ## DESCRIPTION:
 #
-# * This a script designed to check MNAP suite environment setup
+# * This a script designed to check QuNex suite environment setup
 #
 # ## PREREQUISITE INSTALLED SOFTWARE
 #
-# * MNAP Suite
+# * QuNex Suite
 #
 # ## PREREQUISITE ENVIRONMENT VARIABLES
 #
 #    TOOLS=/<absolute_path_to_software_folder>
 #    export TOOLS
-#    source $TOOLS/library/environment/mnap_environment.sh
+#    source $TOOLS/library/environment/qunex_environment.sh
 #
 # ## PREREQUISITE PRIOR PROCESSING
 #
@@ -86,7 +86,7 @@ weho() {
 
 usage() {
     echo ""
-    echo "-- DESCRIPTION:  This a script designed to report status or clear the MNAP suite environment variables."
+    echo "-- DESCRIPTION:  This a script designed to report status or clear the QuNex suite environment variables."
     echo ""
     echo " --envstatus           Reports the status of all environment variables (also supports --envreport or --environment)"
     echo " --envclear            Clears all environment variables (also supports --envreset or --envpurge)"
@@ -97,7 +97,7 @@ usage() {
 
 main() {
 
-# -- Clear MNAP environment
+# -- Clear QuNex environment
 
 # -- Hard reset for the environment in the container manually
      #
@@ -109,7 +109,7 @@ main() {
 if [[ "$1" == "--envreset" ]] || [[ "$1" == "--envclear" ]] || [[ "$1" == "--envpurge" ]]; then
     unset $ENVVARIABLES
     echo ""
-    reho " ---> Requested a hard reset of the MNAP environment! "
+    reho " ---> Requested a hard reset of the QuNex environment! "
     echo ""
     for ENVVARIABLE in ${ENVVARIABLES}; do 
         reho " --> Unsetting ${ENVVARIABLE}"
@@ -124,28 +124,28 @@ if [[ "$1" == "--envreset" ]] || [[ "$1" == "--envclear" ]] || [[ "$1" == "--env
     echo ""
 fi
 
-# -- Check MNAP environment
+# -- Check QuNex environment
 
 if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--env" ]] || [[ "$1" == "--environment" ]]; then
     echo ""
     geho "--------------------------------------------------------------"
-    geho " MNAP Environment Status Report"
+    geho " QuNex Environment Status Report"
     geho "--------------------------------------------------------------"
     unset EnvErrorReport
     unset EnvError
     echo ""
     echo ""
     echo ""
-    geho "   MNAP General Environment Variables"
+    geho "   QuNex General Environment Variables"
     geho "----------------------------------------------"
     echo ""
-    echo "                  MNAPVer : $MNAPVer";              if [[ -z $MNAPVer ]]; then EnvError="yes"; EnvErrorReport="MNAPVer"; fi
+    echo "                  QuNexVer : $QuNexVer";              if [[ -z $QuNexVer ]]; then EnvError="yes"; EnvErrorReport="QuNexVer"; fi
     echo "                    TOOLS : $TOOLS";                if [[ -z $TOOLS ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport TOOLS"; fi
-    echo "                 MNAPREPO : $MNAPREPO";             if [[ -z $MNAPREPO ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MNAPREPO"; fi
-    echo "                 MNAPPATH : $MNAPPATH";             if [[ -z $MNAPPATH ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MNAPPATH"; fi
-    echo "                  MNAPENV : $MNAPENV";              if [[ -z $MNAPENV ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MNAPENV"; fi
+    echo "                 QuNexREPO : $QuNexREPO";             if [[ -z $QuNexREPO ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport QuNexREPO"; fi
+    echo "                 QuNexPATH : $QuNexPATH";             if [[ -z $QuNexPATH ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport QuNexPATH"; fi
+    echo "                  QuNexENV : $QuNexENV";              if [[ -z $QuNexENV ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport QuNexENV"; fi
     echo "           TemplateFolder : $TemplateFolder";       if [[ -z $TemplateFolder ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport TemplateFolder"; fi
-    echo "             MNAPMCOMMAND : $MNAPMCOMMAND";         if [[ -z $MNAPMCOMMAND ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MNAPMCOMMAND"; fi
+    echo "             QuNexMCOMMAND : $QuNexMCOMMAND";         if [[ -z $QuNexMCOMMAND ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport QuNexMCOMMAND"; fi
     echo ""
     geho "   Core Dependencies Environment Variables"
     geho "----------------------------------------------"
@@ -390,7 +390,7 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
         echo ""
     else
         echo ""
-        geho "=================== MNAP environment set successfully! ===================="
+        geho "=================== QuNex environment set successfully! ===================="
         echo ""
     fi
 fi

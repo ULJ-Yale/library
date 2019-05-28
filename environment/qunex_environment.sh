@@ -14,24 +14,24 @@
 #
 # ## PRODUCT
 #
-#  mnap_environment.sh
+#  qunex_environment.sh
 #
 # ## LICENSE
 #
-# * The mnap_environment.sh = the "Software"
-# * This Software conforms to the license outlined in the MNAP Suite:
-# * https://bitbucket.org/hidradev/mnaptools/src/master/LICENSE.md
+# * The qunex_environment.sh = the "Software"
+# * This Software conforms to the license outlined in the QuNex Suite:
+# * https://bitbucket.org/oriadev/qunex/src/master/LICENSE.md
 #
 # ## TODO
 #
 #
 # ## DESCRIPTION:
 #
-# * This is a general script developed as a front-end environment and path organization for the MNAP infrastructure
+# * This is a general script developed as a front-end environment and path organization for the QuNex infrastructure
 #
 # ## PREREQUISITE INSTALLED SOFTWARE
 #
-# * MNAP Suite
+# * QuNex Suite
 #
 # ## PREREQUISITE ENVIRONMENT VARIABLES
 #
@@ -39,7 +39,7 @@
 #
 #    TOOLS=/<absolute_path_to_software_folder>
 #    export TOOLS
-#    source $TOOLS/library/environment/mnap_environment.sh
+#    source $TOOLS/library/environment/qunex_environment.sh
 #
 # ## PREREQUISITE PRIOR PROCESSING
 #
@@ -104,28 +104,28 @@ usage() {
     echo ""
     echo "-- DESCRIPTION:"
     echo ""
-    echo "This script implements the global environment setup for the MNAP Suite."
+    echo "This script implements the global environment setup for the QuNex Suite."
     echo ""
     echo ""
     echo "    Configure the environment script by adding the following lines to the .bash_profile "
     echo ""
-    echo "    -->TOOLS=<path_to_folder_with_mnap_software> "
+    echo "    -->TOOLS=<path_to_folder_with_qunex_software> "
     echo "    -->export TOOLS "
-    echo "    -->source <path_to_folder_with_mnap_software>/library/environment/mnap_environment.sh "
+    echo "    -->source <path_to_folder_with_qunex_software>/library/environment/qunex_environment.sh "
     echo ""
     echo "    Permissions of this file need to be set to 770 "
     echo ""
     echo "-- REQUIRED DEPENDENCIES:"
     echo ""
-    echo " The MNAP Suite assumes a set default folder names for dependencies if undefined by user environment."
+    echo " The QuNex Suite assumes a set default folder names for dependencies if undefined by user environment."
     echo " These are defined relative to the ${TOOLS} folder which should be set as a global system variable."
     echo ""
     echo "  TOOLS                              --> The base folder for the dependency installation "
     echo "  │ "
-    echo "  ├── mnaptools                       --> Env. Variable => MNAPREPO -- All MNAP Suite repositories (https://bitbucket.org/hidradev/mnaptools) "
+    echo "  ├── qunex                          --> Env. Variable => QuNexREPO -- All QuNex Suite repositories (https://bitbucket.org/hidradev/qunextools) "
     echo "  │ "
     echo "  ├── env                             --> conda environments with python packages"
-    echo "  │   └── mnap                        --> Env. Variable => MNAPENV (python2.7 versions of the required packages)"
+    echo "  │   └── qunex                        --> Env. Variable => QuNexENV (python2.7 versions of the required packages)"
     echo "  │ "
     echo "  ├── HCP                             --> Human Connectome Tools Folder "
     echo "  │   ├── Pipelines                   --> Human Connectome Pipelines Folder (https://github.com/Washington-University/HCPpipelines) | Env. Variable => HCPPIPEDIR "
@@ -174,16 +174,16 @@ usage() {
     echo "  ├── R                               --> R Statistical computing environment"
     echo "  │   └── R-latest                    --> Env. Variable => RDIR "
     echo "  │ "
-    echo "  ├── pylib                           --> Env. Variable => PYLIBDIR      -- All MNAP python libraries and tools "
+    echo "  ├── pylib                           --> Env. Variable => PYLIBDIR      -- All QuNex python libraries and tools "
     echo "  ├── gradunwarp                      --> HCP version of gradunwarp (https://github.com/Washington-University/gradunwarp) "
     echo "  │   └── gradunwarp-latest           --> Env. Variable => GRADUNWARPDIR"
     echo "  │ "
     echo "  └── workbench/workbench-<VERSION>   Connectome Workbench (v1.0 or above; https://www.humanconnectome.org/software/connectome-workbench) "
     echo "      └── workbench-<VERSION>         Env. Variable = HCPWBDIR "
     echo ""
-    echo " These defaults can be redefined if the above paths are declared as global variables in the .bash_profile profile after loading the MNAP environment."
+    echo " These defaults can be redefined if the above paths are declared as global variables in the .bash_profile profile after loading the QuNex environment."
     echo ""
-    geho "  ==> For full environment report run 'mnap environment'"
+    geho "  ==> For full environment report run 'qunex environment'"
     echo ""
     exit 0
 }
@@ -196,7 +196,7 @@ fi
 #  Environment clear and check functions
 # ------------------------------------------------------------------------------
 
-ENVVARIABLES='PATH MATLABPATH PYTHONPATH MNAPVer TOOLS MNAPREPO MNAPPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR MATLABDIR MATLABBINDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR RDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR MNAPMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR USEOCTAVE MNAPENV CONDADIR MSMBINDIR MSMCONFIGDIR'
+ENVVARIABLES='PATH MATLABPATH PYTHONPATH QuNexVer TOOLS QuNexREPO QuNexPATH TemplateFolder FSL_FIXDIR POSTFIXICADIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR MATLABDIR MATLABBINDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR RDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR QuNexMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR USEOCTAVE QuNexENV CONDADIR MSMBINDIR MSMCONFIGDIR'
 export ENVVARIABLES
 
 # -- Check if inside the container and reset the environment on first setup
@@ -214,15 +214,15 @@ if [[ -e /opt/.container ]]; then
         # -- Check for specific settings a user might want:
 
         # --- This is a file that should reside in a user's home folder and it should contain the settings the user wants to make that are different from the defaults.
-        if [ -f ~/.mnap_container.rc ]; then
-            echo "--> sourcing  ~/.mnap_container.rc"
-            . ~/.mnap_container.rc
+        if [ -f ~/.qunex_container.rc ]; then
+            echo "--> sourcing  ~/.qunex_container.rc"
+            . ~/.qunex_container.rc
         fi
 
         # --- This is an environmental variable that if set should hold a path to a bash script that contains the settings the user wants to make that are different from the defaults.
-        if [[ ! -z "$MNAPCONTAINERENV" ]]; then    
-            echo "--> MNAPCONTAINERENV set: sourcing $MNAPCONTAINERENV"
-            . $MNAPCONTAINERENV
+        if [[ ! -z "$QuNexCONTAINERENV" ]]; then    
+            echo "--> QuNexCONTAINERENV set: sourcing $QuNexCONTAINERENV"
+            . $QuNexCONTAINERENV
         fi
 
         # --- Check for presence of set con_<VariableName>. If present <VariableName> is set to con_<VariableName>
@@ -243,7 +243,7 @@ if [[ -e /opt/.container ]]; then
         export FIRSTRUNDONE="TRUE"
     fi
 
-elif [[ -e ~/.mnapuseoctave ]]; then
+elif [[ -e ~/.qunexuseoctave ]]; then
     export USEOCTAVE="TRUE"
 fi
 
@@ -296,32 +296,32 @@ fi
 # -- Set up prompt
 # ------------------------------------------------------------------------------
 
-PS1="\[\e[0;36m\][MNAP \W]\$\[\e[0m\] "
-PROMPT_COMMAND='echo -ne "\033]0;MNAP: ${PWD}\007"'
+PS1="\[\e[0;36m\][QuNex \W]\$\[\e[0m\] "
+PROMPT_COMMAND='echo -ne "\033]0;QuNex: ${PWD}\007"'
 
 # ------------------------------------------------------------------------------
-# -- MNAP - General Code
+# -- QuNex - General Code
 # ------------------------------------------------------------------------------
 
-if [ -z ${MNAPREPO} ]; then
-    MNAPREPO="mnaptools"
+if [ -z ${QuNexREPO} ]; then
+    QuNexREPO="qunex"
 fi
 
 # ---- changed to work with new clone/branches setup
 
-if [ -e ~/mnapinit.sh ]; then
-    source ~/mnapinit.sh
+if [ -e ~/qunexinit.sh ]; then
+    source ~/qunexinit.sh
 fi
 
-MNAPPATH=${TOOLS}/${MNAPREPO}
-MNAPVer=`cat ${TOOLS}/${MNAPREPO}/VERSION.md`
-export MNAPPATH MNAPREPO MNAPVer
+QuNexPATH=${TOOLS}/${QuNexREPO}
+QuNexVer=`cat ${TOOLS}/${QuNexREPO}/VERSION.md`
+export QuNexPATH QuNexREPO QuNexVer
 
-if [ -e ~/mnapinit.sh ]; then
+if [ -e ~/qunexinit.sh ]; then
     echo ""
-    reho " --- NOTE: MNAP is set by your ~/mnapinit.sh file! ----"
+    reho " --- NOTE: QuNex is set by your ~/qunexinit.sh file! ----"
     echo ""
-    reho " ---> MNAP path is set to: ${MNAPPATH} "
+    reho " ---> QuNex path is set to: ${QuNexPATH} "
     echo ""
 fi
 
@@ -351,7 +351,7 @@ if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/HCP/Pipelines"; export HCPP
 if [[ -z ${FMRIPREPDIR} ]]; then FMRIPREPDIR="${TOOLS}/fmriprep/fmriprep-latest"; export FMRIPREPDIR; fi
 if [[ -z ${MATLABDIR} ]]; then MATLABDIR="${TOOLS}/matlab/matlab-latest"; export MATLABDIR; fi
 if [[ -z ${GRADUNWARPDIR} ]]; then GRADUNWARPDIR="${TOOLS}/gradunwarp/gradunwarp-latest"; export GRADUNWARPDIR; fi
-if [[ -z ${MNAPENV} ]]; then MNAPENV="${TOOLS}/env/mnap"; export MNAPENV; fi
+if [[ -z ${QuNexENV} ]]; then QuNexENV="${TOOLS}/env/qunex"; export QuNexENV; fi
 if [[ -z ${CONDADIR} ]]; then CONDADIR="${TOOLS}/miniconda/miniconda-latest"; export CONDADIR; fi
 if [[ -z ${RDIR} ]]; then RDIR="${TOOLS}/R/R-latest"; export RDIR; fi
 if [[ -z ${USEOCTAVE} ]]; then USEOCTAVE="FALSE"; export USEOCTAVE; fi
@@ -367,14 +367,14 @@ export CONDABIN PATH
 source deactivate 2> /dev/null
 
 # Activate conda environment
-source activate $MNAPENV 2> /dev/null
+source activate $QuNexENV 2> /dev/null
 
 
 # -- Checks for version
 showVersion() {
-    MNAPVer=`cat ${TOOLS}/${MNAPREPO}/VERSION.md`
+    QuNexVer=`cat ${TOOLS}/${QuNexREPO}/VERSION.md`
     echo ""
-    geho " Loading Multimodal Neuroimaging Analysis Platform (MNAP) Suite Version: v${MNAPVer}"
+    geho " Loading Quantitative Neuroimaging Environment & ToolboX (QuNex) Version: v${QuNexVer}"
 }
 
 # ------------------------------------------------------------------------------
@@ -387,15 +387,27 @@ geho " Logged in as User: $MyID                                                 
 geho " Node info: `hostname`                                                       "
 geho " OS: $OSInfo $OperatingSystem                                                "
 geho ""
-geho "                  ███╗   ███╗███╗   ██╗ █████╗ ██████╗                       "
-geho "                  ████╗ ████║████╗  ██║██╔══██╗██╔══██╗                      "
-geho "                  ██╔████╔██║██╔██╗ ██║███████║██████╔╝                      "
-geho "                  ██║╚██╔╝██║██║╚██╗██║██╔══██║██╔═══╝                       "
-geho "                  ██║ ╚═╝ ██║██║ ╚████║██║  ██║██║                           "
-geho "                  ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝                           "
 geho ""
-geho "                     DEVELOPED & MAINTAINED BY: "
+geho "        ██████\                  ║      ██\   ██\                    "
+geho "       ██  __██\                 ║      ███\  ██ |                   "
+geho "       ██ /  ██ |██\   ██\       ║      ████\ ██ | ██████\ ██\   ██\ "
+geho "       ██ |  ██ |██ |  ██ |      ║      ██ ██\██ |██  __██\\\\\██\ ██  |"
+geho "       ██ |  ██ |██ |  ██ |      ║      ██ \████ |████████ |\████  / "
+geho "       ██ ██\██ |██ |  ██ |      ║      ██ |\███ |██   ____|██  ██<  "
+geho "       \██████ / \██████  |      ║      ██ | \██ |\███████\██  /\██\ "
+geho "        \___███\  \______/       ║      \__|  \__| \_______\__/  \__|"
+geho "            \___|                ║                                   "
+# geho "                               ║                                             "
+# geho "            ▄▄▄▄▄███╗          ║  ███╗   ██╗                                 "
+# geho "            ████████║          ║  ███║   ██║ ██████╗ ██╗   ██╗               "
+# geho "            ██╔═══██║ ██╗  ██╗ ║  ████╗  ██║ ██▄▄▄█║  ╚██╗██╔╝               "
+# geho "            ██║ █ ██║ ██║  ██║ ║  ██╔██╗ ██║ ██════╝   ╚███═╝                "
+# geho "            ╚██████╔╝ ╚█████╔╝ ║  ██║ █████║ ██▄▄▄█╗ ▄██╔██▄▄╗               "
+# geho "             ╚═╗██╔╝   ╚════╝  ║  ╚═╝  ╚═══╝ ╚═════╝ ╚══╝ ╚══╝               "
+# geho "               ╚██╝            ║                                             "
 geho ""
+geho "                       DEVELOPED & MAINTAINED BY: "
+geho ""                                
 geho "                            Anticevic Lab                                    " 
 geho "                       MBLab led by Grega Repovs                             "
 geho ""
@@ -405,8 +417,8 @@ geho "Use of this software is subject to the terms and conditions defined by the
 geho " Yale University Copyright Policies:"
 geho "    http://ocr.yale.edu/faculty/policies/yale-university-copyright-policy    "
 geho " and the terms and conditions defined in the file 'LICENSE.md' which is      "
-geho " a part of the MNAP Suite source code package:"
-geho "    https://bitbucket.org/hidradev/mnaptools/src/master/LICENSE.md"
+geho " a part of the QuNex Suite source code package:"
+geho "    https://bitbucket.org/hidradev/qunextools/src/master/LICENSE.md"
 geho ""
 
 # ------------------------------------------------------------------------------
@@ -422,22 +434,22 @@ geho ""
 #     if [[ `module -t --redirect avail /Matlab` = *"matlab"* ]] || [[ `module -t --redirect avail /Matlab` = *"Matlab"* ]]; then LMODMATLAB="yes"; else LMODMATLAB="no"; fi > /dev/null 2>&1
 #     if [[ `module -t --redirect avail /Matlab` = *"octave"* ]] || [[ `module -t --redirect avail /Octave` = *"Octave"* ]]; then LMODOCTAVE="yes"; else LMODOCTAVE="no"; fi > /dev/null 2>&1
 #     # --- Matlab vs Octave
-#     if [ -f ~/.mnapuseoctave ] && [[ ${LMODOCTAVE} == "yes" ]]; then
+#     if [ -f ~/.qunexuseoctave ] && [[ ${LMODOCTAVE} == "yes" ]]; then
 #         module load Libs/netlib &> /dev/null
 #         module load Apps/Octave/4.2.1 &> /dev/null
 #         echo ""; cyaneho " ---> Selected to use Octave instead of Matlab! "
 #         OctaveTest="pass"
 #     fi
-#     if [ -f ~/.mnapuseoctave ] && [[ ${LMODOCTAVE} == "no" ]]; then
-#         echo ""; reho " ===> ERROR: .mnapuseoctave set but no Octave module is present on the system."; echo ""
+#     if [ -f ~/.qunexuseoctave ] && [[ ${LMODOCTAVE} == "no" ]]; then
+#         echo ""; reho " ===> ERROR: .qunexuseoctave set but no Octave module is present on the system."; echo ""
 #         OctaveTest="fail"
 #     fi
-#     if [ ! -f ~/.mnapuseoctave ] && [[ ${LMODMATLAB} == "yes" ]]; then
+#     if [ ! -f ~/.qunexuseoctave ] && [[ ${LMODMATLAB} == "yes" ]]; then
 #         module load Apps/Matlab/R2018a &> /dev/null
 #         echo ""; cyaneho " ---> Selected to use Matlab!"
 #         MatlabTest="pass"
 #     fi
-#     if [ ! -f ~/.mnapuseoctave ] && [[ ${LMODMATLAB} == "no" ]]; then
+#     if [ ! -f ~/.qunexuseoctave ] && [[ ${LMODMATLAB} == "no" ]]; then
 #         echo ""; reho " ===> ERROR: Matlab selected and Lmod found but Matlab module missing. Alert your SysAdmin"; echo ""
 #         MatlabTest="fail"
 #     fi
@@ -456,9 +468,9 @@ if [ "$USEOCTAVE" == "TRUE" ]; then
          export OCTAVEDIR
          export OCTAVEBINDIR
          cyaneho " ---> Setting up Octave "; echo ""
-         MNAPMCOMMAND='octave -q --no-init-file --eval'
+         QuNexMCOMMAND='octave -q --no-init-file --eval'
          if [ ! -e ~/.octaverc ]; then
-             cp ${MNAPPATH}/library/.octaverc ~/.octaverc
+             cp ${QuNexPATH}/library/.octaverc ~/.octaverc
          fi
          export LD_LIBRARY_PATH=/usr/lib64/hdf5/:LD_LIBRARY_PATH > /dev/null 2>&1
          if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-latest-o"; fi
@@ -469,12 +481,12 @@ else
     # else
          
          cyaneho " ---> Setting up Matlab "; echo ""
-         MNAPMCOMMAND='matlab -nodisplay -nosplash -r'
+         QuNexMCOMMAND='matlab -nodisplay -nosplash -r'
          if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-latest-m"; fi
     # fi
 fi
 # -- Use the following command to run .m code in Matlab
-export MNAPMCOMMAND
+export QuNexMCOMMAND
 
 # ------------------------------------------------------------------------------
 #  path to additional libraries
@@ -568,65 +580,65 @@ PATH=${RDIR}:${PATH}
 export RDIR PATH
 
 # ------------------------------------------------------------------------------
-# -- Setup overall MNAP paths
+# -- Setup overall QuNex paths
 # ------------------------------------------------------------------------------
 
-MNAPCONNPATH=$MNAPPATH/connector
-PATH=${MNAPCONNPATH}:${PATH}
-export MNAPCONNPATH PATH
-PATH=$MNAPPATH/connector/functions:$PATH
-export MNAPFUNCTIONS=${MNAPCONNPATH}/functions
-MATLABPATH=$MNAPPATH/connector:$MATLABPATH
+QuNexCONNPATH=$QuNexPATH/connector
+PATH=${QuNexCONNPATH}:${PATH}
+export QuNexCONNPATH PATH
+PATH=$QuNexPATH/connector/functions:$PATH
+export QuNexFUNCTIONS=${QuNexCONNPATH}/functions
+MATLABPATH=$QuNexPATH/connector:$MATLABPATH
 export MATLABPATH
 
-HCPATLAS=$MNAPPATH/library/data/atlases/HCP
+HCPATLAS=$QuNexPATH/library/data/atlases/HCP
 PATH=${HCPATLAS}:${PATH}
 export HCPATLAS PATH
 MATLABPATH=$HCPATLAS:$MATLABPATH
 export MATLABPATH
 
-TemplateFolder=$MNAPPATH/library/data/
+TemplateFolder=$QuNexPATH/library/data/
 PATH=${TemplateFolder}:${PATH}
 export TemplateFolder PATH
 MATLABPATH=$TemplateFolder:$MATLABPATH
 export MATLABPATH
 
 # -- Define submodules, but omit hcpextendedpull to avoid conflicts
-unset MNAPSubModules
-MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+unset QuNexSubModules
+QuNexSubModules=`cd $QuNexPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
 
-#alias mnap='bash ${TOOLS}/${MNAPREPO}/connector/mnap.sh'
-alias mnap_envset='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh'
-alias mnap_environment_set='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh'
+#alias qunex='bash ${TOOLS}/${QuNexREPO}/connector/qunex.sh'
+alias qunex_envset='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_environment.sh'
+alias qunex_environment_set='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_environment.sh'
 
-alias mnap_envhelp='bash ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh --help'
-alias mnap_environment_help='bash ${TOOLS}/${MNAPREPO}/library/environment/mnap_environment.sh --help'
+alias qunex_envhelp='bash ${TOOLS}/${QuNexREPO}/library/environment/qunex_environment.sh --help'
+alias qunex_environment_help='bash ${TOOLS}/${QuNexREPO}/library/environment/qunex_environment.sh --help'
 
-alias mnap_envcheck='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
-alias mnap_envstatus='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
-alias mnap_envreport='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
-alias mnap_environment_check='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
-alias mnap_environment_status='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
-alias mnap_environment_report='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus'
+alias qunex_envcheck='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envstatus'
+alias qunex_envstatus='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envstatus'
+alias qunex_envreport='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envstatus'
+alias qunex_environment_check='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envstatus'
+alias qunex_environment_status='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envstatus'
+alias qunex_environment_report='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envstatus'
 
-alias mnap_envreset='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
-alias mnap_envclear='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
-alias mnap_envpurge='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
-alias mnap_environment_reset='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
-alias mnap_environment_clear='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
-alias mnap_environment_purge='source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envclear'
+alias qunex_envreset='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envclear'
+alias qunex_envclear='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envclear'
+alias qunex_envpurge='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envclear'
+alias qunex_environment_reset='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envclear'
+alias qunex_environment_clear='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envclear'
+alias qunex_environment_purge='source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envclear'
 
 # ------------------------------------------------------------------------------
 # -- Setup HCP Pipeline paths
 # ------------------------------------------------------------------------------
 
 # -- Re-Set HCP Pipeline path to different version if needed 
-if [ -e ~/.mnaphcpe ];
+if [ -e ~/.qunexhcpe ];
     then
-    export HCPPIPEDIR=${TOOLS}/${MNAPREPO}/hcpextendedpull
+    export HCPPIPEDIR=${TOOLS}/${QuNexREPO}/hcpextendedpull
     echo ""
-    reho " ===> NOTE: You are in MNAP HCP development mode!"
-    reho " ---> MNAP HCP path is set to: $HCPPIPEDIR"
+    reho " ===> NOTE: You are in QuNex HCP development mode!"
+    reho " ---> QuNex HCP path is set to: $HCPPIPEDIR"
     echo ""
 fi
 
@@ -647,9 +659,9 @@ export HCPPIPEDIR_dMRI=${HCPPIPEDIR}/DiffusionPreprocessing/scripts; PATH=${HCPP
 export HCPPIPEDIR_Global=${HCPPIPEDIR}/global/scripts; PATH=${HCPPIPEDIR_Global}:${PATH}; export PATH
 export HCPPIPEDIR_tfMRIAnalysis=${HCPPIPEDIR}/TaskfMRIAnalysis/scripts; PATH=${HCPPIPEDIR_tfMRIAnalysis}:${PATH}; export PATH
 export MSMBin=${HCPPIPEDIR}/MSMBinaries; PATH=${MSMBin}:${PATH}; export PATH
-export HCPPIPEDIR_dMRITract=${TOOLS}/${MNAPREPO}/connector/functions/DiffusionTractography/scripts; PATH=${HCPPIPEDIR_dMRITract}:${PATH}; export PATH
-export HCPPIPEDIR_dMRITracFull=${TOOLS}/${MNAPREPO}/connector/functions/DiffusionTractographyDense; PATH=${HCPPIPEDIR_dMRITracFull}:${PATH}; export PATH
-export HCPPIPEDIR_dMRILegacy=${TOOLS}/${MNAPREPO}/connector/functions; PATH=${HCPPIPEDIR_dMRILegacy}:${PATH}; export PATH
+export HCPPIPEDIR_dMRITract=${TOOLS}/${QuNexREPO}/connector/functions/DiffusionTractography/scripts; PATH=${HCPPIPEDIR_dMRITract}:${PATH}; export PATH
+export HCPPIPEDIR_dMRITracFull=${TOOLS}/${QuNexREPO}/connector/functions/DiffusionTractographyDense; PATH=${HCPPIPEDIR_dMRITracFull}:${PATH}; export PATH
+export HCPPIPEDIR_dMRILegacy=${TOOLS}/${QuNexREPO}/connector/functions; PATH=${HCPPIPEDIR_dMRILegacy}:${PATH}; export PATH
 export AutoPtxFolder=${HCPPIPEDIR_dMRITracFull}/autoPtx_HCP_extended; PATH=${AutoPtxFolder}:${PATH}; export PATH
 export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries; PATH=${FSLGPUBinary}:${PATH}; export PATH
 export EDDYCUDADIR=${FSLGPUBinary}/eddy_cuda; PATH=${EDDYCUDADIR}:${PATH}; export PATH; eddy_cuda="eddy_cuda_wQC"; export eddy_cuda
@@ -680,7 +692,7 @@ export MATLABPATH
 export PATH
 
 # -- FIX ICA Dependencies Folder
-FIXDIR_DEPEND=${MNAPPATH}/library/etc/ICAFIXDependencies
+FIXDIR_DEPEND=${QuNexPATH}/library/etc/ICAFIXDependencies
 export FIXDIR_DEPEND
 PATH=${FIXDIR_DEPEND}:${PATH}
 MATLABPATH=$FIXDIR_DEPEND:$MATLABPATH
@@ -696,24 +708,24 @@ export PATH
 #. ${FIXDIR_DEPEND}/ICAFIX_settings.sh > /dev/null 2>&1 
 
 # -- POST FIX ICA path
-POSTFIXICADIR=${TOOLS}/${MNAPREPO}/hcpmodified/PostFix
+POSTFIXICADIR=${TOOLS}/${QuNexREPO}/hcpmodified/PostFix
 PATH=${POSTFIXICADIR}:${PATH}
 export POSTFIXICADIR PATH
 MATLABPATH=$POSTFIXICADIR:$MATLABPATH
 export MATLABPATH
 
 # ------------------------------------------------------------------------------
-# -- MNAP - NIUtilities and Matlab Paths
+# -- QuNex - NIUtilities and Matlab Paths
 # ------------------------------------------------------------------------------
 
 # -- Make sure gmri is executable
-chmod ugo+x $MNAPPATH/niutilities/gmri &> /dev/null
+chmod ugo+x $QuNexPATH/niutilities/gmri &> /dev/null
 
 # -- Setup additional paths
-PATH=$MNAPPATH/connector:$PATH
-PATH=$MNAPPATH/niutilities:$PATH
-PATH=$MNAPPATH/library/bin:$PATH
-PATH=$MNAPPATH/nitools:$PATH
+PATH=$QuNexPATH/connector:$PATH
+PATH=$QuNexPATH/niutilities:$PATH
+PATH=$QuNexPATH/library/bin:$PATH
+PATH=$QuNexPATH/nitools:$PATH
 PATH=$TOOLS/bin:$PATH
 # PATH=$PYLIBDIR/gradunwarp:$PATH
 # PATH=$PYLIBDIR/gradunwarp/core:$PATH
@@ -733,22 +745,22 @@ PATH=$TOOLS/bin:$PATH
 #    PYTHONPATH=$TOOLS:$PYTHONPATH
 #    PYTHONPATH=$TOOLS/pylib:$PYTHONPATH
 #    PYTHONPATH=/usr/local/bin:$PYTHONPATH
-#    PYTHONPATH=$TOOLS/env/mnap/bin:$PYTHONPATH
+#    PYTHONPATH=$TOOLS/env/qunex/bin:$PYTHONPATH
 #    PYTHONPATH=$TOOLS/miniconda/miniconda-latest/pkgs:$PYTHONPATH
-#    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages:$PYTHONPATH
-#    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/nibabel/xmlutils.py:$PYTHONPATH
-#    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/pydicom:$PYTHONPATH
-#    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/gradunwarp:$PYTHONPATH
-#    PYTHONPATH=$TOOLS/env/mnap/lib/python2.7/site-packages/gradunwarp/core:$PYTHONPATH
-#    PYTHONPATH=$MNAPPATH:$PYTHONPATH
-#    PYTHONPATH=$MNAPPATH/connector:$PYTHONPATH
-#    PYTHONPATH=$MNAPPATH/niutilities:$PYTHONPATH
-#    PYTHONPATH=$MNAPPATH/matlab:$PYTHONPATH
+#    PYTHONPATH=$TOOLS/env/qunex/lib/python2.7/site-packages:$PYTHONPATH
+#    PYTHONPATH=$TOOLS/env/qunex/lib/python2.7/site-packages/nibabel/xmlutils.py:$PYTHONPATH
+#    PYTHONPATH=$TOOLS/env/qunex/lib/python2.7/site-packages/pydicom:$PYTHONPATH
+#    PYTHONPATH=$TOOLS/env/qunex/lib/python2.7/site-packages/gradunwarp:$PYTHONPATH
+#    PYTHONPATH=$TOOLS/env/qunex/lib/python2.7/site-packages/gradunwarp/core:$PYTHONPATH
+#    PYTHONPATH=$QuNexPATH:$PYTHONPATH
+#    PYTHONPATH=$QuNexPATH/connector:$PYTHONPATH
+#    PYTHONPATH=$QuNexPATH/niutilities:$PYTHONPATH
+#    PYTHONPATH=$QuNexPATH/matlab:$PYTHONPATH
 #    PYTHONPATH=$PYLIBDIR/bin:$PYTHONPATH
 #    PYTHONPATH=$PYLIBDIR/lib/python2.7/site-packages:$PYTHONPATH
 #    PYTHONPATH=$PYLIBDIR/lib64/python2.7/site-packages:$PYTHONPATH
 #    PYTHONPATH=$PYLIBDIR:$PYTHONPATH
-#    PATH=$TOOLS/env/mnap/bin:$PATH
+#    PATH=$TOOLS/env/qunex/bin:$PATH
 #fi
 
 #export PATH
@@ -762,10 +774,10 @@ PATH=$TOOLS/bin:$PATH
 # PYTHONPATH=/usr/local/bin/python2.7:$PYTHONPATH
 # PYTHONPATH=/usr/lib/python2.7/site-packages:$PYTHONPATH
 # PYTHONPATH=/usr/lib64/python2.7/site-packages:$PYTHONPATH
-# PYTHONPATH=$MNAPPATH:$PYTHONPATH
-# PYTHONPATH=$MNAPPATH/connector:$PYTHONPATH
-# PYTHONPATH=$MNAPPATH/niutilities:$PYTHONPATH
-# PYTHONPATH=$MNAPPA$TH/matlab:$PYTHONPATH
+# PYTHONPATH=$QuNexPATH:$PYTHONPATH
+# PYTHONPATH=$QuNexPATH/connector:$PYTHONPATH
+# PYTHONPATH=$QuNexPATH/niutilities:$PYTHONPATH
+# PYTHONPATH=$QuNexPA$TH/matlab:$PYTHONPATH
 # PYTHONPATH=$PYLIBDIR/pydicom:$PYTHONPATH
 # PYTHONPATH=$PYLIBDIR/gradunwarp:$PYTHONPATH
 # PYTHONPATH=$PYLIBDIR/gradunwarp/core:$PYTHONPATH
@@ -779,11 +791,11 @@ PATH=$TOOLS/bin:$PATH
 # export PYTHONPATH
 
 # -- Set and export Matlab paths
-MATLABPATH=$MNAPPATH/nitools/fcMRI:$MATLABPATH
-MATLABPATH=$MNAPPATH/nitools/fcMRI:$MATLABPATH
-MATLABPATH=$MNAPPATH/nitools/general:$MATLABPATH
-MATLABPATH=$MNAPPATH/nitools/gmri:$MATLABPATH
-MATLABPATH=$MNAPPATH/nitools/stats:$MATLABPATH
+MATLABPATH=$QuNexPATH/nitools/fcMRI:$MATLABPATH
+MATLABPATH=$QuNexPATH/nitools/fcMRI:$MATLABPATH
+MATLABPATH=$QuNexPATH/nitools/general:$MATLABPATH
+MATLABPATH=$QuNexPATH/nitools/gmri:$MATLABPATH
+MATLABPATH=$QuNexPATH/nitools/stats:$MATLABPATH
 
 # ------------------------------------------------------------------------------
 # -- Path to additional dependencies
@@ -792,72 +804,72 @@ MATLABPATH=$MNAPPATH/nitools/stats:$MATLABPATH
 # -- Define additional paths here as needed
 
 # ------------------------------------------------------------------------------
-#  MNAP Functions and git aliases for BitBucket commit and pull requests
+#  QuNex Functions and git aliases for BitBucket commit and pull requests
 # ------------------------------------------------------------------------------
 
-# -- gitmnap_usage function help
+# -- gitqunex_usage function help
 
-gitmnap_usage() {
+gitqunex_usage() {
     echo ""
-    echo " -- DESCRIPTION for gitmnap function:"
+    echo " -- DESCRIPTION for gitqunex function:"
     echo ""
-    echo "The MNAP Suite provides functionality for users with repo privileges to easily pull or commit & push changes via git."
+    echo "The QuNex Suite provides functionality for users with repo privileges to easily pull or commit & push changes via git."
     echo "This is done via two aliases that are setup as general environment variables: "
     echo ""
-    echo "    * gitmnap   --> Alias for the MNAP function that updates the MNAP Suite via git from the remote repo or pushes changes to remote repo."
+    echo "    * gitqunex   --> Alias for the QuNex function that updates the QuNex Suite via git from the remote repo or pushes changes to remote repo."
     echo ""
     echo ""
     echo " --command=<git_command>                                            Specify git command: push or pull."
     echo " --add=<absolute_path_for_file_to_add_and_commit>                   Specify file to add with absolute path when 'push' is selected. Default []. "
     echo "                                                                    Note: If 'all' is specified then will run git add on entire repo."
-    echo "                                                                    e.g. $TOOLS/$MNAPREPO/connector/mnap.sh "
+    echo "                                                                    e.g. $TOOLS/$QuNexREPO/connector/qunex.sh "
     echo " --branch=<branch_to_work_on>                                       Specify the branch name you want to pull or commit."
-    echo " --branchpath=<absolute_path_to_folder_containing_mnap_suite>       This folder has to have the selected branch checked out."
-    echo " --message=<commit_message>                                         Specify commit message if running commitmnap"
+    echo " --branchpath=<absolute_path_to_folder_containing_qunex_suite>       This folder has to have the selected branch checked out."
+    echo " --message=<commit_message>                                         Specify commit message if running commitqunex"
     echo " --submodules=<list_of_submodules>                                  Comma, space or pipe separated list of submodules to work on."
     echo "                                                                    'all'      --->  Update both the main repo and all submodules"
     echo "                                                                    'main'     --->  Update only the main repo"
-    geho "MNAP Submodules:"
+    geho "QuNex Submodules:"
     echo ""
-    geho "${MNAPSubModules}"
+    geho "${QuNexSubModules}"
     echo ""
     echo ""
     echo " -- EXAMPLES:"
     echo ""
-    echo "gitmnap \ "
+    echo "gitqunex \ "
     echo "--command='pull' \ "
     echo "--branch='master' \ "
-    echo "--branchpath='$TOOLS/$MNAPREPO' \ "
+    echo "--branchpath='$TOOLS/$QuNexREPO' \ "
     echo "--submodules='all' "
     echo ""
     echo ""
-    echo "gitmnap \ "
+    echo "gitqunex \ "
     echo "--command='push' \ "
     echo "--branch='master' \ "
-    echo "--branchpath='$TOOLS/$MNAPREPO' \ "
+    echo "--branchpath='$TOOLS/$QuNexREPO' \ "
     echo "--submodules='all' \ "
     echo "--add='files_to_add' \ "
     echo "--message='Committing change' "
     echo ""
 }
 
-function_gitmnapbranch() {
+function_gitqunexbranch() {
     # -- Check path
-    if [[ -z ${MNAPBranchPath} ]]; then
-        cd $TOOLS/$MNAPREPO
+    if [[ -z ${QuNexBranchPath} ]]; then
+        cd $TOOLS/$QuNexREPO
     else
-        cd ${MNAPBranchPath}
+        cd ${QuNexBranchPath}
     fi
-    if [[ ! -z ${MNAPSubModule} ]]; then
-        cd ${MNAPBranchPath}/${MNAPSubModule}
+    if [[ ! -z ${QuNexSubModule} ]]; then
+        cd ${QuNexBranchPath}/${QuNexSubModule}
     fi
     # -- Update remote
     git remote update > /dev/null 2>&1
-    MNAPDirBranchTest=`pwd`
-    MNAPDirBranchCurrent=`git branch | grep '*'`
+    QuNexDirBranchTest=`pwd`
+    QuNexDirBranchCurrent=`git branch | grep '*'`
     echo ""
-    geho "==> Running git status checks in ${MNAPDirBranchTest}"
-    geho "    Active branch: ${MNAPDirBranchCurrent}"
+    geho "==> Running git status checks in ${QuNexDirBranchTest}"
+    geho "    Active branch: ${QuNexDirBranchCurrent}"
     # -- Set git variables
     unset UPSTREAM; unset LOCAL; unset REMOTE; unset BASE
     UPSTREAM=${1:-'@{u}'}
@@ -873,13 +885,13 @@ function_gitmnapbranch() {
     
     # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
     if [[ $LOCAL == $REMOTE ]]; then
-        cyaneho "    ==> STATUS OK: LOCAL equals REMOTE in $MNAPDirBranchTest"; echo ""
+        cyaneho "    ==> STATUS OK: LOCAL equals REMOTE in $QuNexDirBranchTest"; echo ""
     elif [[ $LOCAL == $BASE ]]; then
-        reho "    ==> ACTION NEEDED: LOCAL equals BASE in ${MNAPDirBranchTest} --> You need to pull."; echo ""
+        reho "    ==> ACTION NEEDED: LOCAL equals BASE in ${QuNexDirBranchTest} --> You need to pull."; echo ""
     elif [[ $REMOTE == $BASE ]]; then
-        reho "    ==> ACTION NEEDED: REMOTE equals BASE in ${MNAPDirBranchTest} --> You need to push."; echo ""
+        reho "    ==> ACTION NEEDED: REMOTE equals BASE in ${QuNexDirBranchTest} --> You need to push."; echo ""
     else
-        reho "    ==> ERROR: LOCAL, BASE and REMOTE tips have diverged in ${MNAPDirBranchTest}"
+        reho "    ==> ERROR: LOCAL, BASE and REMOTE tips have diverged in ${QuNexDirBranchTest}"
         echo ""
         reho "    ------------------------------------------------"
         reho "      LOCAL: ${LOCAL}"
@@ -891,9 +903,9 @@ function_gitmnapbranch() {
         echo ""
     fi
 }
-alias gitmnapbranch=function_gitmnapbranch
+alias gitqunexbranch=function_gitqunexbranch
 
-function_gitmnapstatus() {
+function_gitqunexstatus() {
     
     # -- Function for reporting git status
     function_gitstatusreport() { 
@@ -909,165 +921,165 @@ function_gitmnapstatus() {
     }
 
     echo ""
-    geho " ================ Running MNAP Suite Repository Status Check ================"
+    geho " ================ Running QuNex Suite Repository Status Check ================"
     geho ""
-    unset MNAPBranchPath; unset MNAPSubModules; unset MNAPSubModule
+    unset QuNexBranchPath; unset QuNexSubModules; unset QuNexSubModule
     
     # -- Run it for the main module
-    cd ${TOOLS}/${MNAPREPO}
-    geho "          MNAP Suite location: ${TOOLS}/${MNAPREPO}"
+    cd ${TOOLS}/${QuNexREPO}
+    geho "          QuNex Suite location: ${TOOLS}/${QuNexREPO}"
     geho " ============================================================================"
     echo ""
-    function_gitmnapbranch
+    function_gitqunexbranch
     function_gitstatusreport
     
     # -- Then iterate over submodules
-    MNAPSubModules=`cd ${TOOLS}/${MNAPREPO}; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-    MNAPBranchPath="${MNAPPATH}"
-    for MNAPSubModule in ${MNAPSubModules}; do
-        cd ${MNAPBranchPath}/${MNAPSubModule}
-        function_gitmnapbranch
+    QuNexSubModules=`cd ${TOOLS}/${QuNexREPO}; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+    QuNexBranchPath="${QuNexPATH}"
+    for QuNexSubModule in ${QuNexSubModules}; do
+        cd ${QuNexBranchPath}/${QuNexSubModule}
+        function_gitqunexbranch
         function_gitstatusreport
     done
-    cd ${TOOLS}/${MNAPREPO}
+    cd ${TOOLS}/${QuNexREPO}
     echo ""
-    geho " ================ Completed MNAP Suite Repository Status Check ================"
+    geho " ================ Completed QuNex Suite Repository Status Check ================"
     echo ""
 }
-alias gitmnapstatus=function_gitmnapstatus
+alias gitqunexstatus=function_gitqunexstatus
 
-# -- function_gitmnap start
+# -- function_gitqunex start
 
-function_gitmnap() {
-    unset MNAPSubModules
-    MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+function_gitqunex() {
+    unset QuNexSubModules
+    QuNexSubModules=`cd $QuNexPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
     # -- Inputs
-    unset MNAPBranch
-    unset MNAPAddFiles
-    unset MNAPGitCommand
-    unset MNAPBranchPath
+    unset QuNexBranch
+    unset QuNexAddFiles
+    unset QuNexGitCommand
+    unset QuNexBranchPath
     unset CommitMessage
     unset GitStatus
-    unset MNAPSubModulesList
-    MNAPGitCommand=`opts_GetOpt "--command" $@`
-    MNAPAddFiles=`opts_GetOpt "--add" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of input cases; removing comma or pipes
-    MNAPBranch=`opts_GetOpt "--branch" $@`
-    MNAPBranchPath=`opts_GetOpt "--branchpath" $@`
+    unset QuNexSubModulesList
+    QuNexGitCommand=`opts_GetOpt "--command" $@`
+    QuNexAddFiles=`opts_GetOpt "--add" "$@" | sed 's/,/ /g;s/|/ /g'`; QuNexSubModulesList=`echo "$QuNexSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of input cases; removing comma or pipes
+    QuNexBranch=`opts_GetOpt "--branch" $@`
+    QuNexBranchPath=`opts_GetOpt "--branchpath" $@`
     CommitMessage=`opts_GetOpt "--message" "${@}"`
-    MNAPSubModulesList=`opts_GetOpt "--submodules" "$@" | sed 's/,/ /g;s/|/ /g'`; MNAPSubModulesList=`echo "$MNAPSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of input cases; removing comma or pipes
+    QuNexSubModulesList=`opts_GetOpt "--submodules" "$@" | sed 's/,/ /g;s/|/ /g'`; QuNexSubModulesList=`echo "$QuNexSubModulesList" | sed 's/,/ /g;s/|/ /g'` # list of input cases; removing comma or pipes
 
     # -- Check for help calls
     if [[ ${1} == "help" ]] || [[ ${1} == "-help" ]] || [[ ${1} == "--help" ]] || [[ ${1} == "?help" ]] || [[ -z ${1} ]]; then
-        gitmnap_usage
+        gitqunex_usage
         return 0
     fi
     if [[ ${1} == "usage" ]] || [[ ${1} == "-usage" ]] || [[ ${1} == "--usage" ]] || [[ ${1} == "?usage" ]] || [[ -z ${1} ]]; then
-        gitmnap_usage
+        gitqunex_usage
         return 0
     fi
 
     # -- Start execution
     echo ""
-    geho "=============== Executing MNAP $MNAPGitCommand function ============== "
+    geho "=============== Executing QuNex $QuNexGitCommand function ============== "
     # -- Performing flag checks
     echo ""
     geho "--- Checking inputs ... "
     echo ""
-    if [[ -z ${MNAPGitCommand} ]]; then reho ""; reho "   Error: --command flag not defined. Specify 'pull' or 'push' option."; echo ""; gitmnap_usage; return 1; fi
-    if [[ -z ${MNAPBranch} ]]; then reho ""; reho "   Error: --branch flag not defined."; echo ""; gitmnap_usage; return 1; fi
-    if [[ -z ${MNAPBranchPath} ]]; then reho ""; reho "   Error: --branchpath flag for specified branch not defined. Specify absolute path of the relevant MNAP repo."; echo ""; gitmnap_usage; return 1; fi
-    if [[ -z ${MNAPSubModulesList} ]]; then reho ""; reho "   Error: --submodules flag not not defined. Specify 'main', 'all' or specific submodule to commit."; echo ""; gitmnap_usage; return 1; fi
-    if [[ ${MNAPSubModulesList} == "all" ]]; then reho ""; geho "   Note: --submodules flag set to all. Setting update for all submodules."; echo ""; fi
-    if [[ ${MNAPSubModulesList} == "main" ]]; then reho ""; geho "   Note: --submodules flag set to main MNAP repo only in $MNAPBranchPath"; echo ""; fi
-    if [[ ${MNAPGitCommand} == "push" ]]; then
-        if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitmnap_usage; return 1; else CommitMessage="${CommitMessage}"; fi
-        if [[ -z ${MNAPAddFiles} ]]; then reho ""; reho "   Error: --add flag not defined. Run 'gitmnapstatus' and specify which files to add."; echo ""; gitmnap_usage; return 1; fi
+    if [[ -z ${QuNexGitCommand} ]]; then reho ""; reho "   Error: --command flag not defined. Specify 'pull' or 'push' option."; echo ""; gitqunex_usage; return 1; fi
+    if [[ -z ${QuNexBranch} ]]; then reho ""; reho "   Error: --branch flag not defined."; echo ""; gitqunex_usage; return 1; fi
+    if [[ -z ${QuNexBranchPath} ]]; then reho ""; reho "   Error: --branchpath flag for specified branch not defined. Specify absolute path of the relevant QuNex repo."; echo ""; gitqunex_usage; return 1; fi
+    if [[ -z ${QuNexSubModulesList} ]]; then reho ""; reho "   Error: --submodules flag not not defined. Specify 'main', 'all' or specific submodule to commit."; echo ""; gitqunex_usage; return 1; fi
+    if [[ ${QuNexSubModulesList} == "all" ]]; then reho ""; geho "   Note: --submodules flag set to all. Setting update for all submodules."; echo ""; fi
+    if [[ ${QuNexSubModulesList} == "main" ]]; then reho ""; geho "   Note: --submodules flag set to main QuNex repo only in $QuNexBranchPath"; echo ""; fi
+    if [[ ${QuNexGitCommand} == "push" ]]; then
+        if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitqunex_usage; return 1; else CommitMessage="${CommitMessage}"; fi
+        if [[ -z ${QuNexAddFiles} ]]; then reho ""; reho "   Error: --add flag not defined. Run 'gitqunexstatus' and specify which files to add."; echo ""; gitqunex_usage; return 1; fi
     fi
 
-    # -- Perform checks that MNAP contains requested branch and that it is actively checked out
-    cd ${MNAPBranchPath}
+    # -- Perform checks that QuNex contains requested branch and that it is actively checked out
+    cd ${QuNexBranchPath}
     echo ""
-    mageho "  * Checking active branch for main MNAP repo in $MNAPBranchPath..."
+    mageho "  * Checking active branch for main QuNex repo in $QuNexBranchPath..."
     echo ""
-    if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch found in $MNAPBranchPath"; echo ""; fi
-    if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch is active in $MNAPBranchPath"; echo ""; fi
-    mageho "  * All checks for main MNAP repo passed."
+    if [[ -z `git branch | grep "${QuNexBranch}"` ]]; then reho "Error: Branch $QuNexBranch does not exist in $QuNexBranchPath. Check your repo."; echo ""; gitqunex_usage; return 1; else geho "   --> $QuNexBranch found in $QuNexBranchPath"; echo ""; fi
+    if [[ -z `git branch | grep "* ${QuNexBranch}"` ]]; then reho "Error: Branch $QuNexBranch is not checked out and active in $QuNexBranchPath. Check your repo."; echo ""; gitqunex_usage; return 1; else geho "   --> $QuNexBranch is active in $QuNexBranchPath"; echo ""; fi
+    mageho "  * All checks for main QuNex repo passed."
     echo ""
 
     # -- Not perform further checks
-    if [ "${MNAPSubModulesList}" == "main" ]; then
+    if [ "${QuNexSubModulesList}" == "main" ]; then
         echo ""
-        geho "   Note: --submodules flag set to main MNAP repo only. Omitting individual submodules."
+        geho "   Note: --submodules flag set to main QuNex repo only. Omitting individual submodules."
         echo ""
         # -- Check git command
         echo ""
-        geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
+        geho "--- Running QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex main repo in ${QuNexBranchPath}."
         echo
-        cd ${MNAPBranchPath}
+        cd ${QuNexBranchPath}
         # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
-        function_gitmnapbranch > /dev/null 2>&1
+        function_gitqunexbranch > /dev/null 2>&1
         # -- Check git command request
-        if [[ ${MNAPGitCommand} == "pull" ]]; then
-            cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
+        if [[ ${QuNexGitCommand} == "pull" ]]; then
+            cd ${QuNexBranchPath}; git pull origin ${QuNexBranch}
         fi
-        if [[ ${MNAPGitCommand} == "push" ]]; then
-            cd ${MNAPBranchPath}
+        if [[ ${QuNexGitCommand} == "push" ]]; then
+            cd ${QuNexBranchPath}
             if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
                 echo ""
                 reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
                 echo ""
                 return 1
             else
-                if [[ ${MNAPAddFiles} == "all" ]]; then
+                if [[ ${QuNexAddFiles} == "all" ]]; then
                     git add ./*
                 else
-                    git add ${MNAPAddFiles}
+                    git add ${QuNexAddFiles}
                 fi
                 git commit . --message="${CommitMessage}"
-                git push origin ${MNAPBranch}
+                git push origin ${QuNexBranch}
             fi
         fi
-        function_gitmnapbranch
+        function_gitqunexbranch
         echo ""
-        geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."; echo ""
+        geho "--- Completed QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex main repo in ${QuNexBranchPath}."; echo ""
         return 1
     fi
 
     # -- Check if all submodules are requested or only specific ones
-    if [ ${MNAPSubModulesList} == "all" ]; then
+    if [ ${QuNexSubModulesList} == "all" ]; then
         # -- Reset submodules variable to all
-        unset MNAPSubModulesList
-        MNAPSubModulesList=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-        MNAPSubModules=${MNAPSubModulesList}
-        if [[ ${MNAPAddFiles} != "all" ]] && [[ ${MNAPGitCommand} == "push" ]]; then
+        unset QuNexSubModulesList
+        QuNexSubModulesList=`cd $QuNexPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+        QuNexSubModules=${QuNexSubModulesList}
+        if [[ ${QuNexAddFiles} != "all" ]] && [[ ${QuNexGitCommand} == "push" ]]; then
             reho "ERROR: Cannot specify all submodules and select files. Specify specific files for a given submodule or specify -add='all' "
             return 1
-            gitmnap_usage
+            gitqunex_usage
         else
             GitAddCommand="git add ./*"
         fi
-    elif [ ${MNAPSubModulesList} == "main" ]; then
+    elif [ ${QuNexSubModulesList} == "main" ]; then
         echo ""
-        geho "Note: --submodules flag set to the main MNAP repo."
+        geho "Note: --submodules flag set to the main QuNex repo."
         echo ""
-        MNAPSubModules="main"
-        if [[ ${MNAPAddFiles} == "all" ]] && [[ ${MNAPGitCommand} == "push" ]]; then
+        QuNexSubModules="main"
+        if [[ ${QuNexAddFiles} == "all" ]] && [[ ${QuNexGitCommand} == "push" ]]; then
             GitAddCommand="git add ./*"
         else
-            GitAddCommand="git add ${MNAPAddFiles}"
+            GitAddCommand="git add ${QuNexAddFiles}"
         fi
-    elif [[ ${MNAPSubModulesList} != "main*" ]] && [[ ${MNAPSubModulesList} != "all*" ]]; then
-        MNAPSubModules=${MNAPSubModulesList}
+    elif [[ ${QuNexSubModulesList} != "main*" ]] && [[ ${QuNexSubModulesList} != "all*" ]]; then
+        QuNexSubModules=${QuNexSubModulesList}
         echo ""
-        geho "Note: --submodules flag set to selected MNAP repos: $MNAPSubModules"
+        geho "Note: --submodules flag set to selected QuNex repos: $QuNexSubModules"
         echo ""
-        if [[ ${MNAPAddFiles} != "all" ]] && [[ ${MNAPGitCommand} == "push" ]]; then
-            if [[ `echo ${MNAPSubModules} | wc -w` != 1 ]]; then 
+        if [[ ${QuNexAddFiles} != "all" ]] && [[ ${QuNexGitCommand} == "push" ]]; then
+            if [[ `echo ${QuNexSubModules} | wc -w` != 1 ]]; then 
                 reho "Note: More than one submodule requested"
                 reho "ERROR: Cannot specify several submodules and select specific files. Specify specific files for a given submodule or specify -add='all' "
                 return 1
             fi 
-            GitAddCommand="git add ${MNAPAddFiles}"
+            GitAddCommand="git add ${QuNexAddFiles}"
         else
             GitAddCommand="git add ./*"
         fi
@@ -1075,58 +1087,58 @@ function_gitmnap() {
 
     # -- Continue with specific submodules
     echo ""
-    mageho "  * Checking active branch ${MNAPBranch} for specified submodules in ${MNAPBranchPath}... "
+    mageho "  * Checking active branch ${QuNexBranch} for specified submodules in ${QuNexBranchPath}... "
     echo ""
-    for MNAPSubModule in ${MNAPSubModules}; do
-        cd ${MNAPBranchPath}/${MNAPSubModule}
-        if [[ -z `git branch | grep "${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch does not exist in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch found in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
-        if [[ -z `git branch | grep "* ${MNAPBranch}"` ]]; then reho "Error: Branch $MNAPBranch is not checked out and active in $MNAPBranchPath/$MNAPSubModule. Check your repo."; echo ""; gitmnap_usage; return 1; else geho "   --> $MNAPBranch is active in $MNAPBranchPath/$MNAPSubModule"; echo ""; fi
+    for QuNexSubModule in ${QuNexSubModules}; do
+        cd ${QuNexBranchPath}/${QuNexSubModule}
+        if [[ -z `git branch | grep "${QuNexBranch}"` ]]; then reho "Error: Branch $QuNexBranch does not exist in $QuNexBranchPath/$QuNexSubModule. Check your repo."; echo ""; gitqunex_usage; return 1; else geho "   --> $QuNexBranch found in $QuNexBranchPath/$QuNexSubModule"; echo ""; fi
+        if [[ -z `git branch | grep "* ${QuNexBranch}"` ]]; then reho "Error: Branch $QuNexBranch is not checked out and active in $QuNexBranchPath/$QuNexSubModule. Check your repo."; echo ""; gitqunex_usage; return 1; else geho "   --> $QuNexBranch is active in $QuNexBranchPath/$QuNexSubModule"; echo ""; fi
     done
     mageho "  * All checks passed for specified submodules... "
     echo ""
     # -- First run over specific modules
-    for MNAPSubModule in ${MNAPSubModules}; do
+    for QuNexSubModule in ${QuNexSubModules}; do
         echo ""
-        geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."
+        geho "--- Running QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex submodule ${QuNexBranchPath}/${QuNexSubModule}."
         echo
-        cd ${MNAPBranchPath}/${MNAPSubModule}
+        cd ${QuNexBranchPath}/${QuNexSubModule}
         # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
-        function_gitmnapbranch > /dev/null 2>&1
+        function_gitqunexbranch > /dev/null 2>&1
         # -- Check git command requests
-        if [[ ${MNAPGitCommand} == "pull" ]]; then
-            cd ${MNAPBranchPath}/${MNAPSubModule}; git pull origin ${MNAPBranch}
+        if [[ ${QuNexGitCommand} == "pull" ]]; then
+            cd ${QuNexBranchPath}/${QuNexSubModule}; git pull origin ${QuNexBranch}
         fi
-        if [[ ${MNAPGitCommand} == "push" ]]; then
+        if [[ ${QuNexGitCommand} == "push" ]]; then
             if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
                 echo ""
                 reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
                 echo ""
                 return 1
             else
-                cd ${MNAPBranchPath}/${MNAPSubModule}
+                cd ${QuNexBranchPath}/${QuNexSubModule}
                 eval ${GitAddCommand}
                 git commit . --message="${CommitMessage}"
-                git push origin ${MNAPBranch}
+                git push origin ${QuNexBranch}
             fi
         fi
-        function_gitmnapbranch
+        function_gitqunexbranch
         echo ""
-        geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP submodule ${MNAPBranchPath}/${MNAPSubModule}."; echo ""; echo ""
+        geho "--- Completed QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex submodule ${QuNexBranchPath}/${QuNexSubModule}."; echo ""; echo ""
     done
-    unset MNAPSubModule
+    unset QuNexSubModule
 
     # -- Finish up with the main submodule after individual modules are committed
     echo ""
-    geho "--- Running MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."
+    geho "--- Running QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex main repo in ${QuNexBranchPath}."
     echo
-    cd ${MNAPBranchPath}
-    function_gitmnapbranch > /dev/null 2>&1
+    cd ${QuNexBranchPath}
+    function_gitqunexbranch > /dev/null 2>&1
     # -- Check git command request
-    if [[ ${MNAPGitCommand} == "pull" ]]; then
-        cd ${MNAPBranchPath}; git pull origin ${MNAPBranch}
+    if [[ ${QuNexGitCommand} == "pull" ]]; then
+        cd ${QuNexBranchPath}; git pull origin ${QuNexBranch}
     fi
-    if [[ ${MNAPGitCommand} == "push" ]]; then
-        cd ${MNAPBranchPath}
+    if [[ ${QuNexGitCommand} == "push" ]]; then
+        cd ${QuNexBranchPath}
             if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
             echo ""
                 reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
@@ -1135,32 +1147,32 @@ function_gitmnap() {
         else
             git add ./*
             git commit . --message="${CommitMessage}"
-            git push origin ${MNAPBranch}
+            git push origin ${QuNexBranch}
         fi
     fi
-    function_gitmnapbranch
+    function_gitqunexbranch
     echo ""
-    geho "--- Completed MNAP git ${MNAPGitCommand} for ${MNAPBranch} on MNAP main repo in ${MNAPBranchPath}."; echo ""
+    geho "--- Completed QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex main repo in ${QuNexBranchPath}."; echo ""
 
     # -- Report final completion
     echo ""
-    geho "=============== Completed MNAP $MNAPGitCommand function ============== "
+    geho "=============== Completed QuNex $QuNexGitCommand function ============== "
     echo ""
 
     # -- Reset submodules variable
-    unset MNAPSubModules
-    MNAPSubModules=`cd $MNAPPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
-    unset MNAPBranch
-    unset MNAPGitCommand
-    unset MNAPBranchPath
+    unset QuNexSubModules
+    QuNexSubModules=`cd $QuNexPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
+    unset QuNexBranch
+    unset QuNexGitCommand
+    unset QuNexBranchPath
     unset CommitMessage
     unset GitStatus
-    unset MNAPSubModulesList
-    unset MNAPSubModule
+    unset QuNexSubModulesList
+    unset QuNexSubModule
 }
 
-# -- define function_gitmnap alias
-alias gitmnap=function_gitmnap
+# -- define function_gitqunex alias
+alias gitqunex=function_gitqunex
 
 # ------------------------------------------------------------------------------
 # -- Module setup if using a cluster
@@ -1205,12 +1217,12 @@ if [[ ! -z `command -v nvcc` ]]; then
     #module load GPU/Cuda/${NVCCVer} &> /dev/null # Module setup if using a cluster
 fi
 
-MNAPEnvCheck=`source ${TOOLS}/${MNAPREPO}/library/environment/mnap_envStatus.sh --envstatus | grep "ERROR"` > /dev/null 2>&1
-if [[ -z ${MNAPEnvCheck} ]]; then
-    geho " ---> MNAP environment set successfully!"
+QuNexEnvCheck=`source ${TOOLS}/${QuNexREPO}/library/environment/qunex_envStatus.sh --envstatus | grep "ERROR"` > /dev/null 2>&1
+if [[ -z ${QuNexEnvCheck} ]]; then
+    geho " ---> QuNex environment set successfully!"
     echo ""
 else
-    reho "   --> ERROR in MNAP environment. Run 'mnap_envstatus' to check missing variables!"
+    reho "   --> ERROR in QuNex environment. Run 'qunex_envstatus' to check missing variables!"
     echo ""
 fi
 

@@ -1,8 +1,8 @@
-# Multimodal Neuroimaging Analyses Platform (MNAP) Library Repository
+# Quantitative Neuroimaging Environment & ToolboX (QuNex) Library Repository
 
 ## License
 
-MNAP Library = THIS SOFTWARE
+QuNex Library Repository = THIS SOFTWARE
 
 Copyright (c) 2013-2016 Grega Repovš, [Mind & Brain Lab], University of Ljubljana
 & Alan Anticevic, [AnticevicLab], Yale University
