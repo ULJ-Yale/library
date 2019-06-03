@@ -1,15 +1,17 @@
-# README File for Qu|Nex Library Repo
+# README File for Quantitative Neuroimaging Environment & ToolboX (Qu|Nex) 
+# Qu|Nex Library Code
 
 
 Background
 ==========
 ---
 
-This is a `library` component of the Qu|Nex suite that contains miscellaneous dependencies, 
-environment scripts, relevant data, parameter files, etc. It is required for proper
-Qu|Nex Suite functionality.
+The Qu|Nex `library` component contains miscellaneous dependencies, 
+environment scripts, relevant data, parameter files, etc. The `library` code 
+is required for proper Qu|Nex functionality.
 
-The Qu|Nex `library` repo is co-developed and co-maintained by the [Mind and Brain Lab led by Grega Repovs](http://psy.ff.uni-lj.si/mblab/en) 
+The Qu|Nex `library` repo is co-developed and co-maintained by the 
+[Mind and Brain Lab led by Grega Repovs](http://psy.ff.uni-lj.si/mblab/en) 
 and the [Anticevic Lab](http://anticeviclab.yale.edu/).
 
 Installation
@@ -25,7 +27,7 @@ External dependencies
 ### See https://bitbucket.org/oriadev/qunex/src/master/README.md
 
 
-Usage and command documentation
+Usage and documentation
 ===============================
 ---
 
