@@ -778,7 +778,7 @@ def main(args=None):
 
         for k, v in envars:
             print("export con_%s=\"%s\"" % (k, v), file=f)
-        print("source /opt/qunextools/library/environment/qunex_environment.sh", file=f)
+        print("source /opt/qunex/library/environment/qunex_environment.sh", file=f)
 
         if script:
             if singularity:
@@ -789,10 +789,10 @@ def main(args=None):
                         print(line, file=f)
         elif 'runTurnkey' in scheduleCommand:
             scheduleCommand = scheduleCommand.replace('runTurnkey', '')
-            print("bash /opt/qunextools/connector/functions/RunTurnkey.sh" + scheduleCommand, file=f)
+            print("bash /opt/qunex/connector/functions/RunTurnkey.sh" + scheduleCommand, file=f)
             
         else:        
-            print("bash /opt/qunextools/connector/qunex.sh " + scheduleCommand, file=f)
+            print("bash /opt/qunex/connector/qunex.sh " + scheduleCommand, file=f)
             
         if singularity:
             print("rm " + scriptPath, file=f)
