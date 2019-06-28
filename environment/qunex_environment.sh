@@ -275,6 +275,7 @@ if [[ `gcc --version | grep 'darwin'` != "" ]]; then OSInfo="Darwin"; else
             elif [[ `cat /etc/*-release | grep 'debian'` != "" ]]; then OSInfo="Debian";
     fi
 fi
+export OperatingSystem OSInfo
 
 # ------------------------------------------------------------------------------
 # -- Check for and setup master software folder
