@@ -1,11 +1,11 @@
 {
   "name": "qunex-turnkey-initial-hcp1-5-QC-DWI-BOLDfc-uploadstudy-cleanup",
   "label": "QUNEX TURNKEY INITIAL, HCP1-5, QC, DWI & DATA CLEANUP WITH FULL STUDY UPLOAD",
-  "description": "Runs QuNex Turnkey initial, HCP1-5 & QC, DWI fc w/ full study upload v0.12.1.BTRX",
+  "description": "Runs QuNex Turnkey initial, HCP1-5 & QC, DWI fc w/ full study upload",
   "version": "1.10",
   "schema-version": "1.0",
   "info-url": "https://bitbucket.org/oriadev/qunex",
-  "image": "hub.blackthornprod.radiologics.com/qunex_suite:latest",
+  "image": "qunex/qunex_suite:<replace with image tag in use>",
   "type": "docker",
   "index": null,
   "working-directory": "/output",
