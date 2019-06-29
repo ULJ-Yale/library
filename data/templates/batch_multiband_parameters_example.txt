@@ -1,14 +1,14 @@
 # ==========================================================================
 # == Batch example preprocessing options for multiband HCP-compliant data ==
 # ==     NOTE: ADJUST SETTINGS AS NEEDED FOR YOUR STUDY BEFORE USE!       ==
-# ==       For all supported batch parameter options run > mnap -o        ==
+# ==       For all supported batch parameter options run > qunex -o       ==
 # ==========================================================================
 
 # ---> HCP Pipeline Environment Variable
 
-_hcp_Pipeline           : ${$MNAPPATH}/hcpmodified
+_hcp_Pipeline            : ${HCPPIPEDIR}
 
-# ---> Pre FS (mnap hcp1)
+# ---> Pre FS (qunex hcp1)
  
 _hcp_suffix             :
 _hcp_brainsize          : 150
@@ -26,18 +26,21 @@ _hcp_sephasepos         : PA
 _hcp_dwelltime          : 0.000580008723331
 _hcp_seunwarpdir        : y
  
-# ---> Post FS (mnap hcp3)
+# --->  FS
+_hcp_freesurfer_home    : ${FREESURFER_HOME}
+
+# ---> Post FS (qunex hcp3)
  
 _hcp_grayordinatesres   : 2
 _hcp_hiresmesh          : 164
 _hcp_lowresmesh         : 32
  
-# ---> Diffusion preprocessing (mnap hcpd)
+# ---> Diffusion preprocessing (qunex hcpd)
  
 _hcp_dwi_dwelltime      : 0.689997792007
 _hcp_dwi_PEdir          : 2
   
-# ---> fMRI Volume (mnap hcp4)
+# ---> fMRI Volume (qunex hcp4)
  
 _hcp_bold_echospacing   : 0.000580008723331
 _hcp_bold_echodiff      : NONE
@@ -54,7 +57,7 @@ _hcp_bold_seimg         : independent
 _hcp_bold_movref        : independent
 _hcp_bold_prefix        :
  
-# ---> fMRI Surface (mnap hcp5)
+# ---> fMRI Surface (qunex hcp5)
  
 _hcp_bold_smoothFWHM    : 2
 
@@ -74,12 +77,12 @@ _hcp_bold_smoothFWHM    : 2
 #
 # ===================================================
 
-# ---> CIFTI mapping naming variable (mnap mapHCPData & mnap createBOLDBrainMasks)
+# ---> CIFTI mapping naming variable (qunex mapHCPData & qunex createBOLDBrainMasks)
 
 _hcp_cifti_tail     : _Atlas
 
 
-# ---> Movement scrubbing settings (mnap computeBOLDStats & mnap createStatsReport)
+# ---> Movement scrubbing settings (qunex computeBOLDStats & qunex createStatsReport)
 
 _mov_dvars          : 3.0
 _mov_dvarsme        : 1.6
@@ -99,7 +102,7 @@ _mov_pdf            : movement_plots
 _mov_pref           : 
 
 
-# ---> Nuisance signal (mnap extractNuisanceSignal)
+# ---> Nuisance signal (qunex extractNuisanceSignal)
 
 _shrinknsroi        : true
 
@@ -113,7 +116,7 @@ _smooth_mask        : nonzero
 _dilate_mask        : ${TemplateFolder}/atlases/MNITemplates/MNI152_T1_2mm_brain_mask.nii.gz
 
 
-# ---> BOLD processing (mnap preprocessBold & preprocessConc)
+# ---> BOLD processing (qunex preprocessBold & preprocessConc)
 
 _image_source       : hcp
 _image_target       : cifti
