@@ -1,28 +1,28 @@
 #  Batch parameters file
 #  =====================
 #
-#  This file is used to specify the default parameters used by various MNAP commands for
+#  This file is used to specify the default parameters used by various qunex commands for
 #  HCP minimal preprocessing pipeline, additional bold preprocessing commands,
 #  and other analytic functions. The content of this file should be prepended to the list
 #  that contains all the subjects that is passed to the commands. It can added manually or 
-#  automatically when making use of the compileLists MNAP command.
+#  automatically when making use of the compileLists qunex command.
 #
 #  This template file should be edited to include the parameters relevant for
 #  a given study/analysis and provide the appropriate values. For detailed description of
-#  parameters and their valid values, please consult the MNAP documentation
+#  parameters and their valid values, please consult the qunex documentation
 *  (e.g. Running HCP minimal preprocessing pipelines, Additional BOLD
-#  preprocessing) and online help for the relevant MNAP commands.
+#  preprocessing) and online help for the relevant qunex commands.
 #
 #
 #  --> For all supported batch parameter options run: 
-#      mnap -o
+#      qunex -o
 # 
-# Please note that if a parameter is specified in the batch file MNAP will set it to the value specified. 
+# Please note that if a parameter is specified in the batch file qunex will set it to the value specified. 
 # This is also the case for parameters that are left '' empty (e.g. `_event_file         :`). 
-# This case the `_event_file` parameter is actually being set to an empty string and is being read as such by MNAP. 
+# This case the `_event_file` parameter is actually being set to an empty string and is being read as such by qunex. 
 # The situation where this would be a misspecification would be, for instance: `_nprocess           :`. 
 # In this case the `_nprocess` parameter checks how many concurrent jobs to run. If it set to an empty string then 
-# the MNAP engine cannot set the process number. This behavior is important so that the MNAP engine can interpret 
+# the qunex engine cannot set the process number. This behavior is important so that the qunex engine can interpret 
 # all specified parameters based on actual values provided (empty or some value) as opposed to making an assumptions 
 # that the parameter is absent when in fact it is present with an empty string.
 #
