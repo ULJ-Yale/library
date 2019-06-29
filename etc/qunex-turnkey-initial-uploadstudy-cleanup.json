@@ -1,11 +1,11 @@
 {
   "name": "qunex-turnkey-initial-uploadstudy-cleanup",
   "label": "QUNEX TURNKEY INITIAL & DATA CLEANUP WITH FULL STUDY UPLOAD",
-  "description": "Runs QuNex Turnkey initial w/ full study upload and cleanup v0.12.1.BTRX",
+  "description": "Runs QuNex Turnkey initial w/ full study upload and cleanup",
   "version": "1.10",
   "schema-version": "1.0",
   "info-url": "https://bitbucket.org/oriadev/qunex",
-  "image": "hub.blackthornprod.radiologics.com/qunex_suite:latest",
+  "image": "qunex/qunex_suite:<replace with image tag in use>",
   "type": "docker",
   "index": null,
   "working-directory": "/output",
