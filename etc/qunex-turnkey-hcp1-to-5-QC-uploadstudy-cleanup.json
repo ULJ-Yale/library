@@ -1,11 +1,11 @@
 {
   "name": "qunex-turnkey-hcp1-to-5-QC-uploadstudy-cleanup",
   "label": "QUNEX TURNKEY HCP1-5, QC & DATA CLEANUP WITH FULL STUDY UPLOAD",
-  "description": "Runs QuNex Turnkey hcp1-5 & QC w/ full study upload v0.12.1.BTRX",
+  "description": "Runs QuNex Turnkey hcp1-5 & QC w/ full study upload",
   "version": "1.10",
   "schema-version": "1.0",
   "info-url": "https://bitbucket.org/oriadev/qunex",
-  "image": "hub.blackthornprod.radiologics.com/qunex_suite:latest",
+  "image": "qunex/qunex_suite:<replace with image tag in use>",
   "type": "docker",
   "index": null,
   "working-directory": "/output",
