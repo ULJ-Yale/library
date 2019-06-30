@@ -1,0 +1,14 @@
+# HCP Mapping
+
+19                   => T1w
+23                   => T2w
+SpinEchoFieldMap_AP  => SE-FM-AP
+SpinEchoFieldMap_PA  => SE-FM-PA
+rfMRI_REST_AP_SBRef  => boldref:rest
+rfMRI_REST_AP        => bold:rest
+rfMRI_Task_AP_SBRef  => boldref:task
+rfMRI_Task_AP        => bold:task
+dMRI_dir98_AP        => DWI:dir98_AP
+dMRI_dir98_PA        => DWI:dir98_PA
+dMRI_dir99_AP        => DWI:dir99_AP
+dMRI_dir99_PA        => DWI:dir99_PA
