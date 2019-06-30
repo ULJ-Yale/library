@@ -1,17 +1,17 @@
-#
-# HCP preproccessing options
-#
+# -------------------------------------------------
+# -- Qu|Nex Environment Preprocessing Parameters --
+# -------------------------------------------------
 
 # -------------------------------------
-# ---> HCP Pioelines Repo & Setting
+# ---> HCP Pipelines general parameters
 # -------------------------------------
 _hcp_Pipeline            : ${HCPPIPEDIR}
 _hcp_folderstructure     : hcpls
 _hcp_bold_boldnamekey    : name
-
+_hcp_mppversion          : hcp
 
 # -------------------------------------
-# ---> Pre FS
+# ---> Pre FreeSurfer parameters
 # -------------------------------------
 _hcp_suffix             :
 _hcp_brainsize          : 150
@@ -30,13 +30,13 @@ _hcp_dwelltime          : 0.000580009
 _hcp_seunwarpdir        : y
 
 # -------------------------------------
-# --->  FS
+# ---> FreeSurfer parameters
 # -------------------------------------
 _hcp_freesurfer_home    : ${FREESURFER_HOME}
 
 
 # -------------------------------------
-# ---> Post FS
+# ---> Post FreeSurfer parameters
 # -------------------------------------
 _hcp_grayordinatesres   : 2
 _hcp_hiresmesh          : 164
@@ -51,7 +51,7 @@ _hcp_dwi_PEdir          : 2
 
 
 # -------------------------------------
-# ---> fMRI Volume
+# ---> fMRI Volume parameters
 # -------------------------------------
 _hcp_bold_echospacing   : 0.000580009
 _hcp_bold_echodiff      : NONE
@@ -71,39 +71,59 @@ _cores                  : 16
 
 
 # -------------------------------------
-# ---> fMRI Surface
+# ---> fMRI Surface parameters
 # -------------------------------------
 _hcp_bold_smoothFWHM    : 2
 
 
 # -------------------------------------
-# -- Settings for further analyses
+# ---> Further BOLD analyses parameters
 # -------------------------------------
 _image_source       : hcp
 _image_target       : cifti
-_bold_preprocess    : rest
+_bolds              : rest
 _TR                 : 0.8
 _omit               : 0
-_pignore            : hipass=linear|regress=keep|lopass=linear
+_pignore            : hipass=linear|regress=spline|lopass=linear
 _log                : keep
 _glm_matrix         : both
-_glm_residuals      : forget
+_glm_residuals      : save
+_bold_actions       : shrcl
+
+   # # ==========  _bold_actions  ==============
+   #
+   # m ... Motion scrubbing.
+   # s ... Spatial smooting.
+   # h ... High-pass filtering.
+   # r ... Regression (nuisance and/or task) with an optional number 0, 1, or 2
+   #       specifying the type of regression to use (see REGRESSION below).
+   # c ... Saving of resulting beta coefficients (allways to follow 'r').
+   # l ... Low-pass filtering.
+   #
+   # =========================================
 
 
 # -------------------------------------
-# --- nuisance signal
+# ---> BOLD de-noising parameters
 # -------------------------------------
+_bold_nuisance      : m,V,WM,WB
+_event_file         :
+_nprocess           : 0
+_bold_prefix        :
+_event_string       :
+_event_file         :
+_boldname           : bold
 _shrinknsroi        : true
 
 
 # -------------------------------------
-# --- CIFTI mapping naming variable
+# ---> CIFTI mapping naming variable
 # -------------------------------------
 _hcp_cifti_tail      : _Atlas
 
 
 # -------------------------------------
-# --- smoothing parameters
+# ---> Smoothing parameters
 # -------------------------------------
 _surface_smooth      : 2
 _volume_smooth       : 2
@@ -111,8 +131,9 @@ _voxel_smooth        : 1
 _smooth_mask         : nonzero
 _dilate_mask         : ${TOOLS}/${QUNEXREPO}/library/data/atlases/MNITemplates/MNI152_T1_2mm_brain_mask.nii.gz
 
+
 # -------------------------------------
-# --- Movement scrubbing settings
+# ---> Movement scrubbing parameters
 # -------------------------------------
 _mov_dvars:         3.0
 _mov_dvarsme:       1.6
