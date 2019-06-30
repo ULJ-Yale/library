@@ -348,7 +348,8 @@ if [[ -z ${DICMNIIDIR} ]]; then DICMNIIDIR="${TOOLS}/dicm2nii/dicm2nii-latest"; 
 if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="${TOOLS}/octave/octave-latest"; export OCTAVEDIR; fi
 if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="${TOOLS}/octave/octavepkg"; export OCTAVEPKGDIR; fi
 if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="${TOOLS}/pylib"; export PYLIBDIR; fi
-if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/HCP/Pipelines"; export HCPPIPEDIR; fi
+#if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/HCP/Pipelines"; export HCPPIPEDIR; fi
+if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/qunex/hcp"; export HCPPIPEDIR; fi
 if [[ -z ${FMRIPREPDIR} ]]; then FMRIPREPDIR="${TOOLS}/fmriprep/fmriprep-latest"; export FMRIPREPDIR; fi
 if [[ -z ${MATLABDIR} ]]; then MATLABDIR="${TOOLS}/matlab/matlab-latest"; export MATLABDIR; fi
 if [[ -z ${GRADUNWARPDIR} ]]; then GRADUNWARPDIR="${TOOLS}/gradunwarp/gradunwarp-latest"; export GRADUNWARPDIR; fi
@@ -628,7 +629,7 @@ alias qunex_environment_purge='source ${TOOLS}/${QUNEXREPO}/library/environment/
 # -- Re-Set HCP Pipeline path to different version if needed 
 if [ -e ~/.qunexhcpe ];
     then
-    export HCPPIPEDIR=${TOOLS}/${QUNEXREPO}/hcpextendedpull
+    export HCPPIPEDIR=${TOOLS}/${QUNEXREPO}/hcp
     echo ""
     reho " ===> NOTE: You are in Qu|Nex HCP development mode!"
     reho " ---> Qu|Nex HCP path is set to: $HCPPIPEDIR"
