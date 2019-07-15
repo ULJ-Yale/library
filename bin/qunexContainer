@@ -498,9 +498,10 @@ def main(args=None):
     -------------------
 
     --container ... specifies either the path to the Singularity container image 
-                    or the name of the Docker container to be used. This 
-                    parameter can be omitted if the value is specified in the 
-                    `QUNEXCONIMAGE` environmental variable.
+                    or the full specification of the Docker container to be used
+                    (e.g. qunex/qunex_suite:0_45_07). This parameter can be 
+                    omitted if the value is specified in the `QUNEXCONIMAGE` 
+                    environmental variable.
 
     Optional parameters:
     --------------------
@@ -512,7 +513,7 @@ def main(args=None):
     --envars    ... If environment variables other than the default set by the
                     container are to be used, they can be specified in a pipe
                     separated string formatted as:
-                    "<variable>=><value>|<variable>:<value>"
+                    "<variable>=><value>|<variable>=><value>"
                     Note that only the variables recognized by the Qu|Nex suite
                     will be appropriately parsed and used in the container.
 
@@ -645,7 +646,7 @@ def main(args=None):
         exit()
 
     scheduler      = None
-    image          = None
+    conimage       = None
     command        = ""
     script         = None
     cores          = None
@@ -660,7 +661,7 @@ def main(args=None):
         if "scheduler=" in arg:
             k, scheduler = arg.split("=", 1)
         elif "container=" in arg:
-            k, image = arg.split("=", 1)
+            k, conimage = arg.split("=", 1)
         elif "envars=" in arg:
             k, envars = arg.split("=", 1)
         elif "dockeropt=" in arg:
@@ -690,9 +691,9 @@ def main(args=None):
         print(schedule.__doc__)
         exit()
 
-    if image is None:
+    if conimage is None:
         if "QUNEXCONIMAGE" in os.environ:
-            image = os.environ['QUNEXCONIMAGE']
+            conimage = os.environ['QUNEXCONIMAGE']
         else:
             print("ERROR: No Singularity image or Docker container name specified either in the command line or as a QUNEXCONIMAGE environment variable!")
             exit(1)
@@ -761,7 +762,7 @@ def main(args=None):
         if subjid is not None:
             subjidArray.append(subjid)
 
-    singularity = image.endswith(".simg") or image.endswith(".sif")
+    singularity = conimage.endswith(".simg") or conimage.endswith(".sif")
 
     for i in range(0, containers):
         scheduleCommand = command
@@ -797,12 +798,12 @@ def main(args=None):
         if singularity:
             print("rm " + scriptPath, file=f)
             f.close()    
-            containerCommand = "singularity exec %s bash %s " % (image, scriptPath)
+            containerCommand = "singularity exec %s bash %s " % (conimage, scriptPath)
 
         else:
             print("rm " + os.path.join(homedir, scriptName), file=f)
             f.close()
-            containerCommand = "docker container run %s %s bash ~/%s" % (dockeropt, image, scriptName)
+            containerCommand = "docker container run %s %s bash ~/%s" % (dockeropt, conimage, scriptName)
 
         if scheduler:
             schedule(command=containerCommand, settings=scheduler, output=output)
