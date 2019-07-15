@@ -22,7 +22,7 @@
 #
 # * The qunexContainer.sh = the "Software"
 # * This Software conforms to the license outlined in the MNAP Suite:
-# * https://bitbucket.org/hidradev/mnaptools/src/master/LICENSE.md
+# * https://bitbucket.org/oriadev/qunex/src/master/LICENSE.md
 #
 # ### TODO
 #
