@@ -1223,3 +1223,39 @@ else
     echo ""
 fi
 
+# ------------------------------------------------------------------------------
+# -- QuNex Source & Docker Pull and Build Function Aliases 
+# ------------------------------------------------------------------------------
+
+# -- Build and push Docker container to Docker.io: $1 ==> build,push $2 ==> tag (e.g. qunex/qunex_suite:0_45_07
+qxdocker_function_build_push() { 
+    sudo su
+    cd $TOOLS/qunexcontainer
+    ./qunexRegistryWorkflow.sh --commands="$1" --versiontag="$2" --registry="docker.io" --localcontainerfile="$TOOLS/qunexcontainer/Dockerfile_qunex_suite"
+}
+alias qxdocker_build_push='qxdocker_function_build_push'
+
+# -- Run Docker container with a given tag
+qxdocker_function_run() { 
+    docker container run -it --rm qunex/qunex_suite:$1 bash 
+}
+alias qxdocker_run='qxdocker_function_run'
+
+# -- Pull Docker container with a given tag
+qxdocker_function_pull() { 
+    docker pull qunex/qunex_suite:"$1"
+}
+alias qxdocker_pull='qxdocker_function_pull'
+
+# -- Pull all QuNex source across all submodules
+qxsource_function_pull_all() {
+    gitqunex --command="pull" --branch="master" --branchpath="$TOOLS/qunex" --submodules="all"
+}
+alias qxsource_pull_all='qxsource_function_pull_all'
+
+# -- Commit-Push all QuNex source across all submodules with any message passed as string
+qxsource_function_commit_push_all() {
+    gitqunex --command='push' --add='all' --branch='master' --branchpath="$TOOLS/qunex" --submodules='all' --message="$*"
+}
+alias qxsource_commit_push_all='qxsource_function_commit_push_all'
+
