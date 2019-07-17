@@ -1229,7 +1229,6 @@ fi
 
 # -- Build and push Docker container to Docker.io: $1 ==> build,push $2 ==> tag (e.g. qunex/qunex_suite:0_45_07
 qxdocker_function_build_push() { 
-    sudo su
     cd $TOOLS/qunexcontainer
     ./containerRegistryWorkflow.sh --commands="$1" --versiontag="$2" --registry="docker.io" --localcontainerfile="$TOOLS/qunexcontainer/Dockerfile_qunex_suite"
 }
