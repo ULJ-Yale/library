@@ -1231,7 +1231,7 @@ fi
 qxdocker_function_build_push() { 
     sudo su
     cd $TOOLS/qunexcontainer
-    ./qunexRegistryWorkflow.sh --commands="$1" --versiontag="$2" --registry="docker.io" --localcontainerfile="$TOOLS/qunexcontainer/Dockerfile_qunex_suite"
+    ./containerRegistryWorkflow.sh --commands="$1" --versiontag="$2" --registry="docker.io" --localcontainerfile="$TOOLS/qunexcontainer/Dockerfile_qunex_suite"
 }
 alias qxdocker_build_push='qxdocker_function_build_push'
 
