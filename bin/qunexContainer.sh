@@ -68,7 +68,7 @@ usage() {
     echo ""
     echo "  PARAMETERS FOR DOCKER I/O:"
     echo ""
-    echo "  --studyfolder=<study_folder>              Path to study folder for Docker image"
+    echo "  --inputfolder=<study_folder>              Path to study folder for Docker image"
     echo ""
     echo "  --outputfolder=<output_folder>            Path to output folder for Docker image"
     echo ""
@@ -79,11 +79,16 @@ usage() {
     echo "   <path to this script>/qunexContainer.sh \ " 
     echo "                         --container=<Type of container image> \ "
     echo "                         --script=<Path of the container folder> \ "
-    echo "                         --studyfolder=<study_folder> \ "
+    echo "                         --inputfolder=<input_folder> \ "
     echo "                         --outputfolder=<output_folder> \ "
     echo ""
     exit 0
 }
+
+reho() {
+    echo -e "$RED_F$1 \033[0m"
+}
+
 
 # ------------------------------------------------------------------------------
 # -- Check for help
@@ -97,33 +102,45 @@ fi
 # -- Check for options
 # ------------------------------------------------------------------------------
 
-opts_GetOpt() {
-sopt="$1"
-shift 1
-for fn in "$@" ; do
-    if [ `echo $fn | grep -- "^${sopt}=" | wc -w` -gt 0 ]; then
-        echo $fn | sed "s/^${sopt}=//"
-        return 0
-    fi
-done
-}
 
 # =-=-=-=-=-= GENERAL OPTIONS =-=-=-=-=-=
 #
 # -- key variables to set
 #
 
-ConImage=`opts_GetOpt "--container" $@`
-QUNEXscript=`opts_GetOpt "--script" $@`
-QUNEXstring=`opts_GetOpt "--string" $@`
-StudyFolder=`opts_GetOpt "--studyfolder" $@`
-OutputFolder=`opts_GetOpt "--outputfolder" $@`
+echo "--> Parameters $@"
+
+for i in "$@"; do
+  case "$i" in
+    --container=* ) ConImage="${i#*=}"; shift 2;;
+    --script=* ) QUNEXscript="${i#*=}"; shift 2;;
+    --string=* ) QUNEXstring="${i#*=}"; shift 2;;
+    --inputfolder=* ) InputFolder="${i#*=}"; shift 2;;
+    --outputfolder=* ) OutputFolder="${i#*=}"; shift 2;;
+    --containername=* ) ContainerName="${i#*=}"; shift 2;;
+    * ) break ;;
+  esac
+done
+
+
+echo ""
+echo "Running qunexContainer.sh"
+echo "========================="
+echo ""
+echo "ConImage      : ${ConImage}"
+echo "QUNEXscript   : ${QUNEXscript}"
+echo "QUNEXstring   : ${QUNEXstring}"
+echo "InputFolder   : ${InputFolder}"
+echo "OutputFolder  : ${OutputFolder}"
+echo "ContainerName : ${ContainerName}"
+echo ""
+
 
 # -- Setup paths for scripts folder and container
-if [[ -z ${QUNEXscript} ]] || [[ -z ${QUNEXstring} ]]; then reho "  --> Error: Qu|Nex execute call or script is missing."; exit 1; echo ''; fi
+if [[ -z ${QUNEXscript} ]] && [[ -z ${QUNEXstring} ]]; then reho "  --> Error: Qu|Nex execute call or script is missing."; exit 1; echo ''; fi
 if [[ -z ${ConImage} ]]; then reho "  --> Error: Qu|Nex Container image input is missing."; exit 1; echo ''; fi
-if [[ -z ${StudyFolder} ]]; then reho "  --> Error: Qu|Nex Study folder input is missing."; exit 1; echo ''; fi
-if [[ -z ${OutputFolder} ]]; then reho "  --> Error: Qu|Nex Study folder input is missing."; exit 1; echo ''; fi
+if [[ -z ${InputFolder} ]]; then reho "  --> Error: Qu|Nex Input folder input is missing."; exit 1; echo ''; fi
+if [[ -z ${OutputFolder} ]]; then reho "  --> Error: Qu|Nex Output folder input is missing."; exit 1; echo ''; fi
 
 if [[ `echo ${ConImage} | grep '.simg' ` ]] || [[ `echo ${ConImage} | grep '.sif' ` ]]; then 
     Singularity="yes"
@@ -132,39 +149,47 @@ else
 fi
 
 # -- Execute Singularity container
-if [[ ${Singularity} == 'yes' ]] ; then 
-   echo ""
-   echo " -- Executing container image ${QUNEXCONIMAGEPath} with call: ${QUNEXRunCall}"
-   echo ""
-   singularity exec ${ConImage} bash ${QUNEXRunCall}
-fi
+#
+#   -- Not yet finished -> needs to differentiate between script and call
+
+#if [[ ${Singularity} == 'yes' ]] ; then 
+#   echo ""
+#   echo " -- Executing container image ${QUNEXCONIMAGEPath}"
+#   echo ""
+#   singularity exec ${ConImage} bash ${QUNEXRunCall}
+#fi
 
 # -- Execute Docker container
 if [[ ${Docker} == 'yes' ]] ; then 
    
    echo ""
-   echo " -- Executing Docker container image with call: ${QUNEXRunCall}"
-   echo ""   
+   echo "--> Executing Docker container image"
+   
    # -- If script then parse folder name
    if [[ ! -z ${QUNEXscript} ]]; then
        ScriptsDir=$(dirname "${QUNEXscript}")
    fi
-   echo "  -- Creating output folder $OutputFolder"; echo ""
+   echo "    -- Creating output folder $OutputFolder"
    
    mkdir -p ${OutputFolder}
-   docker rm -f ${OutName}
+   docker rm -f ${ContainerName}
    
    # -- Check for String or Script
    if [[ ! -z ${QUNEXscript} ]]; then
-       docker container run -d -v ${ScriptsDir}/:/data/scripts \
-            -v ${StudyFolder}/:/data/input \
+        echo "    --> Running script ${QUNEXscript}"
+        docker container run \
+            --name ${ContainerName} \
+            -d -v ${ScriptsDir}/:/data/scripts \
+            -v ${InputFolder}/:/data/input \
             -v ${OutputFolder}:/data/output \
             ${ConImage} bash -c "/data/scripts/${QUNEXscript}"
    fi
    if [[ ! -z ${QUNEXstring} ]]; then
-       docker container run -d -v ${ScriptsDir}/:/data/scripts \
-            -v ${StudyFolder}/:/data/input \
+        echo "    --> Running command string ${QUNEXstring}"
+        docker container run \
+            --name ${ContainerName} \
+            -d -v ${InputFolder}/:/data/input \
             -v ${OutputFolder}:/data/output \
-             ${ConImage} bash -c "/opt/qunex/library/bin/qunex-api-wrapper.sh ${QUNEXString}"
+             ${ConImage} bash -c "/opt/qunex/library/bin/qunex-api-wrapper.sh ${QUNEXstring}"
    fi
 fi
