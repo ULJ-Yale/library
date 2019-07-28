@@ -868,17 +868,17 @@ function_gitqunexbranch() {
     geho "==> Running git status checks in ${QuNexDirBranchTest}"
     geho "    Active branch: ${QuNexDirBranchCurrent}"
     # -- Set git variables
-    unset UPSTREAM; unset LOCAL; unset REMOTE; unset BASE
-    UPSTREAM=${1:-'@{u}'}
-    LOCAL=$(git rev-parse origin)
-    REMOTE=$(git rev-parse "$UPSTREAM")
-    BASE=$(git merge-base "$LOCAL" "$UPSTREAM")
+    unset UPSTREAM; unset ORIGIN; unset WORKINGREPO; unset BASE
+    #UPSTREAM=${1:-'@{u}'}
+    ORIGIN=$(git rev-parse origin)
+    WORKINGREPO=$(git rev-parse HEAD)
+    BASE=$(git merge-base "$ORIGIN" "$WORKINGREPO")
     echo ""
     geho "    -------------------------------------------------------------------------"
-    echo "    --> Upstream variable:                       ${UPSTREAM}"
-    geho "    --> Origin Bitbucket commit:                 ${LOCAL}"
-    geho "    --> `hostname` commit:                       ${REMOTE}"
-    geho "    --> Base common ancestor commit:             ${REMOTE}"
+    #echo "    --> Upstream variable:                       ${UPSTREAM}"
+    geho "    --> Origin Bitbucket commit:                 ${ORIGIN}"
+    geho "    --> `hostname` commit:                       ${WORKINGREPO}"
+    geho "    --> Base common ancestor commit:             ${BASE}"
     echo ""
     
     # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
