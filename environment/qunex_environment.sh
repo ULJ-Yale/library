@@ -864,38 +864,46 @@ function_gitqunexbranch() {
     git remote update > /dev/null 2>&1
     QuNexDirBranchTest=`pwd`
     QuNexDirBranchCurrent=`git branch | grep '*'`
+    QuNexSubModuleRepoURL=`more $TOOLS/$QUNEXREPO/.git/config | grep "url" | grep "${QuNexSubModule}" `
     echo ""
-    geho "==> Running git status checks in ${QuNexDirBranchTest}"
-    geho "    Active branch: ${QuNexDirBranchCurrent}"
+    geho "==> Running git status checks in ${QuNexDirBranchTest} \n"
+    geho "        Active branch ${QuNexDirBranchCurrent}"
+    geho " ${QuNexSubModuleRepoURL}"
     # -- Set git variables
     unset UPSTREAM; unset ORIGIN; unset WORKINGREPO; unset BASE
     #UPSTREAM=${1:-'@{u}'}
     ORIGIN=$(git rev-parse origin)
     WORKINGREPO=$(git rev-parse HEAD)
     BASE=$(git merge-base "$ORIGIN" "$WORKINGREPO")
+    HostName=`hostname`
+    if [[ `echo ${#HostName}` -lt 40 ]]; then
+        SetLength=$(expr 40 - ${#HostName})
+        #echo ${SetLength}
+        HostName=`printf ${HostName}%+${SetLength}s`
+        #echo ${#HostName}
+    fi
     echo ""
-    geho "    -------------------------------------------------------------------------"
-    #echo "    --> Upstream variable:                       ${UPSTREAM}"
-    geho "    --> Origin Bitbucket commit:                 ${ORIGIN}"
-    geho "    --> `hostname` commit:                       ${WORKINGREPO}"
-    geho "    --> Base common ancestor commit:             ${BASE}"
+    geho "    -----------------------------------------------------------------------------------------------"
     echo ""
-    
+    geho "     - Commit for origin on Bitbucket                      ${ORIGIN}"
+    geho "     - Commit for ${HostName} ${WORKINGREPO}"
+    geho "     - Base common ancestor commit                         ${BASE}"
+    echo ""
     # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
-    if [[ $LOCAL == $REMOTE ]]; then
-        cyaneho "    ==> STATUS OK: LOCAL equals REMOTE in $QuNexDirBranchTest"; echo ""
-    elif [[ $LOCAL == $BASE ]]; then
-        reho "    ==> ACTION NEEDED: LOCAL equals BASE in ${QuNexDirBranchTest} --> You need to pull."; echo ""
-    elif [[ $REMOTE == $BASE ]]; then
-        reho "    ==> ACTION NEEDED: REMOTE equals BASE in ${QuNexDirBranchTest} --> You need to push."; echo ""
+    if [[ $ORIGIN == $WORKINGREPO ]]; then
+        cyaneho "     ==> STATUS OK: ORIGIN equals `hostname` commit \n         Repo path: ${QuNexDirBranchTest}"; echo ""
+    elif [[ $ORIGIN == $BASE ]] && [[ $WORKINGREPO != $BASE ]]; then
+        reho "     ==> ACTION NEEDED: ORIGIN mismatches `hostname` \n         Repo path: ${QuNexDirBranchTest} \n         You need to push."; echo ""
+    elif [[ $WORKINGREPO == $BASE ]] && [[ $ORIGIN != $BASE ]]; then
+        reho "     ==> ACTION NEEDED: `hostname` equals BASE in ${QuNexDirBranchTest} \n         You need to pull."; echo ""
     else
-        reho "    ==> ERROR: LOCAL, BASE and REMOTE tips have diverged in ${QuNexDirBranchTest}"
+        reho "     ==> ERROR: ORIGIN, BASE and `hostname` tips have diverged in ${QuNexDirBranchTest}"
         echo ""
-        reho "    ------------------------------------------------"
-        reho "      LOCAL: ${LOCAL}"
-        reho "      BASE: ${BASE}"
-        reho "      REMOTE: ${REMOTE}"
-        reho "    ------------------------------------------------"
+        reho "    -----------------------------------------------------------------------------------------------"
+        reho "     - Commit for origin on Bitbucket                      ${ORIGIN}"
+        reho "     - Commit for ${HostName} ${WORKINGREPO}"
+        reho "     - Base common ancestor commit                         ${BASE}"
+        reho "    -----------------------------------------------------------------------------------------------"
         echo ""
         reho "    ==> Check 'git status -uno' to inspect and re-run after cleaning things up."
         echo ""
@@ -914,7 +922,7 @@ function_gitqunexstatus() {
                         if [[ ! -z ${GitStatusReport} ]]; then
                             reho "${GitStatusReport}"
                         fi
-                        geho "    -------------------------------------------------------------------------"
+                        geho "    ----------------------------------------------------------------------------------------------"
                         echo ""; echo ""
     }
 
