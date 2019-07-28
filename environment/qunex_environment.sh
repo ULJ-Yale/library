@@ -875,9 +875,10 @@ function_gitqunexbranch() {
     BASE=$(git merge-base "$LOCAL" "$UPSTREAM")
     echo ""
     geho "    -------------------------------------------------------------------------"
-    geho "    --> Local commit:                $LOCAL"
-    geho "    --> Remote commit:               $REMOTE"
-    geho "    --> Base common ancestor commit: $REMOTE"
+    echo "    --> Upstream variable:                       ${UPSTREAM}"
+    geho "    --> Origin Bitbucket commit:                 ${LOCAL}"
+    geho "    --> `hostname` commit:                       ${REMOTE}"
+    geho "    --> Base common ancestor commit:             ${REMOTE}"
     echo ""
     
     # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
