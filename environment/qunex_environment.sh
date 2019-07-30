@@ -813,7 +813,7 @@ gitqunex_usage() {
     echo "The Qu|Nex Suite provides functionality for users with repo privileges to easily pull or commit & push changes via git."
     echo "This is done via two aliases that are setup as general environment variables: "
     echo ""
-    echo "    * gitqunex   --> Alias for the Qu|Nex function that updates the Qu|Nex Suite via git from the remote repo or pushes changes to remote repo."
+    echo "    * gitqunex   --> Alias for the Qu|Nex function that updates the Qu|Nex Suite via git from the origin repo or pushes changes to origin repo."
     echo ""
     echo ""
     echo " --command=<git_command>                                            Specify git command: push or pull."
@@ -860,7 +860,7 @@ function_gitqunexbranch() {
     if [[ ! -z ${QuNexSubModule} ]]; then
         cd ${QuNexBranchPath}/${QuNexSubModule}
     fi
-    # -- Update remote
+    # -- Update origin
     git remote update > /dev/null 2>&1
     QuNexDirBranchTest=`pwd`
     QuNexDirBranchCurrent=`git branch | grep '*'`
@@ -889,7 +889,7 @@ function_gitqunexbranch() {
     geho "     - Commit for ${HostName} ${WORKINGREPO}"
     geho "     - Base common ancestor commit                         ${BASE}"
     echo ""
-    # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
+    # -- Run a few git tests to verify WORKINGREPO, ORIGIN and BASE tips
     if [[ $ORIGIN == $WORKINGREPO ]]; then
         cyaneho "     ==> STATUS OK: ORIGIN equals `hostname` commit \n         Repo path: ${QuNexDirBranchTest}"; echo ""
     elif [[ $ORIGIN == $BASE ]] && [[ $WORKINGREPO != $BASE ]]; then
@@ -916,11 +916,13 @@ function_gitqunexstatus() {
     # -- Function for reporting git status
     function_gitstatusreport() { 
                         #GitStatusReport="$(git status -uno --porcelain | sed 's/M/Modified:/')"
-                        GitStatusReport="$(git status --porcelain | sed 's/^/    /' | sed 's/M/Modified:/' | sed 's/??/ Untracked:/')"
+                        GitStatusReport="$(git status --porcelain | sed 's/^/    /' | sed 's/M/    Modified:/' | sed 's/??/     Untracked:/' | sed 's/D/    Deleted:/')"
                         #GitStatusReport="$(echo ${GitStatusReport} | sed 's/M/-> Modified:/' | sed 's/^/    /')"
                         #GitStatusReport="$(echo ${GitStatusReport} | sed 's/??/\n    -> Untracked:/')"
                         if [[ ! -z ${GitStatusReport} ]]; then
-                            reho "${GitStatusReport}"
+                            echo ""
+                            reho "     ==> ACTION NEEDED: The following changes need to be committed and pushed: \n"
+                            reho "${GitStatusReport} \n"
                         fi
                         geho "    ----------------------------------------------------------------------------------------------"
                         echo ""; echo ""
@@ -933,8 +935,9 @@ function_gitqunexstatus() {
     
     # -- Run it for the main module
     cd ${TOOLS}/${QUNEXREPO}
-    geho "          Qu|Nex Suite location: ${TOOLS}/${QUNEXREPO}"
-    geho " ============================================================================"
+    geho "  Qu|Nex repo location: ${TOOLS}/${QUNEXREPO}"
+    echo ""
+    geho " =============================================================================="
     echo ""
     function_gitqunexbranch
     function_gitstatusreport
@@ -1022,7 +1025,7 @@ function_gitqunex() {
         geho "--- Running Qu|Nex git ${QuNexGitCommand} for ${QuNexBranch} on Qu|Nex main repo in ${QuNexBranchPath}."
         echo
         cd ${QuNexBranchPath}
-        # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
+        # -- Run a few git tests to verify WORKINGREPO, ORIGIN and BASE tips
         function_gitqunexbranch > /dev/null 2>&1
         # -- Check git command request
         if [[ ${QuNexGitCommand} == "pull" ]]; then
@@ -1030,9 +1033,9 @@ function_gitqunex() {
         fi
         if [[ ${QuNexGitCommand} == "push" ]]; then
             cd ${QuNexBranchPath}
-            if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
+            if [[ $WORKINGREPO == $BASE ]] && [[ $WORKINGREPO != $ORIGIN ]]; then
                 echo ""
-                reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
+                reho " --- ERROR: Local working repo [ $WORKINGREPO ] equals base [ $BASE ] but mismatches origin [ $ORIGIN ]. You need to pull your changes first. Run 'gitqunexstatus' and inspect changes."
                 echo ""
                 return 1
             else
@@ -1108,16 +1111,16 @@ function_gitqunex() {
         geho "--- Running Qu|Nex git ${QuNexGitCommand} for ${QuNexBranch} on Qu|Nex submodule ${QuNexBranchPath}/${QuNexSubModule}."
         echo
         cd ${QuNexBranchPath}/${QuNexSubModule}
-        # -- Run a few git tests to verify LOCAL, REMOTE and BASE tips
+        # -- Run a few git tests to verify WORKINGREPO, ORIGIN and BASE tips
         function_gitqunexbranch > /dev/null 2>&1
         # -- Check git command requests
         if [[ ${QuNexGitCommand} == "pull" ]]; then
             cd ${QuNexBranchPath}/${QuNexSubModule}; git pull origin ${QuNexBranch}
         fi
         if [[ ${QuNexGitCommand} == "push" ]]; then
-            if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
+            if [[ $WORKINGREPO == $BASE ]] && [[ $WORKINGREPO != $ORIGIN ]]; then
                 echo ""
-                reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
+                reho " --- ERROR: Local working repo [ $WORKINGREPO ] equals BASE [ $BASE ] but mismatches origin [ $ORIGIN ]. You need to pull your changes first. Run 'gitqunexstatus' and inspect changes."
                 echo ""
                 return 1
             else
@@ -1145,9 +1148,9 @@ function_gitqunex() {
     fi
     if [[ ${QuNexGitCommand} == "push" ]]; then
         cd ${QuNexBranchPath}
-            if [[ $LOCAL == $BASE ]] && [[ $LOCAL != $REMOTE ]]; then
+            if [[ $WORKINGREPO == $BASE ]] && [[ $WORKINGREPO != $ORIGIN ]]; then
             echo ""
-                reho " --- LOCAL: $LOCAL equals BASE: $BASE but LOCAL mismatches REMOTE: $REMOTE. You need to pull your changes first. Run 'git status' and inspect changes."
+                reho " --- ERROR: Local working repo [ $WORKINGREPO ] equals base [ $BASE ] but mismatches origin [ $ORIGIN ]. You need to pull your changes first. Run 'gitqunexstatus' and inspect changes."
             echo ""
             return 1
         else
