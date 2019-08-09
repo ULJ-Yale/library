@@ -355,7 +355,7 @@ if [[ -z ${QUNEXENV} ]]; then QUNEXENV="${TOOLS}/env/qunex"; export QUNEXENV; fi
 if [[ -z ${CONDADIR} ]]; then CONDADIR="${TOOLS}/miniconda/miniconda-latest"; export CONDADIR; fi
 if [[ -z ${RDIR} ]]; then RDIR="${TOOLS}/R/R-latest"; export RDIR; fi
 if [[ -z ${USEOCTAVE} ]]; then USEOCTAVE="FALSE"; export USEOCTAVE; fi
-if [[ -z ${MSMBINDIR} ]]; then MSMBINDIR="$TOOLS/HCP/MSM_HOCR_v1/Centos"; export MSMBINDIR; fi
+if [[ -z ${MSMBINDIR} ]]; then MSMBINDIR="$TOOLS/MSM_HOCR_v3/Centos"; export MSMBINDIR; fi
 if [[ -z ${MSMCONFIGDIR} ]]; then MSMCONFIGDIR=${HCPPIPEDIR}/MSMConfig; export MSMCONFIGDIR; fi
 if [[ -z ${MATLAB_COMPILER_RUNTIME} ]]; then MATLAB_COMPILER_RUNTIME=${MATLABDIR}/runtime; export MATLAB_COMPILER_RUNTIME; fi
 
