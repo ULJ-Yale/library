@@ -290,6 +290,8 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
                 if v:
                     res += ":ppn=%s" % (v.pop(0))
                 if v:
+                    if sys.version_info[0] < 3:
+                        v[0] = unicode(v[0])
                     if v[0].isnumeric():
                         res += ":gpus=%s" % (v.pop(0))
                     else:
