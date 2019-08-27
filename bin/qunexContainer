@@ -592,6 +592,16 @@ def main(args=None):
     sessions in parallel, the fourth container will run the remaining session. 
 
 
+    Passing --sessions parameter values cleanly
+    -------------------------------------------
+
+    In the case that --sessions parameter needs to be passed to a command, but
+    not used to split up processing into multiple container calls (e.g. in 
+    processInbox or BIDSImport commands), specify the sessions to pass to the
+    call using the --csessions parameter. The value of that parameter will be
+    passed on as --sessions parameter to the command.
+
+
     Redirecting output
     ------------------
 
@@ -640,6 +650,8 @@ def main(args=None):
                  Changed image parameter to container
     2019-07-25 - Grega Repovs
                  Updated the call to use sessions rather than subjects
+    2019-08-26 - Grega Repovs
+                 Added the csessions parameter
     """
 
     if args is None:
@@ -660,6 +672,7 @@ def main(args=None):
     envars         = None
     dockeropt      = None
     output         = None
+    csessions      = None
 
     for arg in args:
         if "scheduler=" in arg:
@@ -680,9 +693,12 @@ def main(args=None):
         elif "subjectsfolder=" in arg:
             k, subjectsfolder = arg.split("=", 1)
             command += '%s="%s" ' % (k, subjectsfolder)
-        elif "sessions=" in arg:
+        elif "sessions=" in arg:            
             k, sessions = arg.split("=", 1)
             command += '%s="%s" ' % (k, sessions)
+        elif "csessions=" in arg:
+            k, csessions = arg.split("=", 1)
+            command += '--sessions="%s" ' % (k, csessions)
         elif "subjid=" in arg:
             k, subjid = arg.split("=", 1)
         elif "=" in arg:
@@ -690,6 +706,10 @@ def main(args=None):
             command += '%s="%s" ' % (k, v)
         else:
             command += '%s ' % (arg)
+
+    if csessions is not None and sessions is not None:
+        print("ERROR: Please specify either sessions or csessions, but not both!")
+        exit(1)
 
     cores = int(cores)
 
