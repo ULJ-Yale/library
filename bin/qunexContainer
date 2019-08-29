@@ -652,6 +652,8 @@ def main(args=None):
                  Updated the call to use sessions rather than subjects
     2019-08-26 - Grega Repovs
                  Added the csessions parameter
+    2019-09-28 - Grega Repovs
+                 Fixed csession order bug
     """
 
     if args is None:
@@ -693,12 +695,12 @@ def main(args=None):
         elif "subjectsfolder=" in arg:
             k, subjectsfolder = arg.split("=", 1)
             command += '%s="%s" ' % (k, subjectsfolder)
-        elif "sessions=" in arg:            
-            k, sessions = arg.split("=", 1)
-            command += '%s="%s" ' % (k, sessions)
         elif "csessions=" in arg:
             k, csessions = arg.split("=", 1)
             command += '--sessions="%s" ' % (k, csessions)
+        elif "sessions=" in arg:            
+            k, sessions = arg.split("=", 1)
+            command += '%s="%s" ' % (k, sessions)        
         elif "subjid=" in arg:
             k, subjid = arg.split("=", 1)
         elif "=" in arg:
