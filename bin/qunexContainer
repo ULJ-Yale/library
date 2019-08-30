@@ -697,7 +697,7 @@ def main(args=None):
             command += '%s="%s" ' % (k, subjectsfolder)
         elif "csessions=" in arg:
             k, csessions = arg.split("=", 1)
-            command += '--sessions="%s" ' % (k, csessions)
+            command += '--sessions="%s" ' % (csessions)
         elif "sessions=" in arg:            
             k, sessions = arg.split("=", 1)
             command += '%s="%s" ' % (k, sessions)        
