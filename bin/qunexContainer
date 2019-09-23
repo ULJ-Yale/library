@@ -204,6 +204,8 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
                  Python3 support.
     2019-04-14 - Grega Repovs
                  Updated documentation
+    2019-09-23 - Grega Repovs
+                 UTF8 encoded input to stdin.
     '''
 
     # --- check inputs
@@ -350,7 +352,7 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
         sout = subprocess.PIPE
 
     run = subprocess.Popen(com, shell=True, stdin=subprocess.PIPE, stdout=sout, stderr=serr, close_fds=True)
-    run.stdin.write(sCommand + command)
+    run.stdin.write((sCommand + command).encode('utf-8'))
     run.stdin.close()
 
     # ---- returning results
