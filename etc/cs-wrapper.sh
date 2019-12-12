@@ -49,12 +49,14 @@ CSInputString="${@:1}"
 
 # -- Output folder check
 #if [[ -z ${WORKDIR} ]]; then WORKDIR="/output"; fi
+if [[ -z ${OutputFolder} ]]; then OutputFolder="/output"; fi
 
 # -- Full Qu|Nex command
 CSWrapperCmd="$TOOLS/qunex/connector/qunex.sh runTurnkey \
 --xnathost=${XNAT_HOST} \
 --xnatuser=${XNAT_USER} \
 --xnatpass=${XNAT_PASS} \
+--studyfolder=${OutputFolder} \
 ${CSInputString}"
 
 echo ""
