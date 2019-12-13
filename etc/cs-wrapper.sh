@@ -47,17 +47,11 @@
 # -- String parsed from XNAT Container Service
 CSInputString="${@:1}"
 
-# -- Output folder check
-#if [[ -z ${WORKDIR} ]]; then WORKDIR="/output"; fi
-#if [[ -z ${OutputFolder} ]]; then OutputFolder="/output"; fi
-if [[ -z ${OutputFolder} ]]; then OutputFolder="/gpfs/project/fas/n3/output2"; fi
-
 # -- Full Qu|Nex command
 CSWrapperCmd="$TOOLS/qunex/connector/qunex.sh runTurnkey \
 --xnathost=${XNAT_HOST} \
 --xnatuser=${XNAT_USER} \
 --xnatpass=${XNAT_PASS} \
---studyfolder=${OutputFolder} \
 ${CSInputString}"
 
 echo ""
