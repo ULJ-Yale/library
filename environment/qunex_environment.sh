@@ -360,9 +360,9 @@ if [[ -z ${MSMCONFIGDIR} ]]; then MSMCONFIGDIR=${HCPPIPEDIR}/MSMConfig; export M
 if [[ -z ${MATLAB_COMPILER_RUNTIME} ]]; then MATLAB_COMPILER_RUNTIME=${MATLABDIR}/runtime; export MATLAB_COMPILER_RUNTIME; fi
 
 # -- The commented line will be the default once HCP Team accepts the pull request
-#if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/HCP/Pipelines"; export HCPPIPEDIR; fi
+if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/HCP/Pipelines"; export HCPPIPEDIR; fi
 # -- The line below points to the environment expectation if using the 'dev' extended version of HCP Pipelines directly from QuNex repo
-if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/qunex/hcp"; export HCPPIPEDIR; fi
+#if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/qunex/hcp"; export HCPPIPEDIR; fi
 
 
 # -- conda management
