@@ -356,11 +356,9 @@ if [[ -z ${CONDADIR} ]]; then CONDADIR="${TOOLS}/miniconda/miniconda-latest"; ex
 if [[ -z ${RDIR} ]]; then RDIR="${TOOLS}/R/R-latest"; export RDIR; fi
 if [[ -z ${USEOCTAVE} ]]; then USEOCTAVE="FALSE"; export USEOCTAVE; fi
 if [[ -z ${MSMBINDIR} ]]; then MSMBINDIR="$TOOLS/MSM_HOCR_v3/Centos"; export MSMBINDIR; fi
-if [[ -z ${MSMCONFIGDIR} ]]; then MSMCONFIGDIR=${HCPPIPEDIR}/MSMConfig; export MSMCONFIGDIR; fi
 if [[ -z ${MATLAB_COMPILER_RUNTIME} ]]; then MATLAB_COMPILER_RUNTIME=${MATLABDIR}/runtime; export MATLAB_COMPILER_RUNTIME; fi
-
-# -- The commented line will be the default once HCP Team accepts the pull request
-if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/HCP/Pipelines"; export HCPPIPEDIR; fi
+if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/HCP/HCPpipelines"; export HCPPIPEDIR; fi
+if [[ -z ${MSMCONFIGDIR} ]]; then MSMCONFIGDIR=${HCPPIPEDIR}/MSMConfig; export MSMCONFIGDIR; fi    
 # -- The line below points to the environment expectation if using the 'dev' extended version of HCP Pipelines directly from QuNex repo
 #if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/qunex/hcp"; export HCPPIPEDIR; fi
 
