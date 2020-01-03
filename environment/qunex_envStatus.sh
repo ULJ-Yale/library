@@ -192,7 +192,7 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
     echo "     HCPPIPEDIR_dMRITract : $HCPPIPEDIR_dMRITract";     if [[ -z $HCPPIPEDIR_dMRITract ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_dMRITract"; fi
     echo "        HCPPIPEDIR_Global : $HCPPIPEDIR_Global";        if [[ -z $HCPPIPEDIR_Global ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_Global"; fi
     echo " HCPPIPEDIR_tfMRIAnalysis : $HCPPIPEDIR_tfMRIAnalysis"; if [[ -z $HCPPIPEDIR_tfMRIAnalysis ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_tfMRIAnalysis"; fi
-    echo "                   MSMBin : $MSMBin";                   if [[ -z $MSMBin ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MSMBin"; fi
+    echo "                MSMBINDIR : $MSMBINDIR";                if [[ -z $MSMBINDIR ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport MSMBINDIR"; fi
     echo "  HCPPIPEDIR_dMRITracFull : $HCPPIPEDIR_dMRITracFull";  if [[ -z $HCPPIPEDIR_dMRITracFull ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_dMRITracFull"; fi
     echo "    HCPPIPEDIR_dMRILegacy : $HCPPIPEDIR_dMRILegacy";    if [[ -z $HCPPIPEDIR_dMRILegacy ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport HCPPIPEDIR_dMRILegacy"; fi
     echo "            AutoPtxFolder : $AutoPtxFolder";            if [[ -z $AutoPtxFolder ]]; then EnvError="yes"; EnvErrorReport="$EnvErrorReport AutoPtxFolder"; fi
@@ -290,6 +290,38 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
         echo ""
     fi
 
+    ## -- Check for gradient_unwarp.py
+    if [ ! -f /opt/.container ]; then
+        echo "  Gradunwarp Binary  : $(which gradient_unwarp.py)"
+        if [[ -z $(which gradient_unwarp.py) ]]; then 
+            BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport gradient_unwarp.py"
+            reho "  Gradunwarp Version : Binary not found!"
+            if [[ -L "$GRADUNWARPDIR"  && ! -e "$GRADUNWARPDIR" ]]; then
+                reho "                     : $GRADUNWARPDIR is a link to a nonexisiting folder!"
+            fi
+        else
+            GradunwarpVersion=$((gradient_unwarp.py -v) 2>&1)
+            echo "  Gradunwarp Version : $GradunwarpVersion"
+        fi
+        echo ""
+    fi
+
+    ## -- Check for msm
+    if [ ! -f /opt/.container ]; then
+        echo "         MSM Binary  : ${MSMBINDIR}/msm"
+        if [[ ! -f ${MSMBINDIR}/msm ]]; then 
+            BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport msm"
+            reho "         MSM Version : Binary not found!"
+            if [[ -L "$MSMBINDIR"  && ! -e "$MSMBINDIR" ]]; then
+                reho "                     : $MSMBINDIR is a link to a nonexisiting folder!"
+            fi
+        else
+            MSMVersion=`${MSMBINDIR}/msm 2>&1 | grep "Part"`
+            echo "         MSM Version : $MSMVersion"
+        fi
+        echo ""
+    fi
+
     ## -- Check for Octave
     if [ "$USEOCTAVE" == "TRUE" ]; then
         echo "      Octave Binary  : $(which octave 2>&1 | grep -v 'no octave')"
@@ -318,7 +350,7 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
     echo ""
 
     ## -- Check for R
-    echo "            R Binary : $(which R 2>&1 | grep -v 'no R')"
+    echo "           R Binary  : $(which R 2>&1 | grep -v 'no R')"
         if [[ -z $(which R 2>&1 | grep -v 'no R') ]]; then
         BinaryError="yes"; BinaryErrorReport="$BinaryErrorReport R"
         reho "  R Version : Binary not found!"

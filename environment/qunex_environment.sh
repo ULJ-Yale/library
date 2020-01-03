@@ -628,12 +628,13 @@ alias qunex_environment_purge='source ${TOOLS}/${QUNEXREPO}/library/environment/
 # ------------------------------------------------------------------------------
 
 # -- Re-Set HCP Pipeline path to different version if needed 
-if [ -e ~/.qunexhcpe ];
-    then
-    export HCPPIPEDIR=${TOOLS}/${QUNEXREPO}/hcp
+if [ -e ~/.qxdevshare ] || [ -e ~/.qxdevind ]; then
     echo ""
-    reho " ===> NOTE: You are in Qu|Nex HCP development mode!"
-    reho " ---> Qu|Nex HCP path is set to: $HCPPIPEDIR"
+    geho " ==> NOTE: You are in Qu|Nex dev mode. Setting HCP debugging settings"
+    echo ""
+    # -- HCPpipelines Debugging Settings
+    export HCP_DEBUG_COLOR=TRUE
+    export HCP_VERBOSE=TRUE
     echo ""
 fi
 
@@ -653,7 +654,6 @@ export HCPPIPEDIR_tfMRI=${HCPPIPEDIR}/tfMRI/scripts; PATH=${HCPPIPEDIR_tfMRI}:${
 export HCPPIPEDIR_dMRI=${HCPPIPEDIR}/DiffusionPreprocessing/scripts; PATH=${HCPPIPEDIR_dMRI}:${PATH}; export PATH
 export HCPPIPEDIR_Global=${HCPPIPEDIR}/global/scripts; PATH=${HCPPIPEDIR_Global}:${PATH}; export PATH
 export HCPPIPEDIR_tfMRIAnalysis=${HCPPIPEDIR}/TaskfMRIAnalysis/scripts; PATH=${HCPPIPEDIR_tfMRIAnalysis}:${PATH}; export PATH
-export MSMBin=${HCPPIPEDIR}/MSMBinaries; PATH=${MSMBin}:${PATH}; export PATH
 export HCPPIPEDIR_dMRITract=${TOOLS}/${QUNEXREPO}/connector/functions/DiffusionTractography/scripts; PATH=${HCPPIPEDIR_dMRITract}:${PATH}; export PATH
 export HCPPIPEDIR_dMRITracFull=${TOOLS}/${QUNEXREPO}/connector/functions/DiffusionTractographyDense; PATH=${HCPPIPEDIR_dMRITracFull}:${PATH}; export PATH
 export HCPPIPEDIR_dMRILegacy=${TOOLS}/${QUNEXREPO}/connector/functions; PATH=${HCPPIPEDIR_dMRILegacy}:${PATH}; export PATH
