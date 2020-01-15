@@ -510,7 +510,11 @@ def main(args=None):
     Optional parameters:
     --------------------
 
-    --script    ... If a script is to be run agains the Singularity container
+    --bash      ... If any additional commands have to be run in bash before the
+                    execution of qunexContainer command itself. Use a semicolon
+                    separated list to chain multiple commands. ['']
+
+    --script    ... If a script is to be run against the Singularity container
                     rather than a single command, the path to the script to be
                     run is specified here. ['']
 
@@ -656,6 +660,8 @@ def main(args=None):
                  Added the csessions parameter
     2019-09-28 - Grega Repovs
                  Fixed csession order bug
+    2019-09-28 - Jure Demsar
+                 Added the bash parameter
     """
 
     if args is None:
@@ -668,6 +674,7 @@ def main(args=None):
     scheduler      = None
     conimage       = None
     command        = ""
+    bash           = None
     script         = None
     cores          = 1
     sessions       = None
@@ -689,6 +696,8 @@ def main(args=None):
             k, dockeropt = arg.split("=", 1)
         elif "output=" in arg:
             k, output = arg.split("=", 1)
+        elif "bash=" in arg:
+            k, bash = arg.split("=", 1)
         elif "script=" in arg:
             k, script = arg.split("=", 1)
         elif "cores=" in arg:
@@ -826,12 +835,17 @@ def main(args=None):
             
         if singularity:
             print("rm " + scriptPath, file=f)
-            f.close()    
-            containerCommand = "singularity exec %s bash %s " % (conimage, scriptPath)
+            f.close()
+            containerCommand = ""
+            if bash:
+                containerCommand = bash + "\n"
+            containerCommand += "singularity exec %s bash %s " % (conimage, scriptPath)
 
         else:
             print("rm " + os.path.join(homedir, scriptName), file=f)
             f.close()
+            if bash:
+                containerCommand = bash + "\n"
             containerCommand = "docker container run %s %s bash ~/%s" % (dockeropt, conimage, scriptName)
 
         if scheduler:
