@@ -7,8 +7,8 @@
 # -------------------------------------
 _hcp_Pipeline            : ${HCPPIPEDIR}
 _hcp_folderstructure     : hcpls
-_hcp_bold_boldnamekey    : name
-_hcp_mppversion          : hcp
+_hcp_filename            : original
+_hcp_processing_mode     : HCPStyleData
 
 # -------------------------------------
 # ---> Pre FreeSurfer parameters
@@ -26,7 +26,7 @@ _hcp_topupconfig        : b02b0.cnf
 _hcp_printcom           :
 _hcp_sephaseneg         : AP
 _hcp_sephasepos         : PA
-_hcp_dwelltime          : 0.000580009
+_hcp_seechospacing      : 0.000580009
 _hcp_seunwarpdir        : y
 
 # -------------------------------------
@@ -38,6 +38,7 @@ _hcp_freesurfer_home    : ${FREESURFER_HOME}
 # -------------------------------------
 # ---> Post FreeSurfer parameters
 # -------------------------------------
+_hcp_regname            : MSMSulc
 _hcp_grayordinatesres   : 2
 _hcp_hiresmesh          : 164
 _hcp_lowresmesh         : 32
@@ -46,7 +47,7 @@ _hcp_lowresmesh         : 32
 # -------------------------------------
 # ---> Diffusion preprocessing - N/A
 # -------------------------------------
-_hcp_dwi_dwelltime      : 0.689998
+_hcp_dwi_echospacing    : 0.689998
 _hcp_dwi_PEdir          : 2
 
 
@@ -55,19 +56,19 @@ _hcp_dwi_PEdir          : 2
 # -------------------------------------
 _hcp_bold_echospacing   : 0.000580009
 _hcp_bold_echodiff      : NONE
-_hcp_bold_correct       : TOPUP
-_hcp_bold_ref           : use
+_hcp_bold_dcmethod      : TOPUP
+_hcp_bold_topupconfig   : b02b0.cnf
+_hcp_bold_sephaseneg    : AP
+_hcp_bold_sephasepos    : PA
+_hcp_bold_sbref         : use
 _hcp_bold_unwarpdir     : -y
 _hcp_bold_res           : 2
 _hcp_bold_gdcoeffs      : NONE
-_hcp_bold_stcorr        : NONE
-_hcp_bold_stcorrdir     : up
-_hcp_bold_stcorrint     : odd
-_hcp_bold_sequencetype  : multi
+_hcp_bold_doslicetime   : FALSE
+_hcp_bold_slicetimerparams :
 _hcp_bold_seimg         : independent
 _hcp_bold_movref        : independent
 _hcp_bold_prefix        :
-_cores                  : 16
 
 
 # -------------------------------------

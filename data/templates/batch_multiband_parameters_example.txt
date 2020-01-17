@@ -4,9 +4,12 @@
 # ==       For all supported batch parameter options run > qunex -o       ==
 # ==========================================================================
 
-# ---> HCP Pipeline Environment Variable
+# -------------------------> General HCP settings
 
-_hcp_Pipeline            : ${HCPPIPEDIR}
+_hcp_Pipeline           : ${HCPPIPEDIR}
+_hcp_folderstructure    : hcpls
+_hcp_filename           : standard
+_hcp_processing_mode    : HCPStyleData
 
 # ---> Pre FS (qunex hcp1)
  
@@ -23,36 +26,38 @@ _hcp_topupconfig        : b02b0.cnf
 _hcp_printcom           :
 _hcp_sephaseneg         : AP
 _hcp_sephasepos         : PA
-_hcp_dwelltime          : 0.000580008723331
+_hcp_seechospacing      : 0.000580008723331
 _hcp_seunwarpdir        : y
  
 # --->  FS
 _hcp_freesurfer_home    : ${FREESURFER_HOME}
 
 # ---> Post FS (qunex hcp3)
- 
+
+_hcp_regname            : MSMSulc
 _hcp_grayordinatesres   : 2
 _hcp_hiresmesh          : 164
 _hcp_lowresmesh         : 32
  
 # ---> Diffusion preprocessing (qunex hcpd)
  
-_hcp_dwi_dwelltime      : 0.689997792007
+_hcp_dwi_echospacing    : 0.689997792007
 _hcp_dwi_PEdir          : 2
   
 # ---> fMRI Volume (qunex hcp4)
  
 _hcp_bold_echospacing   : 0.000580008723331
 _hcp_bold_echodiff      : NONE
-_hcp_bold_correct       : TOPUP
-_hcp_bold_ref           : use
+_hcp_bold_dcmethod      : TOPUP
+_hcp_bold_sephaseneg    : AP
+_hcp_bold_sephasepos    : PA
+_hcp_bold_topupconfig   : b02b0.cnf
+_hcp_bold_sbref         : use
 _hcp_bold_unwarpdir     : -y
 _hcp_bold_res           : 2
 _hcp_bold_gdcoeffs      : NONE
-_hcp_bold_stcorr        : NONE
-_hcp_bold_stcorrdir     : up
-_hcp_bold_stcorrint     : odd
-_hcp_bold_sequencetype  : multi
+_hcp_bold_doslicetime   : FALSE
+_hcp_bold_slicetimerparams : 
 _hcp_bold_seimg         : independent
 _hcp_bold_movref        : independent
 _hcp_bold_prefix        :
