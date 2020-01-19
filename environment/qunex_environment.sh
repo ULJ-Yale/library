@@ -788,9 +788,8 @@ PATH=$TOOLS/bin:$PATH
 
 # -- Set and export Matlab paths
 MATLABPATH=$QUNEXPATH/nitools/fcMRI:$MATLABPATH
-MATLABPATH=$QUNEXPATH/nitools/fcMRI:$MATLABPATH
 MATLABPATH=$QUNEXPATH/nitools/general:$MATLABPATH
-MATLABPATH=$QUNEXPATH/nitools/gmri:$MATLABPATH
+MATLABPATH=$QUNEXPATH/nitools/img:$MATLABPATH
 MATLABPATH=$QUNEXPATH/nitools/stats:$MATLABPATH
 
 # ------------------------------------------------------------------------------
