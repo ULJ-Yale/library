@@ -470,6 +470,9 @@ if [ "$USEOCTAVE" == "TRUE" ]; then
          fi
          export LD_LIBRARY_PATH=/usr/lib64/hdf5/:LD_LIBRARY_PATH > /dev/null 2>&1
          if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-latest-o"; fi
+
+         # required for icafix
+         export FSL_FIX_MATLAB_MODE=2
     fi
 else
     # if [[ ${MatlabTest} == "fail" ]]; then
@@ -479,6 +482,9 @@ else
          cyaneho " ---> Setting up Matlab "; echo ""
          QUNEXMCOMMAND='matlab -nodisplay -nosplash -r'
          if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-latest-m"; fi
+
+         # required for icafix
+         export FSL_FIX_MATLAB_MODE=1
     # fi
 fi
 # -- Use the following command to run .m code in Matlab
