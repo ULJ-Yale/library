@@ -483,8 +483,8 @@ else
          QUNEXMCOMMAND='matlab -nodisplay -nosplash -r'
          if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-latest-m"; fi
 
-         # required for icafix
-         export FSL_FIX_MATLAB_MODE=1
+         # required for icafix, default mode is compiled matlab
+         export FSL_FIX_MATLAB_MODE=0
     # fi
 fi
 # -- Use the following command to run .m code in Matlab
