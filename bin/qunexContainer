@@ -499,6 +499,10 @@ def main(args=None):
                     execution of qunexContainer command itself. Use a semicolon
                     separated list to chain multiple commands. ['']
 
+    --cbash     ... Used if any additional commands have to be run inside the
+                    Qu|Nex container before executing the desired Qu|Nex command.
+                    Use a semicolon separated list to chain multiple commands. ['']
+
     --bind      ... Used for binding external folder for execution via a singualrity
                     container, this is analog to the singularity's -B flag. ['']
 
@@ -652,6 +656,8 @@ def main(args=None):
                  Added the bash parameter
     2020-01-21 - Jure Demsar
                  Added the bind parameter
+    2020-01-21 - Jure Demsar
+                 Added the cbash parameter
     """
 
     if args is None:
@@ -665,6 +671,7 @@ def main(args=None):
     conimage       = None
     command        = ""
     bash           = None
+    cbash          = None
     bind           = None
     script         = None
     cores          = 1
@@ -689,6 +696,8 @@ def main(args=None):
             k, output = arg.split("=", 1)
         elif "bash=" in arg:
             k, bash = arg.split("=", 1)
+        elif "cbash=" in arg:
+            k, cbash = arg.split("=", 1)
         elif "bind=" in arg:
             k, bind = arg.split("=", 1)
         elif "script=" in arg:
@@ -812,6 +821,9 @@ def main(args=None):
             print("export con_%s=\"%s\"" % (k, v), file=f)
         print("source /opt/qunex/library/environment/qunex_environment.sh", file=f)
 
+        if cbash:
+            print(cbash, file=f)
+
         if script:
             if singularity:
                 print("bash " + script, file=f)
@@ -825,13 +837,15 @@ def main(args=None):
             
         else:        
             print("bash /opt/qunex/connector/qunex.sh " + scheduleCommand, file=f)
-            
+
+        containerCommand = ""
+        if bash:
+            containerCommand += bash + ";"
+
         if singularity:
             print("rm " + scriptPath, file=f)
             f.close()
-            containerCommand = ""
-            if bash:
-                containerCommand = bash + "\n"
+
             containerCommand += "singularity exec "
             if bind:
                 containerCommand += "-B %s " % bind
@@ -840,8 +854,7 @@ def main(args=None):
         else:
             print("rm " + os.path.join(homedir, scriptName), file=f)
             f.close()
-            if bash:
-                containerCommand = bash + "\n"
+
             containerCommand = "docker container run %s %s bash ~/%s" % (dockeropt, conimage, scriptName)
 
         if scheduler:
