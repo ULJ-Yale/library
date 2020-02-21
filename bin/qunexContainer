@@ -694,10 +694,10 @@ def main(args=None):
             k, dockeropt = arg.split("=", 1)
         elif "output=" in arg:
             k, output = arg.split("=", 1)
-        elif "bash=" in arg:
-            k, bash = arg.split("=", 1)
         elif "cbash=" in arg:
             k, cbash = arg.split("=", 1)
+        elif "bash=" in arg:
+            k, bash = arg.split("=", 1)
         elif "bind=" in arg:
             k, bind = arg.split("=", 1)
         elif "script=" in arg:
