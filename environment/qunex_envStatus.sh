@@ -206,6 +206,19 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
     unset BinaryErrorReport
     unset BinaryError
     
+    ## -- Check for HCPpipedir
+    if [[ -e $HCPPIPEDIR/version.txt ]]; then
+        echo "        HCPpipelines : $(cat $HCPPIPEDIR/version.txt)"
+    else
+        BinaryError="yes"; BinaryErrorReport="HCPPipelines"
+        reho "        HCPpipelines : Version not found!"
+        if [[ -L "$HCPPIPEDIR"  && ! -e "$HCPPIPEDIR" ]]; then
+            reho "                     : $HCPPIPEDIR is a link to a nonexisiting folder!"
+        fi
+    fi
+    echo ""
+
+
     ## -- Check for FSL
     echo "         FSL Binary  : $(which fsl 2>&1 | grep -v 'no fsl')"
     if [[ -z $(which fsl 2>&1 | grep -v 'no fsl') ]]; then 
