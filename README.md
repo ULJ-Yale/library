@@ -33,6 +33,11 @@ Usage and documentation
 
 ### See https://bitbucket.org/oriadev/qunex/src/master/README.md
 
+Change log
+=====================
+---
+
+* 0.49.10 Initial submodule versioning.
 
 References
 ==========
