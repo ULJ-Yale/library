@@ -11,6 +11,7 @@
 # ## AUTHORS(s)
 #
 # * Alan Anticevic, Department of Psychiatry, Yale University
+# * Jure Demsar, University of Ljubljana
 #
 # ## PRODUCT
 #
@@ -545,8 +546,8 @@ export MATLABPATH
 # -- AFNI path
 PATH=${AFNIDIR}:${PATH}
 export AFNIDIR PATH
-MATLABPATH=$AFNIDIR:$MATLABPATH
-export MATLABPATH
+#MATLABPATH=$AFNIDIR:$MATLABPATH
+#export MATLABPATH
 
 # -- dcm2niix path
 DCMNIIBINDIR=${DCMNIIDIR}/build/bin
