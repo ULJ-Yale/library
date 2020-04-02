@@ -14,8 +14,9 @@ The Qu|Nex `library` repo is co-developed and co-maintained by the
 [Mind and Brain Lab led by Grega Repovs](http://psy.ff.uni-lj.si/mblab/en) 
 and the [Anticevic Lab](http://anticeviclab.yale.edu/).
 
+
 Installation
-===============================
+============
 ---
 
 ### See https://bitbucket.org/oriadev/qunex/src/master/README.md
@@ -28,19 +29,21 @@ External dependencies
 
 
 Usage and documentation
-===============================
+=======================
 ---
 
 ### See https://bitbucket.org/oriadev/qunex/src/master/README.md
 
+
 Change log
-=====================
+==========
 ---
 
 * 0.50.01 Removed double slash in derivates from MATLABDIR.
 * 0.50.00 Renamed gmrimage class to nimage and methods names from mri_ to img_.
 * 0.49.11 Environemnt changes for HCP ICAFix.
 * 0.49.10 Initial submodule versioning.
+
 
 References
 ==========
@@ -51,7 +54,6 @@ Krystal JH, Wang XJ, Pearlson GD, Glahn DC, Anticevic A. Altered global brain
 signal in schizophrenia. Proc Natl Acad Sci U S A. 2014 May 20;111(20):7438-43.
 doi: 10.1073/pnas.1405289111. PubMed PMID: 24799682; PubMed Central PMCID:
 PMC4034208.
-
 
 [Mind and Brain Lab]: http://mblab.si
 [Anticevic Lab]: http://anticeviclab.yale.edu
