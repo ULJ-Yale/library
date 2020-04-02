@@ -33,6 +33,14 @@ Usage and documentation
 
 ### See https://bitbucket.org/oriadev/qunex/src/master/README.md
 
+Change log
+=====================
+---
+
+* 0.50.01 Removed double slash in derivates from MATLABDIR.
+* 0.50.00 Renamed gmrimage class to nimage and methods names from mri_ to img_.
+* 0.49.11 Environemnt changes for HCP ICAFix.
+* 0.49.10 Initial submodule versioning.
 
 References
 ==========
