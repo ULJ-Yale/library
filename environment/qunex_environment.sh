@@ -11,6 +11,7 @@
 # ## AUTHORS(s)
 #
 # * Alan Anticevic, Department of Psychiatry, Yale University
+# * Jure Demsar, University of Ljubljana
 #
 # ## PRODUCT
 #
@@ -196,7 +197,7 @@ fi
 #  Environment clear and check functions
 # ------------------------------------------------------------------------------
 
-ENVVARIABLES='PATH MATLABPATH PYTHONPATH QUNEXVer TOOLS QUNEXREPO QUNEXPATH TemplateFolder FSL_FIXDIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR MATLABDIR MATLABBINDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR RDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR QUNEXMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR USEOCTAVE QUNEXENV CONDADIR MSMBINDIR MSMCONFIGDIR R_LIBS'  # Excluded: POSTFIXICADIR
+ENVVARIABLES='PATH MATLABPATH PYTHONPATH QUNEXVer TOOLS QUNEXREPO QUNEXPATH TemplateFolder FSL_FIXDIR FREESURFERDIR FREESURFER_HOME FREESURFER_SCHEDULER FreeSurferSchedulerDIR WORKBENCHDIR DCMNIIDIR DICMNIIDIR MATLABDIR MATLABBINDIR OCTAVEDIR OCTAVEPKGDIR OCTAVEBINDIR RDIR HCPWBDIR AFNIDIR PYLIBDIR FSLDIR FSLGPUDIR PALMDIR QUNEXMCOMMAND HCPPIPEDIR CARET7DIR GRADUNWARPDIR HCPPIPEDIR_Templates HCPPIPEDIR_Bin HCPPIPEDIR_Config HCPPIPEDIR_PreFS HCPPIPEDIR_FS HCPPIPEDIR_PostFS HCPPIPEDIR_fMRISurf HCPPIPEDIR_fMRIVol HCPPIPEDIR_tfMRI HCPPIPEDIR_dMRI HCPPIPEDIR_dMRITract HCPPIPEDIR_Global HCPPIPEDIR_tfMRIAnalysis MSMBin HCPPIPEDIR_dMRITracFull HCPPIPEDIR_dMRILegacy AutoPtxFolder FSLGPUBinary EDDYCUDADIR USEOCTAVE QUNEXENV CONDADIR MSMBINDIR MSMCONFIGDIR R_LIBS FSL_FIX_CIFTIRW'
 export ENVVARIABLES
 
 # -- Check if inside the container and reset the environment on first setup
@@ -334,8 +335,6 @@ fi
 # -- Set default folder names for dependencies if undefined by user environment:
 # ------------------------------------------------------------------------------
 
-
-
 # -- Check if folders for dependencies are set in the global path
 if [[ -z ${FSLDIR} ]]; then FSLDIR="${TOOLS}/fsl/fsl-latest"; export FSLDIR; fi
 if [[ -z ${FSL_FIXDIR} ]]; then FSL_FIXDIR="${TOOLS}/fsl/fix-latest"; fi
@@ -349,7 +348,7 @@ if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="${TOOLS}/octave/octave-latest"; export
 if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="${TOOLS}/octave/octavepkg"; export OCTAVEPKGDIR; fi
 if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="${TOOLS}/pylib"; export PYLIBDIR; fi
 if [[ -z ${FMRIPREPDIR} ]]; then FMRIPREPDIR="${TOOLS}/fmriprep/fmriprep-latest"; export FMRIPREPDIR; fi
-if [[ -z ${MATLABDIR} ]]; then MATLABDIR="${TOOLS}/matlab/matlab-latest"; export MATLABDIR; fi
+if [[ -z ${MATLABDIR} ]]; then MATLABDIR="${TOOLS}/matlab"; export MATLABDIR; fi
 if [[ -z ${GRADUNWARPDIR} ]]; then GRADUNWARPDIR="${TOOLS}/gradunwarp/gradunwarp-latest"; export GRADUNWARPDIR; fi
 if [[ -z ${QUNEXENV} ]]; then QUNEXENV="${TOOLS}/env/qunex"; export QUNEXENV; fi
 if [[ -z ${CONDADIR} ]]; then CONDADIR="${TOOLS}/miniconda/miniconda-latest"; export CONDADIR; fi
@@ -357,12 +356,11 @@ if [[ -z ${RDIR} ]]; then RDIR="${TOOLS}/R/R-latest"; export RDIR; fi
 if [[ -z ${R_LIBS} ]]; then R_LIBS="${TOOLS}/R/packages"; export R_LIBS; fi
 if [[ -z ${USEOCTAVE} ]]; then USEOCTAVE="FALSE"; export USEOCTAVE; fi
 if [[ -z ${MSMBINDIR} ]]; then MSMBINDIR="$TOOLS/MSM_HOCR_v3/Centos"; export MSMBINDIR; fi
-if [[ -z ${MATLAB_COMPILER_RUNTIME} ]]; then MATLAB_COMPILER_RUNTIME=${MATLABDIR}/runtime; export MATLAB_COMPILER_RUNTIME; fi
 if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/HCP/HCPpipelines"; export HCPPIPEDIR; fi
-if [[ -z ${MSMCONFIGDIR} ]]; then MSMCONFIGDIR=${HCPPIPEDIR}/MSMConfig; export MSMCONFIGDIR; fi    
+if [[ -z ${MSMCONFIGDIR} ]]; then MSMCONFIGDIR=${HCPPIPEDIR}/MSMConfig; export MSMCONFIGDIR; fi
+
 # -- The line below points to the environment expectation if using the 'dev' extended version of HCP Pipelines directly from QuNex repo
 #if [[ -z ${HCPPIPEDIR} ]]; then HCPPIPEDIR="${TOOLS}/qunex/hcp"; export HCPPIPEDIR; fi
-
 
 # -- conda management
 CONDABIN=${CONDADIR}/bin
@@ -468,7 +466,7 @@ if [ "$USEOCTAVE" == "TRUE" ]; then
          if [ ! -e ~/.octaverc ]; then
              cp ${QUNEXPATH}/library/.octaverc ~/.octaverc
          fi
-         export LD_LIBRARY_PATH=/usr/lib64/hdf5/:LD_LIBRARY_PATH > /dev/null 2>&1
+         export LD_LIBRARY_PATH=/usr/lib64/hdf5/:${LD_LIBRARY_PATH} > /dev/null 2>&1
          if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-latest-o"; fi
     fi
 else
@@ -548,8 +546,8 @@ export MATLABPATH
 # -- AFNI path
 PATH=${AFNIDIR}:${PATH}
 export AFNIDIR PATH
-MATLABPATH=$AFNIDIR:$MATLABPATH
-export MATLABPATH
+#MATLABPATH=$AFNIDIR:$MATLABPATH
+#export MATLABPATH
 
 # -- dcm2niix path
 DCMNIIBINDIR=${DCMNIIDIR}/build/bin
@@ -687,6 +685,16 @@ MATLABPATH=$HCPDIRMATLAB:$MATLABPATH
 export MATLABPATH
 export PATH
 
+# -- ciftirw
+if [[ -z ${FSL_FIX_CIFTIRW} ]]; then FSL_FIX_CIFTIRW=${HCPPIPEDIR}/global/matlab; export FSL_FIX_CIFTIRW; fi
+
+# if in container set compiled matlab
+if [[ -e /opt/.container ]]; then
+    export MATLAB_COMPILER_RUNTIME=${MATLABDIR}/v93
+    export FSL_FIX_MCRROOT=${MATLABDIR}
+    export LD_LIBRARY_PATH=/opt/matlab/v93/runtime/glnxa64:/opt/matlab/v93/bin/glnxa64:/opt/matlab/v93/sys/os/glnxa64:${LD_LIBRARY_PATH}
+fi
+
 # -- FIX ICA Dependencies Folder
 # FIXDIR_DEPEND=${QUNEXPATH}/library/etc/ICAFIXDependencies
 # export FIXDIR_DEPEND
@@ -695,12 +703,12 @@ export PATH
 # export MATLABPATH
 
 # -- Setup MATLAB_GIFTI_LIB relevant for FIX ICA
-MATLAB_GIFTI_LIB=$FIXDIR_DEPEND/gifti/
-export MATLAB_GIFTI_LIB
-PATH=${MATLAB_GIFTI_LIB}:${PATH}
-MATLABPATH=$MATLAB_GIFTI_LIB:$MATLABPATH
-export MATLABPATH
-export PATH
+#MATLAB_GIFTI_LIB=$FIXDIR_DEPEND/gifti/
+#export MATLAB_GIFTI_LIB
+#PATH=${MATLAB_GIFTI_LIB}:${PATH}
+#MATLABPATH=$MATLAB_GIFTI_LIB:$MATLABPATH
+#export MATLABPATH
+#export PATH
 #. ${FIXDIR_DEPEND}/ICAFIX_settings.sh > /dev/null 2>&1 
 
 # -- POST FIX ICA path
@@ -788,9 +796,8 @@ PATH=$TOOLS/bin:$PATH
 
 # -- Set and export Matlab paths
 MATLABPATH=$QUNEXPATH/nitools/fcMRI:$MATLABPATH
-MATLABPATH=$QUNEXPATH/nitools/fcMRI:$MATLABPATH
 MATLABPATH=$QUNEXPATH/nitools/general:$MATLABPATH
-MATLABPATH=$QUNEXPATH/nitools/gmri:$MATLABPATH
+MATLABPATH=$QUNEXPATH/nitools/img:$MATLABPATH
 MATLABPATH=$QUNEXPATH/nitools/stats:$MATLABPATH
 
 # ------------------------------------------------------------------------------
