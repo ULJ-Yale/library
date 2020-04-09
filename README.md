@@ -1,10 +1,4 @@
-# README File for Quantitative Neuroimaging Environment & ToolboX (Qu|Nex) 
-# Qu|Nex Library Code
-
-
-Background
-==========
----
+# README File for Qu|Nex Library Component
 
 The Qu|Nex `library` component contains miscellaneous dependencies, 
 environment scripts, relevant data, parameter files, etc. The `library` code 
@@ -15,29 +9,19 @@ The Qu|Nex `library` repo is co-developed and co-maintained by the
 and the [Anticevic Lab](http://anticeviclab.yale.edu/).
 
 
-Installation
-============
----
+Quick links
+-----------
 
-### See https://bitbucket.org/oriadev/qunex/src/master/README.md
-
-
-External dependencies
-=====================
----
-### See https://bitbucket.org/oriadev/qunex/src/master/README.md
-
-
-Usage and documentation
-=======================
----
-
-### See https://bitbucket.org/oriadev/qunex/src/master/README.md
+* [Website](http://qunex.yale.edu/)
+* [Qu|Nex Wiki](https://bitbucket.org/oriadev/qunex/wiki/Home)
+* [SDK Wiki](https://bitbucket.org/oriadev/qunexsdk/wiki/Home)
+* [Qu|Nex quick start](https://bitbucket.org/oriadev/qunex/wiki/Overview/QuickStart.md)
+* [Qu|Nex container deployment](https://bitbucket.org/oriadev/qunex/wiki/Overview/Installation.md)
+* [Installing from source and dependencies](https://bitbucket.org/oriadev/qunex/wiki/Overview/Installation.md)
 
 
 Change log
-==========
----
+----------
 
 * 0.50.1  Removed double slash in derivates from MATLABDIR.
 * 0.50.0  Renamed gmrimage class to nimage and methods names from mri_ to img_.
@@ -46,8 +30,7 @@ Change log
 
 
 References
-==========
----
+----------
 
 Yang GJ, Murray JD, Repovs G, Cole MW, Savic A, Glasser MF, Pittenger C,
 Krystal JH, Wang XJ, Pearlson GD, Glahn DC, Anticevic A. Altered global brain
