@@ -11,6 +11,7 @@
 # ## AUTHORS(s)
 #
 # * Alan Anticevic, Department of Psychiatry, Yale University
+# * Jure Demsar, University of Ljubljana
 #
 # ## PRODUCT
 #
@@ -135,6 +136,13 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
     unset EnvError
     echo ""
     echo ""
+    echo ""
+    geho "   OS Version"
+    geho "----------------------------------------------"
+    echo ""
+    OSVersion=$(cat /etc/os-release)
+    OSVersion="${OSVersion//$'\n'/$'\n'               }"
+    echo "               $OSVersion";
     echo ""
     geho "   Qu|Nex General Environment Variables"
     geho "----------------------------------------------"
