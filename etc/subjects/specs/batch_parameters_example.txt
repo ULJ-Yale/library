@@ -42,7 +42,7 @@
 # _logtag                   :                 ... An optional additional tag to add to the log file after the command name.
 # _overwrite                : no              ... Whether to overwrite existing results.
 # _cores                    : 1               ... How many processor cores to use.
-# _threads                  : 1               ... How many threads to use for bold processing.
+# _parelements              : 1               ... How many elements to run in parralel (e.g. how many bolds when bold processing).
 # _nprocess                 : 0               ... How many sessions to process (0 - all).
 # _datainfo                 : False           ... Whether to print information.
 # _printoptions             : False           ... Whether to print options.
