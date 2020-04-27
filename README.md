@@ -23,6 +23,7 @@ Quick links
 Change log
 ----------
 
+* 0.50.3  Renamed cores and threads parameters.
 * 0.50.2  qunex_envstatus now reports OS info.
 * 0.50.1  Removed double slash in derivates from MATLABDIR.
 * 0.50.0  Renamed gmrimage class to nimage and methods names from mri_ to img_.
