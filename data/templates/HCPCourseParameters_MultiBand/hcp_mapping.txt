@@ -67,7 +67,7 @@ _hcp_bold_sequencetype  : multi
 _hcp_bold_seimg         : independent
 _hcp_bold_movref        : independent
 _hcp_bold_prefix        :
-_cores                  : 16
+_parsessions            : 16
 
 
 # -------------------------------------

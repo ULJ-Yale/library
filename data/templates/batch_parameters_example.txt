@@ -53,14 +53,14 @@
 # _logfolder                The path to log folder. []
 # _logtag                   An optional additional tag to add to the log file after the command name. []
 # _overwrite                Whether to overwrite existing results. [no]
-# _cores                    How many processor cores to use. [1]
-# _threads                  How many threads to use for bold processing. [1]
+# _parsessions              How many sessions to run in parallel. [1]
+# _parelements              How many elements to run in parralel (e.g. how many bolds when bold processing). [1]
 # _nprocess                 How many sessions to process (0 - all). [0]
 # _datainfo                 Whether to print information. [False]
 # _printoptions             Whether to print options. [False]
 # _filter                   Filtering information. []
 # _script                   The script to be executed. [None]
-# _subjid                   list of | separated session ids for which to run the command []
+# _subjid                   list of | separated session ids for which to run the command. []
 # 
 # # ---- Preprocessing options
 # 

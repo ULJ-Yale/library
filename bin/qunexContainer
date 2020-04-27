@@ -581,11 +581,11 @@ def main(args=None):
     Scheduling multiple containers in parallel
     ------------------------------------------
     
-    If the parameters provided include --cores, --scheduler, and --sessions, 
+    If the parameters provided include --parsessions, --scheduler, and --sessions, 
     then qunexContainer will spread the execution of the command by scheduling 
     multiple containers to run on separate nodes. Specifically, it will schedule
-    each node to run a container with `cores` sessions. E.g. if 10 sessions are 
-    specified and cores is set to 3, the command will schedule four containers 
+    each node to run a container with `parsessions` sessions. E.g. if 10 sessions are 
+    specified and parsessions is set to 4, the command will schedule four containers 
     to run on four nodes. The first three containers will each run three 
     sessions in parallel, the fourth container will run the remaining session. 
 
@@ -633,7 +633,7 @@ def main(args=None):
     $ qunexContainer hcp2 \\
       --subjectsfolder=/data/study/subjects \\
       --sessions=/data/study/processing/batch.txt \\
-      --cores=4 \\
+      --parsessions=4 \\
       --container=/singularity/qunex_suite-0_38_10.simg \\
       --scheduler="SLURM,time=2-00:00:00,ntasks=1,cpus-per-task=2,mem-per-cpu=15000,partition=pi_anticevic"
 
@@ -674,7 +674,7 @@ def main(args=None):
     bash_post      = None
     bind           = None
     script         = None
-    cores          = 1
+    parsessions    = 1
     sessions       = None
     subjectsfolder = None
     subjid         = None
@@ -702,9 +702,9 @@ def main(args=None):
             k, bind = arg.split("=", 1)
         elif "script=" in arg:
             k, script = arg.split("=", 1)
-        elif "cores=" in arg:
-            k, cores = arg.split("=", 1)
-            command += '%s="%s" ' % (k, cores)
+        elif "parsessions=" in arg:
+            k, parsessions = arg.split("=", 1)
+            command += '%s="%s" ' % (k, parsessions)
         elif "subjectsfolder=" in arg:
             k, subjectsfolder = arg.split("=", 1)
             command += '%s="%s" ' % (k, subjectsfolder)
@@ -726,7 +726,7 @@ def main(args=None):
         print("ERROR: Please specify either sessions or csessions, but not both!")
         exit(1)
 
-    cores = int(cores)
+    parsessions = int(parsessions)
 
     if command.startswith('?scheduler'):
         print(schedule.__doc__)
@@ -759,11 +759,11 @@ def main(args=None):
     dockeropt += " -v \"%s\":/root" % (homedir)
 
     # run in parallel if:
-    # - cores is not None
+    # - parsessions is not None
     # - schedulers is not None
     # - sessions is not None
     subjidArray = []
-    if cores is not None and sessions is not None and scheduler is not None:
+    if parsessions is not None and sessions is not None and scheduler is not None:
                 
         # split sessions via subjid or split existing subjid
         if subjid is None:
@@ -775,12 +775,12 @@ def main(args=None):
             subjid = [e for e in subjids if e in subjidSplit]
 
         if scheduler is None:
-            containers = cores
+            containers = parsessions
 
-            # split subjids according to cores and add to array
+            # split subjids according to parsessions and add to array
             start = 0
             end = len(subjid)
-            chunks = int(math.ceil(end / float(cores)))
+            chunks = int(math.ceil(end / float(parsessions)))
             for i in range(start, end, chunks):
                 start = i
                 subjidChunk = subjid[start:start+chunks]
@@ -789,10 +789,10 @@ def main(args=None):
         else:
             containers = 0
 
-            # split subjids according to cores and add to array
+            # split subjids according to parsessions and add to array
             while subjid:
                 containers += 1
-                subjidChunk = [subjid.pop(0) for e in range(cores) if subjid]
+                subjidChunk = [subjid.pop(0) for e in range(parsessions) if subjid]
                 subjidArray.append(','.join(subjidChunk))
 
     else:
