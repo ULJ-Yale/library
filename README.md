@@ -23,6 +23,7 @@ Quick links
 Change log
 ----------
 
+* 0.50.5  Replaced REMOVED.git-id files.
 * 0.50.4  Fixed QC templates.
 * 0.50.3  Renamed cores and threads parameters.
 * 0.50.2  qunex_envstatus now reports OS info.
