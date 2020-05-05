@@ -23,7 +23,7 @@ Quick links
 Change log
 ----------
 
-* 0.50.4  Fixed QC template file names.
+* 0.50.4  Fixed QC templates.
 * 0.50.3  Renamed cores and threads parameters.
 * 0.50.2  qunex_envstatus now reports OS info.
 * 0.50.1  Removed double slash in derivates from MATLABDIR.
