@@ -169,7 +169,7 @@
 # _hcp_grayordinatesres     : 2               ... Usually 2mm
 # _hcp_hiresmesh            : 164             ... Usually 164 vertices
 # _hcp_lowresmesh           : 32              ... Usually 32 vertices
-# _hcp_regname              :                 ... What registration is used FS or MSMSulc. FS if none is provided.
+# _hcp_regname              : MSMSulc         ... What registration is used FS or MSMSulc. MSMSulc if none is provided.
 # _hcp_mcsigma              :                 ... Correction sigma used for metric smooting (sqrt(200): 14.14213562373095048801) [''].
 # _hcp_inflatescale         : 1               ... Inflate extra scale parameter [1].
 # _hcp_cifti_tail           :                 ... The tail of the cifti file to use when mapping data from the HCP MNINonLinear/Results folder.
