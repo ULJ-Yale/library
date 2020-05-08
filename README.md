@@ -23,9 +23,10 @@ Quick links
 Change log
 ----------
 
-* 0.50.5  Replaced REMOVED.git-id files.
-* 0.50.4  Fixed QC templates.
-* 0.50.3  Renamed cores and threads parameters.
+* 0.50.6  Replaced REMOVED.git-id files.
+* 0.50.5  Fixed QC templates.
+* 0.50.4  Renamed cores and threads parameters.
+* 0.50.3  Set MSMSulc as the default regname.
 * 0.50.2  qunex_envstatus now reports OS info.
 * 0.50.1  Removed double slash in derivates from MATLABDIR.
 * 0.50.0  Renamed gmrimage class to nimage and methods names from mri_ to img_.
