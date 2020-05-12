@@ -63,7 +63,6 @@ _hcp_bold_gdcoeffs      : NONE
 _hcp_bold_stcorr        : NONE
 _hcp_bold_stcorrdir     : up
 _hcp_bold_stcorrint     : odd
-_hcp_bold_sequencetype  : multi
 _hcp_bold_seimg         : independent
 _hcp_bold_movref        : independent
 _hcp_bold_prefix        :
