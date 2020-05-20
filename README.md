@@ -4,9 +4,11 @@ The Qu|Nex `library` component contains miscellaneous dependencies,
 environment scripts, relevant data, parameter files, etc. The `library` code 
 is required for proper Qu|Nex functionality.
 
-The Qu|Nex `library` repo is co-developed and co-maintained by the 
-[Mind and Brain Lab led by Grega Repovs](http://psy.ff.uni-lj.si/mblab/en) 
-and the [Anticevic Lab](http://anticeviclab.yale.edu/).
+The Qu|Nex `library` code is co-developed and co-maintained by the:
+
+* [Anticevic Lab, Yale University](http://anticeviclab.yale.edu/),
+* [Mind and Brain Lab, University of Ljubljana](http://psy.ff.uni-lj.si/mblab/en),
+* [Murray Lab, Yale University](https://medicine.yale.edu/lab/murray/).
 
 
 Quick links
@@ -23,6 +25,7 @@ Quick links
 Change log
 ----------
 
+* 0.50.7  License and README updates.
 * 0.50.6  Replaced REMOVED.git-id files.
 * 0.50.5  Fixed QC templates.
 * 0.50.4  Renamed cores and threads parameters.
