@@ -25,6 +25,7 @@ Quick links
 Change log
 ----------
 
+* 0.50.8  Consistent jobname in scheduling between qunex and qunexContainer.
 * 0.50.7  License and README updates.
 * 0.50.6  Replaced REMOVED.git-id files.
 * 0.50.5  Fixed QC templates.
