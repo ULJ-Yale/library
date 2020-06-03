@@ -616,7 +616,7 @@ def main(args=None):
 
     In the case that --sessions parameter needs to be passed to a command, but
     not used to split up processing into multiple container calls (e.g. in 
-    processInbox or BIDSImport commands), specify the sessions to pass to the
+    importDICOM or importBIDS commands), specify the sessions to pass to the
     call using the --csessions parameter. The value of that parameter will be
     passed on as --sessions parameter to the command.
 

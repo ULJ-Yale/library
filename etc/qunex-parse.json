@@ -112,7 +112,7 @@
       "description": "Steps to execute",
       "type": "string",
       "matcher": null,
-      "default-value": "createStudy,mapRawData,getHCPReady,setupHCP,createBatch,hcp1,hcp2,hcp3,runQC_T1w,runQC_T2w,runQC_Myelin,hcp4,hcp5,runQC_BOLD,mapHCPData,createBOLDBrainMasks,computeBOLDStats,createStatsReport,extractNuisanceSignal,preprocessBold,BOLDParcellation,computeBOLDfcSeed,computeBOLDfcGBC",
+      "default-value": "createStudy,mapRawData,createSessionInfo,setupHCP,createBatch,hcp1,hcp2,hcp3,runQC_T1w,runQC_T2w,runQC_Myelin,hcp4,hcp5,runQC_BOLD,mapHCPData,createBOLDBrainMasks,computeBOLDStats,createStatsReport,extractNuisanceSignal,preprocessBold,BOLDParcellation,computeBOLDfcSeed,computeBOLDfcGBC",
       "required": true,
       "replacement-key": "#TURNKEYSTEPS_ARG#",
       "sensitive": null,
