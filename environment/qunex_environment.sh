@@ -594,8 +594,13 @@ export MATLABPATH
 TemplateFolder=$QUNEXPATH/library/data/
 PATH=${TemplateFolder}:${PATH}
 export TemplateFolder PATH
+
 MATLABPATH=$TemplateFolder:$MATLABPATH
 export MATLABPATH
+
+NIUTemplateFolder=$QUNEXPATH/niutilites/templates/
+PATH=${NIUTemplateFolder}:${PATH}
+export NIUTemplateFolder PATH
 
 # -- Define submodules, but omit hcpextendedpull to avoid conflicts
 unset QuNexSubModules
