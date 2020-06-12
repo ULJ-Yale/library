@@ -444,7 +444,7 @@ def getSesssionIDsFromList(filename):
     return sessionids
 
 
-def getSesssionIDs(listString, subjectsfolder=None):
+def getSesssionIDs(listString, sessionsfolder=None):
     '''
     getSesssionIDs(listString)
 
@@ -474,10 +474,10 @@ def getSesssionIDs(listString, subjectsfolder=None):
     else:
         sessionids = [e.strip() for e in re.split(' +|,|\|', listString)]
 
-        if subjectsfolder is not None:
+        if sessionsfolder is not None:
             nlist = []
             for s in sessionids:
-                nlist += glob.glob(os.path.join(subjectsfolder, s))
+                nlist += glob.glob(os.path.join(sessionsfolder, s))
             sessionids = [os.path.basename(e) for e in nlist]
 
     return sessionids
@@ -652,7 +652,7 @@ def main(args=None):
     ------------
 
     $ qunexContainer hcp2 \\
-      --subjectsfolder=/data/study/subjects \\
+      --sessionsfolder=/data/study/subjects \\
       --sessions=/data/study/processing/batch.txt \\
       --parsessions=4 \\
       --container=/singularity/qunex_suite-0_38_10.simg \\
@@ -697,7 +697,7 @@ def main(args=None):
     script         = None
     parsessions    = 1
     sessions       = None
-    subjectsfolder = None
+    sessionsfolder = None
     sessionids     = None
     envars         = None
     dockeropt      = None
@@ -726,9 +726,9 @@ def main(args=None):
         elif "parsessions=" in arg:
             k, parsessions = arg.split("=", 1)
             command += '%s="%s" ' % (k, parsessions)
-        elif "subjectsfolder=" in arg:
-            k, subjectsfolder = arg.split("=", 1)
-            command += '%s="%s" ' % (k, subjectsfolder)
+        elif "sessionsfolder=" in arg:
+            k, sessionsfolder = arg.split("=", 1)
+            command += '%s="%s" ' % (k, sessionsfolder)
         elif "csessions=" in arg:
             k, csessions = arg.split("=", 1)
             command += '--sessions="%s" ' % (csessions)
@@ -788,9 +788,9 @@ def main(args=None):
                 
         # split sessions via sessionids or split existing sessionids
         if sessionids is None:
-            sessionids = getSesssionIDs(sessions, subjectsfolder=subjectsfolder)
+            sessionids = getSesssionIDs(sessions, sessionsfolder=sessionsfolder)
         else:
-            getsessionids = getSesssionIDs(sessions, subjectsfolder=subjectsfolder)
+            getsessionids = getSesssionIDs(sessions, sessionsfolder=sessionsfolder)
             sessionidsSplit = re.split(' +|,|\|', sessionids)
             print("sessionidsSplit:", sessionidsSplit, "\nsessionids",  sessionids, "\ngetsessionids", getsessionids)
             sessionids = [e for e in getsessionids if e in sessionidsSplit]
