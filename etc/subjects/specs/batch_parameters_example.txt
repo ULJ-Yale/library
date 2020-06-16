@@ -67,7 +67,7 @@
 # _event_string             :                 ... string specifying what and how of task to regress out
 # _source_folder            : True            ... hould we check for source folder (yes/no)
 # _wbmask                   :                 ... mask specifying what ROI to exclude from WB mask
-# _sbjroi                   :                 ... a mask used to specify subject specific WB
+# _sessionroi               :                 ... a mask used to specify session specific WB
 # _nroi                     :                 ... additional nuisance regressors ROI and which not to mask by brain mask (e.g. 'nroi.names|eyes,scull')
 # _shrinknsroi              : true            ... whether to shrink signal nuisance ROI (V,WM,WB) true or false
 # _path_bold                : bold[N]/*faln_dbnd_xr3d_atl.4dfp.img ... the mask to use for searching for bold images
