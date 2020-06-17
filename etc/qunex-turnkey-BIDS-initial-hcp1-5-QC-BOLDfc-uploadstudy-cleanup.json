@@ -192,7 +192,7 @@
       "description": null,
       "required": false,
       "mount": "out",
-      "path": "#XNAT_PROJECT#/subjects/QC",
+      "path": "#XNAT_PROJECT#/sessions/QC",
       "glob": null
     }
   ],

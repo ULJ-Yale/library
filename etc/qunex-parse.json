@@ -136,7 +136,7 @@
       "description": null,
       "required": false,
       "mount": "out",
-      "path": "#PATHFINDER_PROJECT#/subjects/QC",
+      "path": "#PATHFINDER_PROJECT#/sessions/QC",
       "glob": null
     }
   ],
