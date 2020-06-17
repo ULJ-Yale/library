@@ -376,7 +376,7 @@ def getSesssionIDsFromBatchFile(filename):
     getSesssionIDsFromBatchFile(filename)
 
     An internal function for reading batch.txt files. It reads the file and
-    returns a list of subjects with the information on images and the additional
+    returns a list of sessions with the information on images and the additional
     parameters specified in the header.
 
     ---
@@ -419,7 +419,7 @@ def getSesssionIDsFromList(filename):
     getSesssionIDsFromList(filename)
 
     An internal function for reading list files. It reads the file and
-    returns a list of subjects ids.
+    returns a list of session ids.
 
     ---
     Written by Grega Repovs and Jure Demsar.
@@ -652,7 +652,7 @@ def main(args=None):
     ------------
 
     $ qunexContainer hcp2 \\
-      --sessionsfolder=/data/study/subjects \\
+      --sessionsfolder=/data/study/sessions \\
       --sessions=/data/study/processing/batch.txt \\
       --parsessions=4 \\
       --container=/singularity/qunex_suite-0_38_10.simg \\
