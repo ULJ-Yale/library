@@ -598,7 +598,7 @@ export TemplateFolder PATH
 MATLABPATH=$TemplateFolder:$MATLABPATH
 export MATLABPATH
 
-NIUTemplateFolder=$QUNEXPATH/niutilites/templates/
+NIUTemplateFolder=$QUNEXPATH/niutilities/templates/
 PATH=${NIUTemplateFolder}:${PATH}
 export NIUTemplateFolder PATH
 
