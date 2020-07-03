@@ -186,7 +186,7 @@ Window 1:
                         <Element Index="0">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/T1w_acpc_dc_restore.nii.gz"
+                                   Name="DUMMYPATH/T1w/T1w_acpc_dc_restore.nii.gz"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
@@ -306,7 +306,7 @@ Window 1:
                         <Element Index="1">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame10_brain.nii.gz"
+                                   Name="DUMMYPATH/T1w/DUMMYDWIPATH/data_frame10_brain.nii.gz"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
@@ -426,7 +426,7 @@ Window 1:
                         <Element Index="2">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz"
+                                   Name="DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
@@ -559,7 +559,7 @@ Window 1:
                                       Version="1">
                                  <Object Type="enumeratedType" Name="dataFileType"><![CDATA[VOLUME]]></Object>
                                  <Object Type="enumeratedType" Name="structure"><![CDATA[INVALID]]></Object>
-                                 <Object Type="pathName" Name="fileName"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/T1w_acpc_dc_restore.nii.gz]]></Object>
+                                 <Object Type="pathName" Name="fileName"><![CDATA[DUMMYPATH/T1w/T1w_acpc_dc_restore.nii.gz]]></Object>
                                  <Object Type="boolean" Name="selected">true</Object>
                               </Object>
                            </Element>
@@ -570,7 +570,7 @@ Window 1:
                                       Version="1">
                                  <Object Type="enumeratedType" Name="dataFileType"><![CDATA[VOLUME]]></Object>
                                  <Object Type="enumeratedType" Name="structure"><![CDATA[INVALID]]></Object>
-                                 <Object Type="pathName" Name="fileName"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame10_brain.nii.gz]]></Object>
+                                 <Object Type="pathName" Name="fileName"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame10_brain.nii.gz]]></Object>
                                  <Object Type="boolean" Name="selected">true</Object>
                               </Object>
                            </Element>
@@ -581,7 +581,7 @@ Window 1:
                                       Version="1">
                                  <Object Type="enumeratedType" Name="dataFileType"><![CDATA[VOLUME]]></Object>
                                  <Object Type="enumeratedType" Name="structure"><![CDATA[INVALID]]></Object>
-                                 <Object Type="pathName" Name="fileName"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                 <Object Type="pathName" Name="fileName"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                  <Object Type="boolean" Name="selected">true</Object>
                               </Object>
                            </Element>
@@ -2253,7 +2253,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -2391,7 +2391,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -2529,7 +2529,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/T1w_acpc_dc_restore.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/T1w_acpc_dc_restore.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[T1w_acpc_dc_restore.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -2685,7 +2685,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame10_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame10_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame10_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -2823,7 +2823,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -2961,7 +2961,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/T1w_acpc_dc_restore.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/T1w_acpc_dc_restore.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[T1w_acpc_dc_restore.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -3117,7 +3117,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame10_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame10_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame10_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -3255,7 +3255,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -3393,7 +3393,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/T1w_acpc_dc_restore.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/T1w_acpc_dc_restore.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[T1w_acpc_dc_restore.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -3549,7 +3549,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -3687,7 +3687,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -3825,7 +3825,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/T1w_acpc_dc_restore.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/T1w_acpc_dc_restore.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[T1w_acpc_dc_restore.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -3993,7 +3993,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -4131,7 +4131,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -4269,7 +4269,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -4425,7 +4425,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -4563,7 +4563,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -4701,7 +4701,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -4857,7 +4857,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -4995,7 +4995,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -5133,7 +5133,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -5289,7 +5289,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -5427,7 +5427,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
@@ -5565,7 +5565,7 @@ DUMMYTIMESTAMP</textData>
                                                          <Element Index="3">1</Element>
                                                       </ObjectArray>
                                                    </Object>
-                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
+                                                   <Object Type="pathName" Name="selectedMapFileNameWithPath"><![CDATA[DUMMYPATH/T1w/DUMMYDWIPATH/data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapFile"><![CDATA[data_frame1_brain.nii.gz]]></Object>
                                                    <Object Type="string" Name="selectedMapName"><![CDATA[]]></Object>
                                                    <Object Type="integer" Name="selectedMapIndex">0</Object>
