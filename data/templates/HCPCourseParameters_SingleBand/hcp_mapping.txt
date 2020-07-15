@@ -1,6 +1,0 @@
-#  HCP mapping description file
-#  ----------------------------
-
-T1w              => T1w
-T2w              => T2w
-bold rest1       => bold:rest
