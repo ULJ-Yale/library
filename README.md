@@ -4,9 +4,11 @@ The Qu|Nex `library` component contains miscellaneous dependencies,
 environment scripts, relevant data, parameter files, etc. The `library` code 
 is required for proper Qu|Nex functionality.
 
-The Qu|Nex `library` repo is co-developed and co-maintained by the 
-[Mind and Brain Lab led by Grega Repovs](http://psy.ff.uni-lj.si/mblab/en) 
-and the [Anticevic Lab](http://anticeviclab.yale.edu/).
+The Qu|Nex `library` code is co-developed and co-maintained by the:
+
+* [Anticevic Lab, Yale University](http://anticeviclab.yale.edu/),
+* [Mind and Brain Lab, University of Ljubljana](http://psy.ff.uni-lj.si/mblab/en),
+* [Murray Lab, Yale University](https://medicine.yale.edu/lab/murray/).
 
 
 Quick links
@@ -23,6 +25,17 @@ Quick links
 Change log
 ----------
 
+* 0.61.0 Implementation of bug fixes across connector and pipeline restructure back-compatibility
+* 0.60.1  Full support for hcp_suffix in runQC.
+* 0.60.0  Renamed all subject related parameters to session. Pipeline architecture restructure.
+* 0.50.11 Updated ColeAnticevicNetPartition with files from most recent release (v1.1.4) of the parcellation.
+* 0.50.10 Updated ColeAnticevicNetPartition with files from most recent release of the parcellation.
+* 0.50.9  Added montage templates to the repository.
+* 0.50.8  Consistent jobname in scheduling between qunex and qunexContainer.
+* 0.50.7  License and README updates.
+* 0.50.6  Replaced REMOVED.git-id files.
+* 0.50.5  Fixed QC templates.
+* 0.50.4  Renamed cores and threads parameters.
 * 0.50.3  Set MSMSulc as the default regname.
 * 0.50.2  qunex_envstatus now reports OS info.
 * 0.50.1  Removed double slash in derivates from MATLABDIR.
