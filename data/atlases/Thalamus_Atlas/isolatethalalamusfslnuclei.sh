@@ -103,7 +103,7 @@ isolatethalamusfslnuclei() {
 
 	echo "Mask FSL Thalamic atlas with the CIFTI-based subcortical atlas template..."
 	
-	# first binarize the subcortical Atlas from a sample subject
+	# first binarize the subcortical Atlas from a sample session
 	3dcalc -overwrite -a ${TOOLS}/MNAP/general/templates/Atlas_ROIs.2.nii.gz -expr 'step(a)' -prefix ${TOOLS}/MNAP/general/templates/Atlas_ROIs.2.Binary.nii
 	# compute logical AND (overlap) between the FSL atlas and CIFTI space
 	3dcalc -overwrite -a ${TOOLS}/MNAP/general/templates/Atlas_ROIs.2.Binary.nii -b ${TOOLS}/MNAP/general/templates/Thalamus_Atlas/Thalamus-maxprob-thr25-2mm.nii.gz -expr 'a*b' -prefix ${TOOLS}/MNAP/general/templates/Thalamus_Atlas/Thalamus-maxprob-thr25-2mm.AtlasMasked.nii

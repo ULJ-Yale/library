@@ -95,3 +95,8 @@ ENV/
 
 # mac stuff
 *.DS_store
+
+# Qu|Nex stuff
+1
+2
+*.out

@@ -257,7 +257,7 @@ Window 1:
                         <Element Index="0">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.flat.32k_fs_LR.surf.gii"
+                                   Name="DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.flat.32k_fs_LR.surf.gii"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
@@ -334,7 +334,7 @@ Window 1:
                         <Element Index="1">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii"
+                                   Name="DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
@@ -411,7 +411,7 @@ Window 1:
                         <Element Index="2">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.very_inflated.32k_fs_LR.surf.gii"
+                                   Name="DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.very_inflated.32k_fs_LR.surf.gii"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
@@ -488,7 +488,7 @@ Window 1:
                         <Element Index="3">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.flat.32k_fs_LR.surf.gii"
+                                   Name="DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.flat.32k_fs_LR.surf.gii"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
@@ -565,7 +565,7 @@ Window 1:
                         <Element Index="4">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii"
+                                   Name="DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
@@ -642,7 +642,7 @@ Window 1:
                         <Element Index="5">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.very_inflated.32k_fs_LR.surf.gii"
+                                   Name="DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.very_inflated.32k_fs_LR.surf.gii"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
@@ -719,7 +719,7 @@ Window 1:
                         <Element Index="6">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/DUMMYIMAGEPATH/DUMMYIMAGEFILE"
+                                   Name="DUMMYIMAGEPATH/DUMMYIMAGEFILE"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
@@ -1006,7 +1006,7 @@ Window 1:
                         <Element Index="7">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/DUMMYIMAGEPATH/data.dynconn.nii"
+                                   Name="DUMMYIMAGEPATH/data.dynconn.nii"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
@@ -1112,7 +1112,7 @@ Window 1:
                         <Element Index="8">
                            <Object Type="class"
                                    Class="CaretDataFile"
-                                   Name="DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/T1w_restore.nii.gz"
+                                   Name="DUMMYPATH/MNINonLinear/T1w_restore.nii.gz"
                                    Version="1">
                               <Object Type="class"
                                       Class="LabelDrawingProperties"
@@ -12361,28 +12361,28 @@ Window 1:
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftFirstSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.very_inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.very_inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.very_inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftSecondSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightFirstSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.very_inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.very_inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.very_inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightSecondSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="boolean" Name="m_leftEnabled">true</Object>
@@ -12839,28 +12839,28 @@ Window 1:
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftFirstSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.very_inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.very_inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.very_inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftSecondSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightFirstSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightSecondSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="boolean" Name="m_leftEnabled">true</Object>
@@ -13317,28 +13317,28 @@ Window 1:
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftFirstSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.very_inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.very_inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.very_inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftSecondSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightFirstSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.very_inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.very_inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.very_inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightSecondSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="boolean" Name="m_leftEnabled">false</Object>
@@ -13795,28 +13795,28 @@ Window 1:
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftFirstSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftSecondSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightFirstSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightSecondSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="boolean" Name="m_leftEnabled">true</Object>
@@ -14273,28 +14273,28 @@ Window 1:
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftFirstSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftSecondSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightFirstSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightSecondSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="boolean" Name="m_leftEnabled">true</Object>
@@ -14751,28 +14751,28 @@ Window 1:
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftFirstSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftSecondSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightFirstSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightSecondSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.inflated.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="boolean" Name="m_leftEnabled">false</Object>
@@ -15232,14 +15232,14 @@ Window 1:
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
@@ -15698,14 +15698,14 @@ Window 1:
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
@@ -16164,14 +16164,14 @@ Window 1:
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
@@ -16630,14 +16630,14 @@ Window 1:
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
@@ -17096,14 +17096,14 @@ Window 1:
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
@@ -17562,14 +17562,14 @@ Window 1:
                                                Class="SurfaceSelectionModel"
                                                Name="m_leftSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.flat.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
                                                Class="SurfaceSelectionModel"
                                                Name="m_rightSurfaceSelectionModel"
                                                Version="1">
-                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
+                                          <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
                                           <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.R.flat.32k_fs_LR.surf.gii]]></Object>
                                        </Object>
                                        <Object Type="class"
@@ -17764,7 +17764,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -17794,7 +17794,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -17824,7 +17824,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -17854,7 +17854,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -17884,7 +17884,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -17914,7 +17914,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -17944,7 +17944,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -17974,7 +17974,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18004,7 +18004,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18034,7 +18034,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18064,7 +18064,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18094,7 +18094,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18124,7 +18124,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18154,7 +18154,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18184,7 +18184,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18214,7 +18214,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18244,7 +18244,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18274,7 +18274,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18304,7 +18304,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18334,7 +18334,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18364,7 +18364,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18394,7 +18394,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18424,7 +18424,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18454,7 +18454,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18484,7 +18484,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18855,7 +18855,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18885,7 +18885,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18915,7 +18915,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18945,7 +18945,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -18975,7 +18975,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19005,7 +19005,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19035,7 +19035,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19065,7 +19065,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19095,7 +19095,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19125,7 +19125,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19155,7 +19155,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19185,7 +19185,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19215,7 +19215,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19245,7 +19245,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19275,7 +19275,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19305,7 +19305,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19335,7 +19335,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19365,7 +19365,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19395,7 +19395,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19425,7 +19425,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19455,7 +19455,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19485,7 +19485,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19515,7 +19515,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19545,7 +19545,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19575,7 +19575,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19946,7 +19946,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -19976,7 +19976,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20006,7 +20006,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20036,7 +20036,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20066,7 +20066,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20096,7 +20096,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20126,7 +20126,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20156,7 +20156,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20186,7 +20186,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20216,7 +20216,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20246,7 +20246,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20276,7 +20276,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20306,7 +20306,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20336,7 +20336,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20366,7 +20366,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20396,7 +20396,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20426,7 +20426,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20456,7 +20456,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20486,7 +20486,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20516,7 +20516,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20546,7 +20546,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20576,7 +20576,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20606,7 +20606,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20636,7 +20636,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -20666,7 +20666,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21037,7 +21037,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21067,7 +21067,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21097,7 +21097,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21127,7 +21127,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21157,7 +21157,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21187,7 +21187,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21217,7 +21217,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21247,7 +21247,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21277,7 +21277,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21307,7 +21307,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21337,7 +21337,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21367,7 +21367,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21397,7 +21397,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21427,7 +21427,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21457,7 +21457,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21487,7 +21487,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21517,7 +21517,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21547,7 +21547,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21577,7 +21577,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21607,7 +21607,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21637,7 +21637,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21667,7 +21667,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21697,7 +21697,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21727,7 +21727,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -21757,7 +21757,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22128,7 +22128,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22158,7 +22158,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22188,7 +22188,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22218,7 +22218,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22248,7 +22248,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22278,7 +22278,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22308,7 +22308,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22338,7 +22338,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22368,7 +22368,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22398,7 +22398,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22428,7 +22428,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22458,7 +22458,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22488,7 +22488,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22518,7 +22518,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22548,7 +22548,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22578,7 +22578,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22608,7 +22608,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22638,7 +22638,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22668,7 +22668,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22698,7 +22698,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22728,7 +22728,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22758,7 +22758,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22788,7 +22788,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22818,7 +22818,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -22848,7 +22848,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23219,7 +23219,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23249,7 +23249,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23279,7 +23279,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23309,7 +23309,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23339,7 +23339,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23369,7 +23369,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23399,7 +23399,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23429,7 +23429,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23459,7 +23459,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23489,7 +23489,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23519,7 +23519,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23549,7 +23549,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23579,7 +23579,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23609,7 +23609,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23639,7 +23639,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23669,7 +23669,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23699,7 +23699,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23729,7 +23729,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23759,7 +23759,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23789,7 +23789,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23819,7 +23819,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23849,7 +23849,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23879,7 +23879,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23909,7 +23909,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"
@@ -23939,7 +23939,7 @@ Window 1:
                                          Class="SurfaceSelectionModel"
                                          Name="m_surfaceSelectionModel"
                                          Version="1">
-                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/DUMMYCASE/hcp/DUMMYCASE/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
+                                    <Object Type="string" Name="m_selectedSurfaceFullPath"><![CDATA[DUMMYPATH/MNINonLinear/fsaverage_LR32k/DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                     <Object Type="string" Name="m_selectedSurface"><![CDATA[DUMMYCASE.L.inflated.32k_fs_LR.surf.gii]]></Object>
                                  </Object>
                                  <Object Type="class"

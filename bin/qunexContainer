@@ -213,7 +213,7 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
         setDict   = dict([e.strip().split("=", 1) for e in setList])
         jobname   = setDict.pop('jobname', "schedule")
         comname   = setDict.pop('comname', "")
-        jobnum    = setDict.pop('jobnum', "1")
+        jobnum    = setDict.pop('jobnum', "")
     except:
         raise CommandError("schedule", "Misspecified parameter", "Could not parse the settings string:", settings)
 
@@ -277,8 +277,15 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
             elif k == 'N' and jobname == 'schedule':
                 jobname = v
             elif k == 'nodes':
-                sCommand += "#PBS -l nodes=%s\n" % v  
-        sCommand += "#PBS -N %s-%s#%s\n" % (jobname, comname, jobnum)
+                sCommand += "#PBS -l nodes=%s\n" % v
+
+        # job name
+        if (comname != ""):
+            jobname = "%s-%s" % (jobname, comname)
+        if (jobnum != ""):
+            jobname = "%s(%s)" % (jobname, jobnum)
+        sCommand += "#PBS -N %s\n" % jobname
+
         if outputs['stdout'] is not None:
             sCommand += "#PBS -o %s\n" % (outputs['stdout'])
         if outputs['stderr'] is not None:
@@ -297,8 +304,15 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
                 sCommand += "#BSUB -%s %s\n" % (k, v)
             elif k is 'jobName' and jobname == 'schedule':
                 jobname = v
-        sCommand += "#BSUB -P %s-%s\n" % (jobname, comname)
-        sCommand += "#BSUB -J %s-%s#%d\n" % (jobname, comname, jobnum)
+
+        # jobname
+        if (comname != ""):
+            jobname = "%s-%s" % (jobname, comname)
+        sCommand += "#BSUB -P %s\n" % jobname
+        if (jobnum != ""):
+            jobname = "%s(%s)" % (jobname, jobnum)
+        sCommand += "#BSUB -J %s\n" % jobname
+
         if outputs['stdout'] is not None:
             sCommand += "#BSUB -o %s\n" % (outputs['stdout'])
         if outputs['stderr'] is not None:
@@ -307,12 +321,19 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
 
     elif scheduler == "SLURM":
         sCommand += "#!/bin/sh\n"
-        sCommand += "#SBATCH --job-name=%s-%s#%s\n" % (jobname, comname, jobnum)
         for key, value in setDict.items():
             if key in ('J', 'job-name') and jobname == 'schedule':
                 jobname = v
             else:
                 sCommand += "#SBATCH --%s=%s\n" % (key.replace('--', ''), value)
+
+        # jobname
+        if (comname != ""):
+            jobname = "%s-%s" % (jobname, comname)
+        if (jobnum != ""):
+            jobname = "%s(%s)" % (jobname, jobnum)
+        sCommand += "#SBATCH --job-name=%s\n" % jobname
+
         if outputs['stdout'] is not None:
             sCommand += "#SBATCH -o %s\n" % (outputs['stdout'])
         if outputs['stderr'] is not None:
@@ -350,12 +371,12 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
         return result
 
 
-def getSubjidFromBatchFile(filename):
+def getSesssionIDsFromBatchFile(filename):
     '''
-    getSubjidFromBatchFile(filename)
+    getSesssionIDsFromBatchFile(filename)
 
     An internal function for reading batch.txt files. It reads the file and
-    returns a list of subjects with the information on images and the additional
+    returns a list of sessions with the information on images and the additional
     parameters specified in the header.
 
     ---
@@ -374,7 +395,7 @@ def getSubjidFromBatchFile(filename):
     s = s.split("\n---")
     s = [e for e in s if len(e) > 10]
 
-    subjid = []
+    sessionids = []
 
     for sub in s:
         sub = sub.split('\n')
@@ -387,18 +408,18 @@ def getSubjidFromBatchFile(filename):
 
             # id line
             if len(line) == 2 and line[0] == "id":
-                subjid.append(line[1])
+                sessionids.append(line[1])
                 break
 
-    return subjid
+    return sessionids
 
 
-def getSubjidFromList(filename):
+def getSesssionIDsFromList(filename):
     '''
-    getSubjidFromList(filename)
+    getSesssionIDsFromList(filename)
 
     An internal function for reading list files. It reads the file and
-    returns a list of subjects ids.
+    returns a list of session ids.
 
     ---
     Written by Grega Repovs and Jure Demsar.
@@ -408,7 +429,7 @@ def getSubjidFromList(filename):
         print("\n\n=====================================================\nERROR: List file does not exist [%s]", file=filename)
         raise ValueError("ERROR: List file not found: %s" % (filename))
 
-    subjid  = []
+    sessionids  = []
 
     with open(filename) as f:
         for line in f:
@@ -418,14 +439,14 @@ def getSubjidFromList(filename):
             line = [e.strip() for e in line.split(":")]
 
             if len(line) == 2 and line[0] == "subject id":
-                subjid.append(line[1])
+                sessionids.append(line[1])
 
-    return subjid
+    return sessionids
 
 
-def getSubjid(listString, subjectsfolder=None):
+def getSesssionIDs(listString, sessionsfolder=None):
     '''
-    getSubjid(listString)
+    getSesssionIDs(listString)
 
     An internal function for getting a list of subject ids.
 
@@ -442,24 +463,24 @@ def getSubjid(listString, subjectsfolder=None):
     listString = listString.strip()
 
     if re.match(".*\.list$", listString):
-        subjid = getSubjidFromList(listString)
+        sessionids = getSesssionIDsFromList(listString)
 
     elif os.path.isfile(listString):
-        subjid = getSubjidFromBatchFile(listString)
+        sessionids = getSesssionIDsFromBatchFile(listString)
 
     elif re.match(".*\.txt$", listString) or '/' in listString:
         raise ValueError("ERROR: The specified subject file is not found! [%s]!" % listString)
 
     else:
-        subjid = [e.strip() for e in re.split(' +|,|\|', listString)]
+        sessionids = [e.strip() for e in re.split(' +|,|\|', listString)]
 
-        if subjectsfolder is not None:
+        if sessionsfolder is not None:
             nlist = []
-            for s in subjid:
-                nlist += glob.glob(os.path.join(subjectsfolder, s))
-            subjid = [os.path.basename(e) for e in nlist]
+            for s in sessionids:
+                nlist += glob.glob(os.path.join(sessionsfolder, s))
+            sessionids = [os.path.basename(e) for e in nlist]
 
-    return subjid
+    return sessionids
 
 
 def main(args=None):
@@ -581,11 +602,11 @@ def main(args=None):
     Scheduling multiple containers in parallel
     ------------------------------------------
     
-    If the parameters provided include --cores, --scheduler, and --sessions, 
+    If the parameters provided include --parsessions, --scheduler, and --sessions, 
     then qunexContainer will spread the execution of the command by scheduling 
     multiple containers to run on separate nodes. Specifically, it will schedule
-    each node to run a container with `cores` sessions. E.g. if 10 sessions are 
-    specified and cores is set to 3, the command will schedule four containers 
+    each node to run a container with `parsessions` sessions. E.g. if 10 sessions are 
+    specified and parsessions is set to 4, the command will schedule four containers 
     to run on four nodes. The first three containers will each run three 
     sessions in parallel, the fourth container will run the remaining session. 
 
@@ -595,7 +616,7 @@ def main(args=None):
 
     In the case that --sessions parameter needs to be passed to a command, but
     not used to split up processing into multiple container calls (e.g. in 
-    processInbox or BIDSImport commands), specify the sessions to pass to the
+    importDICOM or importBIDS commands), specify the sessions to pass to the
     call using the --csessions parameter. The value of that parameter will be
     passed on as --sessions parameter to the command.
 
@@ -631,9 +652,9 @@ def main(args=None):
     ------------
 
     $ qunexContainer hcp2 \\
-      --subjectsfolder=/data/study/subjects \\
+      --sessionsfolder=/data/study/sessions \\
       --sessions=/data/study/processing/batch.txt \\
-      --cores=4 \\
+      --parsessions=4 \\
       --container=/singularity/qunex_suite-0_38_10.simg \\
       --scheduler="SLURM,time=2-00:00:00,ntasks=1,cpus-per-task=2,mem-per-cpu=15000,partition=pi_anticevic"
 
@@ -674,10 +695,10 @@ def main(args=None):
     bash_post      = None
     bind           = None
     script         = None
-    cores          = 1
+    parsessions    = 1
     sessions       = None
-    subjectsfolder = None
-    subjid         = None
+    sessionsfolder = None
+    sessionids     = None
     envars         = None
     dockeropt      = None
     output         = None
@@ -702,20 +723,20 @@ def main(args=None):
             k, bind = arg.split("=", 1)
         elif "script=" in arg:
             k, script = arg.split("=", 1)
-        elif "cores=" in arg:
-            k, cores = arg.split("=", 1)
-            command += '%s="%s" ' % (k, cores)
-        elif "subjectsfolder=" in arg:
-            k, subjectsfolder = arg.split("=", 1)
-            command += '%s="%s" ' % (k, subjectsfolder)
+        elif "parsessions=" in arg:
+            k, parsessions = arg.split("=", 1)
+            command += '%s="%s" ' % (k, parsessions)
+        elif "sessionsfolder=" in arg:
+            k, sessionsfolder = arg.split("=", 1)
+            command += '%s="%s" ' % (k, sessionsfolder)
         elif "csessions=" in arg:
             k, csessions = arg.split("=", 1)
             command += '--sessions="%s" ' % (csessions)
         elif "sessions=" in arg:            
             k, sessions = arg.split("=", 1)
             command += '%s="%s" ' % (k, sessions)        
-        elif "subjid=" in arg:
-            k, subjid = arg.split("=", 1)
+        elif "sessionids=" in arg:
+            k, sessionids = arg.split("=", 1)
         elif "=" in arg:
             k, v = arg.split('=', 1)
             command += '%s="%s" ' % (k, v)
@@ -726,7 +747,7 @@ def main(args=None):
         print("ERROR: Please specify either sessions or csessions, but not both!")
         exit(1)
 
-    cores = int(cores)
+    parsessions = int(parsessions)
 
     if command.startswith('?scheduler'):
         print(schedule.__doc__)
@@ -759,58 +780,58 @@ def main(args=None):
     dockeropt += " -v \"%s\":/root" % (homedir)
 
     # run in parallel if:
-    # - cores is not None
+    # - parsessions is not None
     # - schedulers is not None
     # - sessions is not None
-    subjidArray = []
-    if cores is not None and sessions is not None and scheduler is not None:
+    sessionidsArray = []
+    if parsessions is not None and sessions is not None and scheduler is not None:
                 
-        # split sessions via subjid or split existing subjid
-        if subjid is None:
-            subjid = getSubjid(sessions, subjectsfolder=subjectsfolder)
+        # split sessions via sessionids or split existing sessionids
+        if sessionids is None:
+            sessionids = getSesssionIDs(sessions, sessionsfolder=sessionsfolder)
         else:
-            subjids = getSubjid(sessions, subjectsfolder=subjectsfolder)
-            subjidSplit = re.split(' +|,|\|', subjid)
-            print("subjidSplit:", subjidSplit, "\nsubjid",  subjid, "\nsubjids", subjids)
-            subjid = [e for e in subjids if e in subjidSplit]
+            getsessionids = getSesssionIDs(sessions, sessionsfolder=sessionsfolder)
+            sessionidsSplit = re.split(' +|,|\|', sessionids)
+            print("sessionidsSplit:", sessionidsSplit, "\nsessionids",  sessionids, "\ngetsessionids", getsessionids)
+            sessionids = [e for e in getsessionids if e in sessionidsSplit]
 
         if scheduler is None:
-            containers = cores
+            containers = parsessions
 
-            # split subjids according to cores and add to array
+            # split sessionids according to parsessions and add to array
             start = 0
-            end = len(subjid)
-            chunks = int(math.ceil(end / float(cores)))
+            end = len(sessionids)
+            chunks = int(math.ceil(end / float(parsessions)))
             for i in range(start, end, chunks):
                 start = i
-                subjidChunk = subjid[start:start+chunks]
-                subjidArray.append(','.join(subjidChunk))        
+                sessionidsChunk = sessionids[start:start+chunks]
+                sessionidsArray.append(','.join(sessionidsChunk))        
         
         else:
             containers = 0
 
-            # split subjids according to cores and add to array
-            while subjid:
+            # split sessionids according to parsessions and add to array
+            while sessionids:
                 containers += 1
-                subjidChunk = [subjid.pop(0) for e in range(cores) if subjid]
-                subjidArray.append(','.join(subjidChunk))
+                sessionidsChunk = [sessionids.pop(0) for e in range(parsessions) if sessionids]
+                sessionidsArray.append(','.join(sessionidsChunk))
 
     else:
         # do not run parallel
         containers = 1
-        # add subjid filter back if exists
-        if subjid is not None:
-            subjidArray.append(subjid)
+        # add sessionids filter back if exists
+        if sessionids is not None:
+            sessionidsArray.append(sessionids)
 
     singularity = conimage.endswith(".simg") or conimage.endswith(".sif")
 
     for i in range(0, containers):
         scheduleCommand = command
 
-        # add subjid to command?
-        if i < len(subjidArray):
-            subjid = subjidArray[i]
-            scheduleCommand += 'subjid="%s" ' % (subjid)
+        # add sessionids to command?
+        if i < len(sessionidsArray):
+            sessionids = sessionidsArray[i]
+            scheduleCommand += 'sessionids="%s" ' % (sessionids)
 
         # setup script        
         fid, scriptPath = tempfile.mkstemp(dir=homedir)
