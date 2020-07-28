@@ -24,9 +24,6 @@
 # * This Software conforms to the license outlined in the Qu|Nex Suite:
 # * https://bitbucket.org/oriadev/qunex/src/master/LICENSE.md
 #
-# ### TODO
-#
-#
 # ## Description 
 #   
 # This script, qunexContainer.sh runs QuNex  container 
@@ -48,7 +45,7 @@
 
 usage() {
     echo ""
-    echo "  -- DESCRIPTION:"
+    echo "  DESCRIPTION:"
     echo ""
     echo "  This function implements the initialization of the QuNex container execution for Docker or Singularity."
     echo ""
@@ -66,21 +63,26 @@ usage() {
     echo "  --string=<qunex execution string>         String to execute the QuNex call"
     echo ""
     echo ""
-    echo "  PARAMETERS FOR DOCKER I/O:"
+    echo "  PARAMETERS FOR I/O:"
     echo ""
-    echo "  --inputfolder=<study_folder>              Path to study folder for Docker image"
+    echo "  --inputfolder=<study_folder>              Path to study folder"
     echo ""
-    echo "  --outputfolder=<output_folder>            Path to output folder for Docker image"
+    echo "  --outputfolder=<output_folder>            Path to output folder"
+    echo ""
+    echo "  --specfolder=<spec_folder>                Path to folder with spec files (batch.txt and hcp_mapping.txt). "
+    echo "                                            Not required if spec files are inside inputfolder or outputfolder. "
     echo ""
     echo ""
-    echo " "                          
-    echo "   -- Command to execute the shell script:"
-    echo " "
-    echo "   <path to this script>/qunexContainer.sh \ " 
-    echo "                         --container=<Type of container image> \ "
-    echo "                         --script=<Path of the container folder> \ "
-    echo "                         --inputfolder=<input_folder> \ "
-    echo "                         --outputfolder=<output_folder> \ "
+    echo "  EXECUTION:"
+    echo ""
+    echo "  Command to execute the shell script:"
+    echo ""
+    echo "  <path to this script>/qunexContainer.sh \ " 
+    echo "    --container=<Type of container image> \ "
+    echo "    --script=<Path of the container folder> \ "
+    echo "    --inputfolder=<input_folder> \ "
+    echo "    --outputfolder=<output_folder> \ "
+    echo "    --specfolder=<spec_folder> "
     echo ""
     exit 0
 }
@@ -117,6 +119,7 @@ for i in "$@"; do
     --string=* ) QUNEXstring="${i#*=}"; shift 2;;
     --inputfolder=* ) InputFolder="${i#*=}"; shift 2;;
     --outputfolder=* ) OutputFolder="${i#*=}"; shift 2;;
+    --specfolder=* ) SpecFolder="${i#*=}"; shift 2;;
     --containername=* ) ContainerName="${i#*=}"; shift 2;;
     * ) break ;;
   esac
@@ -132,6 +135,7 @@ echo "QUNEXscript   : ${QUNEXscript}"
 echo "QUNEXstring   : ${QUNEXstring}"
 echo "InputFolder   : ${InputFolder}"
 echo "OutputFolder  : ${OutputFolder}"
+echo "SpecFolder    : ${SpecFolder}"
 echo "ContainerName : ${ContainerName}"
 echo ""
 
@@ -182,6 +186,7 @@ if [[ ${Docker} == 'yes' ]] ; then
             -d -v ${ScriptsDir}/:/data/scripts \
             -v ${InputFolder}/:/data/input \
             -v ${OutputFolder}:/data/output \
+            -v ${SpecFolder}:/data/spec \
             ${ConImage} bash -c "/data/scripts/${QUNEXscript}"
    fi
    if [[ ! -z ${QUNEXstring} ]]; then
@@ -190,6 +195,7 @@ if [[ ${Docker} == 'yes' ]] ; then
             --name ${ContainerName} \
             -d -v ${InputFolder}/:/data/input \
             -v ${OutputFolder}:/data/output \
+            -d -v ${SpecFolder}/:/data/spec \
              ${ConImage} bash -c "/opt/qunex/library/bin/qunex-api-wrapper.sh ${QUNEXstring}"
    fi
 fi
