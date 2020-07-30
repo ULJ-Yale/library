@@ -182,8 +182,8 @@ if [[ ${Docker} == 'yes' ]] ; then
    if [[ ! -z ${QUNEXscript} ]]; then
         echo "    --> Running script ${QUNEXscript}"
         docker container run \
-            --name ${ContainerName} \
-            -d -v ${ScriptsDir}/:/data/scripts \
+            --name ${ContainerName} -d \
+            -v ${ScriptsDir}/:/data/scripts \
             -v ${InputFolder}/:/data/input \
             -v ${OutputFolder}:/data/output \
             -v ${SpecFolder}:/data/spec \
@@ -192,10 +192,10 @@ if [[ ${Docker} == 'yes' ]] ; then
    if [[ ! -z ${QUNEXstring} ]]; then
         echo "    --> Running command string ${QUNEXstring}"
         docker container run \
-            --name ${ContainerName} \
-            -d -v ${InputFolder}/:/data/input \
+            --name ${ContainerName} -d \
+            -v ${InputFolder}/:/data/input \
             -v ${OutputFolder}:/data/output \
-            -d -v ${SpecFolder}/:/data/spec \
+            -v ${SpecFolder}/:/data/spec \
              ${ConImage} bash -c "/opt/qunex/library/bin/qunex-api-wrapper.sh ${QUNEXstring}"
    fi
 fi
