@@ -25,7 +25,9 @@ Quick links
 Change log
 ----------
 
-* 0.61.0 Implementation of bug fixes across connector and pipeline restructure back-compatibility
+* 0.61.2  Added CUDA to PATH.
+* 0.61.1  Added SpecFolder attribute to the qunexContainer.sh script.
+* 0.61.0  Implementation of bug fixes across connector and pipeline restructure back-compatibility
 * 0.60.1  Full support for hcp_suffix in runQC.
 * 0.60.0  Renamed all subject related parameters to session. Pipeline architecture restructure.
 * 0.50.11 Updated ColeAnticevicNetPartition with files from most recent release (v1.1.4) of the parcellation.
