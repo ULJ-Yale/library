@@ -25,6 +25,7 @@ Quick links
 Change log
 ----------
 
+* 0.61.3  qunex_envstatus now prints out HCPpipelines TAG and commit hash.
 * 0.61.2  Added CUDA to PATH.
 * 0.61.1  Added SpecFolder attribute to the qunexContainer.sh script.
 * 0.61.0  Implementation of bug fixes across connector and pipeline restructure back-compatibility
