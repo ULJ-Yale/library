@@ -524,8 +524,11 @@ def main(args=None):
                     Qu|Nex container before executing the desired Qu|Nex command.
                     Use a semicolon separated list to chain multiple commands. ['']
 
-    --bind      ... Used for binding external folder for execution via a singualrity
+    --bind      ... Used for binding external folder for execution via a singularity
                     container, this is analog to the singularity's -B flag. ['']
+
+    --nv        ... Required when using CUDA inside singularity. This if --nv is
+                    provided then singularity exec --nv will be ran.
 
     --script    ... If a script is to be run against the Singularity container
                     rather than a single command, the path to the script to be
@@ -679,6 +682,8 @@ def main(args=None):
                  Added the bind parameter
     2020-01-21 - Jure Demsar
                  Added the bash_post parameter
+    2020-08-24 - Jure Demsar
+                 Added the nv parameter
     """
 
     if args is None:
@@ -694,6 +699,7 @@ def main(args=None):
     bash_pre       = None
     bash_post      = None
     bind           = None
+    nv             = None
     script         = None
     parsessions    = 1
     sessions       = None
@@ -721,6 +727,8 @@ def main(args=None):
             k, bash_post = arg.split("=", 1)
         elif "bind=" in arg:
             k, bind = arg.split("=", 1)
+        elif "nv" in arg:
+            nv = True
         elif "script=" in arg:
             k, script = arg.split("=", 1)
         elif "parsessions=" in arg:
@@ -868,10 +876,16 @@ def main(args=None):
             f.close()
 
             containerCommand += "singularity exec "
+
+            # nv
+            if nv:
+                containerCommand += "--nv "
+
+            # bind
             if bind:
                 containerCommand += "-B %s " % bind
-            containerCommand +=  "%s bash %s" % (conimage, scriptPath)
 
+            containerCommand +=  "%s bash %s" % (conimage, scriptPath)
         else:
             print("rm " + os.path.join(homedir, scriptName), file=f)
             f.close()
