@@ -727,7 +727,7 @@ def main(args=None):
             k, bash_post = arg.split("=", 1)
         elif "bind=" in arg:
             k, bind = arg.split("=", 1)
-        elif "nv" in arg:
+        elif arg == "--nv":
             nv = True
         elif "script=" in arg:
             k, script = arg.split("=", 1)
