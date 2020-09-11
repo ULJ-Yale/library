@@ -1,20 +1,11 @@
 function sts = write_hdr_raw(fname,hdr,be)
-%function sts = write_hdr_raw(fname,hdr,be)
+% Write a NIFTI-1 header
+% FORMAT sts = write_hdr_raw(fname,hdr,be)
+% fname      - filename of image
+% hdr        - a structure containing hdr info
+% be         - whether big-endian or not [Default: native]
 %
-% Write a NIFTI-1 header.
-%
-% INPUTS
-% ======
-%
-% --fname   filename of image
-% --hdr     a structure containing hdr info
-% --be      whether big-endian or not [Default: native]
-%
-% OUTPUT
-% ======
-%
-% sts
-%   status (1 = good, 0 = bad)
+% sts        - status (1=good, 0=bad)
 %__________________________________________________________________________
 % Copyright (C) 2005-2017 Wellcome Trust Centre for Neuroimaging
 
