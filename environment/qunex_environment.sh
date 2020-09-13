@@ -663,6 +663,7 @@ export HCPPIPEDIR_dMRITracFull=${TOOLS}/${QUNEXREPO}/connector/functions/Diffusi
 export HCPPIPEDIR_dMRILegacy=${TOOLS}/${QUNEXREPO}/connector/functions; PATH=${HCPPIPEDIR_dMRILegacy}:${PATH}; export PATH
 export AutoPtxFolder=${HCPPIPEDIR_dMRITracFull}/autoPtx_HCP_extended; PATH=${AutoPtxFolder}:${PATH}; export PATH
 export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries; PATH=${FSLGPUBinary}:${PATH}; export PATH
+export DefaultCUDAVersion="9.1";
 export EDDYCUDADIR=${FSLGPUBinary}/eddy_cuda; PATH=${EDDYCUDADIR}:${PATH}; export PATH; eddy_cuda="eddy_cuda_wQC"; export eddy_cuda
 
 
@@ -1229,12 +1230,17 @@ alias gitqunex=function_gitqunex
 #    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
 #fi
 if [[ ! -z `command -v nvcc` ]]; then
+    # set default version to 9.1
+    NVCCVer="9.1"
+
+    # check other versions
     if [[ `nvcc --version | grep "release"` == *"6.0"* ]]; then NVCCVer="6.0"; fi
     if [[ `nvcc --version | grep "release"` == *"6.5"* ]]; then NVCCVer="6.5"; fi
     if [[ `nvcc --version | grep "release"` == *"7.0"* ]]; then NVCCVer="7.0"; fi
     if [[ `nvcc --version | grep "release"` == *"7.5"* ]]; then NVCCVer="7.5"; fi
     if [[ `nvcc --version | grep "release"` == *"8.0"* ]]; then NVCCVer="8.0"; fi
-    if [[ `nvcc --version | grep "release"` == *"9.1"* ]]; then NVCCVer="9.1"; fi
+
+    # set variables
     BedpostXGPUDir="bedpostx_gpu_cuda_${NVCCVer}" 
     ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_${NVCCVer}"
     bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu
