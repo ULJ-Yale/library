@@ -700,6 +700,7 @@ export HCPPIPEDIR_dMRITracFull=${TOOLS}/${QUNEXREPO}/connector/functions/Diffusi
 export HCPPIPEDIR_dMRILegacy=${TOOLS}/${QUNEXREPO}/connector/functions; PATH=${HCPPIPEDIR_dMRILegacy}:${PATH}; export PATH
 export AutoPtxFolder=${HCPPIPEDIR_dMRITracFull}/autoPtx_HCP_extended; PATH=${AutoPtxFolder}:${PATH}; export PATH
 export FSLGPUBinary=${HCPPIPEDIR_dMRITracFull}/fsl_gpu_binaries; PATH=${FSLGPUBinary}:${PATH}; export PATH
+export DefaultCUDAVersion="9.1";
 export EDDYCUDADIR=${FSLGPUBinary}/eddy_cuda; PATH=${EDDYCUDADIR}:${PATH}; export PATH; eddy_cuda="eddy_cuda_wQC"; export eddy_cuda
 
 
@@ -1271,29 +1272,37 @@ alias gitqunex=function_gitqunex
 # ------------------------------------------------------------------------------
 
 # -- set binary location depending on CUDA 
-if [[ ${LMODPRESENT} != "yes" ]]; then
-    PATH=/usr/local/cuda-7.5/bin:$PATH
-    LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LD_LIBRARY_PATH
-    export LD_LIBRARY_PATH
-    BedpostXGPUDir="bedpostx_gpu_cuda_7.5" 
-    ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.0"
-    bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu
-    export BedpostXGPUDir; export ProbTrackXDIR; export bindir; PATH=${bindir}:${PATH}; PATH=${bindir}/lib:${PATH}; PATH=${bindir}/bin:${PATH}; PATH=${ProbTrackXDIR}:${PATH}; export PATH
-    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
-fi
+#if [[ ${LMODPRESENT} != "yes" ]]; then
+#    PATH=/usr/local/cuda-7.5/bin:$PATH
+#    LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LD_LIBRARY_PATH
+#    export LD_LIBRARY_PATH
+#    BedpostXGPUDir="bedpostx_gpu_cuda_7.5" 
+#    ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.0"
+#    bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu
+#    export BedpostXGPUDir; export ProbTrackXDIR; export bindir; PATH=${bindir}:${PATH}; PATH=${bindir}/lib:${PATH}; PATH=${bindir}/bin:${PATH}; PATH=${ProbTrackXDIR}:${PATH}; export PATH
+#    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
+#fi
+# set default version to 9.1
+NVCCVer="9.1"
+
+# check other versions
 if [[ ! -z `command -v nvcc` ]]; then
+
     if [[ `nvcc --version | grep "release"` == *"6.0"* ]]; then NVCCVer="6.0"; fi
     if [[ `nvcc --version | grep "release"` == *"6.5"* ]]; then NVCCVer="6.5"; fi
     if [[ `nvcc --version | grep "release"` == *"7.0"* ]]; then NVCCVer="7.0"; fi
     if [[ `nvcc --version | grep "release"` == *"7.5"* ]]; then NVCCVer="7.5"; fi
     if [[ `nvcc --version | grep "release"` == *"8.0"* ]]; then NVCCVer="8.0"; fi
-    BedpostXGPUDir="bedpostx_gpu_cuda_${NVCCVer}" 
-    ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_${NVCCVer}"
-    bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu
-    export BedpostXGPUDir; export ProbTrackXDIR; export bindir; PATH=${bindir}:${PATH}; PATH=${bindir}/lib:${PATH}; PATH=${bindir}/bin:${PATH}; PATH=${ProbTrackXDIR}:${PATH}; export PATH
-    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
-    #module load GPU/Cuda/${NVCCVer} &> /dev/null # Module setup if using a cluster
+
 fi
+
+# set variables
+BedpostXGPUDir="bedpostx_gpu_cuda_${NVCCVer}" 
+ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_${NVCCVer}"
+bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu
+export BedpostXGPUDir; export ProbTrackXDIR; export bindir; PATH=${bindir}:${PATH}; PATH=${bindir}/lib:${PATH}; PATH=${bindir}/bin:${PATH}; PATH=${ProbTrackXDIR}:${PATH}; export PATH
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
+
 
 QuNexEnvCheck=`source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus | grep "ERROR"` > /dev/null 2>&1
 if [[ -z ${QuNexEnvCheck} ]]; then
