@@ -25,6 +25,7 @@ Quick links
 Change log
 ----------
 
+* 0.62.1  SLURM scheduling in qunexContainer now supports flags (parameters without values).
 * 0.62.0  Documentation rework.
 * 0.61.7  Added CUDA 9.1 bedpostx support.
 * 0.61.6  Made qunexContainer parameter passing more robust.

@@ -210,7 +210,18 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
     try:
         setList   = [e.strip() for e in settings.split(",")]
         scheduler = setList.pop(0)
-        setDict   = dict([e.strip().split("=", 1) for e in setList])
+        setDict = {}
+
+        # split settings
+        for s in setList:
+            # parameters with values
+            if "=" in s:
+                sSplit = s.split("=", 1)
+                setDict[sSplit[0].strip()] = sSplit[1].strip()
+            # flags
+            else:
+                setDict[s.strip()] = "QX_FLAG"
+
         jobname   = setDict.pop('jobname', "schedule")
         comname   = setDict.pop('comname', "")
         jobnum    = setDict.pop('jobnum', "")
@@ -324,6 +335,8 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
         for key, value in setDict.items():
             if key in ('J', 'job-name') and jobname == 'schedule':
                 jobname = v
+            elif value == "QX_FLAG":
+                sCommand += "#SBATCH --%s\n" % (key.replace('--', ''))
             else:
                 sCommand += "#SBATCH --%s=%s\n" % (key.replace('--', ''), value)
 
