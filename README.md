@@ -25,6 +25,7 @@ Quick links
 Change log
 ----------
 
+* 0.61.7  Added CUDA 9.1 bedpostx support.
 * 0.61.6  Made qunexContainer parameter passing more robust.
 * 0.61.5  Added --nv flag to Singularity runs in qunexContainer for CUDA support.
 * 0.61.4  When running through Singularity CUDA is not loaded from inside the container.
