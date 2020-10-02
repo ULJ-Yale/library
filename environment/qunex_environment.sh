@@ -1218,29 +1218,13 @@ alias gitqunex=function_gitqunex
 # -- Setup CUDA
 # ------------------------------------------------------------------------------
 
-# -- set binary location depending on CUDA 
-#if [[ ${LMODPRESENT} != "yes" ]]; then
-#    PATH=/usr/local/cuda-7.5/bin:$PATH
-#    LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LD_LIBRARY_PATH
-#    export LD_LIBRARY_PATH
-#    BedpostXGPUDir="bedpostx_gpu_cuda_7.5" 
-#    ProbTrackXDIR="${FSLGPUBinary}/probtrackx_gpu_cuda_7.0"
-#    bindir=${FSLGPUBinary}/${BedpostXGPUDir}/bedpostx_gpu
-#    export BedpostXGPUDir; export ProbTrackXDIR; export bindir; PATH=${bindir}:${PATH}; PATH=${bindir}/lib:${PATH}; PATH=${bindir}/bin:${PATH}; PATH=${ProbTrackXDIR}:${PATH}; export PATH
-#    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
-#fi
 # set default version to 9.1
 NVCCVer="9.1"
 
 # check other versions
 if [[ ! -z `command -v nvcc` ]]; then
-
-    if [[ `nvcc --version | grep "release"` == *"6.0"* ]]; then NVCCVer="6.0"; fi
-    if [[ `nvcc --version | grep "release"` == *"6.5"* ]]; then NVCCVer="6.5"; fi
-    if [[ `nvcc --version | grep "release"` == *"7.0"* ]]; then NVCCVer="7.0"; fi
     if [[ `nvcc --version | grep "release"` == *"7.5"* ]]; then NVCCVer="7.5"; fi
     if [[ `nvcc --version | grep "release"` == *"8.0"* ]]; then NVCCVer="8.0"; fi
-
 fi
 
 # set variables
