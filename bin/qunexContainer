@@ -53,8 +53,8 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
     Schedules the provided command to be run by the specified scheduler (PBS, 
     LSF, SLURM are currently supported).
 
-    PARAMETERS
-    ==========
+    INPUTS
+    ======
 
     Required parameter
     ------------------
@@ -68,9 +68,9 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
     scheduler. Additional parameters common to all the schedulers can be
     specified:
 
-    * jobname  - the name of the job to run
-    * comname  - the name of the command the job runs
-    * jobnum   - the number of the job being run
+    - jobname  ... the name of the job to run
+    - comname  ... the name of the command the job runs
+    - jobnum   ... the number of the job being run
 
     Example settings strings:
 
@@ -96,17 +96,20 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
     four different directives provided by "<key>:<value>" strings separated by
     pipe:
 
-    * stdout - specifies a path to a log file that should store standard output
-               of the submitted job
-    * stderr - specified a path to a log file that should store error output
-               of the submitted job
-    * both   - specifies a path to a log file that should store joint standard
-               and error outputs of the submitted job
+    stdout 
+        specifies a path to a log file that should store standard output of the 
+        submitted job
+    stderr 
+        specified a path to a log file that should store error output of the 
+        submitted job
+    both   
+        specifies a path to a log file that should store joint standard and 
+        error outputs of the submitted job
 
     Examples:
 
-    * "stdout:processing.log"
-    * "stdout:processing.output.log|stderr:processing.error.log"
+    . "stdout:processing.log"
+    . "stdout:processing.output.log|stderr:processing.error.log"
 
     Do not specify error and standard outputs both using --output parameter and
     scheduler specific options within settings string.
@@ -127,34 +130,40 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
     do its best to use the right flags. Specifically:
 
     Keys: mem, walltime, software, file, procs, pmem, feature, host,
-    naccesspolicy, epilogue, prologue will be submitted using:
-    "#PBS -l <key>=<value>"
+    naccesspolicy, epilogue, prologue will be submitted using::
 
-    Keys: j, m, o, S, a, A, M, q, t, e, N, l will be submitted using:
-    "#PBS -<key> <value>"
+        "#PBS -l <key>=<value>"
 
-    Key: depend will be submitted using:
-    "#PBS -W depend=<value>"
+    Keys: j, m, o, S, a, A, M, q, t, e, N, l will be submitted using::
+    
+        "#PBS -<key> <value>"
 
-    Key: umask will be submitted using:
-    "#PBS -W umask=<value>"
+    Key: depend will be submitted using::
 
-    Key: nodes is a special case. It will be submitted as:
-    "#PBS -l <value>"
+        "#PBS -W depend=<value>"
+
+    Key: umask will be submitted using::
+
+        "#PBS -W umask=<value>"
+
+    Key: nodes is a special case. It will be submitted as::
+
+        "#PBS -l <value>"
 
     LSF settings
     ------------
 
     For LSF the following key/value parameters are parsed as:
 
-    * queue    -> "#BSUB -q <queue>"
-    * mem      -> "#BSUB -R 'span[hosts=1] rusage[mem=<mem>]"
-    * walltime -> "#BSUB -W <walltime>"
-    * cores    -> "#BSUB -n <cores>"
+    - queue    ... "#BSUB -q <queue>"
+    - mem      ... "#BSUB -R 'span[hosts=1] rusage[mem=<mem>]"
+    - walltime ... "#BSUB -W <walltime>"
+    - cores    ... "#BSUB -n <cores>"
 
-    Keys: g, G, i, L, cwd, outdir, p, s, S, sla, sp, T, U, u, v, e, eo, o, oo, jobName
-    will be submitted using:
-    "#BSUB -<key> <value>"
+    Keys: g, G, i, L, cwd, outdir, p, s, S, sla, sp, T, U, u, v, e, eo, o, oo, 
+    jobName will be submitted using::
+
+        "#BSUB -<key> <value>"
 
     SLURM settings
     --------------
@@ -164,34 +173,39 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
 
     Some of the possible parameters to set are:
 
-    * partition        ... The partition (queue) to use
-    * nodes            ... Total number of nodes to run on
-    * ntasks           ... Number of tasks
-    * cpus-per-task    ... Number of cores per task
-    * time             ... Maximum wall time DD-HH:MM:SS
-    * constraint       ... Specific node architecture
-    * mem-per-cpu      ... Memory requested per CPU in MB
-    * mail-user        ... Email address to send notifications to
-    * mail-type        ... On what events to send emails
+    - partition        ... The partition (queue) to use
+    - nodes            ... Total number of nodes to run on
+    - ntasks           ... Number of tasks
+    - cpus-per-task    ... Number of cores per task
+    - time             ... Maximum wall time DD-HH:MM:SS
+    - constraint       ... Specific node architecture
+    - mem-per-cpu      ... Memory requested per CPU in MB
+    - mail-user        ... Email address to send notifications to
+    - mail-type        ... On what events to send emails
 
-    ----------------
-    Written by Grega Repovš, 2017-06-17
+    '''
 
-    Changelog
-    2017-09-30 - Grega Repovs
-                 Added additional options to scheduling LSF jobs.
-    2017-09-30 - Grega Repovs
-                 Added options to redirect job output to log files.
-    2018-10-03 - Grega Repovs
-                 Added checking for validity of log file directories.
-    2019-03-07 - Jure Demsar
-                 Python3 support.
-    2019-04-14 - Grega Repovs
-                 Updated documentation
-    2019-09-23 - Grega Repovs
-                 UTF8 encoded input to stdin.
+    '''
+    ~~~~~~~~~~~~~~~~~~
+
+    Change log
+
+    2017-06-17 Grega Repovs
+               Initial version
+    2017-09-30 Grega Repovs
+               Added additional options to scheduling LSF jobs.
+    2017-09-30 Grega Repovs
+               Added options to redirect job output to log files.
+    2018-10-03 Grega Repovs
+               Added checking for validity of log file directories.
+    2019-03-07 Jure Demsar
+               Python3 support.
+    2019-04-14 Grega Repovs
+               Updated documentation
+    2019-09-23 Grega Repovs
+               UTF8 encoded input to stdin.
     2019-20-01 Jure Demšar
-               - Upgraded job naming and PBS scheduler
+               Upgraded job naming and PBS scheduler
     '''
 
     # --- check inputs
@@ -210,7 +224,18 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
     try:
         setList   = [e.strip() for e in settings.split(",")]
         scheduler = setList.pop(0)
-        setDict   = dict([e.strip().split("=", 1) for e in setList])
+        setDict = {}
+
+        # split settings
+        for s in setList:
+            # parameters with values
+            if "=" in s:
+                sSplit = s.split("=", 1)
+                setDict[sSplit[0].strip()] = sSplit[1].strip()
+            # flags
+            else:
+                setDict[s.strip()] = "QX_FLAG"
+
         jobname   = setDict.pop('jobname', "schedule")
         comname   = setDict.pop('comname', "")
         jobnum    = setDict.pop('jobnum', "")
@@ -324,6 +349,8 @@ def schedule(command=None, script=None, settings=None, replace=None, workdir=Non
         for key, value in setDict.items():
             if key in ('J', 'job-name') and jobname == 'schedule':
                 jobname = v
+            elif value == "QX_FLAG":
+                sCommand += "#SBATCH --%s\n" % (key.replace('--', ''))
             else:
                 sCommand += "#SBATCH --%s=%s\n" % (key.replace('--', ''), value)
 
@@ -379,7 +406,13 @@ def getSesssionIDsFromBatchFile(filename):
     returns a list of sessions with the information on images and the additional
     parameters specified in the header.
 
-    ---
+    '''
+
+    '''
+    ~~~~~~~~~~~~~~~~~~
+
+    Change log
+
     Written by Grega Repovs and Jure Demsar.
     '''
 
@@ -421,7 +454,12 @@ def getSesssionIDsFromList(filename):
     An internal function for reading list files. It reads the file and
     returns a list of session ids.
 
-    ---
+    '''
+
+    '''
+    ~~~~~~~~~~~~~~~~~~
+
+    Change log
     Written by Grega Repovs and Jure Demsar.
     '''
 
@@ -452,11 +490,16 @@ def getSesssionIDs(listString, sessionsfolder=None):
 
     The provided listString can be:
 
-    * a comma, space or pipe separated list of subject id codes,
-    * a path to a batch file (identified by .txt extension),
-    * a path to a *.list file (identified by .list extension).
+    - a comma, space or pipe separated list of subject id codes,
+    - a path to a batch file (identified by .txt extension),
+    - a path to a *.list file (identified by .list extension).
 
-    ---
+    '''
+
+    '''
+    ~~~~~~~~~~~~~~~~~~
+
+    Change log
     Written by Grega Repovs and Jure Demsar.
     '''
 
@@ -489,81 +532,74 @@ def main(args=None):
 
     qunexContaiiner is a self-standing command that can run Qu|Nex commands 
     against a Singularity or a Docker Qu|Nex container. To run an Qu|Nex command 
-    against a container the basic call is:
+    against a container the basic call is::
 
-    $ qunexContainer <qunex command> [parameters] --container="<a path to the Singularity image or a Docker container name>" [additional options]
+        qunexContainer <qunex command> [parameters] \
+        --container="<a path to the Singularity image or a Docker container name>" [additional options]
     
     `qunex command` is any command supported by Qu|Nex. `parameters` are any
     parameters that should be passed to the qunex command. This part is the same
-    as running:
+    as running::
 
-    $ qunex <qunex command> [parameters]
+        qunex <qunex command> [parameters]
 
-    from within a container or on a self-standing Qu|Nex installation. For list of
-    commands and their parameters consult Qu|Nex online or in-line documentation.
+    from within a container or on a self-standing Qu|Nex installation. For list 
+    of commands and their parameters consult Qu|Nex online or in-line 
+    documentation.
 
     Additionally qunexContainer accepts the following parameters:
 
-    Required parameter:
-    -------------------
+    INPUTS
+    ======
 
-    --container ... specifies either the path to the Singularity container image 
+    --container     specifies either the path to the Singularity container image 
                     or the full specification of the Docker container to be used
                     (e.g. qunex/qunex_suite:0_45_07). This parameter can be 
                     omitted if the value is specified in the `QUNEXCONIMAGE` 
                     environmental variable.
-
-    Optional parameters:
-    --------------------
-
-    --bash_pre  ... If any additional commands have to be run in bash before the
+    --bash_pre      If any additional commands have to be run in bash before the
                     execution of qunexContainer command itself. Use a semicolon
                     separated list to chain multiple commands. ['']
-
-    --bash_post ... Used if any additional commands have to be run inside the
+    --bash_post     Used if any additional commands have to be run inside the
                     Qu|Nex container before executing the desired Qu|Nex command.
-                    Use a semicolon separated list to chain multiple commands. ['']
-
-    --bind      ... Used for binding external folder for execution via a singularity
-                    container, this is analog to the singularity's -B flag. ['']
-
-    --nv        ... Required when using CUDA inside singularity. This if --nv is
+                    Use a semicolon separated list to chain multiple commands. 
+                    ['']
+    --bind          Used for binding external folder for execution via a 
+                    singularity container, this is analog to the singularity's 
+                    -B flag. ['']
+    --nv            Required when using CUDA inside singularity. This if --nv is
                     provided then singularity exec --nv will be ran.
-
-    --script    ... If a script is to be run against the Singularity container
+    --script        If a script is to be run against the Singularity container
                     rather than a single command, the path to the script to be
                     run is specified here. ['']
-
-    --envars    ... If environment variables other than the default set by the
+    --envars        If environment variables other than the default set by the
                     container are to be used, they can be specified in a pipe
                     separated string formatted as:
                     "<variable>=><value>|<variable>=><value>"
                     Note that only the variables recognized by the Qu|Nex suite
                     will be appropriately parsed and used in the container.
-
-    --dockeropt ... A string that lists the additional options to be used when
+    --dockeropt     A string that lists the additional options to be used when
                     running the Docker container. If the parameter is ommited, 
                     the content of `QUNEXDOCKEROPT` environment variable will
                     be used. If neither is specified, the container will be 
                     run in a detached mode with the current folder mounted as 
-                    `/data` by specifying the following options:
+                    `/data` by specifying the following options::
 
-                    '-d -v "$(pwd)":/data'                     
+                        '-d -v "$(pwd)":/data'                     
                     
                     The parameters are to be specified in a string exactly as 
-                    they would be on a command line, e.g:
+                    they would be on a command line, e.g::
 
-                    "-d -v /host/directory:/container/directory"
+                        "-d -v /host/directory:/container/directory"
 
-    --scheduler ... A string that specifies the details to use to submit the 
+    --scheduler     A string that specifies the details to use to submit the 
                     container job to a scheduling system. 
-
-    --output    ... A string specifying where to redirect the standard output 
+    --output        A string specifying where to redirect the standard output 
                     and error when using the scheduler. See "Redirecting 
                     output" for details!
     
-    Results
-    -------
+    RESULTS
+    =======
 
     `qunexContainer` will compile a temporary file with the relevant commands to 
     submit to the container. The file will be created in the users home folder
@@ -592,14 +628,14 @@ def main(args=None):
     key-value pairs that are to be passed as settings to the scheduler. 
     Additional parameters common to all the schedulers can be specified:
 
-    * jobname  - the name of the job to run
-    * comname  - the name of the command the job runs
-    * jobnum   - the number of the job being run
+    - jobname ... the name of the job to run
+    - comname ... the name of the command the job runs
+    - jobnum  ... the number of the job being run
 
-    Example settings strings:
+    Example settings strings::
 
-    "SLURM,jobname=hcp2,time=03-24:00:00,ntasks=10,cpus-per-task=2,mem-per-cpu=2500,partition=pi_anticevic"
-    "LSF,jobname=DWIproc,jobnum=1,cores=20,mem=250000,walltime=650:00,queue=pi_anticevic"
+        "SLURM,jobname=hcp2,time=03-24:00:00,ntasks=10,cpus-per-task=2,mem-per-cpu=2500,partition=pi_anticevic"
+        "LSF,jobname=DWIproc,jobnum=1,cores=20,mem=250000,walltime=650:00,queue=pi_anticevic"
 
 
     Scheduling multiple containers in parallel
@@ -633,57 +669,65 @@ def main(args=None):
     be redirected. The parameter supports three different directives provided by
     "<key>:<value>" pairs in a pipe separated string:
 
-    * stdout - specifies a path to a log file that should store standard output
-               of the submitted job
-    * stderr - specified a path to a log file that should store error output
-               of the submitted job
-    * both   - specifies a path to a log file that should store joint standard
-               and error outputs of the submitted job
+    stdout
+        specifies a path to a log file that should store standard output of the 
+        submitted job
+    stderr
+        specified a path to a log file that should store error output of the 
+        submitted job
+    both
+        specifies a path to a log file that should store joint standard and 
+        error outputs of the submitted job
 
     Examples:
 
-    * "stdout:processing.log"
-    * "stdout:processing.output.log|stderr:processing.error.log"
-    * "both:processing.log"
+    - "stdout:processing.log"
+    - "stdout:processing.output.log|stderr:processing.error.log"
+    - "both:processing.log"
 
     Do not specify error and standard outputs both using --output parameter and
     scheduler specific options within settings string. It is best to provide 
     full absolute paths to the desired log.
 
     
-    Example call
-    ------------
+    EXAMPLE USE
+    ===========
 
-    $ qunexContainer hcp2 \\
-      --sessionsfolder=/data/study/sessions \\
-      --sessions=/data/study/processing/batch.txt \\
-      --parsessions=4 \\
-      --container=/singularity/qunex_suite-0_38_10.simg \\
-      --scheduler="SLURM,time=2-00:00:00,ntasks=1,cpus-per-task=2,mem-per-cpu=15000,partition=pi_anticevic"
+    ::
 
-    ---
-    Written by Grega Repovs and Jure Demsar.
+        qunexContainer hcp2 \\
+        --sessionsfolder=/data/study/sessions \\
+        --sessions=/data/study/processing/batch.txt \\
+        --parsessions=4 \\
+        --container=/singularity/qunex_suite-0_38_10.simg \\
+        --scheduler="SLURM,time=2-00:00:00,ntasks=1,cpus-per-task=2,mem-per-cpu=15000,partition=pi_anticevic"
 
-    Changelog
-    2019-03-23 - Grega Repovs
-                 First complete version with documentation.
-    2019-04-15 - Grega Repovs
-                 Updated Docker submission to enable script support.
-                 Changed image parameter to container
-    2019-07-25 - Grega Repovs
-                 Updated the call to use sessions rather than subjects
-    2019-08-26 - Grega Repovs
-                 Added the csessions parameter
-    2019-09-28 - Grega Repovs
-                 Fixed csession order bug
-    2020-01-15 - Jure Demsar
-                 Added the bash parameter
-    2020-01-21 - Jure Demsar
-                 Added the bind parameter
-    2020-01-21 - Jure Demsar
-                 Added the bash_post parameter
-    2020-08-24 - Jure Demsar
-                 Added the nv parameter
+    """
+
+    """
+    ~~~~~~~~~~~~~~~~~~
+
+    Change log
+
+    2019-03-23 Grega Repovs
+               First complete version with documentation.
+    2019-04-15 Grega Repovs
+               Updated Docker submission to enable script support.
+               Changed image parameter to container
+    2019-07-25 Grega Repovs
+               Updated the call to use sessions rather than subjects
+    2019-08-26 Grega Repovs
+               Added the csessions parameter
+    2019-09-28 Grega Repovs
+               Fixed csession order bug
+    2020-01-15 Jure Demsar
+               Added the bash parameter
+    2020-01-21 Jure Demsar
+               Added the bind parameter
+    2020-01-21 Jure Demsar
+               Added the bash_post parameter
+    2020-08-24 Jure Demsar
+               Added the nv parameter
     """
 
     if args is None:
@@ -727,7 +771,7 @@ def main(args=None):
             k, bash_post = arg.split("=", 1)
         elif "bind=" in arg:
             k, bind = arg.split("=", 1)
-        elif "nv" in arg:
+        elif arg == "--nv":
             nv = True
         elif "script=" in arg:
             k, script = arg.split("=", 1)
