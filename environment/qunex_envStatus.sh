@@ -86,12 +86,18 @@ weho() {
 # ------------------------------------------------------------------------------
 
 usage() {
-    echo ""
-    echo "-- DESCRIPTION:  This a script designed to report status or clear the Qu|Nex suite environment variables."
-    echo ""
-    echo " --envstatus           Reports the status of all environment variables (also supports --envreport or --environment)"
-    echo " --envclear            Clears all environment variables (also supports --envreset or --envpurge)"
-    echo ""
+ echo ""
+ echo "This a script designed to report status or clear the Qu|Nex suite environment "
+ echo "variables."
+ echo ""
+ echo "INPUTS"
+ echo "======"
+ echo ""
+ echo "--envstatus   Reports the status of all environment variables (also supports "
+ echo "              --envreport or --environment)"
+ echo "--envclear    Clears all environment variables (also supports --envreset or "
+ echo "              --envpurge)"
+ echo ""
 }
 
 ######################################### DO WORK ##########################################

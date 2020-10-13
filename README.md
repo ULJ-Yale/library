@@ -25,6 +25,11 @@ Quick links
 Change log
 ----------
 
+* 0.62.2  Cleaned up code that used deprecated CUDA versions.
+* 0.62.1  SLURM scheduling in qunexContainer now supports flags (parameters without values).
+* 0.62.0  Documentation rework.
+* 0.61.7  Added CUDA 9.1 bedpostx support.
+* 0.61.6  Made qunexContainer parameter passing more robust.
 * 0.61.5  Added --nv flag to Singularity runs in qunexContainer for CUDA support.
 * 0.61.4  When running through Singularity CUDA is not loaded from inside the container.
 * 0.61.3  qunex_envstatus now prints out HCPpipelines TAG and commit hash.
