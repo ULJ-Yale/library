@@ -20,7 +20,7 @@
 # ## LICENSE
 #
 # * The qunex_environment.sh = the "Software"
-# * This Software conforms to the license outlined in the Qu|Nex Suite:
+# * This Software conforms to the license outlined in the QuNex Suite:
 # * https://bitbucket.org/oriadev/qunex/src/master/LICENSE.md
 #
 # ## TODO
@@ -28,11 +28,11 @@
 #
 # ## DESCRIPTION:
 #
-# * This is a general script developed as a front-end environment and path organization for the Qu|Nex infrastructure
+# * This is a general script developed as a front-end environment and path organization for the QuNex infrastructure
 #
 # ## PREREQUISITE INSTALLED SOFTWARE
 #
-# * Qu|Nex Suite
+# * QuNex Suite
 #
 # ## PREREQUISITE ENVIRONMENT VARIABLES
 #
@@ -103,7 +103,7 @@ done
 
 usage() {
  echo ""
- echo "This script implements the global environment setup for the Qu|Nex Suite."
+ echo "This script implements the global environment setup for the QuNex Suite."
  echo ""
  echo "Configure the environment script by adding the following lines to the "
  echo ".bash_profile::"
@@ -117,7 +117,7 @@ usage() {
  echo "REQUIRED DEPENDENCIES"
  echo "====================="
  echo ""
- echo "The Qu|Nex Suite assumes a set default folder names for dependencies if "
+ echo "The QuNex Suite assumes a set default folder names for dependencies if "
  echo "undefined by user environment. These are defined relative to the "
  echo "${TOOLS} folder which should be set as a global system variable."
  echo ""
@@ -125,7 +125,7 @@ usage() {
  echo "  |                                       installation "
  echo "  │ "
  echo "  ├── qunex                           --> Env. Variable => QUNEXREPO -- "
- echo "  │                                       All Qu|Nex Suite repositories "
+ echo "  │                                       All QuNex Suite repositories "
  echo "  │                                       (https://bitbucket.org/hidradev/qunextools) "
  echo "  │ "
  echo "  ├── env                             --> conda environments with python "
@@ -143,28 +143,31 @@ usage() {
  echo "  │ "
  echo "  ├── fmriprep                        --> fMRIPrep Pipelines "
  echo "  │   │                                   (https://github.com/poldracklab/fmriprep) "
- echo "  │   ├── fmriprep-latest             --> Env. Variable => FMRIPREPDIR "
+ echo "  │   ├── fmriprep                    --> Env. Variable => FMRIPREPDIR "
  echo "  │   └── fmriprep-<VERSION>          --> Set any other version to FMRIPREPDIR "
  echo "  │ "
  echo "  ├── afni                            --> AFNI: Analysis of Functional"
  echo "  │   │                                   NeuroImages "
  echo "  │   │                                   (https://github.com/afni/afni) "
- echo "  │   └── afni-latest                 --> Env. Variable => AFNIDIR "
+ echo "  │   ├── afni                        --> Env. Variable => AFNIDIR "
+ echo "  │   └── afni-<VERSION>              --> Set any other version to AFNIDIR "
  echo "  │ "
  echo "  ├── dcm2niix                        --> dcm2niix conversion tool "
  echo "  │   │                                   (https://github.com/rordenlab/dcm2niix) "
- echo "  │   └── dcm2niix-latest             --> Env. Variable => DCMNIIDIR "
+ echo "  │   ├── dcm2niix                    --> Env. Variable => DCMNIIDIR "
+ echo "  │   └── dcm2niix-<VERSION>          --> Set any other version to DCMNIIDIR "
  echo "  │ "
  echo "  ├── dicm2nii                        --> dicm2nii conversion tool "
- echo "  │                                       (https://github.com/xiangruili/dicm2nii) "
- echo "  │   └── dicm2nii-latest             --> Env. Variable => DICMNIIDIR "
+ echo "  │   │                                   (https://github.com/xiangruili/dicm2nii) "
+ echo "  │   ├── dicm2nii                    --> Env. Variable => DICMNIIDIR "
+ echo "  │   └── dicm2nii-<VERSION>          --> Set any other version to DICMNIIDIR "
  echo "  │ "
  echo "  ├── freesurfer                      --> FreeSurfer "
  echo "  │   │                                   (http://ftp.nmr.mgh.harvard.edu/pub/dist/freesurfer/5.3.0-HCP/) "
- echo "  │   └── freesurfer-5.3-HCP          --> Env. Variable => FREESURFER_HOME "
+ echo "  │   ├── freesurfer-5.3-HCP          --> Env. Variable => FREESURFER_HOME "
  echo "  │   │                                   (v5.3-HCP version for HCP-compatible "
  echo "  │   │                                   data) "
- echo "  │   └── freesurfer-<VERSION>        --> Env. Variable => FREESURFER_HOME "
+ echo "  │   ├── freesurfer-<VERSION>        --> Env. Variable => FREESURFER_HOME "
  echo "  │   │                                   (v6.0 or later stable for all other "
  echo "  │   │                                   data) "
  echo "  │   └── FreeSurferScheduler         --> Env. Variable => FreeSurferSchedulerDIR "
@@ -172,54 +175,59 @@ usage() {
  echo "  ├── fsl                             --> FSL (v5.0.9 or above with GPU-enabled "
  echo "  │   │                                   DWI tools; "
  echo "  │   │                                   https://fsl.fmrib.ox.ac.uk/fsl/fslwiki) "
- echo "  │   └── fsl-latest                  --> Env. Variable => FSLDIR "
- echo "  │   └── fix-latest                  --> Env. Variable => FSL_FIXDIR - ICA FIX "
+ echo "  │   ├── fsl                         --> Env. Variable => FSLDIR "
+ echo "  │   ├── fsl-<VERSION>               --> Set any other version to FSLDIR "
+ echo "  │   ├── fix                         --> Env. Variable => FSL_FIXDIR - ICA FIX "
+ echo "  │   └── fix-<VERSION>               --> Set any other version to FSL_FIXDIR "
  echo "  │                                       (https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FIX/UserGuide) "
  echo "  │ "
- echo "  ├── matlab                          --> Matlab vR2017b or higher. If Matlab "
+ echo "  ├── matlab                          --> Env. Variable => MATLABDIR "
+ echo "  │   │                                   Matlab vR2017b or higher. If Matlab "
  echo "  │   │                                   is installed system-wide then a "
  echo "  │   │                                   symlink is created here "
- echo "  │   └── matlab-latest               --> Env. Variable => MATLABDIR "
- echo "  │   └── matlab-latest/bin           --> Env. Variable => MATLABBINDIR "
+ echo "  │   └── bin                         --> Env. Variable => MATLABBINDIR "
  echo "  │ "
- echo "  ├── miniconda                       --> miniconda2 for python environment "
- echo "  │   │                                   management and package installation "
- echo "  │   │                                   (https://conda.io/projects/conda/en/latest/user-guide/install/) "
- echo "  │   └── miniconda-latest            --> Env. Variable => CONDADIR "
+ echo "  ├── miniconda                       --> Env. Variable => CONDADIR "
+ echo "  │                                       miniconda2 for python environment "
+ echo "  │                                       management and package installation "
+ echo "  │                                       (https://conda.io/projects/conda/en/latest/user-guide/install/) "
  echo "  │ "
  echo "  ├── octave                          --> Octave v.4.4.1 or higher. If Octave "
  echo "  │   │                                   is installed system-wide then a "
  echo "  │   │                                   symlink is created here "
- echo "  │   └── octave-latest               --> Env. Variable => OCTAVEDIR "
- echo "  │   └── octave-latest/bin           --> Env. Variable => OCTAVEBINDIR "
+ echo "  │   ├── octave                      --> Env. Variable => OCTAVEDIR "
+ echo "  │   ├── octave/bin                  --> Env. Variable => OCTAVEBINDIR "
  echo "  │   └── octavepkg                   --> Env. Variable => OCTAVEPKGDIR -- If "
  echo "  │                                       Octave packages need manual deployment "
  echo "  │                                       then the installed packages go here "
  echo "  │ "
  echo "  ├── palm                            --> PALM: Permutation Analysis of Linear "
- echo "  │                                       Models "
- echo "  │                                       (https://github.com/andersonwinkler/PALM) "
- echo "  │   └── palm-latest-o               --> Env. Variable => PALMDIR (If using "
+ echo "  │   │                                   Models "
+ echo "  │   │                                   (https://github.com/andersonwinkler/PALM) "
+ echo "  │   ├── palm-o                      --> Env. Variable => PALMDIR (If using "
  echo "  │   │                                   Octave) "
- echo "  │   └── palm-latest-m               --> Env. Variable => PALMDIR (If using "
+ echo "  │   ├── palm-m                      --> Env. Variable => PALMDIR (If using "
  echo "  │   │                                   Matlab) "
  echo "  │   └── palm-<VERSION>              --> Set any other version to PALMDIR " 
  echo "  │ "
  echo "  ├── R                               --> R Statistical computing environment"
- echo "  │   └── R-latest                    --> Env. Variable => RDIR "
+ echo "  │   ├── packages                    --> Env. Variable => R_LIBS "
+ echo "  │   └── R                           --> Env. Variable => RDIR "
  echo "  │ "
  echo "  ├── pylib                           --> Env. Variable => PYLIBDIR "
- echo "  │                                       - All Qu|Nex python libraries and tools "
+ echo "  │                                       - All QuNex python libraries and tools "
  echo "  ├── gradunwarp                      --> HCP version of gradunwarp "
  echo "  │   │                                   (https://github.com/Washington-University/gradunwarp) "
- echo "  │   └── gradunwarp-latest           --> Env. Variable => GRADUNWARPDIR"
+ echo "  │   ├── gradunwarp                  --> Env. Variable => GRADUNWARPDIR "
+ echo "  │   └── gradunwarp-<VERSION>        --> Set any other version to GRADUNWARPDIR " 
  echo "  │ "
  echo "  └── workbench/workbench-<VERSION>   --> Connectome Workbench (v1.0 or above; "
  echo "      │                                   https://www.humanconnectome.org/software/connectome-workbench) "
- echo "      └── workbench-<VERSION>         Env. Variable = HCPWBDIR "
+ echo "      ├── workbench                   --> Env. Variable => HCPWBDIR "
+ echo "      └── workbench-<VERSION>         --> Set any other version to HCPWBDIR " 
  echo ""
  echo "These defaults can be redefined if the above paths are declared as global "
- echo "variables in the .bash_profile profile after loading the Qu|Nex environment."
+ echo "variables in the .bash_profile profile after loading the QuNex environment."
  echo ""
  geho "**For full environment report run 'qunex environment'.**"
  echo ""
@@ -335,11 +343,11 @@ fi
 # -- Set up prompt
 # ------------------------------------------------------------------------------
 
-PS1="\[\e[0;36m\][Qu|Nex \W]\$\[\e[0m\] "
-PROMPT_COMMAND='echo -ne "\033]0;Qu|Nex: ${PWD}\007"'
+PS1="\[\e[0;36m\][QuNex \W]\$\[\e[0m\] "
+PROMPT_COMMAND='echo -ne "\033]0;QuNex: ${PWD}\007"'
 
 # ------------------------------------------------------------------------------
-# -- Qu|Nex - General Code
+# -- QuNex - General Code
 # ------------------------------------------------------------------------------
 
 if [ -z ${QUNEXREPO} ]; then
@@ -358,9 +366,9 @@ export QUNEXPATH QUNEXREPO QuNexVer
 
 if [ -e ~/qunexinit.sh ]; then
     echo ""
-    reho " --- NOTE: Qu|Nex is set by your ~/qunexinit.sh file! ----"
+    reho " --- NOTE: QuNex is set by your ~/qunexinit.sh file! ----"
     echo ""
-    reho " ---> Qu|Nex path is set to: ${QUNEXPATH} "
+    reho " ---> QuNex path is set to: ${QUNEXPATH} "
     echo ""
 fi
 
@@ -373,23 +381,23 @@ fi
 # ------------------------------------------------------------------------------
 
 # -- Check if folders for dependencies are set in the global path
-if [[ -z ${FSLDIR} ]]; then FSLDIR="${TOOLS}/fsl/fsl-latest"; export FSLDIR; fi
-if [[ -z ${FSL_FIXDIR} ]]; then FSL_FIXDIR="${TOOLS}/fsl/fix-latest"; fi
+if [[ -z ${FSLDIR} ]]; then FSLDIR="${TOOLS}/fsl/fsl"; export FSLDIR; fi
+if [[ -z ${FSL_FIXDIR} ]]; then FSL_FIXDIR="${TOOLS}/fsl/fix"; fi
 if [[ -z ${FREESURFERDIR} ]]; then FREESURFERDIR="${TOOLS}/freesurfer/freesurfer-6.0"; export FREESURFERDIR; fi
 if [[ -z ${FreeSurferSchedulerDIR} ]]; then FreeSurferSchedulerDIR="${TOOLS}/freesurfer/FreeSurferScheduler"; export FreeSurferSchedulerDIR; fi
-if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="${TOOLS}/workbench/workbench-latest"; export HCPWBDIR; fi
-if [[ -z ${AFNIDIR} ]]; then AFNIDIR="${TOOLS}/afni/afni-latest"; export AFNIDIR; fi
-if [[ -z ${DCMNIIDIR} ]]; then DCMNIIDIR="${TOOLS}/dcm2niix/dcm2niix-latest"; export DCMNIIDIR; fi
-if [[ -z ${DICMNIIDIR} ]]; then DICMNIIDIR="${TOOLS}/dicm2nii/dicm2nii-latest"; export DICMNIIDIR; fi
-if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="${TOOLS}/octave/octave-latest"; export OCTAVEDIR; fi
+if [[ -z ${HCPWBDIR} ]]; then HCPWBDIR="${TOOLS}/workbench/workbench"; export HCPWBDIR; fi
+if [[ -z ${AFNIDIR} ]]; then AFNIDIR="${TOOLS}/afni/afni"; export AFNIDIR; fi
+if [[ -z ${DCMNIIDIR} ]]; then DCMNIIDIR="${TOOLS}/dcm2niix/dcm2niix"; export DCMNIIDIR; fi
+if [[ -z ${DICMNIIDIR} ]]; then DICMNIIDIR="${TOOLS}/dicm2nii/dicm2nii"; export DICMNIIDIR; fi
+if [[ -z ${OCTAVEDIR} ]]; then OCTAVEDIR="${TOOLS}/octave/octave"; export OCTAVEDIR; fi
 if [[ -z ${OCTAVEPKGDIR} ]]; then OCTAVEPKGDIR="${TOOLS}/octave/octavepkg"; export OCTAVEPKGDIR; fi
 if [[ -z ${PYLIBDIR} ]]; then PYLIBDIR="${TOOLS}/pylib"; export PYLIBDIR; fi
-if [[ -z ${FMRIPREPDIR} ]]; then FMRIPREPDIR="${TOOLS}/fmriprep/fmriprep-latest"; export FMRIPREPDIR; fi
+if [[ -z ${FMRIPREPDIR} ]]; then FMRIPREPDIR="${TOOLS}/fmriprep/fmriprep"; export FMRIPREPDIR; fi
 if [[ -z ${MATLABDIR} ]]; then MATLABDIR="${TOOLS}/matlab"; export MATLABDIR; fi
-if [[ -z ${GRADUNWARPDIR} ]]; then GRADUNWARPDIR="${TOOLS}/gradunwarp/gradunwarp-latest"; export GRADUNWARPDIR; fi
+if [[ -z ${GRADUNWARPDIR} ]]; then GRADUNWARPDIR="${TOOLS}/gradunwarp/gradunwarp"; export GRADUNWARPDIR; fi
 if [[ -z ${QUNEXENV} ]]; then QUNEXENV="${TOOLS}/env/qunex"; export QUNEXENV; fi
-if [[ -z ${CONDADIR} ]]; then CONDADIR="${TOOLS}/miniconda/miniconda-latest"; export CONDADIR; fi
-if [[ -z ${RDIR} ]]; then RDIR="${TOOLS}/R/R-latest"; export RDIR; fi
+if [[ -z ${CONDADIR} ]]; then CONDADIR="${TOOLS}/miniconda"; export CONDADIR; fi
+if [[ -z ${RDIR} ]]; then RDIR="${TOOLS}/R/R"; export RDIR; fi
 if [[ -z ${R_LIBS} ]]; then R_LIBS="${TOOLS}/R/packages"; export R_LIBS; fi
 if [[ -z ${USEOCTAVE} ]]; then USEOCTAVE="FALSE"; export USEOCTAVE; fi
 if [[ -z ${MSMBINDIR} ]]; then MSMBINDIR="$TOOLS/MSM_HOCR_v3/Centos"; export MSMBINDIR; fi
@@ -413,7 +421,7 @@ source activate $QUNEXENV 2> /dev/null
 showVersion() {
     QuNexVer=`cat ${TOOLS}/${QUNEXREPO}/VERSION.md`
     echo ""
-    geho " Loading Quantitative Neuroimaging Environment & ToolboX (Qu|Nex) Version: v${QuNexVer}"
+    geho " Loading Quantitative Neuroimaging Environment & ToolboX (QuNex) Version: v${QuNexVer}"
 }
 
 # ------------------------------------------------------------------------------
@@ -448,7 +456,7 @@ geho "Use of this software is subject to the terms and conditions defined by the
 geho "University Copyright Policies:"
 geho "http://ocr.yale.edu/faculty/policies/yale-university-copyright-policy    "
 geho "and the terms and conditions defined in the file 'LICENSE.md' which is a part of "
-geho "the Qu|Nex Suite source code package:"
+geho "the QuNex Suite source code package:"
 geho "https://bitbucket.org/hidradev/qunextools/src/master/LICENSE.md"
 geho ""
 
@@ -504,7 +512,7 @@ if [ "$USEOCTAVE" == "TRUE" ]; then
              cp ${QUNEXPATH}/library/.octaverc ~/.octaverc
          fi
          export LD_LIBRARY_PATH=/usr/lib64/hdf5/:${LD_LIBRARY_PATH} > /dev/null 2>&1
-         if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-latest-o"; fi
+         if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-o"; fi
     fi
 else
     # if [[ ${MatlabTest} == "fail" ]]; then
@@ -513,7 +521,7 @@ else
          
          cyaneho " ---> Setting up Matlab "; echo ""
          QUNEXMCOMMAND='matlab -nodisplay -nosplash -r'
-         if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-latest-m"; fi
+         if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-m"; fi
     # fi
 fi
 # -- Use the following command to run .m code in Matlab
@@ -611,7 +619,7 @@ PATH=${RDIR}:${PATH}
 export RDIR PATH
 
 # ------------------------------------------------------------------------------
-# -- Setup overall Qu|Nex paths
+# -- Setup overall QuNex paths
 # ------------------------------------------------------------------------------
 
 QUNEXCONNPATH=$QUNEXPATH/connector
@@ -671,7 +679,7 @@ alias qunex_environment_purge='source ${TOOLS}/${QUNEXREPO}/library/environment/
 # -- Re-Set HCP Pipeline path to different version if needed 
 if [ -e ~/.qxdevshare ] || [ -e ~/.qxdevind ]; then
     echo ""
-    geho " ==> NOTE: You are in Qu|Nex dev mode. Setting HCP debugging settings"
+    geho " ==> NOTE: You are in QuNex dev mode. Setting HCP debugging settings"
     echo ""
     # -- HCPpipelines Debugging Settings
     export HCP_DEBUG_COLOR=TRUE
@@ -767,7 +775,7 @@ fi
 # export MATLABPATH
 
 # ------------------------------------------------------------------------------
-# -- Qu|Nex - NIUtilities and Matlab Paths
+# -- QuNex - NIUtilities and Matlab Paths
 # ------------------------------------------------------------------------------
 
 # -- Make sure gmri is executable
@@ -798,7 +806,7 @@ PATH=$TOOLS/bin:$PATH
 #    PYTHONPATH=$TOOLS/pylib:$PYTHONPATH
 #    PYTHONPATH=/usr/local/bin:$PYTHONPATH
 #    PYTHONPATH=$TOOLS/env/qunex/bin:$PYTHONPATH
-#    PYTHONPATH=$TOOLS/miniconda/miniconda-latest/pkgs:$PYTHONPATH
+#    PYTHONPATH=$TOOLS/miniconda/pkgs:$PYTHONPATH
 #    PYTHONPATH=$TOOLS/env/qunex/lib/python2.7/site-packages:$PYTHONPATH
 #    PYTHONPATH=$TOOLS/env/qunex/lib/python2.7/site-packages/nibabel/xmlutils.py:$PYTHONPATH
 #    PYTHONPATH=$TOOLS/env/qunex/lib/python2.7/site-packages/pydicom:$PYTHONPATH
@@ -855,7 +863,7 @@ MATLABPATH=$QUNEXPATH/nitools/stats:$MATLABPATH
 # -- Define additional paths here as needed
 
 # ------------------------------------------------------------------------------
-#  Qu|Nex Functions and git aliases for BitBucket commit and pull requests
+#  QuNex Functions and git aliases for BitBucket commit and pull requests
 # ------------------------------------------------------------------------------
 
 # -- gitqunex_usage function help
@@ -864,12 +872,12 @@ gitqunex_usage() {
  echo ""
  echo "gitqunex"
  echo ""
- echo "The Qu|Nex Suite provides functionality for users with repo privileges to "
+ echo "The QuNex Suite provides functionality for users with repo privileges to "
  echo "easily pull or commit & push changes via git. This is done via two aliases that "
  echo "are setup as general environment variables: "
  echo ""
  echo "gitqunex"
- echo "     Alias for the Qu|Nex function that updates the Qu|Nex Suite via git from "
+ echo "     Alias for the QuNex function that updates the QuNex Suite via git from "
  echo "     the origin repo or pushes changes to origin repo."
  echo ""
  echo "INPUTS"
@@ -893,7 +901,7 @@ gitqunex_usage() {
  echo "                 - 'all'  ...  Update both the main repo and all submodules"
  echo "                 - 'main' ...  Update only the main repo"
  echo ""
- geho "Qu|Nex Submodules:"
+ geho "QuNex Submodules:"
  echo ""
  geho "${QuNexSubModules}"
  echo ""
@@ -999,13 +1007,13 @@ function_gitqunexstatus() {
     }
 
     echo ""
-    geho " ================ Running Qu|Nex Suite Repository Status Check ================"
+    geho " ================ Running QuNex Suite Repository Status Check ================"
     geho ""
     unset QuNexBranchPath; unset QuNexSubModules; unset QuNexSubModule
     
     # -- Run it for the main module
     cd ${TOOLS}/${QUNEXREPO}
-    geho "  Qu|Nex repo location: ${TOOLS}/${QUNEXREPO}"
+    geho "  QuNex repo location: ${TOOLS}/${QUNEXREPO}"
     echo ""
     geho " =============================================================================="
     echo ""
@@ -1022,7 +1030,7 @@ function_gitqunexstatus() {
     done
     cd ${TOOLS}/${QuNexREPO}
     echo ""
-    geho " ================ Completed Qu|Nex Suite Repository Status Check ================"
+    geho " ================ Completed QuNex Suite Repository Status Check ================"
     echo ""
 }
 alias gitqunexstatus=function_gitqunexstatus
@@ -1059,40 +1067,40 @@ function_gitqunex() {
 
     # -- Start execution
     echo ""
-    geho "=============== Executing Qu|Nex $QuNexGitCommand function ============== "
+    geho "=============== Executing QuNex $QuNexGitCommand function ============== "
     # -- Performing flag checks
     echo ""
     geho "--- Checking inputs ... "
     echo ""
     if [[ -z ${QuNexGitCommand} ]]; then reho ""; reho "   Error: --command flag not defined. Specify 'pull' or 'push' option."; echo ""; gitqunex_usage; return 1; fi
     if [[ -z ${QuNexBranch} ]]; then reho ""; reho "   Error: --branch flag not defined."; echo ""; gitqunex_usage; return 1; fi
-    if [[ -z ${QuNexBranchPath} ]]; then reho ""; reho "   Error: --branchpath flag for specified branch not defined. Specify absolute path of the relevant Qu|Nex repo."; echo ""; gitqunex_usage; return 1; fi
+    if [[ -z ${QuNexBranchPath} ]]; then reho ""; reho "   Error: --branchpath flag for specified branch not defined. Specify absolute path of the relevant QuNex repo."; echo ""; gitqunex_usage; return 1; fi
     if [[ -z ${QuNexSubModulesList} ]]; then reho ""; reho "   Error: --submodules flag not not defined. Specify 'main', 'all' or specific submodule to commit."; echo ""; gitqunex_usage; return 1; fi
     if [[ ${QuNexSubModulesList} == "all" ]]; then reho ""; geho "   Note: --submodules flag set to all. Setting update for all submodules."; echo ""; fi
-    if [[ ${QuNexSubModulesList} == "main" ]]; then reho ""; geho "   Note: --submodules flag set to main Qu|Nex repo only in $QuNexBranchPath"; echo ""; fi
+    if [[ ${QuNexSubModulesList} == "main" ]]; then reho ""; geho "   Note: --submodules flag set to main QuNex repo only in $QuNexBranchPath"; echo ""; fi
     if [[ ${QuNexGitCommand} == "push" ]]; then
         if [[ -z ${CommitMessage} ]]; then reho ""; reho "   Error: --message flag missing. Please specify commit message."; echo ""; gitqunex_usage; return 1; else CommitMessage="${CommitMessage}"; fi
         if [[ -z ${QuNexAddFiles} ]]; then reho ""; reho "   Error: --add flag not defined. Run 'gitqunexstatus' and specify which files to add."; echo ""; gitqunex_usage; return 1; fi
     fi
 
-    # -- Perform checks that Qu|Nex contains requested branch and that it is actively checked out
+    # -- Perform checks that QuNex contains requested branch and that it is actively checked out
     cd ${QuNexBranchPath}
     echo ""
-    mageho "  * Checking active branch for main Qu|Nex repo in $QuNexBranchPath..."
+    mageho "  * Checking active branch for main QuNex repo in $QuNexBranchPath..."
     echo ""
     if [[ -z `git branch | grep "${QuNexBranch}"` ]]; then reho "Error: Branch $QuNexBranch does not exist in $QuNexBranchPath. Check your repo."; echo ""; gitqunex_usage; return 1; else geho "   --> $QuNexBranch found in $QuNexBranchPath"; echo ""; fi
     if [[ -z `git branch | grep "* ${QuNexBranch}"` ]]; then reho "Error: Branch $QuNexBranch is not checked out and active in $QuNexBranchPath. Check your repo."; echo ""; gitqunex_usage; return 1; else geho "   --> $QuNexBranch is active in $QuNexBranchPath"; echo ""; fi
-    mageho "  * All checks for main Qu|Nex repo passed."
+    mageho "  * All checks for main QuNex repo passed."
     echo ""
 
     # -- Not perform further checks
     if [ "${QuNexSubModulesList}" == "main" ]; then
         echo ""
-        geho "   Note: --submodules flag set to main Qu|Nex repo only. Omitting individual submodules."
+        geho "   Note: --submodules flag set to main QuNex repo only. Omitting individual submodules."
         echo ""
         # -- Check git command
         echo ""
-        geho "--- Running Qu|Nex git ${QuNexGitCommand} for ${QuNexBranch} on Qu|Nex main repo in ${QuNexBranchPath}."
+        geho "--- Running QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex main repo in ${QuNexBranchPath}."
         echo
         cd ${QuNexBranchPath}
         # -- Run a few git tests to verify WORKINGREPO, ORIGIN and BASE tips
@@ -1120,7 +1128,7 @@ function_gitqunex() {
         fi
         function_gitqunexbranch
         echo ""
-        geho "--- Completed Qu|Nex git ${QuNexGitCommand} for ${QuNexBranch} on Qu|Nex main repo in ${QuNexBranchPath}."; echo ""
+        geho "--- Completed QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex main repo in ${QuNexBranchPath}."; echo ""
         return 1
     fi
 
@@ -1139,7 +1147,7 @@ function_gitqunex() {
         fi
     elif [ ${QuNexSubModulesList} == "main" ]; then
         echo ""
-        geho "Note: --submodules flag set to the main Qu|Nex repo."
+        geho "Note: --submodules flag set to the main QuNex repo."
         echo ""
         QuNexSubModules="main"
         if [[ ${QuNexAddFiles} == "all" ]] && [[ ${QuNexGitCommand} == "push" ]]; then
@@ -1150,7 +1158,7 @@ function_gitqunex() {
     elif [[ ${QuNexSubModulesList} != "main*" ]] && [[ ${QuNexSubModulesList} != "all*" ]]; then
         QuNexSubModules=${QuNexSubModulesList}
         echo ""
-        geho "Note: --submodules flag set to selected Qu|Nex repos: $QuNexSubModules"
+        geho "Note: --submodules flag set to selected QuNex repos: $QuNexSubModules"
         echo ""
         if [[ ${QuNexAddFiles} != "all" ]] && [[ ${QuNexGitCommand} == "push" ]]; then
             if [[ `echo ${QuNexSubModules} | wc -w` != 1 ]]; then 
@@ -1178,7 +1186,7 @@ function_gitqunex() {
     # -- First run over specific modules
     for QuNexSubModule in ${QuNexSubModules}; do
         echo ""
-        geho "--- Running Qu|Nex git ${QuNexGitCommand} for ${QuNexBranch} on Qu|Nex submodule ${QuNexBranchPath}/${QuNexSubModule}."
+        geho "--- Running QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex submodule ${QuNexBranchPath}/${QuNexSubModule}."
         echo
         cd ${QuNexBranchPath}/${QuNexSubModule}
         # -- Run a few git tests to verify WORKINGREPO, ORIGIN and BASE tips
@@ -1202,13 +1210,13 @@ function_gitqunex() {
         fi
         function_gitqunexbranch
         echo ""
-        geho "--- Completed Qu|Nex git ${QuNexGitCommand} for ${QuNexBranch} on Qu|Nex submodule ${QuNexBranchPath}/${QuNexSubModule}."; echo ""; echo ""
+        geho "--- Completed QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex submodule ${QuNexBranchPath}/${QuNexSubModule}."; echo ""; echo ""
     done
     unset QuNexSubModule
 
     # -- Finish up with the main submodule after individual modules are committed
     echo ""
-    geho "--- Running Qu|Nex git ${QuNexGitCommand} for ${QuNexBranch} on Qu|Nex main repo in ${QuNexBranchPath}."
+    geho "--- Running QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex main repo in ${QuNexBranchPath}."
     echo
     cd ${QuNexBranchPath}
     function_gitqunexbranch > /dev/null 2>&1
@@ -1231,11 +1239,11 @@ function_gitqunex() {
     fi
     function_gitqunexbranch
     echo ""
-    geho "--- Completed Qu|Nex git ${QuNexGitCommand} for ${QuNexBranch} on Qu|Nex main repo in ${QuNexBranchPath}."; echo ""
+    geho "--- Completed QuNex git ${QuNexGitCommand} for ${QuNexBranch} on QuNex main repo in ${QuNexBranchPath}."; echo ""
 
     # -- Report final completion
     echo ""
-    geho "=============== Completed Qu|Nex $QuNexGitCommand function ============== "
+    geho "=============== Completed QuNex $QuNexGitCommand function ============== "
     echo ""
 
     # -- Reset submodules variable
@@ -1290,10 +1298,10 @@ export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
 
 QuNexEnvCheck=`source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus | grep "ERROR"` > /dev/null 2>&1
 if [[ -z ${QuNexEnvCheck} ]]; then
-    geho " ---> Qu|Nex environment set successfully!"
+    geho " ---> QuNex environment set successfully!"
     echo ""
 else
-    reho "   --> ERROR in Qu|Nex environment. Run 'qunex_envstatus' to check missing variables!"
+    reho "   --> ERROR in QuNex environment. Run 'qunex_envstatus' to check missing variables!"
     echo ""
 fi
 
