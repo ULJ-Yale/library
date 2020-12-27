@@ -567,8 +567,8 @@ def main(args=None):
     --bind          Used for binding external folder for execution via a 
                     singularity container, this is analog to the singularity's 
                     -B flag. ['']
-    --nv            Required when using CUDA inside singularity. This if --nv is
-                    provided then singularity exec --nv will be ran.
+    --nv            Required when using CUDA (GPU) inside singularity. If
+                    provided then singularity exec --nv option will be used.
     --script        If a script is to be run against the Singularity container
                     rather than a single command, the path to the script to be
                     run is specified here. ['']

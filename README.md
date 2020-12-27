@@ -25,6 +25,7 @@ Quick links
 Change log
 ----------
 
+* 0.62.4  Update the qunexConatiner documentation so the use of CUDA flag (--nv) is now clearer.
 * 0.62.3  Removed the latest suffix from the QuNex folder structure.
 * 0.62.2  Cleaned up code that used deprecated CUDA versions.
 * 0.62.1  SLURM scheduling in qunexContainer now supports flags (parameters without values).
