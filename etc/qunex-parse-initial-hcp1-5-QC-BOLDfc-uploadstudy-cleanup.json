@@ -8,7 +8,7 @@
   "image": "qunex/qunex_suite:<replace with image tag in use>",
   "type": "docker",
   "working-directory": "/output",
-  "command-line": "/opt/qunex/library/etc/qunexParse.sh #BIDSFORMAT_ARG# #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #OVERWRITEPROJECTXNAT_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #XNAT_PROJECT# #SUBJECTID#",
+  "command-line": "/opt/qunex/qx_library/etc/qunexParse.sh #BIDSFORMAT_ARG# #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #OVERWRITEPROJECTXNAT_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #XNAT_PROJECT# #SUBJECTID#",
   "mounts": [
     {
       "name": "in",
