@@ -40,7 +40,7 @@
 #
 #    TOOLS=/<absolute_path_to_software_folder>
 #    export TOOLS
-#    source $TOOLS/library/environment/qunex_environment.sh
+#    source $TOOLS/env/qunex_environment.sh
 #
 # ## PREREQUISITE PRIOR PROCESSING
 #
@@ -110,7 +110,7 @@ usage() {
  echo ""
  echo " TOOLS=<path_to_folder_with_qunex_software> "
  echo " export TOOLS "
- echo " source <path_to_folder_with_qunex_software>/library/environment/qunex_environment.sh "
+ echo " source <path_to_folder_with_qunex_software>/env/qunex_environment.sh "
  echo ""
  echo "Permissions of this file need to be set to 770."
  echo ""
@@ -510,7 +510,7 @@ if [ "$USEOCTAVE" == "TRUE" ]; then
          cyaneho " ---> Setting up Octave "; echo ""
          QUNEXMCOMMAND='octave -q --no-init-file --eval'
          if [ ! -e ~/.octaverc ]; then
-             cp ${QUNEXPATH}/library/.octaverc ~/.octaverc
+             cp ${QUNEXPATH}/qx_library/.octaverc ~/.octaverc
          fi
          export LD_LIBRARY_PATH=/usr/lib64/hdf5/:${LD_LIBRARY_PATH} > /dev/null 2>&1
          if [[ -z ${PALMDIR} ]]; then PALMDIR="${TOOLS}/palm/palm-o"; fi
@@ -535,10 +535,32 @@ export QUNEXMCOMMAND
 LD_LIBRARY_PATH=$TOOLS/lib:$TOOLS/lib/lib:$LD_LIBRARY_PATH
 LD_LIBRARY_PATH=/usr/lib64/hdf5:$LD_LIBRARY_PATH
 LD_LIBRARY_PATH=$TOOLS/olib:$LD_LIBRARY_PATH
-PKG_CONFIG_PATH=$TOOLS/lib/lib/pkgconfig:$PKG_CONFIG_PATH
 export LD_LIBRARY_PATH
+
+PKG_CONFIG_PATH=$TOOLS/lib/lib/pkgconfig:$PKG_CONFIG_PATH
 export PKG_CONFIG_PATH
-PATH=$TOOLS/bin:$TOOLS/lib/bin:$TOOLS/lib/lib/:$PATH
+
+# -- Make sure gmri is executable and accessible
+chmod ugo+x $QUNEXPATH/python/qx_utilities/gmri &> /dev/null
+PATH=$QUNEXPATH/python/qx_utilities:$PATH
+
+PATH=$TOOLS/olib:$PATH
+PATH=$TOOLS/bin:$PATH
+PATH=$TOOLS/lib/bin:$PATH
+PATH=$TOOLS/lib/lib/:$PATH
+PATH=$QUNEXPATH/bin:$PATH
+PATH=$QUNEXPATH/env:$PATH
+PATH=/usr/local/bin:$PATH
+PATH=$PATH:/bin
+#PATH=$QUNEXPATH/qx_library/bin:$PATH
+#PATH=$QUNEXPATH/bash/qx_utilities:$PATH
+#PATH=$QUNEXPATH/matlab/qx_utilities:$PATH
+#PATH=$PYLIBDIR/gradunwarp:$PATH
+#PATH=$PYLIBDIR/gradunwarp/core:$PATH
+#PATH=$PYLIBDIR/xmlutils.py:$PATH
+#PATH=$PYLIBDIR:$PATH
+#PATH=$PYLIBDIR/bin:$PATH
+#PATH=$TOOLS/MeshNet:$PATH
 export PATH
 
 # -- FSL probtrackx2_gpu command path
@@ -623,21 +645,21 @@ export RDIR PATH
 # -- Setup overall QuNex paths
 # ------------------------------------------------------------------------------
 
-QUNEXCONNPATH=$QUNEXPATH/connector
-PATH=${QUNEXCONNPATH}:${PATH}
-export QUNEXCONNPATH PATH
-PATH=$QUNEXPATH/connector/functions:$PATH
-export QUNEXFUNCTIONS=${QUNEXCONNPATH}/functions
-MATLABPATH=$QUNEXPATH/connector:$MATLABPATH
-export MATLABPATH
+#QUNEXCONNPATH=$QUNEXPATH/bash/qx_utilities
+#PATH=${QUNEXCONNPATH}:${PATH}
+#export QUNEXCONNPATH PATH
+#PATH=$QUNEXPATH/connector/functions:$PATH
+#export QUNEXFUNCTIONS=${QUNEXCONNPATH}/functions
+#MATLABPATH=$QUNEXPATH/connector:$MATLABPATH
+#export MATLABPATH
 
-HCPATLAS=$QUNEXPATH/library/data/atlases/HCP
+HCPATLAS=$QUNEXPATH/qx_library/data/atlases/HCP
 PATH=${HCPATLAS}:${PATH}
 export HCPATLAS PATH
 MATLABPATH=$HCPATLAS:$MATLABPATH
 export MATLABPATH
 
-TemplateFolder=$QUNEXPATH/library/data/
+TemplateFolder=$QUNEXPATH/qx_library/data/
 PATH=${TemplateFolder}:${PATH}
 export TemplateFolder PATH
 
@@ -653,25 +675,25 @@ unset QuNexSubModules
 QuNexSubModules=`cd $QUNEXPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
 
 #alias qunex='bash ${TOOLS}/${QUNEXREPO}/bin/qunex.sh'
-alias qunex_envset='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_environment.sh'
-alias qunex_environment_set='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_environment.sh'
+alias qunex_envset='source ${TOOLS}/${QUNEXREPO}/env/qunex_environment.sh'
+alias qunex_environment_set='source ${TOOLS}/${QUNEXREPO}/env/qunex_environment.sh'
 
-alias qunex_envhelp='bash ${TOOLS}/${QUNEXREPO}/library/environment/qunex_environment.sh --help'
-alias qunex_environment_help='bash ${TOOLS}/${QUNEXREPO}/library/environment/qunex_environment.sh --help'
+alias qunex_envhelp='bash ${TOOLS}/${QUNEXREPO}/env/qunex_environment.sh --help'
+alias qunex_environment_help='bash ${TOOLS}/${QUNEXREPO}/env/qunex_environment.sh --help'
 
-alias qunex_envcheck='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus'
-alias qunex_envstatus='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus'
-alias qunex_envreport='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus'
-alias qunex_environment_check='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus'
-alias qunex_environment_status='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus'
-alias qunex_environment_report='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus'
+alias qunex_envcheck='source ${TOOLS}/${QUNEXREPO}/env/qunex_envStatus.sh --envstatus'
+alias qunex_envstatus='source ${TOOLS}/${QUNEXREPO}/env/qunex_envStatus.sh --envstatus'
+alias qunex_envreport='source ${TOOLS}/${QUNEXREPO}/env/qunex_envStatus.sh --envstatus'
+alias qunex_environment_check='source ${TOOLS}/${QUNEXREPO}/env/qunex_envStatus.sh --envstatus'
+alias qunex_environment_status='source ${TOOLS}/${QUNEXREPO}/env/qunex_envStatus.sh --envstatus'
+alias qunex_environment_report='source ${TOOLS}/${QUNEXREPO}/env/qunex_envStatus.sh --envstatus'
 
-alias qunex_envreset='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envclear'
-alias qunex_envclear='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envclear'
-alias qunex_envpurge='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envclear'
-alias qunex_environment_reset='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envclear'
-alias qunex_environment_clear='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envclear'
-alias qunex_environment_purge='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envclear'
+alias qunex_envreset='source ${TOOLS}/${QUNEXREPO}/env/qunex_envStatus.sh --envclear'
+alias qunex_envclear='source ${TOOLS}/${QUNEXREPO}/env/qunex_envStatus.sh --envclear'
+alias qunex_envpurge='source ${TOOLS}/${QUNEXREPO}/env/qunex_envStatus.sh --envclear'
+alias qunex_environment_reset='source ${TOOLS}/${QUNEXREPO}/env/qunex_envStatus.sh --envclear'
+alias qunex_environment_clear='source ${TOOLS}/${QUNEXREPO}/env/qunex_envStatus.sh --envclear'
+alias qunex_environment_purge='source ${TOOLS}/${QUNEXREPO}/env/qunex_envStatus.sh --envclear'
 
 # ------------------------------------------------------------------------------
 # -- Setup HCP Pipeline paths
@@ -753,7 +775,7 @@ if [[ -e /opt/.container ]]; then
 fi
 
 # -- FIX ICA Dependencies Folder
-# FIXDIR_DEPEND=${QUNEXPATH}/library/etc/ICAFIXDependencies
+# FIXDIR_DEPEND=${QUNEXPATH}/qx_library/etc/ICAFIXDependencies
 # export FIXDIR_DEPEND
 # PATH=${FIXDIR_DEPEND}:${PATH}
 # MATLABPATH=$FIXDIR_DEPEND:$MATLABPATH
@@ -778,28 +800,6 @@ fi
 # ------------------------------------------------------------------------------
 # -- QuNex - python and MATLAB Paths
 # ------------------------------------------------------------------------------
-
-# -- Make sure gmri is executable
-chmod ugo+x $QUNEXPATH/python/qx_utilities/gmri &> /dev/null
-
-# -- Setup additional paths
-PATH=$QUNEXPATH/connector:$PATH
-PATH=$QUNEXPATH/python/qx_utilities:$PATH
-PATH=$QUNEXPATH/qx_library/bin:$PATH
-PATH=$QUNEXPATH/matlab/qx_utilities:$PATH
-PATH=$TOOLS/bin:$PATH
-# PATH=$PYLIBDIR/gradunwarp:$PATH
-# PATH=$PYLIBDIR/gradunwarp/core:$PATH
-# PATH=$PYLIBDIR/xmlutils.py:$PATH
-# PATH=$PYLIBDIR:$PATH
-# PATH=$PYLIBDIR/bin:$PATH
-# PATH=$TOOLS/MeshNet:$PATH
-PATH=/usr/local/bin:$PATH
-PATH=$PATH:/bin
-PATH=$TOOLS/olib:$PATH
-PATH=$TOOLS/bin:$PATH
-
-
 # --- setup PYTHONPATH and PATH When not conda
 
 #if [ ! -e /opt/.hcppipelines ]; then 
@@ -1297,7 +1297,7 @@ export BedpostXGPUDir; export ProbTrackXDIR; export bindir; PATH=${bindir}:${PAT
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${bindir}/lib
 
 
-QuNexEnvCheck=`source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_envStatus.sh --envstatus | grep "ERROR"` > /dev/null 2>&1
+QuNexEnvCheck=`source ${TOOLS}/${QUNEXREPO}/env/qunex_envStatus.sh --envstatus | grep "ERROR"` > /dev/null 2>&1
 if [[ -z ${QuNexEnvCheck} ]]; then
     geho " ---> QuNex environment set successfully!"
     echo ""
