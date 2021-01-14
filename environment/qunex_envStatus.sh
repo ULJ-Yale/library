@@ -20,7 +20,7 @@
 # ## LICENSE
 #
 # * The qunex_envStatus.sh = the "Software"
-# * This Software conforms to the license outlined in the Qu|Nex Suite:
+# * This Software conforms to the license outlined in the QuNex Suite:
 # * https://bitbucket.org/oriadev/qunex/src/master/LICENSE.md
 #
 # ## TODO
@@ -28,11 +28,11 @@
 #
 # ## DESCRIPTION:
 #
-# * This a script designed to check Qu|Nex suite environment setup
+# * This a script designed to check QuNex suite environment setup
 #
 # ## PREREQUISITE INSTALLED SOFTWARE
 #
-# * Qu|Nex Suite
+# * QuNex Suite
 #
 # ## PREREQUISITE ENVIRONMENT VARIABLES
 #
@@ -87,7 +87,7 @@ weho() {
 
 usage() {
  echo ""
- echo "This a script designed to report status or clear the Qu|Nex suite environment "
+ echo "This a script designed to report status or clear the QuNex suite environment "
  echo "variables."
  echo ""
  echo "INPUTS"
@@ -104,7 +104,7 @@ usage() {
 
 main() {
 
-# -- Clear Qu|Nex environment
+# -- Clear QuNex environment
 
 # -- Hard reset for the environment in the container manually
      #
@@ -116,7 +116,7 @@ main() {
 if [[ "$1" == "--envreset" ]] || [[ "$1" == "--envclear" ]] || [[ "$1" == "--envpurge" ]]; then
     unset $ENVVARIABLES
     echo ""
-    reho " ---> Requested a hard reset of the Qu|Nex environment! "
+    reho " ---> Requested a hard reset of the QuNex environment! "
     echo ""
     for ENVVARIABLE in ${ENVVARIABLES}; do 
         reho " --> Unsetting ${ENVVARIABLE}"
@@ -131,12 +131,12 @@ if [[ "$1" == "--envreset" ]] || [[ "$1" == "--envclear" ]] || [[ "$1" == "--env
     echo ""
 fi
 
-# -- Check Qu|Nex environment
+# -- Check QuNex environment
 
 if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--env" ]] || [[ "$1" == "--environment" ]]; then
     echo ""
     geho "--------------------------------------------------------------"
-    geho " Qu|Nex Environment Status Report"
+    geho " QuNex Environment Status Report"
     geho "--------------------------------------------------------------"
     unset EnvErrorReport
     unset EnvError
@@ -150,7 +150,7 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
     OSVersion="${OSVersion//$'\n'/$'\n'               }"
     echo "               $OSVersion";
     echo ""
-    geho "   Qu|Nex General Environment Variables"
+    geho "   QuNex General Environment Variables"
     geho "----------------------------------------------"
     echo ""
     echo "                 QuNexVer : $QuNexVer";             if [[ -z $QuNexVer ]]; then EnvError="yes"; EnvErrorReport="QuNexVer"; fi
@@ -452,7 +452,7 @@ if [[ "$1" == "--envstatus" ]] || [[ "$1" == "--envreport" ]] || [[ "$1" == "--e
         echo ""
     else
         echo ""
-        geho "=================== Qu|Nex environment set successfully! ===================="
+        geho "=================== QuNex environment set successfully! ===================="
         echo ""
     fi
 fi

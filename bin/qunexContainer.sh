@@ -21,7 +21,7 @@
 # ## LICENSE
 #
 # * The qunexContainer.sh = the "Software"
-# * This Software conforms to the license outlined in the Qu|Nex Suite:
+# * This Software conforms to the license outlined in the QuNex Suite:
 # * https://bitbucket.org/oriadev/qunex/src/master/LICENSE.md
 #
 # ## Description 
@@ -139,10 +139,10 @@ echo ""
 
 
 # -- Setup paths for scripts folder and container
-if [[ -z ${QUNEXscript} ]] && [[ -z ${QUNEXstring} ]]; then reho "  --> Error: Qu|Nex execute call or script is missing."; exit 1; echo ''; fi
-if [[ -z ${ConImage} ]]; then reho "  --> Error: Qu|Nex Container image input is missing."; exit 1; echo ''; fi
-if [[ -z ${InputFolder} ]]; then reho "  --> Error: Qu|Nex Input folder input is missing."; exit 1; echo ''; fi
-if [[ -z ${OutputFolder} ]]; then reho "  --> Error: Qu|Nex Output folder input is missing."; exit 1; echo ''; fi
+if [[ -z ${QUNEXscript} ]] && [[ -z ${QUNEXstring} ]]; then reho "  --> Error: QuNex execute call or script is missing."; exit 1; echo ''; fi
+if [[ -z ${ConImage} ]]; then reho "  --> Error: QuNex Container image input is missing."; exit 1; echo ''; fi
+if [[ -z ${InputFolder} ]]; then reho "  --> Error: QuNex Input folder input is missing."; exit 1; echo ''; fi
+if [[ -z ${OutputFolder} ]]; then reho "  --> Error: QuNex Output folder input is missing."; exit 1; echo ''; fi
 
 if [[ `echo ${ConImage} | grep '.simg' ` ]] || [[ `echo ${ConImage} | grep '.sif' ` ]]; then 
     Singularity="yes"

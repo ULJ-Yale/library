@@ -786,7 +786,7 @@ chmod ugo+x $QUNEXPATH/niutilities/gmri &> /dev/null
 PATH=$QUNEXPATH/connector:$PATH
 PATH=$QUNEXPATH/niutilities:$PATH
 PATH=$QUNEXPATH/library/bin:$PATH
-PATH=$QUNEXPATH/nitools:$PATH
+PATH=$QUNEXPATH/matlab/qx_utilities:$PATH
 PATH=$TOOLS/bin:$PATH
 # PATH=$PYLIBDIR/gradunwarp:$PATH
 # PATH=$PYLIBDIR/gradunwarp/core:$PATH
@@ -852,10 +852,10 @@ PATH=$TOOLS/bin:$PATH
 # export PYTHONPATH
 
 # -- Set and export Matlab paths
-MATLABPATH=$QUNEXPATH/nitools/fcMRI:$MATLABPATH
-MATLABPATH=$QUNEXPATH/nitools/general:$MATLABPATH
-MATLABPATH=$QUNEXPATH/nitools/img:$MATLABPATH
-MATLABPATH=$QUNEXPATH/nitools/stats:$MATLABPATH
+MATLABPATH=$QUNEXPATH/matlab/qx_utilities/fcMRI:$MATLABPATH
+MATLABPATH=$QUNEXPATH/matlab/qx_utilities/general:$MATLABPATH
+MATLABPATH=$QUNEXPATH/matlab/qx_utilities/img:$MATLABPATH
+MATLABPATH=$QUNEXPATH/matlab/qx_utilities/stats:$MATLABPATH
 
 # ------------------------------------------------------------------------------
 # -- Path to additional dependencies

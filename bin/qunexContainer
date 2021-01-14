@@ -530,21 +530,21 @@ def main(args=None):
     """
     qunexContainer v0.1.0
 
-    qunexContaiiner is a self-standing command that can run Qu|Nex commands 
-    against a Singularity or a Docker Qu|Nex container. To run an Qu|Nex command 
+    qunexContaiiner is a self-standing command that can run QuNex commands 
+    against a Singularity or a Docker QuNex container. To run an QuNex command 
     against a container the basic call is::
 
         qunexContainer <qunex command> [parameters] \
         --container="<a path to the Singularity image or a Docker container name>" [additional options]
     
-    `qunex command` is any command supported by Qu|Nex. `parameters` are any
+    `qunex command` is any command supported by QuNex. `parameters` are any
     parameters that should be passed to the qunex command. This part is the same
     as running::
 
         qunex <qunex command> [parameters]
 
-    from within a container or on a self-standing Qu|Nex installation. For list 
-    of commands and their parameters consult Qu|Nex online or in-line 
+    from within a container or on a self-standing QuNex installation. For list 
+    of commands and their parameters consult QuNex online or in-line 
     documentation.
 
     Additionally qunexContainer accepts the following parameters:
@@ -561,7 +561,7 @@ def main(args=None):
                     execution of qunexContainer command itself. Use a semicolon
                     separated list to chain multiple commands. ['']
     --bash_post     Used if any additional commands have to be run inside the
-                    Qu|Nex container before executing the desired Qu|Nex command.
+                    QuNex container before executing the desired QuNex command.
                     Use a semicolon separated list to chain multiple commands. 
                     ['']
     --bind          Used for binding external folder for execution via a 
@@ -576,7 +576,7 @@ def main(args=None):
                     container are to be used, they can be specified in a pipe
                     separated string formatted as:
                     "<variable>=><value>|<variable>=><value>"
-                    Note that only the variables recognized by the Qu|Nex suite
+                    Note that only the variables recognized by the QuNex suite
                     will be appropriately parsed and used in the container.
     --dockeropt     A string that lists the additional options to be used when
                     running the Docker container. If the parameter is ommited, 
