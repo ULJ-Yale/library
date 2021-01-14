@@ -21,7 +21,7 @@
 # ## LICENSE
 #
 # * The cs-wrapper.sh = the "Software"
-# * This Software conforms to the license outlined in the Qu|Nex Suite:
+# * This Software conforms to the license outlined in the QuNex Suite:
 # * https://bitbucket.org/oriadev/qunex/src/master/LICENSE.md
 #
 # ### TODO
@@ -29,11 +29,11 @@
 #
 # ## Description 
 #   
-# This script serves as the container service parsing of input for the main Qu|Nex wrapper
+# This script serves as the container service parsing of input for the main QuNex wrapper
 # 
 # ## Prerequisite Installed Software
 #
-# * Qu|Nex Suite
+# * QuNex Suite
 #
 # ## Prerequisite Environment Variables
 #
@@ -47,7 +47,7 @@
 # -- String parsed from XNAT Container Service
 CSInputString="${@:1}"
 
-# -- Full Qu|Nex command
+# -- Full QuNex command
 CSWrapperCmd="$TOOLS/qunex/connector/qunex.sh runTurnkey \
 --xnathost=${XNAT_HOST} \
 --xnatuser=${XNAT_USER} \
@@ -55,7 +55,7 @@ CSWrapperCmd="$TOOLS/qunex/connector/qunex.sh runTurnkey \
 ${CSInputString}"
 
 echo ""
-echo "Qu|Nex Container Service Parsed Qu|Nex Command:"
+echo "QuNex Container Service Parsed QuNex Command:"
 echo "-----------------------------------------------"
 echo ""
 echo $CSWrapperCmd

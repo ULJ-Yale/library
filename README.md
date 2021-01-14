@@ -1,10 +1,10 @@
-# README File for Qu|Nex Library Component
+# README File for QuNex Library Component
 
-The Qu|Nex `library` component contains miscellaneous dependencies, 
+The QuNex `library` component contains miscellaneous dependencies, 
 environment scripts, relevant data, parameter files, etc. The `library` code 
-is required for proper Qu|Nex functionality.
+is required for proper QuNex functionality.
 
-The Qu|Nex `library` code is co-developed and co-maintained by the:
+The QuNex `library` code is co-developed and co-maintained by the:
 
 * [Anticevic Lab, Yale University](http://anticeviclab.yale.edu/),
 * [Mind and Brain Lab, University of Ljubljana](http://psy.ff.uni-lj.si/mblab/en),
@@ -15,10 +15,10 @@ Quick links
 -----------
 
 * [Website](http://qunex.yale.edu/)
-* [Qu|Nex Wiki](https://bitbucket.org/oriadev/qunex/wiki/Home)
+* [QuNex Wiki](https://bitbucket.org/oriadev/qunex/wiki/Home)
 * [SDK Wiki](https://bitbucket.org/oriadev/qunexsdk/wiki/Home)
-* [Qu|Nex quick start](https://bitbucket.org/oriadev/qunex/wiki/Overview/QuickStart.md)
-* [Qu|Nex container deployment](https://bitbucket.org/oriadev/qunex/wiki/Overview/Installation.md)
+* [QuNex quick start](https://bitbucket.org/oriadev/qunex/wiki/Overview/QuickStart.md)
+* [QuNex container deployment](https://bitbucket.org/oriadev/qunex/wiki/Overview/Installation.md)
 * [Installing from source and dependencies](https://bitbucket.org/oriadev/qunex/wiki/Overview/Installation.md)
 
 
