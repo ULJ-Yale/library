@@ -4,4 +4,4 @@
 source /opt/qunex/library/environment/qunex_environment.sh
 
 # -- Execute the call
-/opt/qunex/connector/qunex.sh ${@:1}
+/opt/qunex/bin/qunex.sh ${@:1}

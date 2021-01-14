@@ -652,7 +652,7 @@ export NIUTemplateFolder PATH
 unset QuNexSubModules
 QuNexSubModules=`cd $QUNEXPATH; git submodule status | awk '{ print $2 }' | sed 's/hcpextendedpull//' | sed '/^\s*$/d'`
 
-#alias qunex='bash ${TOOLS}/${QUNEXREPO}/connector/qunex.sh'
+#alias qunex='bash ${TOOLS}/${QUNEXREPO}/bin/qunex.sh'
 alias qunex_envset='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_environment.sh'
 alias qunex_environment_set='source ${TOOLS}/${QUNEXREPO}/library/environment/qunex_environment.sh'
 
@@ -891,7 +891,7 @@ gitqunex_usage() {
  echo "                 Note: If 'all' is specified then will run git add on entire "
  echo "                 repo."
  echo ""
- echo "                 e.g. $TOOLS/$QUNEXREPO/connector/qunex.sh "
+ echo "                 e.g. $TOOLS/$QUNEXREPO/bin/qunex.sh "
  echo "--branch         Specify the branch name you want to pull or commit."
  echo "--branchpath     Absolute path to folder containing QuNex suite. This folder "
  echo "                 has to have the selected branch checked out."
