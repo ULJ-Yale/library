@@ -644,7 +644,7 @@ export TemplateFolder PATH
 MATLABPATH=$TemplateFolder:$MATLABPATH
 export MATLABPATH
 
-NIUTemplateFolder=$QUNEXPATH/niutilities/templates/
+NIUTemplateFolder=$QUNEXPATH/python/qx_utilities/templates/
 PATH=${NIUTemplateFolder}:${PATH}
 export NIUTemplateFolder PATH
 
@@ -776,16 +776,16 @@ fi
 # export MATLABPATH
 
 # ------------------------------------------------------------------------------
-# -- QuNex - NIUtilities and Matlab Paths
+# -- QuNex - python and MATLAB Paths
 # ------------------------------------------------------------------------------
 
 # -- Make sure gmri is executable
-chmod ugo+x $QUNEXPATH/niutilities/gmri &> /dev/null
+chmod ugo+x $QUNEXPATH/python/qx_utilities/gmri &> /dev/null
 
 # -- Setup additional paths
 PATH=$QUNEXPATH/connector:$PATH
-PATH=$QUNEXPATH/niutilities:$PATH
-PATH=$QUNEXPATH/library/bin:$PATH
+PATH=$QUNEXPATH/python/qx_utilities:$PATH
+PATH=$QUNEXPATH/qx_library/bin:$PATH
 PATH=$QUNEXPATH/matlab/qx_utilities:$PATH
 PATH=$TOOLS/bin:$PATH
 # PATH=$PYLIBDIR/gradunwarp:$PATH
@@ -815,8 +815,8 @@ PATH=$TOOLS/bin:$PATH
 #    PYTHONPATH=$TOOLS/env/qunex/lib/python2.7/site-packages/gradunwarp/core:$PYTHONPATH
 #    PYTHONPATH=$QUNEXPATH:$PYTHONPATH
 #    PYTHONPATH=$QUNEXPATH/connector:$PYTHONPATH
-#    PYTHONPATH=$QUNEXPATH/niutilities:$PYTHONPATH
-#    PYTHONPATH=$QUNEXPATH/matlab:$PYTHONPATH
+#    PYTHONPATH=$QUNEXPATH/pyton/qx_utilities:$PYTHONPATH
+#    PYTHONPATH=$QUNEXPATH/matlab/qx_utilities:$PYTHONPATH
 #    PYTHONPATH=$PYLIBDIR/bin:$PYTHONPATH
 #    PYTHONPATH=$PYLIBDIR/lib/python2.7/site-packages:$PYTHONPATH
 #    PYTHONPATH=$PYLIBDIR/lib64/python2.7/site-packages:$PYTHONPATH
@@ -837,8 +837,8 @@ PATH=$TOOLS/bin:$PATH
 # PYTHONPATH=/usr/lib64/python2.7/site-packages:$PYTHONPATH
 # PYTHONPATH=$QUNEXPATH:$PYTHONPATH
 # PYTHONPATH=$QUNEXPATH/connector:$PYTHONPATH
-# PYTHONPATH=$QUNEXPATH/niutilities:$PYTHONPATH
-# PYTHONPATH=$QUNEXPA$TH/matlab:$PYTHONPATH
+# PYTHONPATH=$QUNEXPATH/python/qx_utilities:$PYTHONPATH
+# PYTHONPATH=$QUNEXPA$TH/matlab/qx_utilities:$PYTHONPATH
 # PYTHONPATH=$PYLIBDIR/pydicom:$PYTHONPATH
 # PYTHONPATH=$PYLIBDIR/gradunwarp:$PYTHONPATH
 # PYTHONPATH=$PYLIBDIR/gradunwarp/core:$PYTHONPATH
