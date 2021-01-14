@@ -49,8 +49,8 @@ __email__       = "wbdavis@purdue.edu"
 __status__      = "Production"
 
 CHUNK_SIZE = 8 * 1024
-LOG_FILENAME = os.path.join(os.getcwd(), "filelocker_cli.log") #TODO move to config
-LOG_LEVEL = logging.INFO #TODO move to config
+LOG_FILENAME = os.path.join(os.getcwd(), "filelocker_cli.log")
+LOG_LEVEL = logging.INFO
 
 logger = logging.getLogger("Filelocker CLI")
 logger.setLevel(LOG_LEVEL)
@@ -482,7 +482,7 @@ class CLI_Filelocker:
             sys.exit(0)
         except urllib2.URLError, ue:
             self.cli_write("[Critical]: URL Error %s", ue.reason)
-            logger.critical("HTTP %s: %s", ue.reason)
+            logger.critical("HTTP %s", ue.reason)
             sys.exit(0)
         except RuntimeError:
             self.cli_write("Unable to contact Filelocker server at %s" % self.serverLocation)
@@ -566,7 +566,7 @@ class CLI_Filelocker:
             print self.headerMessages.pop(0)
         print "Welcome, %s, to the command line interface for Filelocker" % self.userId
     
-    def async(fn):
+    def async(self, fn):
         """Decorator that converts functions to run in a separate thread
         
         Author:    Jim Dalton
