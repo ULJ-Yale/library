@@ -38,7 +38,7 @@ Change log
 * 0.61.2  Added CUDA to PATH.
 * 0.61.1  Added SpecFolder attribute to the qunex_container.sh script.
 * 0.61.0  Implementation of bug fixes across bash qx_utilities and pipeline restructure back-compatibility
-* 0.60.1  Full support for hcp_suffix in runQC.
+* 0.60.1  Full support for hcp_suffix in run_qc.
 * 0.60.0  Renamed all subject related parameters to session. Pipeline architecture restructure.
 * 0.50.11 Updated ColeAnticevicNetPartition with files from most recent release (v1.1.4) of the parcellation.
 * 0.50.10 Updated ColeAnticevicNetPartition with files from most recent release of the parcellation.
