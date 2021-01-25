@@ -1,15 +1,12 @@
 # README File for QuNex Library Component
 
-The QuNex `library` component contains miscellaneous dependencies, 
-environment scripts, relevant data, parameter files, etc. The `library` code 
-is required for proper QuNex functionality.
+The QuNex `library` component contains miscellaneous dependencies, environment scripts, relevant data, parameter files, etc. The `library` code  is required for proper QuNex functionality.
 
 The QuNex `library` code is co-developed and co-maintained by the:
 
 * [Anticevic Lab, Yale University](http://anticeviclab.yale.edu/),
 * [Mind and Brain Lab, University of Ljubljana](http://psy.ff.uni-lj.si/mblab/en),
 * [Murray Lab, Yale University](https://medicine.yale.edu/lab/murray/).
-
 
 ## Quick links
 
@@ -19,7 +16,6 @@ The QuNex `library` code is co-developed and co-maintained by the:
 * [QuNex quick start](https://bitbucket.org/oriadev/qunex/wiki/Overview/QuickStart.md)
 * [QuNex container deployment](https://bitbucket.org/oriadev/qunex/wiki/Overview/Installation.md)
 * [Installing from source and dependencies](https://bitbucket.org/oriadev/qunex/wiki/Overview/Installation.md)
-
 
 ## Change log
 
@@ -49,10 +45,9 @@ The QuNex `library` code is co-developed and co-maintained by the:
 * 0.50.3  Set MSMSulc as the default regname.
 * 0.50.2  qunex_envstatus now reports OS info.
 * 0.50.1  Removed double slash in derivates from MATLABDIR.
-* 0.50.0  Renamed gmrimage class to nimage and methods names from mri_ to img_.
+* 0.50.0  Renamed gmrimage class to nimage and methods names from mri\_ to img\_.
 * 0.49.11 Environemnt changes for HCP ICAFix.
 * 0.49.10 Initial submodule versioning.
-
 
 ## References
 
