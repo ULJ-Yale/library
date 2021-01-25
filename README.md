@@ -11,8 +11,7 @@ The QuNex `library` code is co-developed and co-maintained by the:
 * [Murray Lab, Yale University](https://medicine.yale.edu/lab/murray/).
 
 
-Quick links
------------
+## Quick links
 
 * [Website](http://qunex.yale.edu/)
 * [QuNex Wiki](https://bitbucket.org/oriadev/qunex/wiki/Home)
@@ -22,8 +21,7 @@ Quick links
 * [Installing from source and dependencies](https://bitbucket.org/oriadev/qunex/wiki/Overview/Installation.md)
 
 
-Change log
-----------
+## Change log
 
 * 0.62.4  Update the qunex_container documentation so the use of CUDA flag (--nv) is now clearer.
 * 0.62.3  Removed the latest suffix from the QuNex folder structure.
@@ -56,8 +54,7 @@ Change log
 * 0.49.10 Initial submodule versioning.
 
 
-References
-----------
+## References
 
 Yang GJ, Murray JD, Repovs G, Cole MW, Savic A, Glasser MF, Pittenger C,
 Krystal JH, Wang XJ, Pearlson GD, Glahn DC, Anticevic A. Altered global brain
