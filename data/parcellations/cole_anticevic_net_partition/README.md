@@ -122,7 +122,7 @@ The partition across transaxial slices of the S1200 HCP average T1 image.
 - CortexSubcortex_ColeAnticevic_NetPartition_wSubcorGSR_parcels_LR_LabelKey.txt - Legend text file showing all mappings for the wSubcorGSR parcellation between: Index; KeyValue; Label; Red; Green; Blue; Alpha; Hemisphere; Network; NetworkKey; NetworkSortedOrder
 - CortexSubcortex_ColeAnticevic_NetPartition-ReorderedbyNetworks.sh - The code used to sort parcels by network to create CortexSubcortex_ColeAnticevic_NetPartition_wSubcorGSR_parcels_LR_ReorderedByNetworks.dlabel.nii and CortexSubcortex_ColeAnticevic_NetPartition_woSubcorGSR_parcels_LR_ReorderedByNetworks.dlabel.nii.
 - CAB-NP_v1.1_Labels-ReorderedbyNetworks.xlsx - Excel sheet used to sort parcels by network to create CortexSubcortex_ColeAnticevic_NetPartition_wSubcorGSR_parcels_LR_ReorderedByNetworks.dlabel.nii and CortexSubcortex_ColeAnticevic_NetPartition_woSubcorGSR_parcels_LR_ReorderedByNetworks.dlabel.nii.
-- *SeparateHemispheres* directory - Files with each hemisphere separated. This can be useful for ensuring that parcels from each hemisphere are in the correct order by loading each hemisphere separately (e.g., in MATLAB).
+- *separate_hemispheres* directory - Files with each hemisphere separated. This can be useful for ensuring that parcels from each hemisphere are in the correct order by loading each hemisphere separately (e.g., in MATLAB).
   - cortex_ColeAnticevic_NetPartition_GlasserParcels_L.label.gii - Left hemisphere cortex-only partition
   - cortex_ColeAnticevic_NetPartition_GlasserParcels_R.label.gii - Right hemisphere cortex-only partition
   - CortexSubcortex_ColeAnticevic_NetPartition_wSubcorGSR_netassignments_L.dlabel.nii - Left hemisphere cortex+subcortex network assignments for each parcel
@@ -151,7 +151,7 @@ The partition across transaxial slices of the S1200 HCP average T1 image.
 	- CortexSubcortex_ColeAnticevic_NetPartition_woSubcorGSR_parcels_LR_ReorderedByNetworks.dlabel.nii - The parcels (same as in CortexSubcortex_ColeAnticevic_NetPartition_woSubcorGSR_parcels_LR.dlabel.nii) sorted by network. The order of parcels within a network is sorted as such: Cortex then Subcortex; L Hemisphere then R Hemisphere then LR. See CortexSubcortex_ColeAnticevic_NetPartition-ReorderedbyNetworks.sh.
 	- CortexSubcortex_ColeAnticevic_NetPartition_woSubcorGSR_parcels_LR_ReorderedByNetworks.dscalar.nii - The dscalar file corresponding to CortexSubcortex_ColeAnticevic_NetPartition_woSubcorGSR_parcels_LR_ReorderedByNetworks.dlabel.nii .
 	- CortexSubcortex_ColeAnticevic_NetPartition_woSubcorGSR_parcels_v1.1_LR_ReorderedByNetworks.txt - - The labels for CortexSubcortex_ColeAnticevic_NetPartition_woSubcorGSR_parcels_LR_ReorderedByNetworks.dlabel.nii, along with color information (RGBA value).
-	- *SeparateHemispheres* directory - Files with hemispheres separated, for subcortical parcellation without global signal regression (GSR) applied to subcortical voxels as a preprocessing step.
+	- *separate_hemispheres* directory - Files with hemispheres separated, for subcortical parcellation without global signal regression (GSR) applied to subcortical voxels as a preprocessing step.
 - *data* directory
 	- cortex_fc_avg.pconn.nii - Correlation matrix used for creating the cortical partition. Formatted for visualization in Workbench.
 	- meanFCMatSorted.csv - Same correlation matrix, formatted as a comma separated value file.
