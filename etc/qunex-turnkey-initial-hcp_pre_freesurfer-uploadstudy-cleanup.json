@@ -1,7 +1,7 @@
 {
-  "name": "qunex-turnkey-hcp2-to-5-QC-uploadstudy-cleanup",
-  "label": "QUNEX TURNKEY HCP2-5, QC & DATA CLEANUP WITH FULL STUDY UPLOAD",
-  "description": "Runs QuNex Turnkey hcp2-5 & QC w/ full study upload",
+  "name": "qunex-turnkey-initial-hcp_pre_freesurfer-uploadstudy-cleanup",
+  "label": "QUNEX TURNKEY INITIAL, HCP1 & DATA CLEANUP WITH FULL STUDY UPLOAD",
+  "description": "Runs QuNex Turnkey initial and hcp_pre_freesurfer w/ full study upload",
   "version": "1.10",
   "schema-version": "1.0",
   "info-url": "https://bitbucket.org/oriadev/qunex",
@@ -109,7 +109,7 @@
       "description": "Flag to decide if a specific step is to be overwritten by QuNex scripts",
       "type": "string",
       "matcher": null,
-      "default-value": "no",
+      "default-value": "yes",
       "required": true,
       "replacement-key": "#OVERWRITESTEP_ARG#",
       "command-line-flag": "--overwritestep",
@@ -135,7 +135,7 @@
       "description": "Steps to execute",
       "type": "string",
       "matcher": null,
-      "default-value": "hcp2,hcp3,QCPreprocT1w,QCPreprocT2w,QCPreprocMyelin,hcp4,hcp5,QCPreprocBOLD,mapHCPData",
+      "default-value": "create_study,map_raw_data,import_dicom,create_session_info,setup_hcp,create_batch,hcp_pre_freesurfer",
       "required": true,
       "replacement-key": "#TURNKEYSTEPS_ARG#",
       "command-line-flag": "--turnkeysteps",
@@ -148,7 +148,7 @@
       "description": "Flag to decide if the entire XNAT project is to be deleted before start",
       "type": "string",
       "matcher": null,
-      "default-value": "no",
+      "default-value": "yes",
       "required": true,
       "replacement-key": "#OVERWRITEPROJECTXNAT_ARG#",
       "command-line-flag": "--overwriteprojectxnat",
@@ -165,21 +165,13 @@
       "mount": "out",
       "path": "#XNAT_PROJECT#",
       "glob": null
-    },
-    {
-      "name": "QC",
-      "description": null,
-      "required": false,
-      "mount": "out",
-      "path": "#XNAT_PROJECT#/sessions/QC",
-      "glob": null
     }
   ],
   "xnat": [
     {
-      "name": "qunex-hcp2-to-5-QC",
+      "name": "qunex-init-hcp_pre_freesurfer",
       "label": null,
-      "description": "Execute QuNex Turnkey hcp2-5, QC, and mapHCPData with full study upload and data cleanup, depends on competed hcp1",
+      "description": "Execute QuNex Turnkey initial and hcp_pre_freesurfer with full study upload and data cleanup",
       "contexts": [
         "xnat:imageSessionData"
       ],
@@ -273,14 +265,6 @@
           "as-a-child-of": "session",
           "type": "Resource",
           "label": "qunex_study"
-        },
-        {
-          "name": "output-resource-qc",
-          "accepts-command-output": "QC",
-          "via-wrapup-command": null,
-          "as-a-child-of": "session",
-          "type": "Resource",
-          "label": "QC"
         }
       ]
     }
