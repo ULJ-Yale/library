@@ -48,7 +48,7 @@
 CSInputString="${@:1}"
 
 # -- Full QuNex command
-CSWrapperCmd="$TOOLS/qunex/bin/qunex.sh runTurnkey \
+CSWrapperCmd="$TOOLS/qunex/bin/qunex.sh run_turnkey \
 --xnathost=${XNAT_HOST} \
 --xnatuser=${XNAT_USER} \
 --xnatpass=${XNAT_PASS} \
