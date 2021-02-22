@@ -1,7 +1,7 @@
 {
-  "name": "qunex-turnkey-bids-initial-hcp1-5-QC-BOLDfc-uploadstudy-cleanup",
-  "label": "QUNEX BIDS-COMPLIANT TURNKEY INITIAL, HCP1-5, QC, BOLD FC & DATA CLEANUP WITH FULL STUDY UPLOAD",
-  "description": "Runs QuNex BIDS-compliant Turnkey initial, HCP1-5 & QC, BOLD fc w/ full study upload",
+  "name": "qunex-turnkey-bids-initial-hcp_minimal-QC-BOLDfc-uploadstudy-cleanup",
+  "label": "QUNEX BIDS-COMPLIANT TURNKEY INITIAL, HCP_MINIMAL, QC, BOLD FC & DATA CLEANUP WITH FULL STUDY UPLOAD",
+  "description": "Runs QuNex BIDS-compliant Turnkey initial, HCP_MINIMAL & QC, BOLD fc w/ full study upload",
   "version": "1.10",
   "schema-version": "1.0",
   "info-url": "https://bitbucket.org/oriadev/qunex",
@@ -112,7 +112,7 @@
       "description": "Steps to execute",
       "type": "string",
       "matcher": null,
-      "default-value": "createStudy,mapRawData,createSessionInfo,setupHCP,createBatch,hcp1,hcp2,hcp3,runQC_T1w,runQC_T2w,runQC_Myelin,hcp4,hcp5,runQC_BOLD,mapHCPData,createBOLDBrainMasks,computeBOLDStats,createStatsReport,extractNuisanceSignal,preprocessBold,BOLDParcellation,computeBOLDfcSeed,computeBOLDfcGBC",
+      "default-value": "create_study,map_raw_data,create_session_info,setup_hcp,create_batch,hcp_pre_freesurfer,hcp_freesurfer,hcp_post_freesurfer,run_qc_t1w,run_qc_t2w,run_qc_myelin,hcp_fmri_volume,hcp_fmri_surface,run_qc_bold,,create_bold_brain_masks,compute_bold_stats,create_stats_report,extract_nuisance_signal,preprocess_bold,bold_parcellation,compute_bold_fc_seed,compute_bold_fc_gbcgbc",
       "required": true,
       "replacement-key": "#TURNKEYSTEPS_ARG#",
       "sensitive": null,
@@ -142,9 +142,9 @@
   ],
   "pathfinder": [
     {
-      "name": "qunex-bids-init-to-hcp5-QC-BOLDfc",
+      "name": "qunex-bids-init-to-hcp_fmri_surface-QC-BOLDfc",
       "label": null,
-      "description": "Execute QuNex BIDS-compliant Turnkey initial, hcp1-5 with QC, BOLD fc with full study upload and data cleanup",
+      "description": "Execute QuNex BIDS-compliant Turnkey initial, hcp_minimal with QC, BOLD fc with full study upload and data cleanup",
       "contexts": [
         "pathfinder:imageSessionData"
       ],

@@ -135,7 +135,7 @@
       "description": "Steps to execute",
       "type": "string",
       "matcher": null,
-      "default-value": "createBOLDBrainMasks,computeBOLDStats,createStatsReport,extractNuisanceSignal,preprocessBold,BOLDParcellation,computeBOLDfcSeed,computeBOLDfcGBC",
+      "default-value": "create_bold_brain_masks,compute_bold_stats,create_stats_report,extract_nuisance_signal,preprocess_bold,bold_parcellation,compute_bold_fc_seed,compute_bold_fc_gbc",
       "required": true,
       "replacement-key": "#TURNKEYSTEPS_ARG#",
       "command-line-flag": "--turnkeysteps",
@@ -179,7 +179,7 @@
     {
       "name": "qunex-BOLDfc",
       "label": null,
-      "description": "Execute QuNex BOLD fc with full study upload and data cleanup, depends on completed steps hcp1-5",
+      "description": "Execute QuNex BOLD fc with full study upload and data cleanup, depends on completed steps hcp_minimal",
       "contexts": [
         "xnat:imageSessionData"
       ],

@@ -1,7 +1,7 @@
 {
-  "name": "qunex-turnkey-initial-hcp1-5-QC-BOLDfc-uploadstudy-cleanup",
-  "label": "QUNEX TURNKEY INITIAL, HCP1-5, QC, BOLD FC & DATA CLEANUP WITH FULL STUDY UPLOAD",
-  "description": "Runs QuNex Turnkey initial, HCP1-5 & QC, BOLD fc w/ full study upload",
+  "name": "qunex-turnkey-initial-hcp_minimal-QC-DWI-uploadstudy-cleanup",
+  "label": "QUNEX TURNKEY INITIAL, HCP_MINIMAL, QC, DWI & DATA CLEANUP WITH FULL STUDY UPLOAD",
+  "description": "Runs QuNex Turnkey initial, HCP_MINIMAL & QC, DWI fc w/ full study upload",
   "version": "1.10",
   "schema-version": "1.0",
   "info-url": "https://bitbucket.org/oriadev/qunex",
@@ -135,7 +135,7 @@
       "description": "Steps to execute",
       "type": "string",
       "matcher": null,
-      "default-value": "createStudy,mapRawData,importDICOM,createSessionInfo,setupHCP,createBatch,hcp1,hcp2,hcp3,QCPreprocT1w,QCPreprocT2w,QCPreprocMyelin,hcp4,hcp5,QCPreprocBOLD,mapHCPData,createBOLDBrainMasks,computeBOLDStats,createStatsReport,extractNuisanceSignal,preprocessBold,BOLDParcellation,computeBOLDfcSeed,computeBOLDfcGBC",
+      "default-value": "create_study,map_raw_data,import_dicom,create_session_info,setup_hcp,create_batch,hcp_pre_freesurfer,hcp_freesurfer,hcp_post_freesurfer,run_qc_t1w,run_qc_t2w,run_qc_myelin,hcp_fmri_volume,hcp_fmri_surface,run_qc_bold,,hcp_diffusion,run_qc_dwi,dwi_eddy_qc,dwi_fsl_dtifit,run_qc_dwi_dtifit,dwi_fsl_bedpostx_gpu,run_qc_dwi_process,run_qc_dwi_bedpostx,pretractographyDense,dwi_parcellate,dwi_seed_tractography_dense,run_qc_custom",
       "required": true,
       "replacement-key": "#TURNKEYSTEPS_ARG#",
       "command-line-flag": "--turnkeysteps",
@@ -177,9 +177,9 @@
   ],
   "xnat": [
     {
-      "name": "qunex-init-to-hcp5-QC-BOLDfc",
+      "name": "qunex-init-to-hcp_fmri_surface-QC-DWI",
       "label": null,
-      "description": "Execute QuNex Turnkey initial, hcp1-5 with QC, BOLD fc with full study upload and data cleanup",
+      "description": "Execute QuNex Turnkey initial, hcp_minimal with QC, , DWI with full study upload and data cleanup",
       "contexts": [
         "xnat:imageSessionData"
       ],

@@ -135,7 +135,7 @@
       "description": "Steps to execute",
       "type": "string",
       "matcher": null,
-      "default-value": "hcpd,QCPreprocDWI,eddyQC,QCPreprocDWIeddyQC,FSLDtifit,QCPreprocDWIDTIFIT,FSLBedpostxGPU,QCPreprocDWIProcess,QCPreprocDWIBedpostX,pretractographyDense,DWIDenseParcellation,DWISeedTractography,QCPreprocCustom",
+      "default-value": "hcp_diffusion,run_qc_dwi,dwi_eddy_qc,dwi_fsl_dtifit,run_qc_dwi_dtifit,dwi_fsl_bedpostx_gpu,run_qc_dwi_process,run_qc_dwi_bedpostx,pretractographyDense,dwi_parcellate,dwi_seed_tractography_dense,run_qc_custom",
       "required": true,
       "replacement-key": "#TURNKEYSTEPS_ARG#",
       "command-line-flag": "--turnkeysteps",
@@ -179,7 +179,7 @@
     {
       "name": "qunex-DWI",
       "label": null,
-      "description": "Execute QuNex Turnkey DWI with full study upload and data cleanup, depends on completed hcp1-5",
+      "description": "Execute QuNex Turnkey DWI with full study upload and data cleanup, depends on completed hcp_minimal",
       "contexts": [
         "xnat:imageSessionData"
       ],

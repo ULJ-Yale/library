@@ -135,7 +135,7 @@
       "description": "Steps to execute",
       "type": "string",
       "matcher": null,
-      "default-value": "createStudy,mapRawData,importDICOM,createSessionInfo,setupHCP,createBatch",
+      "default-value": "create_study,map_raw_data,import_dicom,create_session_info,setup_hcp,create_batch",
       "required": true,
       "replacement-key": "#TURNKEYSTEPS_ARG#",
       "command-line-flag": "--turnkeysteps",

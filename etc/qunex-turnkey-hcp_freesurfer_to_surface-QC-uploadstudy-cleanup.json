@@ -1,7 +1,7 @@
 {
-  "name": "qunex-turnkey-hcp1-uploadstudy-cleanup",
-  "label": "QUNEX TURNKEY HCP1 & DATA CLEANUP WITH FULL STUDY UPLOAD",
-  "description": "Runs QuNex Turnkey hcp1 w/ full study upload",
+  "name": "qunex-turnkey-hcp_freesurfer_to_surface-QC-uploadstudy-cleanup",
+  "label": "QUNEX TURNKEY HCP_FREESURFER_TO_SURFACE, QC & DATA CLEANUP WITH FULL STUDY UPLOAD",
+  "description": "Runs QuNex Turnkey HCP_FREESURFER_TO_SURFACE & QC w/ full study upload",
   "version": "1.10",
   "schema-version": "1.0",
   "info-url": "https://bitbucket.org/oriadev/qunex",
@@ -109,7 +109,7 @@
       "description": "Flag to decide if a specific step is to be overwritten by QuNex scripts",
       "type": "string",
       "matcher": null,
-      "default-value": "yes",
+      "default-value": "no",
       "required": true,
       "replacement-key": "#OVERWRITESTEP_ARG#",
       "command-line-flag": "--overwritestep",
@@ -135,7 +135,7 @@
       "description": "Steps to execute",
       "type": "string",
       "matcher": null,
-      "default-value": "hcp1",
+      "default-value": "hcp_freesurfer,hcp_post_freesurfer,run_qc_t1w,run_qc_t2w,run_qc_myelin,hcp_fmri_volume,hcp_fmri_surface,run_qc_bold,",
       "required": true,
       "replacement-key": "#TURNKEYSTEPS_ARG#",
       "command-line-flag": "--turnkeysteps",
@@ -165,13 +165,21 @@
       "mount": "out",
       "path": "#XNAT_PROJECT#",
       "glob": null
+    },
+    {
+      "name": "QC",
+      "description": null,
+      "required": false,
+      "mount": "out",
+      "path": "#XNAT_PROJECT#/sessions/QC",
+      "glob": null
     }
   ],
   "xnat": [
     {
-      "name": "qunex-hcp1",
+      "name": "qunex-hcp_freesurfer_to_surface-QC",
       "label": null,
-      "description": "Execute QuNex Turnkey hcp1 with full study upload and data cleanup, depends on initial being completed",
+      "description": "Execute QuNex Turnkey HCP_FREESURFER_TO_SURFACE, QC, and  with full study upload and data cleanup, depends on competed hcp_pre_freesurfer",
       "contexts": [
         "xnat:imageSessionData"
       ],
@@ -265,6 +273,14 @@
           "as-a-child-of": "session",
           "type": "Resource",
           "label": "qunex_study"
+        },
+        {
+          "name": "output-resource-qc",
+          "accepts-command-output": "QC",
+          "via-wrapup-command": null,
+          "as-a-child-of": "session",
+          "type": "Resource",
+          "label": "QC"
         }
       ]
     }

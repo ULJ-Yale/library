@@ -1,7 +1,7 @@
 {
-  "name": "qunex-turnkey-initial-hcp1-5-QC-uploadstudy-cleanup",
-  "label": "QUNEX TURNKEY INITIAL, HCP1-5, QC & DATA CLEANUP WITH FULL STUDY UPLOAD",
-  "description": "Runs QuNex Turnkey initial, HCP1-5 & QC w/ full study upload",
+  "name": "qunex-turnkey-hcp_minimal-QC-uploadstudy-cleanup",
+  "label": "QUNEX TURNKEY HCP_MINIMAL, QC & DATA CLEANUP WITH FULL STUDY UPLOAD",
+  "description": "Runs QuNex Turnkey hcp_minimal & QC w/ full study upload",
   "version": "1.10",
   "schema-version": "1.0",
   "info-url": "https://bitbucket.org/oriadev/qunex",
@@ -109,7 +109,7 @@
       "description": "Flag to decide if a specific step is to be overwritten by QuNex scripts",
       "type": "string",
       "matcher": null,
-      "default-value": "yes",
+      "default-value": "no",
       "required": true,
       "replacement-key": "#OVERWRITESTEP_ARG#",
       "command-line-flag": "--overwritestep",
@@ -135,7 +135,7 @@
       "description": "Steps to execute",
       "type": "string",
       "matcher": null,
-      "default-value": "createStudy,mapRawData,importDICOM,createSessionInfo,setupHCP,createBatch,hcp1,hcp2,hcp3,QCPreprocT1w,QCPreprocT2w,QCPreprocMyelin,hcp4,hcp5,QCPreprocBOLD,mapHCPData",
+      "default-value": "hcp_pre_freesurfer,hcp_freesurfer,hcp_post_freesurfer,run_qc_t1w,run_qc_t2w,run_qc_myelin,hcp_fmri_volume,hcp_fmri_surface,run_qc_bold,",
       "required": true,
       "replacement-key": "#TURNKEYSTEPS_ARG#",
       "command-line-flag": "--turnkeysteps",
@@ -148,7 +148,7 @@
       "description": "Flag to decide if the entire XNAT project is to be deleted before start",
       "type": "string",
       "matcher": null,
-      "default-value": "yes",
+      "default-value": "no",
       "required": true,
       "replacement-key": "#OVERWRITEPROJECTXNAT_ARG#",
       "command-line-flag": "--overwriteprojectxnat",
@@ -177,9 +177,9 @@
   ],
   "xnat": [
     {
-      "name": "qunex-init-to-hcp5-QC",
+      "name": "qunex-hcp_minimal-QC",
       "label": null,
-      "description": "Execute QuNex Turnkey initial, hcp1-5, QC and mapHCPData with full study upload and data cleanup",
+      "description": "Execute QuNex Turnkey hcp_minimal, QC and  with full study upload and data cleanup, depends on competed initial steps",
       "contexts": [
         "xnat:imageSessionData"
       ],
