@@ -9,7 +9,7 @@
   "type": "docker",
   "index": null,
   "working-directory": "/output",
-  "command-line": "/opt/qunex/library/etc/cs-wrapper.sh #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #OVERWRITEPROJECTXNAT_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #XNAT_PROJECT# #SUBJECTID#",
+  "command-line": "/opt/qunex/qx_library/etc/cs-wrapper.sh #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #OVERWRITEPROJECTXNAT_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #XNAT_PROJECT# #SUBJECTID#",
   "override-entrypoint": null,
   "mounts": [
     {
@@ -135,7 +135,7 @@
       "description": "Steps to execute",
       "type": "string",
       "matcher": null,
-      "default-value": "createStudy,mapRawData,importDICOM,createSessionInfo,setupHCP,createBatch",
+      "default-value": "create_study,map_raw_data,import_dicom,create_session_info,setup_hcp,create_batch",
       "required": true,
       "replacement-key": "#TURNKEYSTEPS_ARG#",
       "command-line-flag": "--turnkeysteps",
