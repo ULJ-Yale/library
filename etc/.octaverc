@@ -1,0 +1,17 @@
+warning('off');
+addpath(getenv("PALMDIR"));
+addpath(getenv("MATLABPATH"));
+LOCALLIST = getenv("OCTAVEPKGDIR");
+pkg('local_list', LOCALLIST);
+pkg load image
+pkg load control
+pkg load signal
+pkg load nan
+pkg load statistics
+pkg load general
+pkg load io
+pkg load miscellaneous
+pkg load optim
+pkg load struct
+warning('on');
+warning('off', 'Octave:possible-matlab-short-circuit-operator');
