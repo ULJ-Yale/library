@@ -1,0 +1,2 @@
+$QXLIBRARYETC/auto_ptx/protocols/slf3_l/target1.nii.gz
+$QXLIBRARYETC/auto_ptx/protocols/slf3_l/target2.nii.gz
