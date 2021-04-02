@@ -1,2 +1,2 @@
-$QUNEXLIBARARYETC/auto_ptx/protocols/slf1_r/target1.nii.gz
-$QUNEXLIBARARYETC/auto_ptx/protocols/slf1_r/target2.nii.gz
+$QUNEXLIBRARYETC/auto_ptx/protocols/slf1_r/target1.nii.gz
+$QUNEXLIBRARYETC/auto_ptx/protocols/slf1_r/target2.nii.gz
