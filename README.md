@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2021 QuNex development team <https://qunex.yale.edu/>
+
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
+
 # README File for QuNex Library Component
 
 The QuNex `library` component contains miscellaneous dependencies, environment scripts, relevant data, parameter files, etc. The `library` code  is required for proper QuNex functionality.
@@ -19,7 +25,7 @@ The QuNex `library` code is co-developed and co-maintained by the:
 
 ## Version
 
-0.90.2
+0.90.3
 
 ## References
 

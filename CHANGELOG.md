@@ -1,4 +1,15 @@
+<!--
+SPDX-FileCopyrightText: 2021 QuNex development team <https://qunex.yale.edu/>
+
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
+
 # Change Log
+
+## 0.90.3 (2021-04-21)
+
+Licensing is now compliant with version 3.0 of the REUSE Specification.
+
 
 ## 0.90.2 (2021-03-22)
 
