@@ -1,3 +1,7 @@
+% SPDX-FileCopyrightText: 2021 QuNex development team <https://qunex.yale.edu/>
+%
+% SPDX-License-Identifier: GPL-3.0-or-later
+
 function sts = write_hdr_raw(fname,hdr,be)
 % Write a NIFTI-1 header
 % FORMAT sts = write_hdr_raw(fname,hdr,be)
