@@ -25,7 +25,7 @@ The QuNex `library` code is co-developed and co-maintained by the:
 
 ## Version
 
-0.90.4
+0.90.5
 
 ## References
 
