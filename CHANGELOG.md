@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 0.90.5
+
+Added required libraries for bedpostx.
+
 ## 0.90.4 (2021-06-21)
 
 Fixed the reference in the README file.
