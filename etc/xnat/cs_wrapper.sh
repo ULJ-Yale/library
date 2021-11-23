@@ -36,6 +36,7 @@ CSWrapperCmd="$TOOLS/qunex/bin/qunex.sh run_turnkey \
 --xnathost=${XNAT_HOST} \
 --xnatuser=${XNAT_USER} \
 --xnatpass=${XNAT_PASS} \
+--turnkeytype=xnat \
 ${CSInputString}"
 
 echo ""
