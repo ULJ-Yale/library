@@ -8,7 +8,7 @@
   "image": "qunex/qunex_suite:[TAG]",
   "type": "docker",
   "working-directory": "/output",
-  "command-line": "/opt/qunex/qx_library/etc/xnat/cs-wrapper.sh #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #OVERWRITEPROJECTXNAT_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #XNAT_PROJECT# #SUBJECTID#",
+  "command-line": "/opt/qunex/qx_library/etc/xnat/cs_wrapper.sh #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #OVERWRITEPROJECTXNAT_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #XNAT_PROJECT# #SUBJECTID#",
   "mounts": [
     {
       "name": "in",
@@ -21,7 +21,9 @@
       "path": "/output"
     }
   ],
-  "environment-variables": {},
+  "environment-variables": {
+    "XNAT_PROJECT": "#XNAT_PROJECT#"
+  },
   "ports": {},
   "inputs": [
     {
@@ -166,7 +168,7 @@
       "description": "Steps to execute",
       "type": "string",
       "matcher": null,
-      "default-value": "createStudy,mapRawData,importDICOM,createSessionInfo,setupHCP,createBatch,hcp1,hcp2,hcp3,runQC_T1w,runQC_T2w,runQC_Myelin,hcp4,hcp5,runQC_BOLD",
+      "default-value": "create_study,map_raw_data,import_dicom,create_session_info,setup_hcp,create_batch,hcp_pre_freesurfer,hcp_freesurfer,hcp_post_freesurfer,hcp_fmri_volume,hcp_fmri_surface",
       "required": true,
       "replacement-key": "#TURNKEYSTEPS_ARG#",
       "sensitive": null,
@@ -209,15 +211,15 @@
       "description": null,
       "required": false,
       "mount": "out",
-      "path": "#XNAT_PROJECT#/subjects/QC",
+      "path": "#XNAT_PROJECT#/sessions/QC",
       "glob": null
     }
   ],
   "xnat": [
     {
-      "name": "qunex-xnat-turnkey-all_steps-0.62.7_xcon",
+      "name": "qunex-hcp1-hcp5-QC-0.91.12",
       "label": null,
-      "description": "Execute QuNex Turnkey 0.62.7_xcon hcp2-hcp5-QC",
+      "description": "Execute QuNex Turnkey 0.91.12 all steps",
       "contexts": [
         "xnat:imageSessionData"
       ],
@@ -257,7 +259,8 @@
           "derived-from-wrapper-input": "session",
           "derived-from-xnat-object-property": "id",
           "via-setup-command": null,
-          "multiple": false
+          "multiple": false,
+          "parser": null
         },
         {
           "name": "label",
@@ -276,7 +279,8 @@
           "derived-from-wrapper-input": "session",
           "derived-from-xnat-object-property": "label",
           "via-setup-command": null,
-          "multiple": false
+          "multiple": false,
+          "parser": null
         },
         {
           "name": "xnat_project",
@@ -295,7 +299,8 @@
           "derived-from-wrapper-input": "session",
           "derived-from-xnat-object-property": "project-id",
           "via-setup-command": null,
-          "multiple": false
+          "multiple": false,
+          "parser": null
         },
         {
           "name": "subjectid",
@@ -314,7 +319,8 @@
           "derived-from-wrapper-input": "session",
           "derived-from-xnat-object-property": "subject-id",
           "via-setup-command": null,
-          "multiple": false
+          "multiple": false,
+          "parser": null
         }
       ],
       "output-handlers": [
@@ -325,7 +331,10 @@
           "as-a-child-of": "session",
           "type": "Resource",
           "label": "qunex_study",
-          "format": null
+          "format": null,
+          "description": null,
+          "content": null,
+          "tags": []
         },
         {
           "name": "output-resource-qc",
@@ -334,10 +343,16 @@
           "as-a-child-of": "session",
           "type": "Resource",
           "label": "QC",
-          "format": null
+          "format": null,
+          "description": null,
+          "content": null,
+          "tags": []
         }
       ]
     }
   ],
-  "reserve-memory": 15000
+  "reserve-memory": 24000,
+  "container-labels": {},
+  "generic-resources": {},
+  "ulimits": {}
 }
