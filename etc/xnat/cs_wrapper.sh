@@ -36,6 +36,7 @@ CSWrapperCmd="$TOOLS/qunex/bin/qunex.sh run_turnkey \
 --xnathost=${XNAT_HOST} \
 --xnatuser=${XNAT_USER} \
 --xnatpass=${XNAT_PASS} \
+--turnkeytype=xnat \
 ${CSInputString}"
 
 echo ""
@@ -46,3 +47,13 @@ echo $CSWrapperCmd
 echo ""
 
 eval $CSWrapperCmd
+
+COM_LOGS_DIR="/output/${XNAT_PROJECT}/processing/logs/comlogs"
+
+ERROR_FILE_COUNT=`find ${COM_LOGS_DIR} -name "error_*"| wc | awk '{print $1}'`
+
+if [[ ${ERROR_FILE_COUNT} -eq 0 ]]; then
+    exit 0
+else
+    exit 1
+fi

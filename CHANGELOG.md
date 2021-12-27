@@ -6,6 +6,14 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 0.90.7
+
+Added binaries for newer versions of CUDA.
+
+## 0.90.6
+
+More robust error checking for XNAT runs.
+
 ## 0.90.5
 
 Added required libraries for bedpostx.
