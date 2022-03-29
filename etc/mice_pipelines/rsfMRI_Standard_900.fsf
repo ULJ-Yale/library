@@ -273,7 +273,7 @@ set feat_files(1) "DATA"
 set fmri(confoundevs) 0
 
 # Subject's structural image for analysis 1
-set highres_files(1) "/cluster/work/wenderoth/zerbiv/Templates/EPI_Boha_template_template_Brain"
+set highres_files(1) "ANATFILE"
 
 # Resampling resolution
 set fmri(regstandard_res) 4
