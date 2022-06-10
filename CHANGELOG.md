@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 0.90.8
+
+Added templates for mice pipelines.
+
 ## 0.90.7
 
 Added binaries for newer versions of CUDA.
