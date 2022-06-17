@@ -18,9 +18,9 @@ The QuNex `library` code is co-developed and co-maintained by the:
 
 * [Website](http://qunex.yale.edu/)
 * [QuNex Documentation](https://qunex.readthedocs.io)
-* [QuNex quick start](https://qunex.readthedocs.io/en/latest/wiki/Overview/QuickStart.md)
-* [QuNex container deployment](https://qunex.readthedocs.io/en/latest/wiki/Overview/Installation.md)
-* [Installing from source and dependencies](https://qunex.readthedocs.io/en/latest/wiki/Overview/Installation.md)
+* [QuNex quick start](https://qunex.readthedocs.io/en/latest/wiki/Overview/QuickStart.html)
+* [QuNex container deployment](https://qunex.readthedocs.io/en/latest/wiki/Overview/Installation.html)
+* [Installing from source and dependencies](https://qunex.readthedocs.io/en/latest/wiki/Overview/Installation.html)
 
 ## Version
 
