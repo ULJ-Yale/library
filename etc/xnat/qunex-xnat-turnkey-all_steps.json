@@ -4,7 +4,7 @@
   "description": "Runs QuNex Turnkey all steps w/ full study upload",
   "version": "1.20",
   "schema-version": "1.0",
-  "info-url": "https://bitbucket.org/oriadev/qunex/wiki/Home",
+  "info-url": "https://qunex.readthedocs.io",
   "image": "qunex/qunex_suite:[TAG]",
   "type": "docker",
   "working-directory": "/output",
@@ -32,11 +32,11 @@
       "description": "Name of the batch parameters file. This file is expected to be present at the QUNEX_PROC resource at the project level",
       "type": "string",
       "matcher": null,
-      "default-value": "batch_parameters.txt",
+      "default-value": "parameters.txt",
       "required": true,
       "replacement-key": "#BATCH_PARAMETERS_FILENAME_ARG#",
       "sensitive": null,
-      "command-line-flag": "--batchfile",
+      "command-line-flag": "--paramfile",
       "command-line-separator": "=",
       "true-value": null,
       "false-value": null,
@@ -217,9 +217,9 @@
   ],
   "xnat": [
     {
-      "name": "qunex-hcp1-hcp5-QC-0.91.12",
+      "name": "qunex-hcp1-hcp5-QC-[VER]",
       "label": null,
-      "description": "Execute QuNex Turnkey 0.91.12 all steps",
+      "description": "Execute QuNex Turnkey [VER] all steps",
       "contexts": [
         "xnat:imageSessionData"
       ],
