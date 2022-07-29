@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 0.90.10
+
+* Removed an unused eddy_cuda binary.
+
 ## 0.90.9
 
 * Added the missing file for octave and Singularity.
