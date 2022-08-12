@@ -239,7 +239,7 @@ set fmri(regstandard_yn) 0
 set fmri(alternateReference_yn) 0
 
 # Standard image
-set fmri(regstandard) "/cluster/apps/fsl/5.0.7/x86_64/data/standard/MNI152_T1_2mm_brain"
+set fmri(regstandard) "FSLDIR/data/standard/MNI152_T1_2mm_brain"
 
 # Search space for registration to standard space
 # 0   : No search
