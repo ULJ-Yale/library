@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 0.90.12
+
+* Removed some warnings from MATLAB files for mice pipelines.
+
 ## 0.90.11
 
 * Fixed a path in the .fsf file for mice pipelines.
