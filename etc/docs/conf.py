@@ -14,13 +14,13 @@ import os
 import sys
 import datetime
 
-sys.path.append(os.path.join("../..", "python"))
-matlab_src_dir = os.path.join("../..", "matlab")  # MATLAB domain root folder
+sys.path.append(os.path.join("../../..", "python"))
+matlab_src_dir = os.path.join("../../..", "matlab")  # MATLAB domain root folder
 
 # Modules or directories that are shared between multiple languages (e.g.
 # qx_utilities) have to be added to sys.path separately for each language.
 for lang in ["python", "matlab"]:
-    path_with_modules = os.path.abspath(os.path.join(os.path.dirname(__file__), "../..", lang))
+    path_with_modules = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..", lang))
     if os.path.isdir(path_with_modules):
         for each in os.listdir(path_with_modules):
             full_path = os.path.join(path_with_modules, each)
@@ -33,7 +33,7 @@ for lang in ["python", "matlab"]:
 project = 'QuNex'
 copyright = f'{str(datetime.date.today().year)}, Anticevic Lab (Yale University), Mind and Brain Lab (University of Ljubljana), Murray Lab (Yale University)'
 
-version_path = "../../VERSION.md"
+version_path = "../../../VERSION.md"
 # check if file exists to avoid error when using this script as import
 if os.path.isfile(version_path):
     with open(version_path, "r") as version_file:
