@@ -11,14 +11,14 @@ import sys
 import os
 
 sys.path.append("../..")  # for $QUNEXPATH/docs/conf.py import
-sys.path.append("../../../../python")
+sys.path.append("../../../../../python")
 
 from conf import napoleon_custom_sections
 from importlib.util import spec_from_loader, module_from_spec
 from importlib.machinery import SourceFileLoader
 
 # this code imports python/qx_utilities/gmri to use all_qunex_commands list
-spec = spec_from_loader("gmri", SourceFileLoader("gmri", "../../../../python/qx_utilities/gmri"))
+spec = spec_from_loader("gmri", SourceFileLoader("gmri", "../../../../../python/qx_utilities/gmri"))
 gmri = module_from_spec(spec)
 spec.loader.exec_module(gmri)
 
@@ -123,7 +123,7 @@ def extract_docstrings(input_dict):
                 function_name = command_split[-1]
                 module_path = "/".join(command_split[:-2])
                 # if there is at least one command per language
-                source_file_path = os.path.abspath("../../../../" + lang + "/" + module_path + "/" + function_name)
+                source_file_path = os.path.abspath("../../../../../" + lang + "/" + module_path + "/" + function_name)
                 if lang == "bash":
                     source_file_path += ".sh"
                 elif lang == "r":
@@ -151,7 +151,7 @@ def write_python_files(docstring_dict):
     for lang, inner_dict in docstring_dict.items():
         for module_path, functions in inner_dict.items():
             if len(functions) > 0:
-                module_path = os.path.join("..", "..", "..", "..", "python", module_path)
+                module_path = os.path.join("..", "..", "..", "..", "..", "python", module_path)
                 os.makedirs(module_path, exist_ok=True)
                 # create empty file __init__.py if it doesn't exist to mark
                 # the directory as a module
