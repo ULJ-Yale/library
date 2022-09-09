@@ -117,3 +117,5 @@ html_favicon = '_static/img/favicon.png'
 html_theme_options = {
     "home_page_in_toc": True
 }
+
+html_extra_path = ["_extras/robots.txt"]

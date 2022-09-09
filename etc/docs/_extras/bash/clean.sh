@@ -5,4 +5,5 @@ cd $(dirname $0)
 echo "==> Cleaning docs and related directories"
 rm -rf ../../wiki ../../HomeMenu.rst ../../index.rst ../../_build
 rm -f ../../api/gmri/*
-rm -rf  ../../../python/qx_utilities/bash.py ../../../python/qx_utilities/r.py
+find ../../../../../python -name "bash.py" -type f -delete
+find ../../../../../python -name "r.py" -type f -delete
