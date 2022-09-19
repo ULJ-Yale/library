@@ -1,14 +1,14 @@
 {
-  "name": "qunex-turnkey-initial-hcp1-hcp5-QC-uploadstudy-cleanup",
+  "name": "qunex-turnkey-initial-hcp-mpp-QC-uploadstudy-cleanup",
   "label": "QUNEX TURNKEY initial, hcp1-hcp5, QC, DATA CLEANUP WITH FULL STUDY UPLOAD",
   "description": "Runs QuNex Turnkey all steps w/ full study upload",
-  "version": "1.20",
+  "version": "[VER]",
   "schema-version": "1.0",
   "info-url": "https://qunex.readthedocs.io",
-  "image": "qunex/qunex_suite:[TAG]",
+  "image": "qunex/qunex_suite:[VER]",
   "type": "docker",
   "working-directory": "/output",
-  "command-line": "/opt/qunex/qx_library/etc/xnat/cs_wrapper.sh #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #OVERWRITEPROJECTXNAT_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #XNAT_PROJECT# #SUBJECTID#",
+  "command-line": "/opt/qunex/qx_library/etc/xnat/cs_wrapper.sh #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #XNAT_PROJECT# #SUBJECTID# #ADDITIONAL_PARAMETERS#",
   "mounts": [
     {
       "name": "in",
@@ -180,17 +180,17 @@
       "multiple-delimiter": null
     },
     {
-      "name": "overwriteprojectxnat",
+      "name": "additional_parameters",
       "label": null,
-      "description": "Flag to decide if the entire XNAT project is to be deleted before start",
+      "description": "Additional parameters for run_turnkey",
       "type": "string",
       "matcher": null,
-      "default-value": "no",
-      "required": true,
-      "replacement-key": "#OVERWRITEPROJECTXNAT_ARG#",
+      "default-value": "",
+      "required": false,
+      "replacement-key": "#ADDITIONAL_PARAMETERS#",
       "sensitive": null,
-      "command-line-flag": "--overwriteprojectxnat",
-      "command-line-separator": "=",
+      "command-line-flag": null,
+      "command-line-separator": null,
       "true-value": null,
       "false-value": null,
       "select-values": [],
@@ -217,7 +217,7 @@
   ],
   "xnat": [
     {
-      "name": "qunex-hcp1-hcp5-QC-[VER]",
+      "name": "qunex-hcp-mpp-QC-[VER]",
       "label": null,
       "description": "Execute QuNex Turnkey [VER] all steps",
       "contexts": [

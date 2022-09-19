@@ -62,7 +62,12 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/_build/
+/etc/docs/_build/
+/etc/docs/wiki
+/etc/docs/api/gmri/*
+!/etc/docs/api/gmri/.gitkeep
+/etc/docs/index.rst
+/etc/docs/HomeMenu.rst
 
 # PyBuilder
 target/

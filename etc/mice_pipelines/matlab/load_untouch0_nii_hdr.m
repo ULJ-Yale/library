@@ -2,7 +2,7 @@
 
 %  - Jimmy Shen (jimmy@rotman-baycrest.on.ca)
 
-function hdr = load_nii_hdr(fileprefix, machine)
+function hdr = load_untouch0_nii_hdr(fileprefix, machine)
 
    fn = sprintf('%s.hdr',fileprefix);
    fid = fopen(fn,'r',machine);
@@ -16,7 +16,7 @@ function hdr = load_nii_hdr(fileprefix, machine)
       fclose(fid);
    end
 
-   return					% load_nii_hdr
+   return					% load_untouch0_nii_hdr
 
 
 %---------------------------------------------------------------------

@@ -2,7 +2,7 @@
 
 %  - Jimmy Shen (jimmy@rotman-baycrest.on.ca)
 
-function save_nii_hdr(hdr, fid)
+function save_untouch_nii_hdr(hdr, fid)
 
    if ~isequal(hdr.hk.sizeof_hdr,348),
       error('hdr.hk.sizeof_hdr must be 348.');
@@ -10,7 +10,7 @@ function save_nii_hdr(hdr, fid)
 
    write_header(hdr, fid);
 
-   return;					% save_nii_hdr
+   return;					% save_untouch_nii_hdr
 
 
 %---------------------------------------------------------------------
