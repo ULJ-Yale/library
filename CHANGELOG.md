@@ -6,9 +6,14 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 0.90.14
+
+* Added additional HCP ASL files for more robust setting of defaults.
+
 ## 0.90.13
 
 * Fixed permissions for fsl CUDA binaries.
+
 ## 0.90.12
 
 * Moved docs folder to the library repository.
