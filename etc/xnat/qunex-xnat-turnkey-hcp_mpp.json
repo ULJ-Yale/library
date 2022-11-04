@@ -1,0 +1,236 @@
+{
+  "name": "qunex-turnkey-hcp-mpp-QC-uploadstudy-cleanup",
+  "label": "QUNEX TURNKEY  hcp-mpp, QC, DATA CLEANUP WITH FULL STUDY UPLOAD",
+  "description": "Runs QuNex Turnkey hcp-mpp steps w/ full study upload",
+  "version": "[VER]",
+  "schema-version": "1.0",
+  "info-url": "https://qunex.readthedocs.io",
+  "image": "qunex/qunex_suite:[VER]",
+  "type": "docker",
+  "working-directory": "/output",
+  "command-line": "/opt/qunex/qx_library/etc/xnat/cs_wrapper.sh #BATCH_PARAMETERS_FILENAME_ARG# #TURNKEYSTEPS_ARG# #OVERWRITESTEP_ARG# #SCAN_MAPPING_FILENAME_ARG# #ID# #LABEL# #XNAT_PROJECT# #SUBJECTID# #ADDITIONAL_PARAMETERS#",
+  "mounts": [
+    {
+      "name": "in",
+      "writable": false,
+      "path": "/input"
+    },
+    {
+      "name": "out",
+      "writable": true,
+      "path": "/output"
+    }
+  ],
+  "environment-variables": {
+    "XNAT_PROJECT": "#XNAT_PROJECT#"
+  },
+  "ports": {},
+  "inputs": [
+    {
+      "name": "batch_parameters_filename",
+      "description": "Name of the batch parameters file. This file is expected to be present at the QUNEX_PROC resource at the project level",
+      "type": "string",
+      "default-value": "parameters.txt",
+      "required": true,
+      "replacement-key": "#BATCH_PARAMETERS_FILENAME_ARG#",
+      "command-line-flag": "--paramfile",
+      "command-line-separator": "=",
+      "select-values": []
+    },
+    {
+      "name": "scan_mapping_filename",
+      "description": "Name of the scan mapping file. This file is expected to be present at the QUNEX_PROC resource at the project level",
+      "type": "string",
+      "default-value": "hcp_mapping.txt",
+      "required": true,
+      "replacement-key": "#SCAN_MAPPING_FILENAME_ARG#",
+      "command-line-flag": "--mappingfile",
+      "command-line-separator": "=",
+      "select-values": []
+    },
+    {
+      "name": "session_id",
+      "description": "Session Accession ID",
+      "type": "string",
+      "required": true,
+      "replacement-key": "#ID#",
+      "command-line-flag": "--xnataccsessionid",
+      "command-line-separator": "=",
+      "select-values": []
+    },
+    {
+      "name": "session_label",
+      "description": "Session Label",
+      "type": "string",
+      "required": true,
+      "replacement-key": "#LABEL#",
+      "command-line-flag": "--xnatsessionlabels",
+      "command-line-separator": "=",
+      "select-values": []
+    },
+    {
+      "name": "session_project",
+      "description": "Project ID of the session",
+      "type": "string",
+      "required": true,
+      "replacement-key": "#XNAT_PROJECT#",
+      "command-line-flag": "--xnatprojectid",
+      "command-line-separator": "=",
+      "select-values": []
+    },
+    {
+      "name": "session_subject",
+      "description": "Subject ID of the Session",
+      "type": "string",
+      "required": true,
+      "replacement-key": "#SUBJECTID#",
+      "command-line-flag": "--xnatsubjectid",
+      "command-line-separator": "=",
+      "select-values": []
+    },
+    {
+      "name": "overwritestep",
+      "description": "Flag to decide if a specific step is to be overwritten by QuNex scripts",
+      "type": "string",
+      "default-value": "yes",
+      "required": true,
+      "replacement-key": "#OVERWRITESTEP_ARG#",
+      "command-line-flag": "--overwritestep",
+      "command-line-separator": "=",
+      "select-values": []
+    },
+    {
+      "name": "cleanup",
+      "description": "Flag to decide if the data is to be cleaned up after all turnkey steps",
+      "type": "string",
+      "default-value": "yes",
+      "required": true,
+      "replacement-key": "#CLEANUP_ARG#",
+      "command-line-flag": "--cleanup",
+      "command-line-separator": "=",
+      "select-values": []
+    },
+    {
+      "name": "turnkeysteps",
+      "description": "Steps to execute",
+      "type": "string",
+      "default-value": "hcp_pre_freesurfer,hcp_freesurfer,hcp_post_freesurfer,hcp_fmri_volume,hcp_fmri_surface,run_qc_t1w,run_qc_t2w,run_qc_myelin,run_qc_bold,map_hcp_data",
+      "required": true,
+      "replacement-key": "#TURNKEYSTEPS_ARG#",
+      "command-line-flag": "--turnkeysteps",
+      "command-line-separator": "=",
+      "select-values": []
+    },
+    {
+      "name": "additional_parameters",
+      "description": "Additional parameters for run_turnkey",
+      "type": "string",
+      "default-value": "",
+      "required": false,
+      "replacement-key": "#ADDITIONAL_PARAMETERS#",
+      "select-values": []
+    }
+  ],
+  "outputs": [
+    {
+      "name": "qunex_study",
+      "required": false,
+      "mount": "out",
+      "path": "#XNAT_PROJECT#"
+    },
+    {
+      "name": "QC",
+      "required": false,
+      "mount": "out",
+      "path": "#XNAT_PROJECT#/sessions/QC"
+    }
+  ],
+  "xnat": [
+    {
+      "name": "qunex-hcp-mpp-QC-[VER]",
+      "description": "Execute QuNex Turnkey [VER] hcp-mpp and QC steps",
+      "contexts": [
+        "xnat:imageSessionData"
+      ],
+      "external-inputs": [
+        {
+          "name": "session",
+          "description": "Input session",
+          "type": "Session",
+          "required": true,
+          "provides-files-for-command-mount": "in",
+          "load-children": true
+        }
+      ],
+      "derived-inputs": [
+        {
+          "name": "id",
+          "description": "Session Accession ID. Used as QuNex id variable.",
+          "type": "string",
+          "required": true,
+          "provides-value-for-command-input": "session_id",
+          "load-children": true,
+          "derived-from-wrapper-input": "session",
+          "derived-from-xnat-object-property": "id",
+          "multiple": false
+        },
+        {
+          "name": "label",
+          "description": "Session label. Used as QuNex subject identifier.",
+          "type": "string",
+          "required": true,
+          "provides-value-for-command-input": "session_label",
+          "load-children": true,
+          "derived-from-wrapper-input": "session",
+          "derived-from-xnat-object-property": "label",
+          "multiple": false
+        },
+        {
+          "name": "xnat_project",
+          "description": "Project in which session is stored",
+          "type": "string",
+          "required": true,
+          "provides-value-for-command-input": "session_project",
+          "load-children": true,
+          "derived-from-wrapper-input": "session",
+          "derived-from-xnat-object-property": "project-id",
+          "multiple": false
+        },
+        {
+          "name": "subjectid",
+          "description": "Subject Accession ID",
+          "type": "string",
+          "required": true,
+          "provides-value-for-command-input": "session_subject",
+          "load-children": true,
+          "derived-from-wrapper-input": "session",
+          "derived-from-xnat-object-property": "subject-id",
+          "multiple": false
+        }
+      ],
+      "output-handlers": [
+        {
+          "name": "output-resource-study",
+          "accepts-command-output": "qunex_study",
+          "as-a-child-of": "session",
+          "type": "Resource",
+          "label": "qunex_study",
+          "tags": []
+        },
+        {
+          "name": "output-resource-qc",
+          "accepts-command-output": "QC",
+          "as-a-child-of": "session",
+          "type": "Resource",
+          "label": "QC",
+          "tags": []
+        }
+      ]
+    }
+  ],
+  "reserve-memory": 28000,
+  "container-labels": {},
+  "generic-resources": {},
+  "ulimits": {},
+  "secrets": []
+}
