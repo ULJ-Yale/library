@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 0.90.15
+
+Fixed a shebang in one of the bash scripts.
+
 ## 0.90.14
 
 * Added additional HCP ASL files for more robust setting of defaults.

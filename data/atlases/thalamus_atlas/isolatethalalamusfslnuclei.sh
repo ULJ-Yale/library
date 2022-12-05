@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/bash 
 #
 #~ND~FORMAT~MARKDOWN~
 #~ND~START~
