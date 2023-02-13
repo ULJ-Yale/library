@@ -163,17 +163,6 @@ def get_toc_tree_content(lines):
     return toc_tree_lines
 
 
-def read_exclude_list(ex_path):
-    """
-    Reads the ex_path file containing the files to be excluded from public
-    documentation page. Currently, pages linking to excluded files are replaced
-    by the page under construction (pageUnderConstruction.md).
-    """
-    with open(ex_path) as f:
-        ex_lines = f.readlines()
-    return ex_lines
-
-
 if __name__ == "__main__":
     print("==> Converting Home.md to index.rst and HomeMenu.rst")
 
@@ -232,12 +221,5 @@ if __name__ == "__main__":
     # -- export index.rst
     export_file('../../index.rst', index_lines, True)
 
-    # -- remove files that should be excluded from index.rst
-    ex_lines = read_exclude_list('../excludelist.txt')
-    for line in ex_lines:
-        file2remove = prefix_wiki(line)
-        if os.path.exists(file2remove):
-            os.remove(file2remove)
-            copyfile('../pageUnderConstruction.md', file2remove)
-        else:
-            print("WARNING: The file to be excluded (" + file2remove + ") does not exist or it was already excluded.")
+    # remove Home.md file to avoid errors
+    os.remove("../../wiki/Home.md")
