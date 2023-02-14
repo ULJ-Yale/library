@@ -160,6 +160,7 @@
     .bd-toc {
         margin-top: 52px !important;
         padding-top: 8px !important;
+        height: calc(100% - 48px);
     }
 
     .bd-toc li {
@@ -186,6 +187,11 @@
 
 .heading-style, h1, h2, h3, h4, h5, h6 {
     margin-top: 2rem !important;
+}
+
+#main-content a code {
+	color: var(--qunex-orange) !important;
+	font-weight: normal;
 }
 
 #main-content p a,
@@ -228,4 +234,3 @@ main code,
     background-color: transparent;
     text-decoration: none;
 }
-
