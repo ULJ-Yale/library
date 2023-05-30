@@ -1,8 +1,6 @@
 warning('off');
 addpath(getenv("PALMDIR"));
 addpath(getenv("MATLABPATH"));
-LOCALLIST = getenv("OCTAVEPKGDIR");
-pkg('local_list', LOCALLIST);
 pkg load image
 pkg load control
 pkg load signal
