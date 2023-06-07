@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 0.90.16
+
+Removed unused CUDA binaries.
+
 ## 0.90.15
 
 Fixed a shebang in one of the bash scripts.
