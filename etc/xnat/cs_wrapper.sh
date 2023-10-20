@@ -28,16 +28,12 @@
 #
 #~ND~END~
 
-# -- String parsed from XNAT Container Service
-CSInputString="${@:1}"
+mkdir /output/${XNAT_PROJECT_ID}
+STUDY_FOLDER=/output/${XNAT_PROJECT_ID}
+SESSIONS_FOLDER=${STUDY_FOLDER}/sessions
 
-# -- Full QuNex command
-CSWrapperCmd="$TOOLS/qunex/bin/qunex.sh run_turnkey \
---xnathost=${XNAT_HOST} \
---xnatuser=${XNAT_USER} \
---xnatpass=${XNAT_PASS} \
---turnkeytype=xnat \
-${CSInputString}"
+CSWrapperCmd="$TOOLS/qunex/bin/qunex.sh create_study \
+    --studyfolder=${STUDY_FOLDER}"
 
 echo ""
 echo "QuNex Container Service Parsed QuNex Command:"
@@ -47,6 +43,29 @@ echo $CSWrapperCmd
 echo ""
 
 eval $CSWrapperCmd
+
+curl -k -u ${XNAT_USER_NAME}:${XNAT_PASSWORD} -X GET "${XNAT_HOST_NAME}/data/projects/${XNAT_PROJECT}/resources/QUNEX_PROC/files/${RECIPE_FILENAME}" > ${SESSIONS_FOLDER}/specs/${RECIPE_FILENAME}
+
+RECIPE_FILE=${SESSIONS_FOLDER}/specs/${RECIPE_FILENAME}
+INITIAL_PARAMETERS=${SESSIONS_FOLDER}/specs/${BATCH_PARAMETERS_FILENAME}
+MAPPING=${SESSIONS_FOLDER}/specs/${SCAN_MAPPING_FILENAME}
+BATCH_PARAMETERS=${STUDY_FOLDER}/processing/${BATCH_PARAMETERS_FILENAME}
+
+CSWrapperCmd="$TOOLS/qunex/bin/qunex.sh run_recipe \
+    --recipe_file=${RECIPE_FILE} \
+    --recipe=${RECIPE}"
+
+echo ""
+echo "QuNex Container Service Parsed QuNex Command:"
+echo "-----------------------------------------------"
+echo ""
+echo $CSWrapperCmd
+echo ""
+
+eval $CSWrapperCmd
+
+# -- String parsed from XNAT Container Service
+CSInputString="${@:1}"
 
 COM_LOGS_DIR="/output/${XNAT_PROJECT}/processing/logs/comlogs"
 
