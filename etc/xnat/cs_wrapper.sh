@@ -62,7 +62,7 @@ export BATCH_PARAMETERS=${STUDY_FOLDER}/processing/${BATCH_PARAMETERS_FILENAME}
 
 CSWrapperCmd="$TOOLS/qunex/bin/qunex.sh run_recipe \
     --recipe_file=${RECIPE_FILE} \
-    --recipe=${RECIPE}" \
+    --recipe=${RECIPE} \
     --xnat=True"
 
 echo ""
@@ -73,6 +73,10 @@ echo $CSWrapperCmd
 echo ""
 
 eval $CSWrapperCmd
+
+# Dicom cleanup
+
+rm ${SESSIONS_FOLDER}/${LABEL}/dicom/*tar* &> /dev/null
 
 # -- String parsed from XNAT Container Service
 CSInputString="${@:1}"
