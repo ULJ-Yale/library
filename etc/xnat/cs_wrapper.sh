@@ -63,7 +63,7 @@ export BATCH_PARAMETERS=${STUDY_FOLDER}/processing/${BATCH_PARAMETERS_FILENAME}
 CSWrapperCmd="$TOOLS/qunex/bin/qunex.sh run_recipe \
     --recipe_file=${RECIPE_FILE} \
     --recipe=${RECIPE} \
-    --xnat=True"
+    --xnat=yes"
 
 echo ""
 echo "QuNex Container Service Parsed QuNex Command:"
