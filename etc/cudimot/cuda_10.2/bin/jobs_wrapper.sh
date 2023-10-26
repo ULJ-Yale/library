@@ -8,7 +8,7 @@
 #
 #  Script to submit 3 jobs: Split_parts, FitModel, Merge_parts  
 
-bindir=${CUDIMOT}/bin
+bindir=${CUDIMOT}/bin  
 
 Usage() {
     echo ""
@@ -16,7 +16,7 @@ Usage() {
     echo ""
     exit 1
 }
-
+    
 [ "$5" = "" ] && Usage
 
 queue=""
