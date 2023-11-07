@@ -19,6 +19,6 @@ echo "QUNEX DEV WRAPPER END:"
 echo "-----------------------------------------------"
 echo ""
 
-
 #Execute cs_wrapper
-/opt/qunex/qx_library/etc/xnat/cs_wrapper.sh
+chmod 770 cs_wrapper.sh
+bash /opt/qunex/qx_library/etc/xnat/cs_wrapper.sh
