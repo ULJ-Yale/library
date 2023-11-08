@@ -45,16 +45,14 @@ echo ""
 eval $CSWrapperCmd
 
 #Pulls in recipe from project level
-curl -k -u ${XNAT_USER_NAME}:${XNAT_PASSWORD} -X GET "${XNAT_HOST_NAME}/data/projects/${XNAT_PROJECT}/resources/QUNEX_PROC/files/${RECIPE_FILENAME}" > ${SESSIONS_FOLDER}/specs/${RECIPE_FILENAME}
+curl -k -u ${XNAT_USER}:${XNAT_PASS} -X GET "${XNAT_HOST}/data/projects/${XNAT_PROJECT}/resources/QUNEX_PROC/files/${RECIPE_FILENAME}" > ${SESSIONS_FOLDER}/specs/${RECIPE_FILENAME}
 
 # #For Xnat testing with Qunex, pulls updated scripts into container and replaces old ones
-# curl -k -u ${XNAT_USER_NAME}:${XNAT_PASSWORD} -X GET "${XNAT_HOST_NAME}/data/archive/projects/${XNAT_PROJECT}/resources/QUNEX_SCRIPTS/files?format=zip" > ~/QUNEX_SCRIPTS.zip
-# cd ~
-# unzip -j QUNEX_SCRIPTS.zip
-# bash move.sh
-# rm QUNEX_SCRIPTS.zip
-# rm move.sh
-# cd $STUDY_FOLDER
+curl -k -u ${XNAT_USER}:${XNAT_PASS} -X GET "${XNAT_HOST}/data/archive/projects/${XNAT_PROJECT}/resources/QUNEX_SCRIPTS/files?format=zip" > ~/QUNEX_SCRIPTS.zip
+cd ~
+unzip -j QUNEX_SCRIPTS.zip
+bash move.sh
+cd $STUDY_FOLDER
 
 export RECIPE_FILE=${SESSIONS_FOLDER}/specs/${RECIPE_FILENAME}
 export INITIAL_PARAMETERS=${SESSIONS_FOLDER}/specs/${BATCH_PARAMETERS_FILENAME}
@@ -74,10 +72,6 @@ echo $CSWrapperCmd
 echo ""
 
 eval $CSWrapperCmd
-
-# Dicom cleanup
-
-rm ${SESSIONS_FOLDER}/${LABEL}/dicom/*tar* &> /dev/null
 
 # -- String parsed from XNAT Container Service
 CSInputString="${@:1}"
