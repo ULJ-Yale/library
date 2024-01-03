@@ -24,8 +24,8 @@ The QuNex `library` code is co-developed and co-maintained by the:
 
 ## Version
 
-0.90.16
+0.90.17
 
 ## References
 
-Jie Lisa Ji, Jure Demšar, Clara Fonteneau, Zailyn Tamayo, Lining Pan, Aleksij Kraljič, Andraž Matkovič, Nina Purg, Markus Helmer, Shaun Warrington, Anderson Winkler, Valerio Zerbi, Timothy S. Coalson, Matthew F. Glasser, Michael P. Harms, Stamatios N. Sotiropoulos, John D. Murray, Alan Anticevic, Grega Repovš; QuNex – An Integrative Platform for Reproducible Neuroimaging Analytics; bioRxiv 2022.06.03.494750; doi: https://doi.org/10.1101/2022.06.03.494750
+Jie Lisa Ji, Jure Demšar, Clara Fonteneau, Zailyn Tamayo, Lining Pan, Aleksij Kraljič, Andraž Matkovič, Nina Purg, Markus Helmer, Shaun Warrington, Anderson Winkler, Valerio Zerbi, Timothy S. Coalson, Matthew F. Glasser, Michael P. Harms, Stamatios N. Sotiropoulos, John D. Murray, Alan Anticevic, Grega Repovš; QuNex – An Integrative Platform for Reproducible Neuroimaging Analytics; bioRxiv 2022.06.03.494750; doi: <https://doi.org/10.1101/2022.06.03.494750>

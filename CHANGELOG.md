@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 0.90.17
+
+Fixed some regular expression escape characters to avoid warnings.
+
 ## 0.90.16
 
 Removed unused CUDA binaries.
