@@ -62,7 +62,7 @@ def restructure_home_menu(file_lines):
     paths in the last part of the homepage (QuNex SDK).
     """
     for i in range(len(file_lines) - bottom_line_padding):
-        matched_path = re.search("(?<=<)[^hb].+?(?=>)", file_lines[i])
+        matched_path = re.search(r"(?<=<)[^hb].+?(?=>)", file_lines[i])
         if matched_path:
             new_path = prefix_wiki(matched_path.group(0))
             new_path = append_html(new_path)
@@ -156,8 +156,8 @@ def get_toc_tree_content(lines):
     toc_tree_lines = []
     for i in range(len(lines)):
         if lines[i][0] in ["*", "-"]:
-            toc_caption = re.search("(?<=\[).+(?=\]\()", lines[i])
-            toc_path = re.search("(?<=\]\()[A-Za-z].+(?=\))", lines[i])
+            toc_caption = re.search(r"(?<=\[).+(?=\]\()", lines[i])
+            toc_path = re.search(r"(?<=\]\()[A-Za-z].+(?=\))", lines[i])
             if toc_caption and toc_path:
                 toc_tree_lines.append("   " + toc_caption.group(0) + " <" + prefix_wiki(toc_path.group(0)) + ">")
     return toc_tree_lines
