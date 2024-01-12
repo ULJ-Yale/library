@@ -51,7 +51,7 @@ eval $CSWrapperCmd
 
 mkdir $SESSIONS_FOLDER/$LABEL
 mkdir $SESSIONS_FOLDER/$LABEL/inbox
-mkdir $SESSIONS_FOLDER/$LABEL/checkpoints
+mkdir $SESSIONS_FOLDER/checkpoints
 
 #Pulls in recipe from project level
 curl -k -u ${XNAT_USER}:${XNAT_PASS} -X GET "${XNAT_HOST}/data/projects/${XNAT_PROJECT}/resources/QUNEX_PROC/files/${RECIPE_FILENAME}" > ${SESSIONS_FOLDER}/specs/${RECIPE_FILENAME}
@@ -73,21 +73,23 @@ export INITIAL_PARAMETERS=${SESSIONS_FOLDER}/specs/${BATCH_PARAMETERS_FILENAME}
 export MAPPING=${SESSIONS_FOLDER}/specs/${SCAN_MAPPING_FILENAME}
 export BATCH_PARAMETERS=${STUDY_FOLDER}/processing/${BATCH_PARAMETERS_FILENAME}
 
-CSWrapperCmd="$TOOLS/qunex/bin/qunex.sh run_recipe \
-    --recipe_file=${RECIPE_FILE} \
-    --recipe=${RECIPE} \
-    ${CSInputString}"
+IFS=',' read -ra recipeArray <<< "$RECIPES"
+for RECIPE in "${recipeArray[@]}"; do 
+    echo "Running recipe: ${RECIPE}"
+    CSWrapperCmd="$TOOLS/qunex/bin/qunex.sh run_recipe \
+        --recipe_file=${RECIPE_FILE} \
+        --recipe=${RECIPE} \
+        ${CSInputString}"
 
-echo ""
-echo "QuNex Container Service Parsed QuNex Command:"
-echo "-----------------------------------------------"
-echo ""
-echo $CSWrapperCmd
-echo ""
+    echo ""
+    echo "QuNex Container Service Parsed QuNex Command:"
+    echo "-----------------------------------------------"
+    echo ""
+    echo $CSWrapperCmd
+    echo ""
 
-eval $CSWrapperCmd
-
-
+    eval $CSWrapperCmd
+done
 
 
 COM_LOGS_DIR="/output/${XNAT_PROJECT}/processing/logs/comlogs"
