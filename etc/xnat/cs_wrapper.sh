@@ -71,7 +71,7 @@ fi
 export RECIPE_FILE=${SESSIONS_FOLDER}/specs/${RECIPE_FILENAME}
 export INITIAL_PARAMETERS=${SESSIONS_FOLDER}/specs/${BATCH_PARAMETERS_FILENAME}
 export MAPPING=${SESSIONS_FOLDER}/specs/${SCAN_MAPPING_FILENAME}
-export BATCH_PARAMETERS=${STUDY_FOLDER}/processing/${BATCH_PARAMETERS_FILENAME}
+export BATCH_PARAMETERS=${STUDY_FOLDER}/processing/batch.txt
 
 IFS=',' read -ra recipeArray <<< "$RECIPES"
 for RECIPE in "${recipeArray[@]}"; do 
