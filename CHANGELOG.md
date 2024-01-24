@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 0.90.19
+
+Added some additional info to docs compilation.
+
 ## 0.90.18
 
 Added support files for run_recipe.
