@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 0.90.20
+
+Hidden the access token in docs build instructions.
+
 ## 0.90.19
 
 Added some additional info to docs compilation.
