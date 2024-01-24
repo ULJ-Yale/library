@@ -4,10 +4,10 @@ cd $(dirname $0)
 
 echo "==> Cloning latest wiki version from GitLab"
 
-echo "    ... Cloning from https://token:glpat-5EgdqsDJkKEHYgXZpgsx@gitlab.qunex.yale.edu/qunex/qunex.wiki.git"
+echo "    ... Cloning from https://token:${GITLAB_QUNEX_TOKEN}@gitlab.qunex.yale.edu/qunex/qunex.wiki.git"
 
 # Use a project access token with `read_repository` api scope for qunex.wiki
-git clone --depth 1 https://token:glpat-5EgdqsDJkKEHYgXZpgsx@gitlab.qunex.yale.edu/qunex/qunex.wiki.git ../../wiki
+git clone --depth 1 https://token:${GITLAB_QUNEX_TOKEN}@gitlab.qunex.yale.edu/qunex/qunex.wiki.git ../../wiki
 #cp -r ../../../../../../qunex.wiki ../../wiki  # useful during development
 
 python3 ../python/generate_index.py
