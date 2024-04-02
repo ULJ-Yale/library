@@ -11,5 +11,5 @@ pkg load io
 pkg load miscellaneous
 pkg load optim
 pkg load struct
-warning('on');
 warning('off', 'Octave:possible-matlab-short-circuit-operator');
+warning('off', 'Octave:language-extension');
