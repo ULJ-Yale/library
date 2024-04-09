@@ -11,8 +11,6 @@ generate_index.py is the script that performs all the necessary adjustments to
 the homepage file of the QuNex Wiki (Home.md) in order to prepare the
 index file for the public GitLab QuNex documentation website.
 
-* Search for TODO to find what needs to be implemented.
-
 * Search for HARDCODED to find what is hardcoded and should be inspected and
   modified every time there is a major change in the format of the Wiki.
 '''
