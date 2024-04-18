@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 0.100.0 [QX IO]
+
+Octave optimizations, library cleanup.
+
 ## 0.90.20
 
 Hidden the access token in docs build instructions.
