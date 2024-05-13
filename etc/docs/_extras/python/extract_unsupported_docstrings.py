@@ -170,7 +170,7 @@ def write_python_files(docstring_dict):
 
 
 if __name__ == "__main__":
-    print("==> Generating Python-like docstrings from unsupported (bash and R) commands")
+    print("---> Generating Python-like docstrings from unsupported (bash and R) commands")
     unsupported_languages = [
         "bash",
         "r",

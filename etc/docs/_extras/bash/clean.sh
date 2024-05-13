@@ -2,7 +2,7 @@
 
 cd $(dirname $0)
 
-echo "==> Cleaning docs and related directories"
+echo "---> Cleaning docs and related directories"
 rm -rf ../../wiki ../../HomeMenu.rst ../../index.rst ../../_build
 rm -f ../../api/gmri/*
 find ../../../../../python -name "bash.py" -type f -delete

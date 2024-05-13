@@ -162,7 +162,7 @@ def get_toc_tree_content(lines):
 
 
 if __name__ == "__main__":
-    print("==> Converting Home.md to index.rst and HomeMenu.rst")
+    print("---> Converting Home.md to index.rst and HomeMenu.rst")
 
     # -- read Home.md file (Wiki homepage)
     with open('../../wiki/Home.md') as f:
