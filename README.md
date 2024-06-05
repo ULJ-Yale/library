@@ -12,7 +12,7 @@ The QuNex `library` code is co-developed and co-maintained by the:
 
 * [Anticevic Lab, Yale University](http://anticeviclab.yale.edu),
 * [Mind and Brain Lab, University of Ljubljana](http://psy.ff.uni-lj.si/mblab/en),
-* [Murray Lab, Dartmouth University](https://murraylab.org).
+* [Murray Lab, Dartmouth College](https://murraylab.org).
 
 ## Quick links
 
