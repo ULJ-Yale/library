@@ -11,7 +11,7 @@ The QuNex `library` component contains miscellaneous dependencies, environment s
 The QuNex `library` code is co-developed and co-maintained by the:
 
 * [Anticevic Lab, Yale University](http://anticeviclab.yale.edu),
-* [Mind and Brain Lab, University of Ljubljana](http://psy.ff.uni-lj.si/mblab/en),
+* [Mind and Brain Lab, University of Ljubljana](https://mblab.si),
 * [Murray Lab, Dartmouth College](https://murraylab.org).
 
 ## Quick links
