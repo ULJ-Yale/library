@@ -31,7 +31,7 @@ for lang in ["python", "matlab"]:
 # -- Project information -----------------------------------------------------
 
 project = 'QuNex'
-copyright = f'{str(datetime.date.today().year)}, Anticevic Lab (Yale University), Mind and Brain Lab (University of Ljubljana), Murray Lab (Yale University)'
+copyright = f'{str(datetime.date.today().year)}, Anticevic Lab (Yale University), Mind and Brain Lab (University of Ljubljana), Murray Lab (Darthmouth College)'
 
 version_path = "../../../VERSION.md"
 # check if file exists to avoid error when using this script as import

@@ -102,7 +102,7 @@ function image_dimension(fid, dime)
 	%				pixdim[1] - voxel width
 	%				pixdim[2] - voxel height
 	%				pixdim[3] - interslice distance
-	%				pixdim[4] - volume timing, in msec
+	%				pixdim[4] - volume timing, in ms
 	%					..etc
 	%			*/
 	%       float vox_offset;                /* 68 + 4          */

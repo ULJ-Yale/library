@@ -2,7 +2,7 @@
 
 cd $(dirname $0)
 
-echo "==> Cloning latest wiki version from GitLab"
+echo "---> Cloning latest wiki version from GitLab"
 
 echo "    ... Cloning from https://token:${GITLAB_QUNEX_TOKEN}@gitlab.qunex.yale.edu/qunex/qunex.wiki.git"
 

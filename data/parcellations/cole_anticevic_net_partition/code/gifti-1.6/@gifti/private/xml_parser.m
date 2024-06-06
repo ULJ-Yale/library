@@ -95,7 +95,7 @@ function tree = xml_parser(xmlstr)
 %
 %--------------------------------------------------------------------------
 
-% TODO/BUG/FEATURES:
+% BUG/FEATURES:
 %  - [compile] only a warning if TagStart is empty ?
 %  - [attribution] should look for " and ' rather than only "
 %  - [main] with normalize as a preprocessing, CDATA are modified

@@ -4,7 +4,7 @@
 
 cd $(dirname $0)
 
-echo "==> Copying latest wiki version from local qunex.wiki folder"
+echo "---> Copying latest wiki version from local qunex.wiki folder"
 cp -r ../../../../../../qunex.wiki ../../wiki
 
 QUNEXMCOMMAND="matlab" # To supress a warning

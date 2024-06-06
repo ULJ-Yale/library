@@ -19,7 +19,7 @@ gmri = module_from_spec(spec)
 spec.loader.exec_module(gmri)
 
 if __name__ == "__main__":
-    print("==> Generating .rst files for individual commands")
+    print("---> Generating .rst files for individual commands")
 
     directory_path = os.path.join("..", "..", "api", "gmri")
 

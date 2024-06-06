@@ -12,16 +12,13 @@ switch subs(1).type
                 {'vertices' 'faces' 'normals' 'cdata','mat','indices','private'})
             error('Reference to non-existent field ''%s''.',subs(1).subs);
         end
-        % TODO % handle cases when length(subs) > 1
         [i,n] = isintent(this,subs(1).subs);
         if isempty(i) && ~strcmp(subs(1).subs,'private')
             n = length(this.data) + 1;
             if n==1, this.data = {}; end
-            % TODO % Initialise data field appropriately
             this.data{n}.metadata = struct([]);
             this.data{n}.space    = [];
             this.data{n}.attributes.Dim = size(A);
-            % TODO % set DataType according to intent type
             this.data{n}.data = [];
             switch subs(1).subs
                 case {'vertices','mat'}
