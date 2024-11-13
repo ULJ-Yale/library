@@ -20,7 +20,9 @@ matlab_src_dir = os.path.join("../../..", "matlab")  # MATLAB domain root folder
 # Modules or directories that are shared between multiple languages (e.g.
 # qx_utilities) have to be added to sys.path separately for each language.
 for lang in ["python", "matlab"]:
-    path_with_modules = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..", lang))
+    path_with_modules = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "../../..", lang)
+    )
     if os.path.isdir(path_with_modules):
         for each in os.listdir(path_with_modules):
             full_path = os.path.join(path_with_modules, each)
@@ -30,8 +32,8 @@ for lang in ["python", "matlab"]:
 
 # -- Project information -----------------------------------------------------
 
-project = 'QuNex'
-copyright = f'{str(datetime.date.today().year)}, Anticevic Lab (Yale University), Mind and Brain Lab (University of Ljubljana), Murray Lab (Darthmouth College)'
+project = "QuNex"
+copyright = f"{str(datetime.date.today().year)}, Mind and Brain Lab (University of Ljubljana) and Cho Lab (Yale University)"
 
 version_path = "../../../VERSION.md"
 # check if file exists to avoid error when using this script as import
@@ -46,12 +48,12 @@ if os.path.isfile(version_path):
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinxcontrib.matlab',
-#    'sphinx.ext.autodoc',
-    'sphinx.ext.napoleon',
-    'myst_parser',
-    'sphinx_copybutton',
-    'sphinxext.opengraph',
+    "sphinxcontrib.matlab",
+    #    'sphinx.ext.autodoc',
+    "sphinx.ext.napoleon",
+    "myst_parser",
+    "sphinx_copybutton",
+    "sphinxext.opengraph",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -72,9 +74,9 @@ smartquotes = False
 napoleon_numpy_docstring = False
 
 napoleon_custom_sections = [
-    ('parameters'),
-    ('returns'),
-    ('output files'),
+    ("parameters"),
+    ("returns"),
+    ("output files"),
 ]
 
 # -- Options for MyST parser extension --------------------------------------
@@ -92,30 +94,28 @@ ogp_image = "https://qunex.readthedocs.io/en/latest/_images/QuNex_Logo_pantheons
 # a list of builtin themes.
 #
 
-html_theme = 'sphinx_book_theme'
+html_theme = "sphinx_book_theme"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]
 
 html_css_files = [
-    'css/custom.css',
-    'css/header.css',
+    "css/custom.css",
+    "css/header.css",
 ]
 
 html_js_files = [
-    'js/header.js',
-    'js/custom.js',
+    "js/header.js",
+    "js/custom.js",
 ]
 
-html_title = f'{project} documentation'
+html_title = f"{project} documentation"
 
-#html_logo = 'wiki/Images/QuNex_Logo_small.png'
-html_favicon = '_static/img/favicon.png'
+# html_logo = 'wiki/Images/QuNex_Logo_small.png'
+html_favicon = "_static/img/favicon.png"
 
-html_theme_options = {
-    "home_page_in_toc": True
-}
+html_theme_options = {"home_page_in_toc": True}
 
 html_extra_path = ["_extras/robots.txt"]
