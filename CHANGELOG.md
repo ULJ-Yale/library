@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 1.0.0 [QIO]
+
+New QuNex version.
+
 ## 0.100.0 [QX IO]
 
 Octave optimizations, library cleanup.
