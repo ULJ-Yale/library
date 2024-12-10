@@ -212,7 +212,7 @@ if __name__ == "__main__":
     index_lines.append("   :maxdepth: 3")
     index_lines.append("   :caption: Specific command documentation")
     index_lines.append("   :hidden:\n")
-    index_lines.append("   api/all_commands")
+    index_lines.append("   api/gmri")
 
     index_lines.append("\n.. include:: HomeMenu.rst\n")
 

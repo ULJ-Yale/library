@@ -14,7 +14,7 @@ python3 ../python/generate_index.py
 
 python3 ../python/extract_unsupported_docstrings.py
 
-python3 ../python/generate_all_commands_rsts.py
+python3 ../python/generate_gmri_rsts.py
 
 # The actual build step
 cd ../..

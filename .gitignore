@@ -64,8 +64,8 @@ instance/
 # Sphinx documentation
 /etc/docs/_build/
 /etc/docs/wiki
-/etc/docs/api/all_commands/*
-!/etc/docs/api/all_commands/.gitkeep
+/etc/docs/api/gmri/*
+!/etc/docs/api/gmri/.gitkeep
 /etc/docs/index.rst
 /etc/docs/HomeMenu.rst
 

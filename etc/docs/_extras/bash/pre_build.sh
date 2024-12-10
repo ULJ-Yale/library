@@ -14,7 +14,7 @@ python3 ../python/generate_index.py
 
 python3 ../python/extract_unsupported_docstrings.py
 
-python3 ../python/generate_all_commands_rsts.py
+python3 ../python/generate_gmri_rsts.py
 
 # use the following command to build the documentation locally from $QUNEXPATH/docs:
 # python3 -m sphinx -W -T -E -b html -d _build/doctrees -D language=en . _build/html
