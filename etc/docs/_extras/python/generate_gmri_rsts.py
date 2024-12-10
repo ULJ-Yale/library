@@ -13,17 +13,22 @@ from importlib.machinery import SourceFileLoader
 sys.path.insert(0, "../../../../../python")
 sys.path.insert(0, "../../../../../python/qx_utilities")
 
-# this code imports python/qx_utilities/gmri to use all_qunex_commands list
-spec = spec_from_loader("gmri", SourceFileLoader("gmri", "../../../../../python/qx_utilities/gmri"))
-gmri = module_from_spec(spec)
-spec.loader.exec_module(gmri)
+# this code imports python/qx_utilities/general/commands.py to use the all_qunex_commands list
+spec = spec_from_loader(
+    "all_commands",
+    SourceFileLoader(
+        "all_commands", "../../../../../python/qx_utilities/general/all_commands.py"
+    ),
+)
+all_commands = module_from_spec(spec)
+spec.loader.exec_module(all_commands)
 
 if __name__ == "__main__":
     print("---> Generating .rst files for individual commands")
 
     directory_path = os.path.join("..", "..", "api", "gmri")
 
-    for full_name, description, language in gmri.all_qunex_commands:
+    for full_name, description, language in all_commands.all_qunex_commands:
         function_name = full_name.split(".")[-1]
         file_content = f'{function_name}\n{"=" * len(function_name)}\n\n'
         if language.lower() in ["python", "bash", "r"]:
