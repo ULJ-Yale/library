@@ -17,10 +17,15 @@ from conf import napoleon_custom_sections
 from importlib.util import spec_from_loader, module_from_spec
 from importlib.machinery import SourceFileLoader
 
-# this code imports python/qx_utilities/gmri to use all_qunex_commands list
-spec = spec_from_loader("gmri", SourceFileLoader("gmri", "../../../../../python/qx_utilities/gmri"))
-gmri = module_from_spec(spec)
-spec.loader.exec_module(gmri)
+# this code imports python/qx_utilities/general/commands.py to use the all_qunex_commands list
+spec = spec_from_loader(
+    "all_commands",
+    SourceFileLoader(
+        "all_commands", "../../../../../python/qx_utilities/general/all_commands.py"
+    ),
+)
+all_commands = module_from_spec(spec)
+spec.loader.exec_module(all_commands)
 
 
 def docstring_to_parameters(docstring, headings):
@@ -34,7 +39,9 @@ def docstring_to_parameters(docstring, headings):
 
     parameters = []
 
-    sections["parameters"] = re.findall(r'(?i)(Parameters:[\s\S]*?(?:\n\n(?:' + headings_string + r'):|\Z))', docstring)
+    sections["parameters"] = re.findall(
+        r"(?i)(Parameters:[\s\S]*?(?:\n\n(?:" + headings_string + r"):|\Z))", docstring
+    )
 
     for heading, section in sections.items():
         if sections[heading]:
@@ -47,13 +54,13 @@ def docstring_to_parameters(docstring, headings):
         if section:
             for result in re.findall("\n {4}--(\w+).*?(default .*)?\):", section):
                 parameter = result[0]
-                if result[1] not in ['', "default detailed below"]:
+                if result[1] not in ["", "default detailed below"]:
                     stripped = re.sub("^default ", "", result[1])
                     if stripped.lower() == "true":
                         stripped = "True"
                     elif stripped.lower() == "false":
                         stripped = "False"
-                    parameter += f'={stripped}'
+                    parameter += f"={stripped}"
                     parameters.append((parameter, True))
                 else:
                     parameters.append((parameter, False))
@@ -100,7 +107,7 @@ def generate_heading_list():
         "warn",
         "warns",
         "yield",
-        "yields"
+        "yields",
     ]
     # add custom headings from conf.py
     for heading in napoleon_custom_sections:
@@ -123,7 +130,9 @@ def extract_docstrings(input_dict):
                 function_name = command_split[-1]
                 module_path = "/".join(command_split[:-2])
                 # if there is at least one command per language
-                source_file_path = os.path.abspath("../../../../../" + lang + "/" + module_path + "/" + function_name)
+                source_file_path = os.path.abspath(
+                    "../../../../../" + lang + "/" + module_path + "/" + function_name
+                )
                 if lang == "bash":
                     source_file_path += ".sh"
                 elif lang == "r":
@@ -131,9 +140,13 @@ def extract_docstrings(input_dict):
 
                 with open(source_file_path, "r") as file:
                     if lang == "bash":
-                        docstring = re.findall("usage\(\) \{\n *cat << EOF\n([\s\S]*?)\nEOF", file.read())[0]
+                        docstring = re.findall(
+                            "usage\(\) \{\n *cat << EOF\n([\s\S]*?)\nEOF", file.read()
+                        )[0]
                     elif lang == "r":
-                        docstring = re.findall("\n# {3}``" + function_name + "``\n(?:#.*\n)+", file.read())[0]
+                        docstring = re.findall(
+                            "\n# {3}``" + function_name + "``\n(?:#.*\n)+", file.read()
+                        )[0]
                         docstring = re.sub("(\n# {3}|\n#)", "\n", docstring)
 
                     # add function name, parameters, indentation and comment docstring
@@ -151,26 +164,34 @@ def write_python_files(docstring_dict):
     for lang, inner_dict in docstring_dict.items():
         for module_path, functions in inner_dict.items():
             if len(functions) > 0:
-                module_path = os.path.join("..", "..", "..", "..", "..", "python", module_path)
+                module_path = os.path.join(
+                    "..", "..", "..", "..", "..", "python", module_path
+                )
                 os.makedirs(module_path, exist_ok=True)
                 # create empty file __init__.py if it doesn't exist to mark
                 # the directory as a module
                 if not os.path.isfile(os.path.join(module_path, "__init__.py")):
-                    with open(os.path.join(module_path, "__init__.py"), 'w'):
+                    with open(os.path.join(module_path, "__init__.py"), "w"):
                         pass
                 output_file_path = os.path.join(module_path, lang + ".py")
                 with open(output_file_path, "w") as output_file:
                     # hardcoded module description
-                    output_file.write('#!/usr/bin/env python\n'
-                                      '# encoding: utf-8\n\n'
-                                      '"""\n'
-                                      'This file consists of docstrings extracted from functions in' + lang + '.\n'
-                                                                                                              '"""\n\n\n')
+                    output_file.write(
+                        "#!/usr/bin/env python\n"
+                        "# encoding: utf-8\n\n"
+                        '"""\n'
+                        "This file consists of docstrings extracted from functions in"
+                        + lang
+                        + ".\n"
+                        '"""\n\n\n'
+                    )
                     output_file.write("".join(functions).strip())
 
 
 if __name__ == "__main__":
-    print("---> Generating Python-like docstrings from unsupported (bash and R) commands")
+    print(
+        "---> Generating Python-like docstrings from unsupported (bash and R) commands"
+    )
     unsupported_languages = [
         "bash",
         "r",
@@ -179,7 +200,7 @@ if __name__ == "__main__":
     unsupported_commands = {}
     for language in unsupported_languages:
         unsupported_commands[language] = []
-    for full_name, description, language in gmri.all_qunex_commands:
+    for full_name, description, language in all_commands.all_qunex_commands:
         if language in unsupported_languages:
             unsupported_commands[language].append(full_name)
 
