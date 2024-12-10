@@ -191,7 +191,6 @@ if __name__ == "__main__":
 
     # HARDCODED -> below are the headings to be included in the toctree (side menu)
     list_of_headers = ["General overview", "User guides", "QuNex deployment in XNAT"]
-#    list_of_headers = ["General overview", "User guides", "QuNex deployment in XNAT", "QuNex development"]
 
     cap_ind = get_captions_line_indices(home_lines, list_of_headers)
 
