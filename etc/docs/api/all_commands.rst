@@ -17,4 +17,4 @@ For more information on how to use QuNex refer to `QuNex commands and general us
    :caption: Available commands:
    :glob:
 
-   gmri/*
+   all_commands/*
