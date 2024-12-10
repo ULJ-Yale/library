@@ -28,7 +28,7 @@ Past contributors to the QuNex `library` code:
 
 ## Version
 
-1.0.0 [QIO]
+1.0.1 [QIO]
 
 ## References
 
