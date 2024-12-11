@@ -62,9 +62,11 @@ def restructure_home_menu(file_lines):
             new_path = prefix_wiki(matched_path.group(0))
             new_path = append_html(new_path)
             file_lines[i] = re.sub("(?<=<)[^hb].+?(?=>)", new_path, file_lines[i])
-            if re.findall("^-+\n", file_lines[i]):
-                # add the 10 missing dashes because "wiki/" and ".html" have been added
-                file_lines[i + 1] = f'{"-" * 10}{file_lines[i + 1]}'
+
+            if (i + 1) < len(file_lines) and re.findall("^-+\n", file_lines[i + 1]):
+                # add the missing dashes because "wiki/" and ".html" have been added
+                file_lines[i + 1] = f'{"-" * 20}{file_lines[i+1]}'
+
     return file_lines
 
 
