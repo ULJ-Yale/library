@@ -12,6 +12,7 @@ from importlib.machinery import SourceFileLoader
 # paths
 sys.path.insert(0, "../../../../../python")
 sys.path.insert(0, "../../../../../python/qx_utilities")
+sys.path.insert(0, "../../../../../python/qx_utilities/general")
 
 # this code imports python/qx_utilities/general/commands.py to use the all_qunex_commands list
 spec = spec_from_loader(

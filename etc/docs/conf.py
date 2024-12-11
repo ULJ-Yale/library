@@ -4,8 +4,7 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-# -- Path setup --------------------------------------------------------------
-
+# -- Path setup ----------------------------------------------------------------
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -30,8 +29,7 @@ for lang in ["python", "matlab"]:
                 sys.path.append(os.path.abspath(full_path))
 
 
-# -- Project information -----------------------------------------------------
-
+# -- Project information -------------------------------------------------------
 project = "QuNex"
 copyright = f"{str(datetime.date.today().year)}, Mind and Brain Lab (University of Ljubljana) and Cho Lab (Yale University)"
 
@@ -42,14 +40,12 @@ if os.path.isfile(version_path):
         # The full version name, including alpha/beta/rc tags
         release = version_file.read()
 
-# -- General configuration ---------------------------------------------------
-
+# -- General configuration -----------------------------------------------------
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
     "sphinxcontrib.matlab",
-    #    'sphinx.ext.autodoc',
     "sphinx.ext.napoleon",
     "myst_parser",
     "sphinx_copybutton",
@@ -68,8 +64,7 @@ exclude_patterns = []
 # ellipses (...) etc.
 smartquotes = False
 
-# -- Options for Napoleon extension ------------------------------------------
-
+# -- Options for the Napoleon extension ----------------------------------------
 # Google style is used throughout the project, so NumPy style can be ignored
 napoleon_numpy_docstring = False
 
@@ -79,21 +74,17 @@ napoleon_custom_sections = [
     ("output files"),
 ]
 
-# -- Options for MyST parser extension --------------------------------------
+# -- Options for MyST parser extension -----------------------------------------
 # Depth of auto-generated header anchors
 myst_heading_anchors = 4
 
-# -- Options for Opengraph extension -----------------------------------------
-
+# -- Options for the Opengraph extension --------------------------------------
 ogp_site_url = "https://qunex.readthedocs.io/"
 ogp_image = "https://qunex.readthedocs.io/en/latest/_images/QuNex_Logo_pantheonsite.png"
 
-# -- Options for HTML output -------------------------------------------------
-
+# -- Options for the HTML output -------------------------------------------------
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#
-
 html_theme = "sphinx_book_theme"
 
 # Add any paths that contain custom static files (such as style sheets) here,
