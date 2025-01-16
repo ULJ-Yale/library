@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 1.1.0 [QIO]
+
+Added MATLAB unit test data.
+
 ## 1.0.1 [QIO]
 
 Documentation building fix.
