@@ -1,0 +1,119 @@
+# Created by Octave 7.3.0, Mon Jan 13 22:05:31 2025 UTC <root@db09d93e1503>
+# name: fcmat
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 4
+# name: title
+# type: sq_string
+# elements: 1
+# length: 10
+timeseries
+
+
+# name: roi
+# type: cell
+# rows: 1
+# columns: 4
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 7
+DLPFC_R
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 7
+DLPFC_L
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 6
+dACC_R
+
+
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 6
+dACC_L
+
+
+
+
+
+# name: subjects
+# type: cell
+# rows: 1
+# columns: 1
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+OP242
+
+
+
+
+
+# name: fc
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 5
+# name: r
+# type: matrix
+# rows: 4
+# columns: 4
+ 0.99999999999999978 0.78336274513426674 0.66019775340979014 0.70073577178803648
+ 0.78336274513426674 1.0000000000000002 0.66443881774487223 0.64246787673754346
+ 0.66019775340979014 0.66443881774487223 1 0.77773166741621935
+ 0.70073577178803648 0.64246787673754346 0.77773166741621935 1.0000000000000002
+
+
+# name: N
+# type: scalar
+168
+
+
+# name: fz
+# type: float matrix
+# rows: 4
+# columns: 4
+ 8.4056215286254883 1.0540156364440918 0.7931639552116394 0.86874455213546753
+ 1.0540156364440918 8.4056215286254883 0.80071938037872314 0.76236486434936523
+ 0.7931639552116394 0.80071938037872314 8.4056215286254883 1.0396038293838501
+ 0.86874455213546753 0.76236486434936523 1.0396038293838501 8.4056215286254883
+
+
+# name: z
+# type: float matrix
+# rows: 4
+# columns: 4
+ 107.97216033935547 13.53907585144043 10.188375473022461 11.159225463867188
+ 13.53907585144043 107.97216033935547 10.285427093505859 9.7927541732788086
+ 10.188375473022461 10.285427093505859 107.97216033935547 13.35395336151123
+ 11.159225463867188 9.7927541732788086 13.35395336151123 107.97216033935547
+
+
+# name: p
+# type: float matrix
+# rows: 4
+# columns: 4
+ 0 0 0 0
+ 0 0 0 0
+ 0 0 0 0
+ 0 0 0 0
+
+
+
+
+
+

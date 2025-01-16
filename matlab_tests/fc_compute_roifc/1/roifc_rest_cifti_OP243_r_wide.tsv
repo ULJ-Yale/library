@@ -1,0 +1,5 @@
+name	title	subject	measure	roiname	DLPFC_R	DLPFC_L	dACC_R	dACC_L
+rest_cifti	timeseries	OP243	r	DLPFC_R		1.0000000	0.8991242	0.7083797	0.6821788
+rest_cifti	timeseries	OP243	r	DLPFC_L		0.8991242	1.0000000	0.7480706	0.6832231
+rest_cifti	timeseries	OP243	r	dACC_R		0.7083797	0.7480706	1.0000000	0.8198446
+rest_cifti	timeseries	OP243	r	dACC_L		0.6821788	0.6832231	0.8198446	1.0000000

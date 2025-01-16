@@ -102,6 +102,6 @@ ENV/
 *.DS_store
 
 # QuNex stuff
-1
-2
+./1
+./2
 *.out

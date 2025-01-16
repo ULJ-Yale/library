@@ -1,0 +1,13 @@
+name	title	subject	roi1_name	roi2_name	cv
+rest_cifti	timeseries	OP242	DLPFC_R	DLPFC_L	6000.20159
+rest_cifti	timeseries	OP242	DLPFC_R	dACC_R	5245.73359
+rest_cifti	timeseries	OP242	DLPFC_R	dACC_L	8554.97652
+rest_cifti	timeseries	OP242	DLPFC_L	dACC_R	5391.30950
+rest_cifti	timeseries	OP242	DLPFC_L	dACC_L	8009.82505
+rest_cifti	timeseries	OP242	dACC_R	dACC_L	10058.44060
+rest_cifti	timeseries	OP243	DLPFC_R	DLPFC_L	18716.67567
+rest_cifti	timeseries	OP243	DLPFC_R	dACC_R	9577.37473
+rest_cifti	timeseries	OP243	DLPFC_R	dACC_L	12280.37049
+rest_cifti	timeseries	OP243	DLPFC_L	dACC_R	11132.10157
+rest_cifti	timeseries	OP243	DLPFC_L	dACC_L	13537.23406
+rest_cifti	timeseries	OP243	dACC_R	dACC_L	10550.43307

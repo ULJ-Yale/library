@@ -1,0 +1,7 @@
+name	title	subject	roi1_name	roi2_name	r	Fz	Z	p
+rest_cifti	timeseries	OP242	DLPFC_R	DLPFC_L	0.78336	1.05402	13.53908	0.0000000
+rest_cifti	timeseries	OP242	DLPFC_R	dACC_R	0.66020	0.79316	10.18838	0.0000000
+rest_cifti	timeseries	OP242	DLPFC_R	dACC_L	0.70074	0.86874	11.15923	0.0000000
+rest_cifti	timeseries	OP242	DLPFC_L	dACC_R	0.66444	0.80072	10.28543	0.0000000
+rest_cifti	timeseries	OP242	DLPFC_L	dACC_L	0.64247	0.76236	9.79275	0.0000000
+rest_cifti	timeseries	OP242	dACC_R	dACC_L	0.77773	1.03960	13.35395	0.0000000
