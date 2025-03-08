@@ -17,7 +17,7 @@ myst-parser==0.18.0
 nibabel==3.2.2
 numpy==1.23.2
 packaging==23.0
-pandas == 2.1.4
+pandas==2.1.4
 pockets==0.9.1
 pydata-sphinx-theme==0.8.1
 pydicom==2.3.0
