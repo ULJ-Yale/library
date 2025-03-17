@@ -159,7 +159,7 @@ def get_toc_tree_content(lines):
                     + toc_caption.group(0)
                     + " <"
                     + prefix_wiki(toc_path.group(0))
-                    + ">"
+                    + ".md>"
                 )
     return toc_tree_lines
 
