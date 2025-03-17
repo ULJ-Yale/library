@@ -226,7 +226,6 @@ if __name__ == "__main__":
     )
 
     index_lines.extend(get_toc_tree_structure("QuNex deployment in XNAT"))
-    index_lines.append("   XNAT <wiki/XNAT.md>")
     index_lines.extend(
         get_toc_tree_content(
             home_lines[cap_ind["QuNex deployment in XNAT"] : len(home_lines)]
