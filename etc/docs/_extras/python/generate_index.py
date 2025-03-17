@@ -55,7 +55,6 @@ def restructure_home_menu(file_lines):
     Restructures a list of lines from the home page. Specifically, it prepends
     wiki/ to all the internal paths.
     """
-
     for i in range(len(file_lines)):
         matched_path = re.search(r"(?<=<)[^hb].+?(?=>)", file_lines[i])
         if matched_path:
@@ -139,18 +138,15 @@ def get_toc_tree_content(lines):
         ::
 
             lines = [
-            "* [Installing from source and dependencies](Overview/Installation.md)",
+            "* [QuNex container deployment](Overview-QuNexDeployment.md)",
             "\n",
-            "* [QuNex container deployment](Overview/QuNexContainerUsage.md)",
-            "\n",
-            "* [QuNex commands and general usage overview](Overview/GeneralUse.md)"]
+            "* [QuNex commands and general usage overview](Overview-GeneralUse.md)"]
 
         is converted to::
 
             toc_tree_lines = [
-            "Installing from source and dependencies <wiki/Overview/Installation.md>",
-            "QuNex container deployment <wiki/Overview/QuNexContainerUsage.md>",
-            "QuNex commands and general usage overview <wiki/Overview/GeneralUse.md>"]
+            "QuNex container deployment <wiki/Overview-QuNexDeployment.md>",
+            "QuNex commands and general usage overview <wiki/Overview-GeneralUse.md>"]
     """
     toc_tree_lines = []
     for i in range(len(lines)):
@@ -208,13 +204,13 @@ if __name__ == "__main__":
     cap_ind = get_captions_line_indices(home_lines, list_of_headers)
 
     index_lines.extend(
-        "\n.. toctree::\n   :maxdepth: 2\n   :hidden:\n\n   QuNex quick start <wiki/Overview/QuickStart.md>".split(
+        "\n.. toctree::\n   :maxdepth: 2\n   :hidden:\n\n   QuNex quick start <wiki/Overview-QuickStart.md>".split(
             "\n"
         )
     )
 
     index_lines.extend(get_toc_tree_structure("General overview"))
-    index_lines.append("   Overview <wiki/Overview/Overview.md>")
+    index_lines.append("   Overview <wiki/Overview-Overview.md>")
     index_lines.extend(
         get_toc_tree_content(
             home_lines[cap_ind["General overview"] : cap_ind["User guides"]]
@@ -222,7 +218,7 @@ if __name__ == "__main__":
     )
 
     index_lines.extend(get_toc_tree_structure("User guides"))
-    index_lines.append("   Overview <wiki/UsageDocs/Overview.md>")
+    index_lines.append("   Overview <wiki/UsageDocs-Overview.md>")
     index_lines.extend(
         get_toc_tree_content(
             home_lines[cap_ind["User guides"] : cap_ind["QuNex deployment in XNAT"]]
