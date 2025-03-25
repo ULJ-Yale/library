@@ -6,6 +6,8 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # README File for QuNex Library Component
 
+For details about getting QuNex licensing and getting access to the QuNex container, please consult the README of the main repository.
+
 The QuNex `library` component contains miscellaneous dependencies, environment scripts, relevant data, parameter files, etc. The `library` code  is required for proper QuNex functionality.
 
 The QuNex `library` code is co-developed and co-maintained by the:
@@ -17,14 +19,6 @@ Past contributors to the QuNex `library` code:
 
 * Anticevic Lab, Yale University,
 * Murray Lab, Dartmouth College.
-
-## Quick links
-
-* [Website](http://qunex.yale.edu/)
-* [QuNex Documentation](https://qunex.readthedocs.io)
-* [QuNex quick start](https://qunex.readthedocs.io/en/latest/wiki/Overview/QuickStart.html)
-* [QuNex container deployment](https://qunex.readthedocs.io/en/latest/wiki/Overview/Installation.html)
-* [Installing from source and dependencies](https://qunex.readthedocs.io/en/latest/wiki/Overview/Installation.html)
 
 ## Version
 
