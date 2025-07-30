@@ -26,7 +26,7 @@ Documentation building fix.
 
 New QuNex version.
 
-## 0.100.0 [QX IO]
+## 0.100.0
 
 Octave optimizations, library cleanup.
 
