@@ -200,6 +200,10 @@ def get_essential_syscalls() -> Set[str]:
         "setpgid",
         "setsid",
         "setuid",
+        "seteuid",
+        "setreuid",
+        "setresuid",
+        "initgroups",
         # Process scheduling and priority
         "getpgid",
         "getpgrp",
