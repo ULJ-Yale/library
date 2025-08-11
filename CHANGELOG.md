@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 1.3.1
+
+* Added Docker seccomp profile JSON and its generation script.
+
 ## 1.1.1 [QIO]
 
 Package udpate.
@@ -22,7 +26,7 @@ Documentation building fix.
 
 New QuNex version.
 
-## 0.100.0 [QX IO]
+## 0.100.0
 
 Octave optimizations, library cleanup.
 
