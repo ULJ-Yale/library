@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 1.3.3
+
+* Improved documentation, path fixes.
+
 ## 1.3.1
 
 * Added Docker seccomp profile JSON and its generation script.
