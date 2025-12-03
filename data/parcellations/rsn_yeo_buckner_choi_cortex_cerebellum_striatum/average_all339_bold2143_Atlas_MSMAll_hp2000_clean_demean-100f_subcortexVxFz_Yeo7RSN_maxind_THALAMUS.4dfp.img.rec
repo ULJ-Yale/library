@@ -1,5 +1,5 @@
 rec average_all339_bold2143_Atlas_MSMAll_hp2000_clean_demean-100f_subcortexVxFz_Yeo7RSN_maxind_THALAMUS.4dfp.img  Sun Nov  5 19:45:12 2017  jj464@grace2.grace.hpc.yale.internal Linux 3.10.0-327.36.3.el7.x86_64 x86_64
-/gpfs/project/fas/n3/software/4dfp/nifti_4dfp -4 average_all339_bold2143_Atlas_MSMAll_hp2000_clean_demean-100f_subcortexVxFz_Yeo7RSN_maxind_THALAMUS.nii average_all339_bold2143_Atlas_MSMAll_hp2000_clean_demean-100f_subcortexVxFz_Yeo7RSN_maxind_THALAMUS 
+/software/4dfp/nifti_4dfp -4 average_all339_bold2143_Atlas_MSMAll_hp2000_clean_demean-100f_subcortexVxFz_Yeo7RSN_maxind_THALAMUS.nii average_all339_bold2143_Atlas_MSMAll_hp2000_clean_demean-100f_subcortexVxFz_Yeo7RSN_maxind_THALAMUS
 $Id: nifti_4dfp.c,v 1.9 2011/09/13 03:40:37 avi Exp $
 littleendian
 datatype: 16	 bitpix: 32

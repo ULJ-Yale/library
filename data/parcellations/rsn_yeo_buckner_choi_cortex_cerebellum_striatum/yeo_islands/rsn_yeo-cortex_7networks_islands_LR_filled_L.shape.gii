@@ -11,7 +11,7 @@
       <MD>
          <Name><![CDATA[ParentProvenance]]></Name>
          <Value><![CDATA[rsn_yeo-cortex_7networks_islands_LR_MWfix.dscalar.nii:
-/gpfs/project2/fas/n3/software/workbench/bin_rh_linux64/../exe_rh_linux64/wb_command -cifti-create-dense-from-template /gpfs/project/fas/n3/Studies/Anticevic.DP5/fcMRI/roi/Yeo_Lisa_edited_byAlan/structures.allvaluesone.dtseries.nii cortex_7networks_islands_dilated_masked_MWfix.dscalar.nii -metric CORTEX_LEFT cortex_7networks_islands_dilated_masked_L_MWmasked.func.gii -metric CORTEX_RIGHT cortex_7networks_islands_dilated_masked_R_MWmasked.func.gii
+/gpfs/project2/fas/n3/software/workbench/bin_rh_linux64/../exe_rh_linux64/wb_command -cifti-create-dense-from-template /data/roi/structures.allvaluesone.dtseries.nii cortex_7networks_islands_dilated_masked_MWfix.dscalar.nii -metric CORTEX_LEFT cortex_7networks_islands_dilated_masked_L_MWmasked.func.gii -metric CORTEX_RIGHT cortex_7networks_islands_dilated_masked_R_MWmasked.func.gii
 
 ]]></Value>
       </MD>

@@ -1,7 +1,7 @@
 INTERFILE	:=
 version of keys	:= 3.3
 number format		:= float
-conversion program	:= /gpfs/project/fas/n3/software/4dfp/nifti_4dfp
+conversion program	:= /software/4dfp/nifti_4dfp
 name of data file	:= average_all339_bold2143_Atlas_MSMAll_hp2000_clean_demean-100f_subcortexVxFz_Yeo7RSN_maxind_THALAMUS.4dfp.ifh
 number of bytes per pixel	:= 4
 imagedata byte order	:= littleendian
