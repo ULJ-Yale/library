@@ -12,9 +12,13 @@
 import os
 import sys
 import datetime
+from pathlib import Path
 
 sys.path.append(os.path.join("../../..", "python"))
 matlab_src_dir = os.path.join("../../..", "matlab")  # MATLAB domain root folder
+# repo root (where qx_commands.yaml lives) so the registry can be loaded
+qunex_root = os.path.join(os.path.dirname(__file__), "../../..")
+os.environ["QUNEXPATH"] = str(Path(qunex_root).resolve())
 
 # Modules or directories that are shared between multiple languages (e.g.
 # qx_utilities) have to be added to sys.path separately for each language.
