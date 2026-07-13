@@ -10,45 +10,45 @@
          <BalsaSceneID><![CDATA[]]></BalsaSceneID>
          <Description><![CDATA[Created 26 Oct 2016 18:59:45
 Window 1:
-   Browser Tab 1: 
+   Browser Tab 1:
       Volume Slice View
-         Volume Slice Settings: 
+         Volume Slice Settings:
                View Plane: All
                Parasagittal (X-axis) Coordinate: -15.000
-               
+
                Coronal (Y-axis) Coordinate:      -21.000
                Axial (Z-axis) Coordinate:        -2.000
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_SBRef.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-         Overlay 3: 
+         Overlay 3:
             File: T1w_restore.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-   Browser Tab 4: 
+   Browser Tab 4:
       Volume Slice View
-         Volume Slice Settings: 
+         Volume Slice Settings:
                View Plane: Axial
                Parasagittal (X-axis) Coordinate: -15.000
                Coronal (Y-axis) Coordinate:      -21.000
                Axial (Z-axis) Coordinate:        1.500
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_SBRef.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-         Overlay 3: 
+         Overlay 3:
             File: T1w_restore.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-   Browser Tab 5: 
-      Cerebral Montage: 
+   Browser Tab 5:
+      Cerebral Montage:
          Left Surface:
             Surface: DUMMYCASE.L.midthickness.32k_fs_LR.surf.gii
                Structure: CortexLeft
@@ -56,26 +56,26 @@ Window 1:
                Secondary Type: Midthickness
          Selected Views:  Lateral
       Overlay Set
-   Browser Tab 2: 
+   Browser Tab 2:
       Volume Slice View
-         Volume Slice Settings: 
+         Volume Slice Settings:
                View Plane: All
                Parasagittal (X-axis) Coordinate: -15.000
                Coronal (Y-axis) Coordinate:      -21.000
                Axial (Z-axis) Coordinate:        -2.000
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_DUMMYBOLDSUFFIX.dtseries.nii
             Map Index: 1
             Map Name: 0 seconds
             Structure: All
-         Overlay 3: 
+         Overlay 3:
             File: T1w_restore.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-   Browser Tab 3: 
-      Cerebral Montage: 
+   Browser Tab 3:
+      Cerebral Montage:
          Left Surface:
             Surface: DUMMYCASE.L.inflated.32k_fs_LR.surf.gii
                Structure: CortexLeft
@@ -88,13 +88,13 @@ Window 1:
                Secondary Type: Midthickness
          Selected Views:  Lateral Medial
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_DUMMYBOLDSUFFIX.dtseries.nii
             Map Index: 1
             Map Name: 0 seconds
             Structure: All
-   Browser Tab 6: 
-      Cerebral Montage: 
+   Browser Tab 6:
+      Cerebral Montage:
          Left Surface:
             Surface: DUMMYCASE.L.inflated.32k_fs_LR.surf.gii
                Structure: CortexLeft
@@ -107,7 +107,7 @@ Window 1:
                Secondary Type: Midthickness
          Selected Views:  Lateral Medial
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_DUMMYBOLDSUFFIX_TSNR.dscalar.nii
             Map Index: 1
             Map Name: TSNR
@@ -121,65 +121,65 @@ iVBORw0KGgoAAAANSUhEUgAABAAAAAHWCAIAAABmIGxBAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAsT
          <BalsaSceneID><![CDATA[]]></BalsaSceneID>
          <Description><![CDATA[Created 28 Oct 2016 12:13:11
 Window 1:
-   Browser Tab 1: 
+   Browser Tab 1:
       Volume Slice View
-         Volume Slice Settings: 
+         Volume Slice Settings:
                View Plane: All
                Parasagittal (X-axis) Coordinate: -15.000
                Coronal (Y-axis) Coordinate:      -21.000
                Axial (Z-axis) Coordinate:        -2.000
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_SBRef.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-         Overlay 3: 
+         Overlay 3:
             File: T1w_restore.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-   Browser Tab 4: 
+   Browser Tab 4:
       Volume Slice View
-         Volume Slice Settings: 
+         Volume Slice Settings:
                View Plane: Axial
                Parasagittal (X-axis) Coordinate: -15.000
                Coronal (Y-axis) Coordinate:      -21.000
                Axial (Z-axis) Coordinate:        1.500
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_SBRef.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-         Overlay 3: 
+         Overlay 3:
             File: T1w_restore.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-   Browser Tab 5: 
+   Browser Tab 5:
       Chart Type: Time Series
           Row 1 from DUMMYBOLDDATA_DUMMYBOLDSUFFIX_GS.sdseries.nii
-   Browser Tab 2: 
+   Browser Tab 2:
       Volume Slice View
-         Volume Slice Settings: 
+         Volume Slice Settings:
                View Plane: All
                Parasagittal (X-axis) Coordinate: -15.000
                Coronal (Y-axis) Coordinate:      -21.000
                Axial (Z-axis) Coordinate:        -2.000
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_DUMMYBOLDSUFFIX.dtseries.nii
             Map Index: 1
             Map Name: 0 seconds
             Structure: All
-         Overlay 3: 
+         Overlay 3:
             File: T1w_restore.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-   Browser Tab 3: 
-      Cerebral Montage: 
+   Browser Tab 3:
+      Cerebral Montage:
          Left Surface:
             Surface: DUMMYCASE.L.inflated.32k_fs_LR.surf.gii
                Structure: CortexLeft
@@ -192,13 +192,13 @@ Window 1:
                Secondary Type: Midthickness
          Selected Views:  Lateral Medial
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_DUMMYBOLDSUFFIX.dtseries.nii
             Map Index: 1
             Map Name: 0 seconds
             Structure: All
-   Browser Tab 6: 
-      Cerebral Montage: 
+   Browser Tab 6:
+      Cerebral Montage:
          Left Surface:
             Surface: DUMMYCASE.L.inflated.32k_fs_LR.surf.gii
                Structure: CortexLeft
@@ -211,7 +211,7 @@ Window 1:
                Secondary Type: Midthickness
          Selected Views:  Lateral Medial
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_DUMMYBOLDSUFFIX_TSNR.dscalar.nii
             Map Index: 1
             Map Name: TSNR
@@ -226,44 +226,44 @@ iVBORw0KGgoAAAANSUhEUgAABAAAAAHZCAIAAACXdt6UAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAsT
       <Name><![CDATA[DUMMYCASE BOLD with T1w underlay with stats (MNINonLinear Space)]]></Name>
       <Description><![CDATA[Created 26 Oct 2016 18:59:45
 Window 1:
-   Browser Tab 1: 
+   Browser Tab 1:
       Volume Slice View
-         Volume Slice Settings: 
+         Volume Slice Settings:
                View Plane: All
                Parasagittal (X-axis) Coordinate: -15.000
                Coronal (Y-axis) Coordinate:      -21.000
                Axial (Z-axis) Coordinate:        -2.000
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_SBRef.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-         Overlay 3: 
+         Overlay 3:
             File: T1w_restore.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-   Browser Tab 4: 
+   Browser Tab 4:
       Volume Slice View
-         Volume Slice Settings: 
+         Volume Slice Settings:
                View Plane: Axial
                Parasagittal (X-axis) Coordinate: -15.000
                Coronal (Y-axis) Coordinate:      -21.000
                Axial (Z-axis) Coordinate:        1.500
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_SBRef.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-         Overlay 3: 
+         Overlay 3:
             File: T1w_restore.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-   Browser Tab 5: 
-      Cerebral Montage: 
+   Browser Tab 5:
+      Cerebral Montage:
          Left Surface:
             Surface: DUMMYCASE.L.midthickness.32k_fs_LR.surf.gii
                Structure: CortexLeft
@@ -271,26 +271,26 @@ Window 1:
                Secondary Type: Midthickness
          Selected Views:  Lateral
       Overlay Set
-   Browser Tab 2: 
+   Browser Tab 2:
       Volume Slice View
-         Volume Slice Settings: 
+         Volume Slice Settings:
                View Plane: All
                Parasagittal (X-axis) Coordinate: -15.000
                Coronal (Y-axis) Coordinate:      -21.000
                Axial (Z-axis) Coordinate:        -2.000
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_DUMMYBOLDSUFFIX.dtseries.nii
             Map Index: 1
             Map Name: 0 seconds
             Structure: All
-         Overlay 3: 
+         Overlay 3:
             File: T1w_restore.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-   Browser Tab 3: 
-      Cerebral Montage: 
+   Browser Tab 3:
+      Cerebral Montage:
          Left Surface:
             Surface: DUMMYCASE.L.inflated.32k_fs_LR.surf.gii
                Structure: CortexLeft
@@ -303,13 +303,13 @@ Window 1:
                Secondary Type: Midthickness
          Selected Views:  Lateral Medial
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_DUMMYBOLDSUFFIX.dtseries.nii
             Map Index: 1
             Map Name: 0 seconds
             Structure: All
-   Browser Tab 6: 
-      Cerebral Montage: 
+   Browser Tab 6:
+      Cerebral Montage:
          Left Surface:
             Surface: DUMMYCASE.L.inflated.32k_fs_LR.surf.gii
                Structure: CortexLeft
@@ -322,7 +322,7 @@ Window 1:
                Secondary Type: Midthickness
          Selected Views:  Lateral Medial
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_DUMMYBOLDSUFFIX_TSNR.dscalar.nii
             Map Index: 1
             Map Name: TSNR
@@ -1452,8 +1452,8 @@ Window 1:
                                             Class="ChartMatrixDisplayProperties"
                                             Name="m_chartMatrixDisplayProperties"
                                             Version="1">
-                                       <Object Type="float" Name="m_cellWidth">1</Object>
-                                       <Object Type="float" Name="m_cellHeight">180</Object>
+                                       <Object Type="float" Name="m_cellWidth">1.25</Object>
+                                       <Object Type="float" Name="m_cellHeight">410</Object>
                                        <Object Type="float" Name="m_viewZooming">1</Object>
                                        <ObjectArray Type="float"
                                                     Name="m_viewPanning"
@@ -2230,8 +2230,8 @@ Window 1:
         </percentSizeText>
          <percentSizeText coordinateSpace="TAB" backgroundCaretColor="NONE" backgroundCustomRGBA="0.000000;0.000000;0.000000;1.000000" foregroundCaretColor="NONE" foregroundCustomRGBA="1.000000;1.000000;1.000000;1.000000" foregroundLineWidth="3" tabIndex="1" windowIndex="-1" uniqueKey="4" width="25" height="25" rotationAngle="0">
             <coordOne x="5" y="45" z="0.000000" structure="INVALID" numberOfNodes="-1" nodeIndex="-1" nodeOffset="5.000000" nodeOffsetVectorType="CENTROID_THRU_VERTEX"/>
-            <textData textCaretColor="WHITE" textCustomRGBA="1.000000;1.000000;1.000000;1.000000" fontBold="false" fontItalic="false" fontName="VERA" fontPointSize="SIZE12" fontUnderline="false" horizontalAlignment="LEFT" orientation="HORIZONTAL" verticalAlignment="TOP" fontPercentViewportSize="3" connectBrainordinate="ANNOTATION_TEXT_CONNECT_NONE">Time (y-m-d-h-m-s): 
-DUMMYTIMESTAMP</textData> 
+            <textData textCaretColor="WHITE" textCustomRGBA="1.000000;1.000000;1.000000;1.000000" fontBold="false" fontItalic="false" fontName="VERA" fontPointSize="SIZE12" fontUnderline="false" horizontalAlignment="LEFT" orientation="HORIZONTAL" verticalAlignment="TOP" fontPercentViewportSize="3" connectBrainordinate="ANNOTATION_TEXT_CONNECT_NONE">Time (y-m-d-h-m-s):
+DUMMYTIMESTAMP</textData>
         </percentSizeText>
     </group>
 
@@ -51524,65 +51524,65 @@ DUMMYTIMESTAMP</textData>
       <Name><![CDATA[DUMMYCASE BOLD with T1w underlay with timeseries (MNINonLinear Space)]]></Name>
       <Description><![CDATA[Created 28 Oct 2016 12:13:11
 Window 1:
-   Browser Tab 1: 
+   Browser Tab 1:
       Volume Slice View
-         Volume Slice Settings: 
+         Volume Slice Settings:
                View Plane: All
                Parasagittal (X-axis) Coordinate: -15.000
                Coronal (Y-axis) Coordinate:      -21.000
                Axial (Z-axis) Coordinate:        -2.000
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_SBRef.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-         Overlay 3: 
+         Overlay 3:
             File: T1w_restore.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-   Browser Tab 4: 
+   Browser Tab 4:
       Volume Slice View
-         Volume Slice Settings: 
+         Volume Slice Settings:
                View Plane: Axial
                Parasagittal (X-axis) Coordinate: -15.000
                Coronal (Y-axis) Coordinate:      -21.000
                Axial (Z-axis) Coordinate:        1.500
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_SBRef.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-         Overlay 3: 
+         Overlay 3:
             File: T1w_restore.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-   Browser Tab 5: 
+   Browser Tab 5:
       Chart Type: Time Series
           Row 1 from DUMMYBOLDDATA_DUMMYBOLDSUFFIX_GS.sdseries.nii
-   Browser Tab 2: 
+   Browser Tab 2:
       Volume Slice View
-         Volume Slice Settings: 
+         Volume Slice Settings:
                View Plane: All
                Parasagittal (X-axis) Coordinate: -15.000
                Coronal (Y-axis) Coordinate:      -21.000
                Axial (Z-axis) Coordinate:        -2.000
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_DUMMYBOLDSUFFIX.dtseries.nii
             Map Index: 1
             Map Name: 0 seconds
             Structure: All
-         Overlay 3: 
+         Overlay 3:
             File: T1w_restore.nii.gz
             Map Index: 1
-            Map Name: 
+            Map Name:
             Structure: Invalid
-   Browser Tab 3: 
-      Cerebral Montage: 
+   Browser Tab 3:
+      Cerebral Montage:
          Left Surface:
             Surface: DUMMYCASE.L.inflated.32k_fs_LR.surf.gii
                Structure: CortexLeft
@@ -51595,13 +51595,13 @@ Window 1:
                Secondary Type: Midthickness
          Selected Views:  Lateral Medial
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_DUMMYBOLDSUFFIX.dtseries.nii
             Map Index: 1
             Map Name: 0 seconds
             Structure: All
-   Browser Tab 6: 
-      Cerebral Montage: 
+   Browser Tab 6:
+      Cerebral Montage:
          Left Surface:
             Surface: DUMMYCASE.L.inflated.32k_fs_LR.surf.gii
                Structure: CortexLeft
@@ -51614,7 +51614,7 @@ Window 1:
                Secondary Type: Midthickness
          Selected Views:  Lateral Medial
       Overlay Set
-         Overlay 1: 
+         Overlay 1:
             File: DUMMYBOLDDATA_DUMMYBOLDSUFFIX_TSNR.dscalar.nii
             Map Index: 1
             Map Name: TSNR
@@ -53522,8 +53522,8 @@ Window 1:
         </percentSizeText>
          <percentSizeText coordinateSpace="TAB" backgroundCaretColor="NONE" backgroundCustomRGBA="0.000000;0.000000;0.000000;1.000000" foregroundCaretColor="NONE" foregroundCustomRGBA="1.000000;1.000000;1.000000;1.000000" foregroundLineWidth="3" tabIndex="1" windowIndex="-1" uniqueKey="4" width="25" height="25" rotationAngle="0">
             <coordOne x="5" y="45" z="0.000000" structure="INVALID" numberOfNodes="-1" nodeIndex="-1" nodeOffset="5.000000" nodeOffsetVectorType="CENTROID_THRU_VERTEX"/>
-            <textData textCaretColor="WHITE" textCustomRGBA="1.000000;1.000000;1.000000;1.000000" fontBold="false" fontItalic="false" fontName="VERA" fontPointSize="SIZE12" fontUnderline="false" horizontalAlignment="LEFT" orientation="HORIZONTAL" verticalAlignment="TOP" fontPercentViewportSize="3" connectBrainordinate="ANNOTATION_TEXT_CONNECT_NONE">Time (y-m-d-h-m-s): 
-DUMMYTIMESTAMP</textData> 
+            <textData textCaretColor="WHITE" textCustomRGBA="1.000000;1.000000;1.000000;1.000000" fontBold="false" fontItalic="false" fontName="VERA" fontPointSize="SIZE12" fontUnderline="false" horizontalAlignment="LEFT" orientation="HORIZONTAL" verticalAlignment="TOP" fontPercentViewportSize="3" connectBrainordinate="ANNOTATION_TEXT_CONNECT_NONE">Time (y-m-d-h-m-s):
+DUMMYTIMESTAMP</textData>
         </percentSizeText>
     </group>
 
