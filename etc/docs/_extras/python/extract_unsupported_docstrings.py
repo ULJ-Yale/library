@@ -135,7 +135,10 @@ def extract_docstrings(commands):
         # add function name, parameters, indentation and comment docstring
         parameters = docstring_to_parameters(docstring, all_headings)
         docstring = "    " + "\n    ".join(docstring.split("\n"))
-        docstring = f'def {function_name}({", ".join(parameters)}):\n    """\n{docstring}    """\n\n\n'
+        # the stub docstring is raw, so RST escapes in the bash/R source (\*, \_)
+        # stay literal instead of becoming invalid python escape sequences, which
+        # python reports as a SyntaxWarning when it compiles the generated file
+        docstring = f'def {function_name}({", ".join(parameters)}):\n    r"""\n{docstring}    """\n\n\n'
 
         output_dict.setdefault(lang, {}).setdefault(cmd.module_dir, []).append(docstring)
     return output_dict
