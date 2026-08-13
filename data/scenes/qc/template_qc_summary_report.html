@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>QuNeX QC Report</title>
+<title>QuNex QC Report</title>
 <script charset="utf-8">/*PLOTLY*/</script>
 <style>
   :root{--bg:#fff;--panel:#f6f7f9;--ink:#1a2230;--muted:#5b6675;--line:#e2e6ec;--accent:#d1495b;--normal:#3f6fb0;}
@@ -59,7 +59,7 @@
 </style>
 </head>
 <body>
-<header><h1>QuNeX QC Report</h1><p id="meta"></p></header>
+<header><h1>QuNex QC Report</h1><p id="meta"></p></header>
 
 <div class="tabs" role="tablist">
   <button class="tab" id="tab-param" role="tab" aria-selected="true" onclick="showTab('param')">By parameter</button>
@@ -139,7 +139,7 @@
       <select id="expCrit">
         <option value="udvarsme">FD or DVARSme (udvarsme)</option>
         <option value="idvarsme">FD and DVARSme (idvarsme)</option>
-        <option value="fd">FD only</option>
+        <option value="mov">FD only (mov)</option>
         <option value="dvarsme">DVARSme only</option>
         <option value="dvars">DVARS mean-norm only</option>
         <option value="udvars">FD or DVARS</option>
@@ -469,18 +469,27 @@ if(BR.length){
   // exploration state: null = show pipeline (authoritative) flags; else override thresholds/criterion
   let explore=null;
   const usesMean=c=>(c==="dvars"||c==="udvars"||c==="idvars");
+  // QuNex spells the movement-only criterion `mov`, which is what a .scrub
+  // column is named and what --mov_bad takes; `fd` was the standalone tool's
+  // name for it and is still accepted so an older traces file reads. Without
+  // the `mov` arm the rule fell through to the union below, so a run scrubbed
+  // on movement alone was read, shaded and described as FD-or-DVARSme.
+  const onlyFD=c=>(c==="mov"||c==="fd");
+  const onlyDV=c=>(c==="dvars"||c==="dvarsme");
   function computeFlags(tr,crit,fdt,dvarst,dvarsmet){
-    const n=tr.fd.length;
     const overF=tr.fd.map(v=>v!==null&&v>fdt);
     const dser=usesMean(crit)?(tr.dvarsm||[]):(tr.dvarsme||[]);
     const dthr=usesMean(crit)?dvarst:dvarsmet;
     const overD=dser.map(v=>v!==null&&v>dthr);
+    // which measures the rule actually consults, so that the drawing can shade
+    // by the rule rather than by whatever happens to be over threshold
+    const usesFD=!onlyDV(crit), usesDV=!onlyFD(crit);
     let bad;
-    if(crit==="fd") bad=overF.slice();
-    else if(crit==="dvars"||crit==="dvarsme") bad=overD.slice();
+    if(onlyFD(crit)) bad=overF.slice();
+    else if(onlyDV(crit)) bad=overD.slice();
     else if(crit==="idvars"||crit==="idvarsme") bad=overF.map((b,i)=>b&&overD[i]);
     else bad=overF.map((b,i)=>b||overD[i]);          // udvars(me) union (default)
-    return {bad,overF,overD,dser,dthr};
+    return {bad,overF,overD,dser,dthr,usesFD,usesDV};
   }
   function fillExpControls(tr){       // show the run's pipeline values when not exploring
     if(explore) return;
@@ -511,22 +520,36 @@ if(BR.length){
     for(let i=0;i<n;i++){
       if(!badArr[i]) continue;
       nbad++;
-      const f=F.overF[i], d=F.overD[i];
+      // by the measures the rule consults, not by every measure that happens to
+      // be over: under an FD-only rule a frame that also exceeds DVARSme is
+      // still flagged for its movement, and shading it orange as well reads as
+      // the rule having taken something into account that it did not
+      const f=F.usesFD&&F.overF[i], d=F.usesDV&&F.overD[i];
       if(f) fdFrames.push(i);
       if(d) dvFrames.push(i);
       if(f&&d) nboth++;
     }
 
     const dName = usesMean(crit)? "DVARS (mean-norm)" : "DVARSme";
+    // the thresholds named are the ones the rule applies. Quoting a DVARSme
+    // threshold beside a movement-only rule reads as the rule having used it
+    const thr=[];
+    if(F.usesFD) thr.push("FD>"+fmt(fdt));
+    if(F.usesDV) thr.push(dName+">"+fmt(F.dthr));
     note.innerHTML = explore
       ? '<span style="color:#b5651d;font-weight:600">Exploration thresholds \u2014 not your pipeline scrubbing.</span> '
-        + crit+" \u00b7 FD>"+fmt(fdt)+" \u00b7 "+dName+">"+fmt(F.dthr)
-      : '<span style="color:var(--muted)">Pipeline scrubbing ('+crit+", FD>"+fmt(fdt)+", "+dName+">"+fmt(F.dthr)+").</span>";
+        + crit+" \u00b7 "+thr.join(" \u00b7 ")
+      : '<span style="color:var(--muted)">Pipeline scrubbing ('+crit+", "+thr.join(", ")+").</span>";
+    // the key names only the measures the rule uses, for the same reason the
+    // shading does
+    const key_parts=[];
+    if(F.usesFD) key_parts.push('<span style="color:'+FD_COL+';font-weight:600">blue = FD</span> over threshold');
+    if(F.usesDV) key_parts.push('<span style="color:'+DV_COL+';font-weight:600">orange = '+dName+'</span> over threshold');
+    if(F.usesFD&&F.usesDV) key_parts.push("overlap = both");
     sel.innerHTML="<b>"+key+"</b> \u2014 "+nbad+" / "+n+" frames flagged"
       +(nboth?" \u00b7 "+nboth+" on both measures":"")
       +'<br><span style="color:var(--muted);font-size:12.5px">Shading: '
-      +'<span style="color:'+FD_COL+';font-weight:600">blue = FD</span> over threshold \u00b7 '
-      +'<span style="color:'+DV_COL+';font-weight:600">orange = '+dName+'</span> over \u00b7 overlap = both.</span>';
+      +key_parts.join(" \u00b7 ")+".</span>";
 
     const fd={x,y:tr.fd,name:"FD (mm)",mode:"lines",line:{color:FD_COL,width:1.3},yaxis:"y"};
     const dv={x,y:F.dser,name:dName,mode:"lines",line:{color:DV_COL,width:1.3},yaxis:"y2"};
