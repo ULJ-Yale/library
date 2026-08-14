@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QuNex QC Report</title>
+<script charset="utf-8">/*PLOTLY*/</script>
+<style>
+  :root{--bg:#fff;--panel:#f6f7f9;--ink:#1a2230;--muted:#5b6675;--line:#e2e6ec;--accent:#d1495b;--normal:#3f6fb0;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  header{padding:20px 24px 12px;border-bottom:1px solid var(--line)}
+  h1{margin:0;font-size:18px;font-weight:650;letter-spacing:.2px}
+  header p{margin:4px 0 0;color:var(--muted);font-size:13px}
+  .tabs{display:flex;gap:4px;padding:12px 24px 0}
+  .tab{border:1px solid var(--line);border-bottom:none;background:var(--panel);color:var(--muted);
+       padding:8px 16px;border-radius:8px 8px 0 0;cursor:pointer;font-size:14px;font-weight:550}
+  .tab[aria-selected="true"]{background:var(--bg);color:var(--ink);border-color:var(--line)}
+  .tab:focus-visible{outline:2px solid var(--normal);outline-offset:2px}
+  .panel{border-top:1px solid var(--line);padding:18px 24px 32px}
+  .controls{display:flex;flex-wrap:wrap;gap:16px 20px;align-items:flex-end;margin-bottom:6px}
+  .ctl{display:flex;flex-direction:column;gap:5px}
+  .ctl label{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+  select,input[type=number],input[type=text]{font:14px inherit;padding:7px 9px;border:1px solid var(--line);
+       border-radius:7px;background:#fff;color:var(--ink);min-width:150px}
+  input[type=number]{min-width:90px}
+  button.reset{font:13px inherit;padding:7px 12px;border:1px solid var(--line);background:#fff;
+       border-radius:7px;cursor:pointer;color:var(--muted)}
+  button.reset:hover{color:var(--ink);border-color:var(--muted)}
+  label.check{flex-direction:row;align-items:center;gap:7px;text-transform:none;letter-spacing:0;
+       font-weight:500;color:var(--ink);font-size:14px}
+  .plot{width:100%}
+  .hint{color:var(--muted);font-size:12.5px;margin:2px 0 10px}
+  .flagbox{margin-top:6px;padding:12px 14px;background:var(--panel);border:1px solid var(--line);border-radius:9px;font-size:14px}
+  .flagbox b{color:var(--accent)}
+  .flagbox .row{margin-top:8px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px}
+  .flagbox .row .path{color:var(--muted);font-size:12.5px}
+  .hidden{display:none}
+  .diag-group{margin-bottom:22px;border-left:3px solid var(--accent);padding-left:14px}
+  .diag-group.ok{border-left-color:#2a9d8f}
+  .diag-h{margin:0 0 4px;font-size:15px;font-weight:650}
+  .diag-h span{color:var(--muted);font-weight:500}
+  .diag-action{margin:2px 0 8px;color:var(--muted);font-size:13px}
+  .diag-table{border-collapse:collapse;font-size:13.5px;width:100%;max-width:900px}
+  .diag-table th{text-align:left;color:var(--muted);font-weight:600;font-size:12px;
+       text-transform:uppercase;letter-spacing:.4px;padding:4px 12px 4px 0;border-bottom:1px solid var(--line)}
+  .diag-table td{padding:5px 12px 5px 0;border-bottom:1px solid var(--line);vertical-align:top}
+  .rank-row{cursor:pointer}
+  .rank-row.sel{background:rgba(63,111,176,0.10)}
+  .rank-row:hover{background:rgba(63,111,176,0.05)}
+  .rank-bar{height:8px;background:var(--accent);border-radius:4px;display:inline-block;vertical-align:middle;min-width:2px}
+  .low-cov{color:#b5651d}
+  .wt-grid{display:grid;grid-template-columns:minmax(200px,auto) 1fr 70px;gap:8px 16px;align-items:start;font-size:13px;max-width:820px}
+  .wt-grid .wt-desc{color:var(--muted);font-size:12.5px;margin-top:1px}
+  .wt-grid input{width:60px;padding:4px 6px;border:1px solid var(--line);border-radius:6px;font:13px inherit}
+  #weightsPanel summary,#boldThreshPanel summary{cursor:pointer;color:var(--normal);font-size:13.5px;font-weight:550}
+  .diag-table td:first-child{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap}
+</style>
+</head>
+<body>
+<header><h1>QuNex QC Report</h1><p id="meta"></p></header>
+
+<div class="tabs" role="tablist">
+  <button class="tab" id="tab-param" role="tab" aria-selected="true" onclick="showTab('param')">By parameter</button>
+  <button class="tab" id="tab-prof"  role="tab" aria-selected="false" onclick="showTab('prof')">Participant profiles</button>
+  <button class="tab hidden" id="tab-bold" role="tab" aria-selected="false" onclick="showTab('bold')">BOLD runs</button>
+  <button class="tab hidden" id="tab-diag" role="tab" aria-selected="false" onclick="showTab('diag')">Diagnosis</button>
+</div>
+
+<!-- ---------- Tab 1 ---------- -->
+<section class="panel" id="view-param" role="tabpanel">
+  <div class="controls">
+    <div class="ctl"><label for="metric">Parameter</label><select id="metric"></select></div>
+    <div class="ctl"><label for="orientP">Axis</label>
+      <select id="orientP"><option value="namesY">names on Y</option><option value="namesX">names on X</option></select></div>
+    <div class="ctl"><label for="direction">Flag</label>
+      <select id="direction"><option value="above">above cutoff</option><option value="below">below cutoff</option></select></div>
+    <div class="ctl"><label for="cutoff">Cutoff value</label><input type="number" id="cutoff" step="any"></div>
+    <div class="ctl"><label for="resetSel">Reset cutoff to</label>
+      <select id="resetSel">
+        <option value="sd2">mean &plusmn;2 SD</option>
+        <option value="sd1">mean &plusmn;1 SD</option>
+        <option value="iqr">IQR fence (Tukey)</option>
+        <option value="p95">outside 95% (P2.5/P97.5)</option>
+      </select></div>
+    <div class="ctl"><label for="overlaySel">Reference overlay</label>
+      <select id="overlaySel">
+        <option value="none">None</option>
+        <option value="sd">Mean &amp; SD</option>
+        <option value="iqr">Median &amp; IQR</option>
+      </select></div>
+  </div>
+  <p class="hint" id="statsHint"></p>
+  <div id="paramPlot" class="plot"></div>
+  <div id="densPlot" class="plot"></div>
+  <div class="flagbox">
+    <span><b id="flagCount">0</b> participant(s) flagged for <span id="flagMetric"></span>:</span>
+    <div id="flagList"></div>
+  </div>
+</section>
+
+<!-- ---------- Tab 2 ---------- -->
+<section class="panel hidden" id="view-prof" role="tabpanel">
+  <div class="controls">
+    <div class="ctl"><label for="participant">Participant</label><select id="participant"></select></div>
+    <div class="ctl"><label for="sdBand">Reference band (&plusmn; SD)</label>
+      <input type="number" id="sdBand" step="0.5" min="0.5" value="2"></div>
+    <div class="ctl"><label class="check"><input type="checkbox" id="orient"> Orient so higher = more concerning</label>
+      <span class="hint" style="margin:0">flips sign of SNR/contrast metrics</span></div>
+    <div class="ctl"><label class="check"><input type="checkbox" id="showAll" checked> Show other participants faintly</label></div>
+  </div>
+  <div id="profilePlot" class="plot"></div>
+  <div id="rankWrap" style="margin-top:20px">
+    <h3 class="diag-h">Overall deviation ranking <span id="rankMeta" style="color:var(--muted);font-weight:500;font-size:13px"></span></h3>
+    <p class="hint">Direction-aware composite: each metric's z is oriented so higher = worse, the good side is clamped to zero (being unusually clean can't cancel real problems), then the curated representatives are averaged with the weights below. A triage ranking of who to inspect first &mdash; it complements the Diagnosis tab, it doesn't replace it. Click a row to jump to that participant.</p>
+    <details id="weightsPanel" style="margin:8px 0 14px">
+      <summary>Adjust weights &middot; which metric represents each concept</summary>
+      <div id="weightsBody" style="margin-top:12px"></div>
+    </details>
+    <div id="rankTable"></div>
+  </div>
+</section>
+
+<!-- ---------- Tab 3: BOLD runs ---------- -->
+<section class="panel hidden" id="view-bold" role="tabpanel">
+  <div class="controls">
+    <div class="ctl"><label for="boldMetric">Run metric</label><select id="boldMetric"></select></div>
+    <div class="ctl"><label for="boldFilter">Participants</label>
+      <input type="text" id="boldFilter" placeholder="blank = all, e.g. SUB01, SUB02" style="min-width:240px"></div>
+    <div class="ctl"><label class="check"><input type="checkbox" id="boldColorBad" checked> Colour by % flagged</label></div>
+    <div class="ctl"><label class="check"><input type="checkbox" id="boldStats"> Show mean &amp; median</label></div>
+  </div>
+  <p class="hint">Each point is one BOLD run, sorted by the chosen metric. Click a run to see its motion timecourse below. Filter accepts one or more IDs (comma/space separated); partial IDs match too.</p>
+  <p class="hint" id="boldOverview" style="margin:0 0 8px"></p>
+  <div id="boldScatter" class="plot"></div>
+  <div class="controls" id="expControls" style="margin-top:8px">
+    <div class="ctl"><label for="expCrit">Flag rule (exploration)</label>
+      <select id="expCrit">
+        <option value="udvarsme">FD or DVARSme (udvarsme)</option>
+        <option value="idvarsme">FD and DVARSme (idvarsme)</option>
+        <option value="mov">FD only (mov)</option>
+        <option value="dvarsme">DVARSme only</option>
+        <option value="dvars">DVARS mean-norm only</option>
+        <option value="udvars">FD or DVARS</option>
+        <option value="idvars">FD and DVARS</option>
+      </select></div>
+    <div class="ctl"><label for="expFd">FD thr</label><input type="number" id="expFd" step="0.05" style="min-width:80px"></div>
+    <div class="ctl"><label for="expDme">DVARSme thr</label><input type="number" id="expDme" step="0.1" style="min-width:80px"></div>
+    <div class="ctl"><label for="expDv">DVARS thr</label><input type="number" id="expDv" step="0.1" style="min-width:80px"></div>
+    <div class="ctl"><button class="reset" id="expReset" type="button">Reset to pipeline</button></div>
+  </div>
+  <p class="hint" id="expNote" style="margin-top:2px"></p>
+  <p class="hint" id="boldSel" style="margin-top:2px"></p>
+  <div id="boldTrace" class="plot"></div>
+</section>
+
+<!-- ---------- Tab 4: Diagnosis ---------- -->
+<section class="panel hidden" id="view-diag" role="tabpanel">
+  <p class="hint">Likely pipeline step where each subject's issue arose, from the structural probes, plus a per-run head-motion screen for the functional data. This is a heuristic pointer to <em>where to look</em>, not a verdict &mdash; the evidence column shows which probes fired. Registration probes read the PreFreeSurfer warp (unchanged by PostFreeSurfer); surface distortion reads PostFreeSurfer; holes read native FreeSurfer; motion tiers read the per-run BOLD scrubbing and framewise displacement.</p>
+  <div id="diagBody"></div>
+</section>
+
+<script>
+const DATA = /*DATA*/;
+const {subjects, metrics, labels, raw, z, stats, higher_is_better, paths} = DATA;
+const L = m => labels[m] || m;
+
+document.getElementById("meta").textContent = subjects.length+" participants \u00b7 "+metrics.length+" metrics";
+function fmt(x){if(x===null||x===undefined||Number.isNaN(x))return "\u2013";const a=Math.abs(x);
+  return (a!==0&&a<1)?Number(x.toPrecision(3)).toString():Number(x.toFixed(2)).toString();}
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+function showTab(w){
+  [["param","view-param","tab-param"],["prof","view-prof","tab-prof"],["bold","view-bold","tab-bold"],["diag","view-diag","tab-diag"]]
+    .forEach(([name,view,btn])=>{const on=name===w;
+      const v=document.getElementById(view), b=document.getElementById(btn);
+      if(v) v.classList.toggle("hidden",!on);
+      if(b) b.setAttribute("aria-selected",on);});
+  window.dispatchEvent(new Event("resize"));}
+
+/* ===== Tab 1 ===== */
+const mSel=document.getElementById("metric"), orientPSel=document.getElementById("orientP");
+const dirSel=document.getElementById("direction"), cutIn=document.getElementById("cutoff");
+const resetSel=document.getElementById("resetSel"), overlaySel=document.getElementById("overlaySel");
+metrics.forEach(m=>{const o=document.createElement("option");o.value=m;o.textContent=L(m);mSel.appendChild(o);});
+
+function cutoffFor(m,k){const s=stats[m];if(!s||s.mean===null||s.sd===null)return{dir:"above",cut:0};
+  return higher_is_better.includes(m)
+    ? {dir:"below",cut:+(s.mean-k*s.sd).toPrecision(4)}
+    : {dir:"above",cut:+(s.mean+k*s.sd).toPrecision(4)};}
+function applyCut(k){const d=cutoffFor(mSel.value,k);dirSel.value=d.dir;cutIn.value=d.cut;}
+// robust flagging presets: central-95% percentiles and the Tukey IQR fence
+function cutoff95(m){const s=stats[m];if(!s||s.p2_5===null||s.p97_5===null)return null;
+  return higher_is_better.includes(m)?{dir:"below",cut:s.p2_5}:{dir:"above",cut:s.p97_5};}
+function cutoffIqr(m){const s=stats[m];if(!s||s.q1===null||s.q3===null)return null;
+  const iqr=s.q3-s.q1;
+  return higher_is_better.includes(m)
+    ? {dir:"below",cut:+(s.q1-1.5*iqr).toPrecision(4)}
+    : {dir:"above",cut:+(s.q3+1.5*iqr).toPrecision(4)};}
+function applyPreset(kind){const m=mSel.value,d=kind==="iqr"?cutoffIqr(m):cutoff95(m);
+  if(d){dirSel.value=d.dir;cutIn.value=d.cut;}}
+// apply whichever reset mode the dropdown currently shows
+function applyReset(){const k=resetSel.value;
+  if(k==="sd1") applyCut(1); else if(k==="sd2") applyCut(2); else applyPreset(k);}
+
+// faint filled band spanning [lo,hi] on the value axis, drawn beneath everything
+function bandRect(lo,hi,color,valueAxis){
+  if(lo===null||hi===null||lo===undefined||hi===undefined) return null;
+  return valueAxis==="x"
+    ? {type:"rect",xref:"x",x0:lo,x1:hi,yref:"paper",y0:0,y1:1,fillcolor:color,line:{width:0},layer:"below"}
+    : {type:"rect",yref:"y",y0:lo,y1:hi,xref:"paper",x0:0,x1:1,fillcolor:color,line:{width:0},layer:"below"};
+}
+// mean / SD reference lines (+ a faint ±1 SD band) along the value axis
+function statShapes(m, valueAxis){
+  if(overlaySel.value!=="sd") return [];
+  const s=stats[m]; if(!s||s.mean===null||s.sd===null) return [];
+  const line=(val,color,dash,width)=> valueAxis==="x"
+    ? {type:"line",xref:"x",x0:val,x1:val,yref:"paper",y0:0,y1:1,line:{color,dash,width}}
+    : {type:"line",yref:"y",y0:val,y1:val,xref:"paper",x0:0,x1:1,line:{color,dash,width}};
+  const {mean,sd}=s;
+  return [bandRect(mean-sd,mean+sd,"rgba(122,135,152,0.07)",valueAxis),
+          line(mean,"#7a8798","solid",1.5),
+          line(mean+sd,"#9aa6b4","dash",1), line(mean-sd,"#9aa6b4","dash",1),
+          line(mean+2*sd,"#b8c0cb","dot",1), line(mean-2*sd,"#b8c0cb","dot",1)].filter(Boolean);
+}
+
+// median / IQR / central-95% reference lines (+ a faint IQR band), drawn in teal
+function robustShapes(m, valueAxis){
+  if(overlaySel.value!=="iqr") return [];
+  const s=stats[m]; if(!s||s.median===null||s.median===undefined) return [];
+  const line=(val,color,dash,width)=> (val===null||val===undefined) ? null : (valueAxis==="x"
+    ? {type:"line",xref:"x",x0:val,x1:val,yref:"paper",y0:0,y1:1,line:{color,dash,width}}
+    : {type:"line",yref:"y",y0:val,y1:val,xref:"paper",x0:0,x1:1,line:{color,dash,width}});
+  return [bandRect(s.q1,s.q3,"rgba(42,157,143,0.07)",valueAxis),
+          line(s.median,"#2a9d8f","solid",1.5),
+          line(s.q1,"#5cb5aa","dash",1), line(s.q3,"#5cb5aa","dash",1),
+          line(s.p2_5,"#9ad4cc","dot",1), line(s.p97_5,"#9ad4cc","dot",1)].filter(Boolean);
+}
+
+function drawParam(){
+  const m=mSel.value, dir=dirSel.value, cut=parseFloat(cutIn.value), namesY=orientPSel.value==="namesY";
+  let pts=subjects.map((s,i)=>({s,v:raw[m][i]})).filter(p=>p.v!==null&&!Number.isNaN(p.v)).sort((a,b)=>a.v-b.v);
+  const isFlag=p=>!Number.isNaN(cut)&&(dir==="above"?p.v>cut:p.v<cut);
+  const colors=pts.map(p=>isFlag(p)?css("--accent"):css("--normal"));
+  const names=pts.map(p=>p.s), vals=pts.map(p=>p.v), marker={color:colors,size:9,line:{width:1,color:"#fff"}};
+  const cutShape=Number.isNaN(cut)?[]:[(namesY
+    ? {type:"line",yref:"paper",y0:0,y1:1,xref:"x",x0:cut,x1:cut,line:{color:css("--accent"),width:1.5,dash:"dash"}}
+    : {type:"line",xref:"paper",x0:0,x1:1,yref:"y",y0:cut,y1:cut,line:{color:css("--accent"),width:1.5,dash:"dash"}})];
+
+  let trace,layout;
+  if(namesY){
+    trace={x:vals,y:names,text:names,mode:"markers",marker,
+           hovertemplate:"<b>%{y}</b><br>"+L(m)+" = %{x}<extra></extra>"};
+    layout={margin:{l:96,r:20,t:12,b:44},xaxis:{title:L(m),zeroline:false},
+            yaxis:{categoryorder:"array",categoryarray:names,automargin:true,tickfont:{size:11}},
+            shapes:cutShape.concat(statShapes(m,"x"),robustShapes(m,"x")),hovermode:"closest",
+            plot_bgcolor:"#fff",paper_bgcolor:"#fff",height:Math.max(420,pts.length*21+80),font:{color:css("--ink")}};
+  }else{
+    trace={x:names,y:vals,text:names,mode:"markers",marker,
+           hovertemplate:"<b>%{x}</b><br>"+L(m)+" = %{y}<extra></extra>"};
+    layout={margin:{l:64,r:20,t:12,b:110},yaxis:{title:L(m),zeroline:false},
+            xaxis:{categoryorder:"array",categoryarray:names,tickangle:-60,automargin:true,tickfont:{size:10}},
+            shapes:cutShape.concat(statShapes(m,"y"),robustShapes(m,"y")),hovermode:"closest",
+            plot_bgcolor:"#fff",paper_bgcolor:"#fff",height:520,font:{color:css("--ink")}};
+  }
+  Plotly.react("paramPlot",[trace],layout,{responsive:true,displaylogo:false});
+  drawDensity(m,vals,cut);
+  updateFlags(m,dir,cut,pts.filter(isFlag));
+  let ov="";
+  if(overlaySel.value==="sd")  ov="Mean/SD (grey):  solid = mean \u00b7 dashed = \u00b11 SD \u00b7 dotted = \u00b12 SD \u00b7 shaded = \u00b11 SD band";
+  if(overlaySel.value==="iqr") ov="Median/IQR (teal):  solid = median \u00b7 dashed = quartiles \u00b7 dotted = 2.5/97.5 pct (central 95%) \u00b7 shaded = IQR band";
+  document.getElementById("statsHint").textContent = ov ? ov+"   \u00b7   dashed red = your cutoff" : "";
+}
+
+function kde(vals){const n=vals.length;if(n<2)return{x:[],y:[]};
+  const mean=vals.reduce((a,b)=>a+b,0)/n;
+  const sd=Math.sqrt(vals.reduce((a,b)=>a+(b-mean)*(b-mean),0)/(n-1))||0;
+  let bw=1.06*sd*Math.pow(n,-0.2);if(!(bw>0))bw=(Math.max(...vals)-Math.min(...vals))/10||1;
+  const min=Math.min(...vals),max=Math.max(...vals),pad=(max-min)*0.12+1e-9,steps=90,grid=[];
+  for(let i=0;i<=steps;i++)grid.push(min-pad+(max-min+2*pad)*i/steps);
+  const y=grid.map(g=>{let s=0;for(const v of vals){const u=(g-v)/bw;s+=Math.exp(-0.5*u*u);}return s/(n*bw*Math.sqrt(2*Math.PI));});
+  return{x:grid,y};}
+function drawDensity(m,vals,cut){
+  // opaque bars (not translucent) so the faint reference band behind them can't
+  // bleed through the data — the band then shows only in the empty plot areas
+  const hist={type:"histogram",x:vals,histnorm:"probability density",nbinsx:16,
+              marker:{color:"#c4d3e6",line:{width:1,color:"#fff"}},
+              hovertemplate:L(m)+": %{x}<br>density %{y:.3f}<extra></extra>"};
+  const k=kde(vals);
+  const dens={type:"scatter",x:k.x,y:k.y,mode:"lines",line:{color:css("--normal"),width:2},hoverinfo:"skip"};
+  const cutShape=Number.isNaN(cut)?[]:[{type:"line",xref:"x",x0:cut,x1:cut,yref:"paper",y0:0,y1:1,line:{color:css("--accent"),width:1.5,dash:"dash"}}];
+  const layout={margin:{l:64,r:20,t:8,b:46},height:240,bargap:0.04,
+                xaxis:{title:L(m)+"  \u2014  value distribution",zeroline:false},yaxis:{title:"density",zeroline:false},
+                shapes:cutShape.concat(statShapes(m,"x"),robustShapes(m,"x")),showlegend:false,
+                plot_bgcolor:"#fff",paper_bgcolor:"#fff",font:{color:css("--ink")}};
+  Plotly.react("densPlot",[hist,dens],layout,{responsive:true,displaylogo:false});
+}
+function updateFlags(m,dir,cut,flags){
+  document.getElementById("flagCount").textContent=flags.length;
+  document.getElementById("flagMetric").textContent=L(m)+" "+(dir==="above"?"> ":"< ")+fmt(cut);
+  const box=document.getElementById("flagList");
+  if(!flags.length){box.innerHTML='<div class="row">none</div>';return;}
+  flags.sort((a,b)=>dir==="above"?b.v-a.v:a.v-b.v);
+  box.innerHTML=flags.map(p=>`<div class="row">${p.s} (${fmt(p.v)})<br><span class="path">${paths[p.s]||""}</span></div>`).join("");
+}
+mSel.addEventListener("change",()=>{applyReset();drawParam();});
+orientPSel.addEventListener("change",drawParam);
+dirSel.addEventListener("change",drawParam);
+cutIn.addEventListener("input",drawParam);
+overlaySel.addEventListener("change",drawParam);
+resetSel.addEventListener("change",()=>{applyReset();drawParam();});
+
+/* ===== Tab 2 ===== */
+const pSel=document.getElementById("participant"), sdIn=document.getElementById("sdBand");
+const orientChk=document.getElementById("orient"), showAllChk=document.getElementById("showAll");
+subjects.forEach(s=>{const o=document.createElement("option");o.value=s;o.textContent=s;pSel.appendChild(o);});
+const yLabels=metrics.map(L);
+function zFor(i,orient){return metrics.map(m=>{let v=z[m][i];if(v===null)return null;if(orient&&higher_is_better.includes(m))v=-v;return v;});}
+function drawProfile(){
+  const subj=pSel.value,si=subjects.indexOf(subj),orient=orientChk.checked,sd=Math.max(0.1,parseFloat(sdIn.value)||2);
+  const traces=[];
+  if(showAllChk.checked){subjects.forEach((s,idx)=>{if(idx===si)return;
+    traces.push({x:zFor(idx,orient),y:yLabels,mode:"lines",line:{color:"rgba(150,160,175,0.22)",width:1},hoverinfo:"skip",showlegend:false,connectgaps:false});});}
+  const zsel=zFor(si,orient);
+  traces.push({x:zsel,y:yLabels,mode:"lines+markers",name:subj,line:{color:css("--accent"),width:2.5},
+    marker:{size:9,color:css("--accent"),line:{width:1,color:"#fff"}},connectgaps:false,
+    text:metrics.map((m,i)=>L(m)+"<br>z = "+fmt(zsel[i])+"<br>raw = "+fmt(raw[m][si])),hovertemplate:"%{text}<extra></extra>"});
+  const band={type:"rect",yref:"paper",y0:0,y1:1,xref:"x",x0:-sd,x1:sd,fillcolor:"rgba(63,111,176,0.06)",line:{width:0},layer:"below"};
+  const vline=(x,dash)=>({type:"line",yref:"paper",y0:0,y1:1,xref:"x",x0:x,x1:x,line:{color:"#c2c8d2",width:1,dash:dash}});
+  const layout={margin:{l:186,r:24,t:12,b:48},
+    xaxis:{title:"z-score (relative to sample)  \u00b7  band = \u00b1"+sd+" SD",zeroline:false},
+    yaxis:{categoryorder:"array",categoryarray:yLabels,autorange:"reversed",automargin:true,tickfont:{size:12}},
+    shapes:[band,vline(0,"solid"),vline(sd,"dot"),vline(-sd,"dot")],hovermode:"closest",showlegend:false,
+    height:Math.max(520,metrics.length*32+90),plot_bgcolor:"#fff",paper_bgcolor:"#fff",font:{color:css("--ink")}};
+  Plotly.react("profilePlot",traces,layout,{responsive:true,displaylogo:false});
+}
+pSel.addEventListener("change",()=>{drawProfile(); renderRanking();});
+sdIn.addEventListener("input",drawProfile);
+orientChk.addEventListener("change",drawProfile);
+showAllChk.addEventListener("change",drawProfile);
+
+/* ----- overall deviation ranking (composite, direction-aware, clamped) ----- */
+const CONCEPTS=[
+  {key:"registration", label:"Registration to MNI", desc:"Is the brain correctly warped into MNI space.", metrics:["reg_group_ncc","reg_template_ncc"]},
+  {key:"warp",         label:"Warp plausibility",   desc:"Does the nonlinear warp fold space (physically invalid).", metrics:["warp_jac_pct_folded","warp_jac_min"]},
+  {key:"topology",     label:"Surface topology",    desc:"How many defects recon-all had to fix.", metrics:["euler_total","fs_surface_holes","holes_total"]},
+  {key:"contrast",     label:"Tissue contrast",     desc:"Grey-white separation; low = unreliable surfaces.", metrics:["t1_wg_cnr","con_snr_mean","con_snr_lh"]},
+  {key:"surfacereg",   label:"Surface registration",desc:"How strained the fs_LR surface alignment is.", metrics:["areal_distortion_p95","edge_distortion_mean"]},
+  {key:"myelin",       label:"Myelin / bias",       desc:"Lopsided surface registration or bias field.", metrics:["myelin_asym","myelin_cv"]},
+  {key:"boldmotion",   label:"BOLD motion",         desc:"Censoring burden of the worst run.", metrics:["bold_worst_pct_bad","bold_meanFD"]},
+  {key:"boldtsnr",     label:"BOLD tSNR",           desc:"Temporal SNR of the worst run.", metrics:["bold_tsnr_min","bold_tsnr_median"]},
+  {key:"boldcoverage", label:"BOLD coverage",       desc:"Cortical grayordinates with usable signal.", metrics:["bold_coverage_min"]},
+  {key:"diffusion",    label:"Diffusion",           desc:"Dropout slices in the diffusion data.", metrics:["dwi_outliers_pct","dwi_cnr_mean"]},
+];
+const zHas=m => z[m] && z[m].some(v=>v!==null&&v!==undefined&&!Number.isNaN(v));
+const activeConcepts=[]; CONCEPTS.forEach(c=>{const m=c.metrics.find(mm=>zHas(mm)); if(m) activeConcepts.push(Object.assign({},c,{metric:m}));});
+const weights={}; activeConcepts.forEach(c=>weights[c.key]=1);
+
+function compositeFor(idx){
+  let num=0,den=0,cov=0;
+  activeConcepts.forEach(c=>{
+    const zv=z[c.metric][idx];
+    if(zv===null||zv===undefined||Number.isNaN(zv)) return;
+    const bad=higher_is_better.includes(c.metric)? -zv : zv;   // orient so + = worse
+    const w=weights[c.key];
+    num+=w*Math.max(0,bad); den+=w; cov++;                      // clamp good side to 0
+  });
+  return {score: den>0? num/den : null, cov};
+}
+function rankings(){
+  return subjects.map((s,i)=>{const r=compositeFor(i);return {subject:s,idx:i,score:r.score,cov:r.cov};})
+                 .filter(a=>a.score!==null).sort((a,b)=>b.score-a.score);
+}
+function buildWeights(){
+  let html='<div class="wt-grid"><div style="font-weight:600">Concept</div><div style="font-weight:600">Represented by</div><div style="font-weight:600">Weight</div>';
+  activeConcepts.forEach(c=>{
+    html+=`<div><b>${c.label}</b><div class="wt-desc">${c.desc}</div></div>`
+        + `<div>${labels[c.metric]||c.metric}</div>`
+        + `<div><input type="number" step="0.5" min="0" value="${weights[c.key]}" data-key="${c.key}"></div>`;
+  });
+  html+="</div>";
+  const body=document.getElementById("weightsBody"); body.innerHTML=html;
+  body.querySelectorAll("input[data-key]").forEach(inp=>inp.addEventListener("input",()=>{
+    const v=parseFloat(inp.value); weights[inp.dataset.key]=isNaN(v)?0:v; renderRanking();}));
+}
+function renderRanking(){
+  const arr=rankings(), n=arr.length, sel=pSel.value, tot=activeConcepts.length;
+  const maxScore=arr.length? Math.max(0.0001,...arr.map(a=>a.score)) : 1;
+  const selRank=arr.findIndex(a=>a.subject===sel), selEntry=arr[selRank];
+  document.getElementById("rankMeta").textContent = selEntry
+    ? `\u2014 ${sel}: rank ${selRank+1} / ${n}  (score ${fmt(selEntry.score)}, ${selEntry.cov}/${tot} concepts)` : "";
+  let html='<table class="diag-table"><thead><tr><th>#</th><th>Subject</th><th>Deviation</th><th>Score</th><th>Concepts</th></tr></thead><tbody>';
+  arr.forEach((a,i)=>{
+    const w=Math.round(140*a.score/maxScore), lc=a.cov<tot*0.6?" low-cov":"";
+    html+=`<tr class="rank-row${a.subject===sel?" sel":""}" data-subj="${a.subject}">`
+        + `<td>${i+1}</td><td>${a.subject}</td>`
+        + `<td><span class="rank-bar" style="width:${w}px"></span></td>`
+        + `<td>${fmt(a.score)}</td><td class="${lc.trim()}">${a.cov}/${tot}</td></tr>`;
+  });
+  html+="</tbody></table>";
+  const t=document.getElementById("rankTable"); t.innerHTML=html;
+  t.querySelectorAll(".rank-row").forEach(row=>row.addEventListener("click",()=>{
+    pSel.value=row.dataset.subj; drawProfile(); renderRanking();}));
+}
+if(activeConcepts.length){ buildWeights(); renderRanking(); }
+else { document.getElementById("rankWrap").style.display="none"; }
+
+/* ===== Tab 3: BOLD runs ===== */
+const BR=DATA.bold_runs||[], BT=DATA.bold_traces||{}, BL=DATA.bold_labels||{};
+const bLab=c=>BL[c]||labels[c]||c;
+let currentRun=null, boldClickBound=false;
+if(BR.length){
+  document.getElementById("tab-bold").classList.remove("hidden");
+  const bmSel=document.getElementById("boldMetric");
+  // how many BOLD runs each participant has; expose it as a selectable run metric
+  // ("Number of BOLDs") so sorting by it surfaces who completed the full protocol
+  const boldCounts={}; BR.forEach(r=>{boldCounts[r.subject]=(boldCounts[r.subject]||0)+1;});
+  BR.forEach(r=>{r.n_bolds=boldCounts[r.subject];});
+  BL["n_bolds"]="Number of BOLDs (per participant)";
+  const numCols=Object.keys(BR[0]).filter(k=>!["subject","run","criterion"].includes(k)&&typeof BR[0][k]==="number");
+  const _rank=c=>(c==="n_bolds"?-2:c==="pct_bad"?-1:0);   // surface these two first
+  numCols.sort((a,b)=>_rank(a)-_rank(b));
+  numCols.forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=bLab(c);bmSel.appendChild(o);});
+  bmSel.value=numCols.includes("pct_bad")?"pct_bad":numCols[0];
+
+  function badColor(pb){ if(pb===null||pb===undefined) return css("--normal");
+    const t=Math.min(1,pb/10);
+    return `rgb(${Math.round(63+t*146)},${Math.round(111+t*-38)},${Math.round(176+t*-85)})`; }
+
+  function filterTokens(){return document.getElementById("boldFilter").value.toLowerCase().split(/[,\s]+/).filter(Boolean);}
+  function passFilter(subj){const t=filterTokens();if(!t.length)return true;const s=subj.toLowerCase();return t.some(tok=>s===tok||s.includes(tok));}
+  function meanOf(a){return a.reduce((x,y)=>x+y,0)/a.length;}
+  function medianOf(a){const s=[...a].sort((x,y)=>x-y),n=s.length;return n%2?s[(n-1)/2]:(s[n/2-1]+s[n/2])/2;}
+
+  function drawBoldScatter(){
+    const m=bmSel.value, colBad=document.getElementById("boldColorBad").checked;
+    const pts=BR.filter(r=>passFilter(r.subject))
+      .map(r=>({key:r.subject+"/"+r.run,v:r[m],s:r.subject,run:r.run,pb:r.pct_bad,cnt:boldCounts[r.subject]}))
+      .filter(p=>p.v!==null&&p.v!==undefined&&!Number.isNaN(p.v)).sort((a,b)=>a.v-b.v);
+    const trace={x:pts.map((_,i)=>i+1),y:pts.map(p=>p.v),customdata:pts.map(p=>[p.key,p.cnt]),
+      text:pts.map(p=>p.s+" / "+p.run),mode:"markers",
+      marker:{color:pts.map(p=>colBad?badColor(p.pb):css("--normal")),size:9,line:{width:1,color:"#fff"}},
+      hovertemplate:"<b>%{text}</b><br>"+bLab(m)+" = %{y}<br>%{customdata[1]} BOLD run(s) for this participant<extra></extra>"};
+    // overview line: per-participant run counts, only when a filter is active
+    const shownSubj={}; pts.forEach(p=>{shownSubj[p.s]=(shownSubj[p.s]||0)+1;});
+    document.getElementById("boldOverview").textContent = filterTokens().length
+      ? (pts.length ? "Showing "+pts.length+" run(s) from "+Object.keys(shownSubj).length+" participant(s): "
+          + Object.keys(shownSubj).sort().map(s=>s+" ("+shownSubj[s]+")").join(", ")
+        : "No runs match the filter.")
+      : "";
+    const shapes=[], anns=[];
+    if(document.getElementById("boldStats").checked && pts.length){
+      const v=pts.map(p=>p.v), mean=meanOf(v), med=medianOf(v);
+      shapes.push({type:"line",xref:"paper",x0:0,x1:1,yref:"y",y0:mean,y1:mean,line:{color:"#7a8798",width:1.5}});
+      shapes.push({type:"line",xref:"paper",x0:0,x1:1,yref:"y",y0:med,y1:med,line:{color:"#2a9d8f",width:1.5,dash:"dash"}});
+      anns.push({xref:"paper",x:1,y:mean,xanchor:"right",yanchor:"bottom",text:"mean "+fmt(mean),showarrow:false,font:{size:11,color:"#7a8798"}});
+      anns.push({xref:"paper",x:1,y:med,xanchor:"right",yanchor:"top",text:"median "+fmt(med),showarrow:false,font:{size:11,color:"#2a9d8f"}});
+    }
+    const layout={margin:{l:64,r:20,t:12,b:44},height:440,
+      xaxis:{title:"BOLD runs (sorted)",showgrid:false,zeroline:false},
+      yaxis:{title:bLab(m),zeroline:false},shapes,annotations:anns,hovermode:"closest",
+      plot_bgcolor:"#fff",paper_bgcolor:"#fff",font:{color:css("--ink")}};
+    Plotly.react("boldScatter",[trace],layout,{responsive:true,displaylogo:false});
+    const el=document.getElementById("boldScatter");
+    if(!boldClickBound){ el.on("plotly_click",ev=>drawBoldTrace(ev.points[0].customdata[0])); boldClickBound=true; }
+    if(pts.length){ if(!currentRun || !pts.some(p=>p.key===currentRun)) drawBoldTrace(pts[pts.length-1].key); }
+    else { document.getElementById("boldSel").textContent="No runs match the filter."; Plotly.purge("boldTrace"); currentRun=null; }
+  }
+  // exploration state: null = show pipeline (authoritative) flags; else override thresholds/criterion
+  let explore=null;
+  const usesMean=c=>(c==="dvars"||c==="udvars"||c==="idvars");
+  // QuNex spells the movement-only criterion `mov`, which is what a .scrub
+  // column is named and what --mov_bad takes; `fd` was the standalone tool's
+  // name for it and is still accepted so an older traces file reads. Without
+  // the `mov` arm the rule fell through to the union below, so a run scrubbed
+  // on movement alone was read, shaded and described as FD-or-DVARSme.
+  const onlyFD=c=>(c==="mov"||c==="fd");
+  const onlyDV=c=>(c==="dvars"||c==="dvarsme");
+  function computeFlags(tr,crit,fdt,dvarst,dvarsmet){
+    const overF=tr.fd.map(v=>v!==null&&v>fdt);
+    const dser=usesMean(crit)?(tr.dvarsm||[]):(tr.dvarsme||[]);
+    const dthr=usesMean(crit)?dvarst:dvarsmet;
+    const overD=dser.map(v=>v!==null&&v>dthr);
+    // which measures the rule actually consults, so that the drawing can shade
+    // by the rule rather than by whatever happens to be over threshold
+    const usesFD=!onlyDV(crit), usesDV=!onlyFD(crit);
+    let bad;
+    if(onlyFD(crit)) bad=overF.slice();
+    else if(onlyDV(crit)) bad=overD.slice();
+    else if(crit==="idvars"||crit==="idvarsme") bad=overF.map((b,i)=>b&&overD[i]);
+    else bad=overF.map((b,i)=>b||overD[i]);          // udvars(me) union (default)
+    return {bad,overF,overD,dser,dthr,usesFD,usesDV};
+  }
+  function fillExpControls(tr){       // show the run's pipeline values when not exploring
+    if(explore) return;
+    document.getElementById("expCrit").value=tr.criterion||"udvarsme";
+    document.getElementById("expFd").value=tr.fdt;
+    document.getElementById("expDme").value=tr.dvarsmet;
+    document.getElementById("expDv").value=(tr.dvarst!==undefined?tr.dvarst:3.0);
+  }
+
+  function drawBoldTrace(key){
+    currentRun=key; const tr=BT[key];
+    const sel=document.getElementById("boldSel"), note=document.getElementById("expNote");
+    if(!tr){ sel.textContent="No per-frame trace stored for "+key; Plotly.purge("boldTrace"); note.textContent=""; return; }
+    fillExpControls(tr);
+    const n=tr.fd.length, x=Array.from({length:n},(_,i)=>i+1);
+    const crit  = explore? explore.crit  : (tr.criterion||"udvarsme");
+    const fdt   = explore? explore.fdt   : tr.fdt;
+    const dvarsmet = explore? explore.dvarsmet : tr.dvarsmet;
+    const dvarst   = explore? explore.dvarst   : (tr.dvarst!==undefined?tr.dvarst:3.0);
+    const F=computeFlags(tr,crit,fdt,dvarst,dvarsmet);
+    // pipeline mode uses the stored authoritative mask for the count; exploration recomputes
+    const badArr = explore ? F.bad : (tr.bad? tr.bad.map(b=>!!b) : F.bad);
+    // colour each flagged frame by which measure(s) it exceeds, congruent with the
+    // line colours: FD = blue, DVARS(me) = orange, both = the two bands overlapping.
+    const FD_COL=css("--normal"), DV_COL="#e08a1e";
+    const FD_BAND="rgba(63,111,176,0.20)", DV_BAND="rgba(224,138,30,0.24)";
+    const fdFrames=[], dvFrames=[]; let nbad=0, nboth=0;
+    for(let i=0;i<n;i++){
+      if(!badArr[i]) continue;
+      nbad++;
+      // by the measures the rule consults, not by every measure that happens to
+      // be over: under an FD-only rule a frame that also exceeds DVARSme is
+      // still flagged for its movement, and shading it orange as well reads as
+      // the rule having taken something into account that it did not
+      const f=F.usesFD&&F.overF[i], d=F.usesDV&&F.overD[i];
+      if(f) fdFrames.push(i);
+      if(d) dvFrames.push(i);
+      if(f&&d) nboth++;
+    }
+
+    const dName = usesMean(crit)? "DVARS (mean-norm)" : "DVARSme";
+    // the thresholds named are the ones the rule applies. Quoting a DVARSme
+    // threshold beside a movement-only rule reads as the rule having used it
+    const thr=[];
+    if(F.usesFD) thr.push("FD>"+fmt(fdt));
+    if(F.usesDV) thr.push(dName+">"+fmt(F.dthr));
+    note.innerHTML = explore
+      ? '<span style="color:#b5651d;font-weight:600">Exploration thresholds \u2014 not your pipeline scrubbing.</span> '
+        + crit+" \u00b7 "+thr.join(" \u00b7 ")
+      : '<span style="color:var(--muted)">Pipeline scrubbing ('+crit+", "+thr.join(", ")+").</span>";
+    // the key names only the measures the rule uses, for the same reason the
+    // shading does
+    const key_parts=[];
+    if(F.usesFD) key_parts.push('<span style="color:'+FD_COL+';font-weight:600">blue = FD</span> over threshold');
+    if(F.usesDV) key_parts.push('<span style="color:'+DV_COL+';font-weight:600">orange = '+dName+'</span> over threshold');
+    if(F.usesFD&&F.usesDV) key_parts.push("overlap = both");
+    sel.innerHTML="<b>"+key+"</b> \u2014 "+nbad+" / "+n+" frames flagged"
+      +(nboth?" \u00b7 "+nboth+" on both measures":"")
+      +'<br><span style="color:var(--muted);font-size:12.5px">Shading: '
+      +key_parts.join(" \u00b7 ")+".</span>";
+
+    const fd={x,y:tr.fd,name:"FD (mm)",mode:"lines",line:{color:FD_COL,width:1.3},yaxis:"y"};
+    const dv={x,y:F.dser,name:dName,mode:"lines",line:{color:DV_COL,width:1.3},yaxis:"y2"};
+    const band=(i,fill)=>({type:"rect",xref:"x",x0:i+0.5,x1:i+1.5,yref:"paper",y0:0,y1:1,fillcolor:fill,line:{width:0},layer:"below"});
+    const shapes=[];
+    fdFrames.forEach(i=>shapes.push(band(i,FD_BAND)));
+    dvFrames.forEach(i=>shapes.push(band(i,DV_BAND)));
+    shapes.push({type:"line",xref:"paper",x0:0,x1:1,yref:"y",y0:fdt,y1:fdt,line:{color:FD_COL,width:1,dash:"dash"}});
+    shapes.push({type:"line",xref:"paper",x0:0,x1:1,yref:"y2",y0:F.dthr,y1:F.dthr,line:{color:DV_COL,width:1,dash:"dash"}});
+    if(document.getElementById("boldStats").checked){
+      const fdv=tr.fd.filter(v=>v!==null), dmv=F.dser.filter(v=>v!==null);
+      if(fdv.length){
+        shapes.push({type:"line",xref:"paper",x0:0,x1:1,yref:"y",y0:meanOf(fdv),y1:meanOf(fdv),line:{color:"#7a8798",width:1,dash:"dot"}});
+        shapes.push({type:"line",xref:"paper",x0:0,x1:1,yref:"y",y0:medianOf(fdv),y1:medianOf(fdv),line:{color:"#2a9d8f",width:1,dash:"dot"}}); }
+      if(dmv.length){
+        shapes.push({type:"line",xref:"paper",x0:0,x1:1,yref:"y2",y0:meanOf(dmv),y1:meanOf(dmv),line:{color:"#7a8798",width:1,dash:"dot"}});
+        shapes.push({type:"line",xref:"paper",x0:0,x1:1,yref:"y2",y0:medianOf(dmv),y1:medianOf(dmv),line:{color:"#2a9d8f",width:1,dash:"dot"}}); }
+    }
+    const layout={margin:{l:56,r:56,t:10,b:44},height:340,
+      xaxis:{title:"frame",zeroline:false},
+      yaxis:{title:"FD (mm)",rangemode:"tozero",zeroline:false},
+      yaxis2:{title:dName,overlaying:"y",side:"right",rangemode:"tozero",zeroline:false},
+      shapes,hovermode:"x unified",showlegend:true,legend:{orientation:"h",y:1.15},
+      plot_bgcolor:"#fff",paper_bgcolor:"#fff",font:{color:css("--ink")}};
+    Plotly.react("boldTrace",[fd,dv],layout,{responsive:true,displaylogo:false});
+  }
+
+  function onExpChange(){
+    explore={crit:document.getElementById("expCrit").value,
+             fdt:parseFloat(document.getElementById("expFd").value),
+             dvarsmet:parseFloat(document.getElementById("expDme").value),
+             dvarst:parseFloat(document.getElementById("expDv").value)};
+    if(currentRun) drawBoldTrace(currentRun);
+  }
+  ["expCrit","expFd","expDme","expDv"].forEach(id=>{
+    const el=document.getElementById(id);
+    el.addEventListener(id==="expCrit"?"change":"input", onExpChange);
+  });
+  document.getElementById("expReset").addEventListener("click",()=>{explore=null; if(currentRun) drawBoldTrace(currentRun);});
+
+  bmSel.addEventListener("change",drawBoldScatter);
+  document.getElementById("boldColorBad").addEventListener("change",drawBoldScatter);
+  document.getElementById("boldStats").addEventListener("change",()=>{drawBoldScatter(); if(currentRun) drawBoldTrace(currentRun);});
+  document.getElementById("boldFilter").addEventListener("input",drawBoldScatter);
+  drawBoldScatter();
+}
+
+/* ===== Tab 4: Diagnosis ===== */
+const DIAG=DATA.diagnosis||[], CONST=DATA.constant_metrics||[];
+const DIAG_ACTIONS={
+  "Pipeline incomplete":"Outputs missing \u2014 check this session's run logs; the pipeline likely stopped early.",
+  "PreFreeSurfer (volume warp)":"Re-run PreFreeSurfer \u2014 check brain extraction, ACPC alignment and FNIRT. Inspect T1w_restore in MNI space.",
+  "FreeSurfer (incomplete)":"Check recon-all.log and re-run FreeSurfer for this subject.",
+  "FreeSurfer (recon quality)":"Inspect surfaces; consider manual edits (wm/brainmask) then re-run recon-all.",
+  "PostFreeSurfer (surface reg)":"Inspect the MSMSulc surface registration / myelin; consider re-running PostFreeSurfer.",
+  "OK":"",
+};
+const DIAG_ORDER=["Pipeline incomplete","PreFreeSurfer (volume warp)","FreeSurfer (incomplete)",
+                  "FreeSurfer (recon quality)","PostFreeSurfer (surface reg)","OK"];
+const escD=s=>(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+
+/* ---- per-run BOLD motion diagnosis (a lot of movement) ---- */
+const BRUNS=DATA.bold_runs||[];
+// Adjustable thresholds (edited in the panel below, like the ranking weights in Tab 2).
+// A run is assigned to the worst tier for which ANY of its conditions is met.
+const BOLD_THRESH={severe_pct:30, high_pct:15, high_fd:5, elev_pct:8, elev_fd:2, elev_fdmean:0.4};
+const BOLD_TIERS=[
+  {key:"severe", color:"#c0392b", label:"Severe motion — run likely unusable",
+   tail:"Consider excluding this run; inspect its motion timecourse in the BOLD runs tab.",
+   conds:[{k:"severe_pct", field:"pct_bad"}]},
+  {key:"high", color:"#e08a1e", label:"High motion — review closely",
+   tail:"Review before including this run.",
+   conds:[{k:"high_pct", field:"pct_bad"}, {k:"high_fd", field:"fd_max"}]},
+  {key:"elevated", color:"#d9b310", label:"Elevated motion — inspect",
+   tail:"Worth a look, though often still usable.",
+   conds:[{k:"elev_pct", field:"pct_bad"}, {k:"elev_fd", field:"fd_max"}, {k:"elev_fdmean", field:"fd_mean"}]},
+];
+// Editable threshold fields, in display order.
+const BOLD_THRESH_FIELDS=[
+  {k:"severe_pct",  label:"Severe · frames scrubbed (%)",   step:1},
+  {k:"high_pct",    label:"High · frames scrubbed (%)",     step:1},
+  {k:"high_fd",     label:"High · peak FD (mm)",            step:0.5},
+  {k:"elev_pct",    label:"Elevated · frames scrubbed (%)", step:1},
+  {k:"elev_fd",     label:"Elevated · peak FD (mm)",        step:0.5},
+  {k:"elev_fdmean", label:"Elevated · mean FD (mm)",        step:0.1},
+];
+const condMet=(c,r)=>{const v=r[c.field]; return v!=null && v>=BOLD_THRESH[c.k];};
+const condPhrase=c=>c.field==="pct_bad" ? ("≥"+fmt(BOLD_THRESH[c.k])+"% of frames scrubbed")
+                  : c.field==="fd_max" ? ("peak FD ≥"+fmt(BOLD_THRESH[c.k])+" mm")
+                  : ("mean FD ≥"+fmt(BOLD_THRESH[c.k])+" mm");
+const tierAction=t=>"Flagged when "+t.conds.map(condPhrase).join(" or ")+". "+t.tail;
+function boldEvidence(r){
+  const p=[];
+  if(r.pct_bad!=null) p.push(fmt(r.pct_bad)+"% frames scrubbed");
+  if(r.fd_max!=null) p.push("peak FD "+fmt(r.fd_max)+" mm");
+  if(r.fd_mean!=null) p.push("mean FD "+fmt(r.fd_mean)+" mm");
+  if(r.frames_retained!=null && r.n_frames!=null) p.push(r.frames_retained+"/"+r.n_frames+" frames kept");
+  return p.join(" · ");
+}
+function boldMotionGroups(){
+  const groups=BOLD_TIERS.map(t=>Object.assign({},t,{runs:[]}));
+  BRUNS.forEach(r=>{ for(let i=0;i<BOLD_TIERS.length;i++){ if(BOLD_TIERS[i].conds.some(c=>condMet(c,r))){ groups[i].runs.push(r); break; } } });
+  groups.forEach(g=>g.runs.sort((a,b)=>(b.pct_bad||0)-(a.pct_bad||0)));
+  return groups.filter(g=>g.runs.length);
+}
+// build the threshold-editor panel, then (re)render the grouped tables below it
+function buildBoldThresh(){
+  let h='<div class="wt-grid"><div style="font-weight:600">Threshold</div><div style="font-weight:600">Value</div><div></div>';
+  BOLD_THRESH_FIELDS.forEach(f=>{ h+=`<div><b>${f.label}</b></div>`
+      +`<div><input type="number" step="${f.step}" min="0" value="${BOLD_THRESH[f.k]}" data-tk="${f.k}"></div><div></div>`; });
+  h+="</div>";
+  const body=document.getElementById("boldThreshBody"); body.innerHTML=h;
+  body.querySelectorAll("input[data-tk]").forEach(inp=>inp.addEventListener("input",()=>{
+    const v=parseFloat(inp.value); BOLD_THRESH[inp.dataset.tk]=isNaN(v)?0:v; renderBoldDiag();}));
+}
+function renderBoldDiag(){
+  const groups=boldMotionGroups(); let h="";
+  if(!groups.length) h='<p class="diag-action">No runs flagged at these thresholds.</p>';
+  groups.forEach(g=>{
+    h+=`<div class="diag-group" style="border-left-color:${g.color}"><h3 class="diag-h">${escD(g.label)} <span>(${g.runs.length})</span></h3>`;
+    h+=`<p class="diag-action">${escD(tierAction(g))}</p>`;
+    h+='<table class="diag-table"><thead><tr><th>Subject</th><th>Run</th><th>Evidence</th></tr></thead><tbody>';
+    g.runs.forEach(r=>{h+=`<tr><td>${escD(String(r.subject))}</td><td>${escD(String(r.run))}</td><td>${escD(boldEvidence(r))}</td></tr>`;});
+    h+="</tbody></table></div>";
+  });
+  document.getElementById("boldDiagBody").innerHTML=h;
+}
+
+const diagHasIssues = DIAG.length && DIAG.some(d=>d.step && d.step!=="OK");
+if(diagHasIssues || BRUNS.length || CONST.length){
+  document.getElementById("tab-diag").classList.remove("hidden");
+  let html="";
+  if(diagHasIssues){
+    const by={}; DIAG.forEach(d=>{(by[d.step]=by[d.step]||[]).push(d);});
+    const order=DIAG_ORDER.filter(s=>by[s]).concat(Object.keys(by).filter(s=>!DIAG_ORDER.includes(s)));
+    order.forEach(step=>{
+      const grp=by[step], ok=step==="OK";
+      html+=`<div class="diag-group${ok?" ok":""}"><h3 class="diag-h">${escD(step)} <span>(${grp.length})</span></h3>`;
+      if(DIAG_ACTIONS[step]) html+=`<p class="diag-action">${escD(DIAG_ACTIONS[step])}</p>`;
+      html+='<table class="diag-table"><thead><tr><th>Subject</th><th>Evidence</th></tr></thead><tbody>';
+      grp.forEach(d=>{html+=`<tr><td>${escD(d.subject)}</td><td>${escD(d.evidence)||"\u2013"}</td></tr>`;});
+      html+="</tbody></table></div>";
+    });
+  }
+  if(BRUNS.length){
+    html+='<h3 class="diag-h" style="margin-top:26px">Functional runs — head motion</h3>';
+    html+='<p class="diag-action">Per-run motion screen, worst tier first. Tiers combine the pipeline\'s own scrubbing (% frames censored) with peak and mean framewise displacement. Adjust the thresholds to change what flags as severe / high / elevated; open a run in the BOLD runs tab to see its frame-by-frame trace.</p>';
+    html+='<details id="boldThreshPanel" style="margin:8px 0 14px"><summary>Adjust motion thresholds &middot; what flags severe / high / elevated</summary><div id="boldThreshBody" style="margin-top:12px"></div></details>';
+    html+='<div id="boldDiagBody"></div>';
+  }
+  if(CONST.length){
+    html+='<div class="diag-group ok"><h3 class="diag-h">Constant across sample <span>('+CONST.length+')</span></h3>';
+    html+='<p class="diag-action">Single value for every subject \u2014 no relative-QC signal, so hidden from the plots. Kept in the CSV: a change in a future run would be meaningful (e.g. a mesh that failed to build).</p>';
+    html+='<table class="diag-table"><thead><tr><th>Measure</th><th>Value</th><th>Note</th></tr></thead><tbody>';
+    CONST.forEach(c=>{html+=`<tr><td>${escD(c.label)}</td><td>${c.value===null?"\u2013":escD(String(c.value))}</td><td>${escD(c.reason)}</td></tr>`;});
+    html+="</tbody></table></div>";
+  }
+  document.getElementById("diagBody").innerHTML=html;
+  if(BRUNS.length){ buildBoldThresh(); renderBoldDiag(); }
+}
+
+/* init */
+applyReset();drawParam();drawProfile();
+</script>
+</body>
+</html>

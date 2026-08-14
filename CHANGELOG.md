@@ -6,6 +6,16 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 1.5.0
+
+* Read the Docs py update to 3.12.
+* Read the Docs update because of command registry.
+* QC scene tweaks.
+
+## 1.4.4
+
+* QC scene updates.
+
 ## 1.4.1
 
 * Version sync.

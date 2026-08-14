@@ -29,7 +29,7 @@ def get_image_block(lines):
     """
     for i in range(len(lines)):
         if lines[i][0] == "!":
-            img_path = re.search("\(([^)]+)\)", lines[i]).group(0)
+            img_path = re.search(r"\(([^)]+)\)", lines[i]).group(0)
             img_path = img_path[1:-1]
             img_line_1 = ".. image:: " + prefix_wiki(img_path)
             img_line_2 = "   :align: center\n"
@@ -110,7 +110,7 @@ def get_captions_line_indices(lines, captions):
     caption_indices = {}
     for i in range(len(captions)):
         for j in range(len(lines)):
-            m = re.search("^## \[*" + captions[i], lines[j])
+            m = re.search(r"^## \[*" + captions[i], lines[j])
             if m:
                 caption_indices[captions[i]] = j
     return caption_indices
