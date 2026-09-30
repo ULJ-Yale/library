@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 1.5.3
+
+* Cleaned old and non-working cudimot versions.
+
 ## 1.5.0
 
 * Read the Docs py update to 3.12.
