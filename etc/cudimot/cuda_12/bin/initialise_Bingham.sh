@@ -83,7 +83,10 @@ PathDTI=$2
 mask=$3
 outputdir=$4
 
-${bindir}/initialise_Psi ${PathDTI}/dtifit_V1.nii.gz ${PathDTI}/dtifit_V2.nii.gz ${mask} ${outputdir}/initialPsi
+${bindir}/initialise_Psi ${PathDTI}/dtifit_V1.nii.gz ${PathDTI}/dtifit_V2.nii.gz ${mask} ${outputdir}/initialPsi || {
+    echo "ERROR: initialise_Psi failed" >&2
+    exit 1
+}
 
 #beta_to_kappa = 1 - (eigs(1)/eigs(2))^2;   eig(1)=L3   eig(2)=L2
 #if L2 is too low-> beta_to_kappa = 0
