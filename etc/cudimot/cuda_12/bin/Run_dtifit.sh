@@ -93,6 +93,14 @@ PathDTI=${output}/Dtifit
 ${bindir}/cart2spherical ${PathDTI}/dtifit_V1 ${PathDTI}/dtifit_V1
 ${bindir}/cart2spherical ${PathDTI}/dtifit_V2 ${PathDTI}/dtifit_V2
 
+# cart2spherical exits with 1 whether it worked or not, so check what it wrote
+for f in dtifit_V1_th dtifit_V1_ph dtifit_V2_th dtifit_V2_ph; do
+    if [ `${FSLDIR}/bin/imtest ${PathDTI}/${f}` -eq 0 ]; then
+        echo "ERROR: ${PathDTI}/${f} was not created" >&2
+        exit 1
+    fi
+done
+
 # for f2
 ${FSLDIR}/bin/fslmaths ${PathDTI}/dtifit_FA -div 2 ${PathDTI}/dtifit_FA_div2
 ${FSLDIR}/bin/fslmaths ${PathDTI}/dtifit_FA -div 4 ${PathDTI}/dtifit_FA_div4

@@ -80,6 +80,15 @@ Usage() {
     
 [ "$5" = "" ] && Usage
 
+# fsl_sub prints the id of the job it submitted and nothing when it failed; its
+# shell plugin runs the job in place, so a job that failed lands here as well
+check_submitted() {
+    if [ -z "$1" ]; then
+        echo "ERROR: $2 failed, see the logs in $directory/logs" >&2
+        exit 1
+    fi
+}
+
 queue=""
 if [ "x$SGE_ROOT" != "x" ]; then
 	queue="-q $FSLGECUDAQ"
@@ -104,6 +113,7 @@ preproc_command="$bindir/split_parts_$modelname $PreprocOpts"
 
 #SGE
 preProcess=`${FSLDIR}/bin/fsl_sub $queue -l $directory/logs -N ${modelname}_${procname}_preproc $wait $preproc_command`
+check_submitted "$preProcess" "${modelname}_${procname}_preproc"
 
 [ -f $directory/commands.txt ] && rm $directory/commands.txt
 part=0
@@ -120,10 +130,12 @@ done
 
 #SGE
 FitProcess=`${FSLDIR}/bin/fsl_sub $queue -l $directory/logs -N ${modelname}_${procname} -j $preProcess -t $directory/commands.txt`
+check_submitted "$FitProcess" "${modelname}_${procname}"
 
 PostprocOpts=$options" --idPart=0 --nParts=$njobs --logdir=$directory/logs/postProcess"
 postproc_command="$bindir/merge_parts_$modelname $PostprocOpts"
 
 #SGE
 postProcess=`${FSLDIR}/bin/fsl_sub $queue -l $directory/logs -N ${modelname}_${procname}_postproc -j $FitProcess $postproc_command`
+check_submitted "$postProcess" "${modelname}_${procname}_postproc"
 echo $postProcess

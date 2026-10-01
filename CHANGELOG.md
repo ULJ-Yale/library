@@ -8,7 +8,8 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 ## 1.5.3
 
-* Cleaned old and non-working cudimot versions.
+* Cleaned old and non-working cuDIMOT versions.
+* Rebuild cuDIMOT for the latest FSL and CUDA 12.
 
 ## 1.5.0
 
