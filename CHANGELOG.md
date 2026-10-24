@@ -6,6 +6,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Change Log
 
+## 1.6.0
+
+* Fixed a bug in cs_wrapper.
+
 ## 1.5.3
 
 * Cleaned old and non-working cuDIMOT versions.

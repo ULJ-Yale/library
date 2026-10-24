@@ -94,9 +94,10 @@ for RECIPE in "${recipeArray[@]}"; do
 done
 
 
-COM_LOGS_DIR="/output/${XNAT_PROJECT}/processing/logs/comlogs"
-
-ERROR_FILE_COUNT=`find ${COM_LOGS_DIR} -name "error_*"| wc | awk '{print $1}'`
+# comlogs are in each run's folder, <study>/logs/<run>/comlogs, or in
+# processing/logs/comlogs under the legacy layout; a checkpoint does not
+# restore earlier runs' logs, so what is found here is this job's
+ERROR_FILE_COUNT=`find "${STUDY_FOLDER}/processing/logs/comlogs" "${STUDY_FOLDER}"/logs/*/comlogs -name "error_*" 2>/dev/null | wc -l`
 
 if [[ ${ERROR_FILE_COUNT} -eq 0 ]]; then
     exit 0
